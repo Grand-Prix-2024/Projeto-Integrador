@@ -1,0 +1,93 @@
+*{
+    padding: 0;
+    margin: 0;
+    outline: 0;
+}
+
+body{
+    background-color: whitesmoke;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+}
+
+/*cabecalho*/
+
+#amarelo{
+    color: #FADA5B;
+}
+
+
+#marrom{
+    color:#8b4513;
+}
+
+
+#navegacao{
+    background-color: #FADA5B;
+    border-bottom: 1px solid black;
+    height: 45px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+#area_menu{
+    width: 720px;
+    margin: 0 auto;
+}
+
+#logo{
+    float: left;
+}
+
+#menu{
+    float: right;
+    padding: 10px 0;
+}
+
+#menu a:visited{
+    color: #4682B4;
+}
+
+#menu a:link{
+    color: black;
+}
+
+#menu a{
+    text-decoration: none;
+    padding: 5px;
+}
+
+#menu a:hover{
+    color:white;
+    background-color: burlywood;
+}
+
+#area-cadastro{
+    width: 720px;
+    margin: 55px auto 10px auto;
+}
+
+#form{
+    background-color: white;
+    padding: 10px;
+    width: 720px;
+    height: 800px;
+    border-radius: 15px;
+    
+}
+
+.alinhar{
+    text-align: center;
+}
+
+#form h1{
+    text-align: center;
+}
+
+h1{
+    color: black;
+    padding: 10px; 
+}
+div p{
+    margin-bottom: 10px;
+}
