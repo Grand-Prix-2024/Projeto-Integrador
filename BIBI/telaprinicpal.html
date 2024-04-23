@@ -1,11 +1,87 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIBIII</title>
+    <title>Republica</title>
+    <link rel="stylesheet" href="css/estile.css">
 </head>
+
 <body>
-    
+    <h1>Anuncie sua republica!</h1>
+    <form>
+    <fieldset>
+            <legend>Tipo de residencia</legend>
+            <p>
+                <input type="radio" name="size" id="size_1" value="Casa" />
+                <label for="size_1">Casa</label>
+            </p>
+            <p>
+                <input type="radio" name="size" id="size_2" value="Apartamento" />
+                <label for="size_2">Apto</label>
+            </p>
+        
+    </form>
+    <label for="name">
+        Nome Republica: <input type="text" id="name" name="user_name">
+    </label>
+    <label for="local">
+        Local: <input type="text" id="local" name="user_local">
+    </label>
+
+    <form> 
+        <p>
+            <label for="taste_1">I like cherry</label>
+            <input type="checkbox" id="taste_1" name="taste_cherry" value="1">
+        </p>
+        <p>
+            <label for="taste_2">I like banana</label>
+            <input type="checkbox" id="taste_2" name="taste_banana" value="2">
+        </p>
+
+        <section>
+            <h2>Contact information</h2>
+        
+                <legend>Title</legend>
+                <ul>
+                    <li>
+                        <label for="title_1">
+                            <input type="radio" id="title_1" name="title" value="M." />
+                            Mister 
+                        </label>
+                    </li>
+                    <li>
+                        <label for="title_2">
+                            <input type="radio" id="title_2" name="title" value="Ms." />
+                            Miss
+                        </label>
+                    </li>
+                </ul>
+            <p>
+                <label for="name">
+                    <span>Name: </span>
+                    <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <input type="text" id="name" name="username" />
+            </p>
+            <p>
+                <label for="mail">
+                    <span>E-mail: </span>
+                    <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <input type="email" id="mail" name="usermail" />
+            </p>
+            <p>
+                <label for="pwd">
+                    <span>Password: </span>
+                    <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <input type="password" id="pwd" name="password" />
+            </p>
+        </section>
+    </fieldset>
+    </form>
 </body>
+
 </html>
