@@ -1,0 +1,54 @@
+*{
+padding: 0;
+margin: 0;
+outline: 0;
+}
+
+body{
+    background-color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+}
+
+.navegacao{
+background-color: grey;
+border-bottom: 4px solid #d8d8d8;
+height: 60px;
+}
+
+.area_menu{
+    width: 720px;
+    margin: 0 auto;
+}
+
+.menu{
+    float: right;
+    padding: 10px 0;
+}
+
+
+.logo{
+    float: left;
+}
+
+.perfil{
+    width: 720px;
+    margin: 55px auto 10px auto;
+}
+
+
+.postado{
+    background-color: aliceblue;
+    padding: 10px;
+}
+
+.img-postagens{
+    max-width: 100%;
+    border-radius: 160px;
+}
+
+.img-postagens :hover{
+    color: aliceblue;
+    background-color: antiquewhite;
+    display: block;
+}
