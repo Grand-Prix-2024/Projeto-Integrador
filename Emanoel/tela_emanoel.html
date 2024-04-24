@@ -7,39 +7,55 @@
     <title>TELA INSCRICAO_PESSOA</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/estlio.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
     <div>
-        <div id="navegacao">
-            <div id="area_menu">
-                <h1 id="logo"><span id="amarelo">Hi</span><span id="marrom">ve</span></h1>
-                <div id="menu">
-                    <a href="tela_perfil.html">Perfil</a>
-                    <a href="login.html">Login</a>
-                    <a href="republicas.html">Republicas</a>
-                </div>
-            </div>
-        </div>
         <div id="area-cadastro">
-            <div id="form">
-                <h1>Bem-vindo(a) ao Hive!</h1>
-                <p class="alinhar">Insira abaixo os seus dados cadastrais:</p>
-                <p>Nome Completo: <input type="text"></p>
-                <p>E-mail: <input type="email" name="" id=""></p>
-                <p>Telefone: <input type="tel"></p>
-                <p>Senha: <input type="password" name="" id=""></p>
-                <p>Repita a senha: <input type="password" name="" id=""></p>
-                Genero:<select name="Genero" id="">
-                    <option value="DF">Selecione</option>
-                    <option value="Mas">Masculino</option>
-                    <option value="Fem">Feminino</option>
-                    <option value="Pni">Prefiro nao informar</option>
-                </select>
-                <p>Data de Nascimento: <input type="date" name="" id=""></p>
-                <input type="button" value="Enviar">
-            </div>
+            <form action="">
+                <div id="form">
+                    <h1>Bem-vindo(a) ao Hive!</h1>
+                    <p class="alinhar">Insira abaixo os seus dados cadastrais:</p>
+                    <div class="inputs">
+                        <input type="text" placeholder="Nome Completo" required>
+                        <i class='bx bx-user'></i>
+                    </div>
+                    <div class="inputs">
+                        <input type="password" placeholder="Senha" required>
+                        <i class='bx bx-lock-alt' ></i>
+                    </div>
+                    <div class="inputs">
+                        <input type="password" placeholder="Repita a Senha" required>
+                        <i class='bx bx-lock-alt' ></i>
+                    </div>
+                    <div class="inputs">
+                        <input type="email" placeholder="E-mail" required>
+                        <i class='bx bx-envelope' ></i>
+                    </div>
+                    <div class="inputs">
+                        Data de Nascimento: <input type="date" placeholder="Data de Nascimento" required>
+                        <i class='bx bxs-calendar' ></i>
+                    </div>
+                    <div class="inputs">
+                        <input type="tel" placeholder="Num. Telefone" required>
+                        <i class='bx bx-phone' ></i>
+                    </div>
+                    <div class="inputs">
+                        <label for="genero">Selecione um gênero</label>
+                        <select name="genero" id="genero">
+                            <option value="D">Selecione</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Feminino</option>
+                            <option value="N">Não Binário</option>
+                            <option value="O">Prefiro não informar</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Enviar</button>
+            </form>
         </div>
+
 </body>
 
 </html>

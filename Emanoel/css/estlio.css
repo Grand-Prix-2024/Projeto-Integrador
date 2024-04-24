@@ -2,64 +2,16 @@
     padding: 0;
     margin: 0;
     outline: 0;
+    box-sizing: border-box;
+    font-family:'Courier New', Courier, monospace;
 }
 
 body{
-    background-color: whitesmoke;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 16px;
-}
-
-/*cabecalho*/
-
-#amarelo{
-    color: #FADA5B;
-}
-
-
-#marrom{
-    color:#8b4513;
-}
-
-
-#navegacao{
-    background-color: #FADA5B;
-    border-bottom: 1px solid black;
-    height: 45px;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-}
-
-#area_menu{
-    width: 720px;
-    margin: 0 auto;
-}
-
-#logo{
-    float: left;
-}
-
-#menu{
-    float: right;
-    padding: 10px 0;
-}
-
-#menu a:visited{
-    color: #4682B4;
-}
-
-#menu a:link{
-    color: black;
-}
-
-#menu a{
-    text-decoration: none;
-    padding: 5px;
-}
-
-#menu a:hover{
-    color:white;
-    background-color: burlywood;
+    background: rgb(209, 189, 4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 #area-cadastro{
@@ -67,27 +19,54 @@ body{
     margin: 55px auto 10px auto;
 }
 
-#form{
-    background-color: white;
-    padding: 10px;
-    width: 720px;
-    height: 800px;
-    border-radius: 15px;
-    
-}
-
 .alinhar{
     text-align: center;
 }
 
+#form{
+    background-color: white;
+    color: black;
+    padding: 10px;
+    width: 620px;
+    height: 700px;
+    border-radius: 15px;
+}
+
 #form h1{
+    font-size: 36px;
     text-align: center;
 }
 
-h1{
-    color: black;
-    padding: 10px; 
+#form .inputs{
+    width: 75%;
+    height: 50px;
+    margin: 30px 0;
 }
-div p{
-    margin-bottom: 10px;
+
+.inputs input{
+    position: relative;
+    width: 100%;
+    background: black;
+    height: 70%;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: white;
+    padding: 20px 45px 20px 20px;
+}
+
+.inputs input::placeholder{
+    color: white;
+}
+
+.inputs i{
+    color: white;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+
 }
