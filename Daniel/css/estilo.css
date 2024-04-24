@@ -34,21 +34,32 @@ height: 60px;
 .perfil{
     width: 720px;
     margin: 55px auto 10px auto;
+    
 }
 
 
 .postado{
     background-color: aliceblue;
     padding: 10px;
+    border-style: inset; 
+    height: 250px;
 }
 
 .img-postagens{
     max-width: 100%;
     border-radius: 160px;
+    float: left;
 }
 
 .img-postagens :hover{
     color: aliceblue;
     background-color: antiquewhite;
     display: block;
+}
+
+.texto{
+ padding: 20px;
+ float: left;  
+ width: 200px;
+ 
 }
