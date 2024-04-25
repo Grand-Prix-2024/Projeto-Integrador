@@ -3,11 +3,11 @@
     margin: 0;
     outline: 0;
     box-sizing: border-box;
-    font-family:'Courier New', Courier, monospace;
+    font-family: "Inter", sans-serif;
 }
 
 body{
-    background: rgb(209, 189, 4);
+    background: #F5EFDC;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,32 +41,65 @@ body{
     width: 75%;
     height: 50px;
     margin: 30px 0;
+    
 }
 
 .inputs input{
     position: relative;
     width: 100%;
-    background: black;
+    background:transparent ;
     height: 70%;
     border: none;
     outline: none;
     border: 2px solid rgba(255, 255, 255, .2);
     border-radius: 40px;
     font-size: 16px;
-    color: white;
+    color: black;
     padding: 20px 45px 20px 20px;
+    border-color: black;
+    left: 55px;
 }
 
 .inputs input::placeholder{
-    color: white;
+    color: black;
 }
 
 .inputs i{
-    color: white;
-    position: absolute;
+    color: black;
+    position:relative;
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 20px;
+    left: 25px;
+    top: -20px;
+}
 
+#form .btn{
+    width: 100%;
+    height: 45px;
+    background-color: white;
+    border-color: black;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.btn{
+    width: 50%;
+    height: 45px;
+    background: #fff;
+    border-color: black;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+#genero{
+    border-radius: 40px;
+    left: 55px;
 }
