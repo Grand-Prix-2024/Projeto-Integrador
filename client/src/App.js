@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/perfil' element={<Perfil/>}/>   
-        <Route path='/Cadastro' element={<Cadastro/>}/>
+        <Route path='/cadastro' element={<Cadastro/>}/>
       </Routes>
     </BrowserRouter>
   );
