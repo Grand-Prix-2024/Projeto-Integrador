@@ -14,6 +14,7 @@ body{
 background-color: grey;
 border-bottom: 4px solid #d8d8d8;
 height: 60px;
+justify-content: space-between;
 }
 
 .area_menu{
