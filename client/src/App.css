@@ -1,134 +1,134 @@
 *{
-  padding: 0;
-  margin: 0;
-  outline: 0;
-  }
-  
-  body{
-      background-color: white;
-      font-family: "Inter", sans-serif;
-      font-size: 16px;
-  }
-  
-  .navegacao{
-  background-color: yellow;
-  height: 50px;
-  
-  }
-  
-  
-  
-  
-  .logo{
-      float: left;
-  }
-  
-  
-  
-  
-  .postado{
-      background-color: aliceblue;
-      padding-left: 1rem;
-      border-style: inset; 
-      height: 212px;
-      width: 300px;
-      
-      
-  }
-  
-  .img-postagens{
-      max-width: 100%;
-      float: left;
-  }
-  
-  .img-postagens :hover{
-      color: aliceblue;
-      background-color: antiquewhite;
-      display: block;
-  }
-  
-  .texto{
-   padding: 5px;
-   float: left;  
-   width: 200px;
-   padding-left: 30px;
-   
-  }
-  
-  .nascimento{
-      width:  200px;
-      height: 100px;
-      float: inline-start ;
-      
-  
-      
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    }
+    
+    body{
+        background-color: white;
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+    }
+    
+    .navegacao{
+    background-color: yellow;
+    height: 50px;
+    
+    }
+    
+    
+    
+    
+    .logo{
+        float: left;
+    }
+    
+    
+    
+    
+    .postado{
+        background-color: aliceblue;
+        padding-left: 1rem;
+        border-style: inset; 
+        height: 212px;
+        width: 300px;
+        
+        
+    }
+    
+    .img-postagens{
+        max-width: 100%;
+        float: left;
+    }
+    
+    .img-postagens :hover{
+        color: aliceblue;
+        background-color: antiquewhite;
+        display: block;
+    }
+    
+    .texto{
+     padding: 5px;
+     float: left;  
+     width: 200px;
+     padding-left: 30px;
      
-  }
-  
-  
-  .container {
-      width: 30%;
-      margin: 0px 160px;
-      box-sizing: border-box;
-      display: block;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      padding-top: 1rem;
-      padding-left: 120px;
-      font-size: 40px;
-  
-  }
-  
-  
-  .container_2 {
-      width: 30%;
-      margin: 0px 160px;
-      box-sizing: border-box;
-      display: block;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      padding-top: 1rem;  
-      padding-left: 120px;
-  }
-  
-  .container_3 {
-      width: 30%;
-      margin: 0px 160px;
-      box-sizing: border-box;
-      display: block;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      padding-top: 1rem;  
-      padding-left: 120px;
-  }
-  
-  .container_4 {
-      width: 30%;
-      margin: 0px 160px;
-      box-sizing: border-box;
-      display: block;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      padding-top: 1rem;  
-      padding-left: 120px;
-  }
-  
-  .container_5 {
-      width: 30%;
-      margin: 0px 160px;
-      box-sizing: border-box;
-      display: block;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      padding-top: 1rem;  
-      padding-left: 120px;
-  }
-  
-  
-  
-  
+    }
+    
+    .nascimento{
+        width:  200px;
+        height: 100px;
+        float: inline-start ;
+        
+    
+        
+       
+    }
+    
+    
+    .container {
+        width: 30%;
+        margin: 0px 160px;
+        box-sizing: border-box;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-top: 1rem;
+        padding-left: 120px;
+        font-size: 40px;
+    
+    }
+    
+    
+    .container_2 {
+        width: 30%;
+        margin: 0px 160px;
+        box-sizing: border-box;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-top: 1rem;  
+        padding-left: 120px;
+    }
+    
+    .container_3 {
+        width: 30%;
+        margin: 0px 160px;
+        box-sizing: border-box;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-top: 1rem;  
+        padding-left: 120px;
+    }
+    
+    .container_4 {
+        width: 30%;
+        margin: 0px 160px;
+        box-sizing: border-box;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-top: 1rem;  
+        padding-left: 120px;
+    }
+    
+    .container_5 {
+        width: 30%;
+        margin: 0px 160px;
+        box-sizing: border-box;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-top: 1rem;  
+        padding-left: 120px;
+    }
+    
+    
+    
+    
