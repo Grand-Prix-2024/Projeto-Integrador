@@ -1,0 +1,32 @@
+.container {
+    width: 30%;
+    margin: 0px 160px;
+    box-sizing: border-box;
+    border: 1px solid red;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+}
+
+.postado{
+    background-color: aliceblue;
+    padding: 0px;
+    border-style: inset; 
+    height: 212px;
+    width: 700px
+    ;
+}
+
+.container_2 {
+    width: 30%;
+    margin: 0px 160px;
+    box-sizing: border-box;
+    border: 1px solid red;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+}
