@@ -20,8 +20,8 @@ function Musica() {
                     <h5>Super Shy</h5>
                     <p>NewJeans</p>
                 </div>
-                <button onClick={play}>
-                    Tocar
+                <button className='cst_btm' onClick={play}>
+                    
                 </button>
             </div>
         </div>

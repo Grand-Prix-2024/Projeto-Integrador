@@ -53,7 +53,41 @@ body{
     font-weight: 400;
 }
 
-button{
-    border-radius: 3px;
+.cst_btm{
+    font-size: 80px;
+    color: white;
+    display: grid;
+    place-items: center;
+    height: 0.5em;
+    width: 0.5em;
+    margin-left: 77%;
+    margin-bottom: 3%;
+    border-radius: 50%;
+    border: none;
+    background: hsla(250, 100%, 75%, 1);
     cursor: pointer;
+    transition: 0.3s;
+    animation: pulse 1.3s ease infinite;
+}
+
+.cst_btm::before{
+    content: "";
+    display: inline-block;
+    border-left: 0.3em solid;
+    border-top: 0.18em solid transparent;
+    border-bottom: 0.18em solid transparent;
+    margin-right: -0.08em;
+}
+
+.cst_btm:hover{
+    background: hsla(250, 100%, 70%, 1);
+}
+
+@keyframes pulse{
+    0%{
+        box-shadow:0em 0em 0em 0em hsla(250, 100%, 75%, 1);
+    }
+    100%{
+        box-shadow:0em 0em 0em 0.3em hsla(250, 100%, 75%, 0);
+    }
 }
