@@ -1,12 +1,16 @@
-.container{
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap');
+
+
+.container_perfil{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     outline: 0;
-    gap: 25px;
+    gap: 60px;
     flex-direction: column;
     display: flex;
     align-items: start;
+    width: 500px;
     
     
     
@@ -20,6 +24,9 @@
     width: 1874px;
     border: solid black;
     height: 80px;
+    text-align: center;
+    
+    
     
     
 
@@ -31,24 +38,36 @@
     font-size: 60px;
     float: left;
     padding-right: 120px; 
+    margin: 0;
+    padding-top: 10px;
+   
+    
+    
     
     
 }
 
 .barracima h2{
-    font-size: 40px;
-    padding-top: 15px;
+    font-size: 30px;
+    padding-top: 40px;
+    margin: 0;
+    float: left;
+    width: 500px;
+    padding-right: 20px;
+    
     
     
 }
 
 .img{
     display: block ;
-    height: 200px;
-    width: 400px;
+    height: 300px;
+    width: 460px;
     background-color: whitesmoke;
-    margin-left: 20px;
+    margin-left: 50px;
     border: solid black;
+    border-radius: 20px;
+    display: inline-flex;
 
     
     
@@ -59,10 +78,132 @@
 .infos{
 
     display: block ;
-    height: 250px;
-    width: 400px;
+    height: 350px;
+    width: 460px;
     background-color: whitesmoke;
-    margin-left: 20px;
+    margin-left: 50px;
     border: solid black;
+    border-radius: 20px;
 
+}
+
+.container_texto{
+   width: 800px;
+   height: 800px;
+   margin-top: 85px;
+   margin-left: 70px;
+   font-size: 25px;
+   
+    
+}
+
+.name_texto h1{
+    margin-bottom: 5px;
+}
+
+.name_texto p{
+    margin-top: 5px;
+    
+   
+    
+}
+
+.container_geral{
+    display: inline-flex;
+    font-family: "Arimo", sans-serif;
+    
+
+    
+    
+}
+
+.descricao_texto{
+    height: 250px;
+    padding-top: 2px;
+}
+
+.ks{
+    margin-top:  2.5px;
+}
+
+.caixa_music{
+    display: block;
+    height: 180px;
+    width: 150px;
+    background-color: whitesmoke;
+    margin-top: 60px;
+}
+
+.caixa{
+    height: 350px;
+    display: inline-flex;
+}
+
+.caixa_texto{
+    margin-top: 85px;
+    padding-left:40px;
+    
+}
+
+.box1{
+    height: 35px;
+    
+}
+
+.box2{
+    height: 35px;
+}
+
+.box3{
+    height: 35px;
+}
+
+.box4{
+    height: 35px;
+}
+
+.img img{
+    border-radius: 100%;
+    margin-left: 35px;
+    margin-top: 35px;
+    height: 150px ;
+}
+
+.nome1{
+    margin-left: 45px;
+}
+
+.nome1 h1{
+    margin-bottom: 0;
+    width: 200px;
+    font-size: 25px;
+    
+}
+
+.nome1 h2{
+    margin-top: 0;
+    width: 200px;
+    margin-left: 15px;
+    font-size: 17px;
+    
+
+}
+
+.img_pt1{
+    width: 250px;
+    height: 300px;
+}
+
+.img_pt2{
+    width: 210px;
+    
+}
+
+.pedra{
+    height: 25px;
+
+}
+
+.fogo{
+   height: 25px; 
 }
