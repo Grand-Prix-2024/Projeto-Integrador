@@ -1,4 +1,4 @@
-import React from 'react'
+/*import React from 'react'
 import './Cad.css';
 import user from "./img/user_icon.png"
 import email from "./img/email.png"
@@ -52,4 +52,4 @@ function Cadastro() {
   )
 }
 
-export default Cadastro
+export default Cadastro*/
