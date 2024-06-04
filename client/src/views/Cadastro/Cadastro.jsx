@@ -8,7 +8,7 @@ import data from "./img/data.png"
 
 function Cadastro() {
   return (
-    <div className="container">
+    <div className="container-cad">
       <div className="header">
         <div className="texto">Cadastrar-se</div>
         <div className="underline"></div>
@@ -44,7 +44,7 @@ function Cadastro() {
         </div>
       </div>
       <div className="forgot-pass">Esqueci minha senha? <span>Clique aqui.</span></div>
-      <div className="submit-container">
+      <div className="submit-container-cad">
         <div className="submit">Cadastrar-se</div>
         <div className="submit">Entrar</div>
       </div>

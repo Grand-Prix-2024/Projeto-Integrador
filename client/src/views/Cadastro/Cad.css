@@ -13,19 +13,22 @@ code{
 
 
 .texto{
-    width: 35%;
+    font-size: 30px;
+    width: 25%;
 }
 
-.container{
+.container-cad{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: auto;
     width: 720px;
     margin-top: 200px;
-    background: rgb(253, 253, 196);
+    background: #FFE34C;
     padding: 0px;
     border-radius: 20px;
+    border: solid black;
+    border-width: 2px;
 }
 
 .header{
@@ -64,7 +67,7 @@ code{
     margin: auto;
     width: 480px;
     height: 40px;
-    background: #ccc7c7;
+    background: white;
     border-radius: 6px;
 }
 
@@ -78,7 +81,7 @@ code{
     background: transparent;
     border: none;
     outline: none;
-    color: #797979;
+    color: black;
     font-size: 19px;
 }
 
@@ -94,7 +97,7 @@ code{
     cursor: pointer;
 }
 
-.submit-container{
+.submit-container-cad{
     display: flex;
     gap: 30px;
     margin: 40px auto;
@@ -106,8 +109,10 @@ code{
     align-items: center;
     width: 220px;
     height: 59px;
-    color: #fff;
-    background: pink;
+    color: black;
+    background: white;
+    border: solid black;
+    border-width: 2px;
     border-radius: 50px;
     font-size: 19px;
     font-weight: 700;
