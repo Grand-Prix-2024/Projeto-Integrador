@@ -18,7 +18,7 @@ function Cadastro() {
               <div className='corpo' aria-labelledby="box-header">
                 <div>
                   <div className='boasVindas'>
-                    <h2 className='boasTXT'><b>Entre ou Cadastre-se</b></h2>
+                    <h2 className='boasTXT'><b>Cadastre-se no Hive</b></h2>
                   </div>
                   <form action="/authenticate" method='POST' noValidate data-testid="auth-form">
                     <div className='cont-campos'>
@@ -30,23 +30,25 @@ function Cadastro() {
                           <div class="separator"></div>
                           <input type="password" name="" id="" placeholder='Senha' />
                         </div>
+                        <br />
                         <div className="botao">
                           <button type="submit" className='btn'
-                          ><b>ENTRAR</b></button>
+                          ><b>CONTINUAR</b></button>
                         </div>
-                        <div className="sem-conta">
-                          <h4>Não tem uma conta? <a href="">Cadastre-se.</a></h4>
+                        <br />
+                        <div className="linha">
+                          <hr />
+                          <span>ou</span>
                         </div>
-                        <hr />
                         <div className="alternativos">
                           <div className="outros">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/facebook/facebook-original.svg" />  
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/facebook/facebook-original.svg" />
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apple/apple-original.svg" />
                             <img className='ggl' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" />
                             <form action=""></form>
                           </div>
                           <div className="outros">
-                            
+
                             <form action=""></form>
                           </div>
                           <div className="outros">
