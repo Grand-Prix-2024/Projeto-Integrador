@@ -241,3 +241,24 @@ img{
 h1{
     margin: 0;
 }
+
+.linha {
+    text-align: center;
+    position: relative;
+    margin: 20px 0;
+}
+
+.linha hr {
+    border: none;
+    border-top: 1px solid #000;
+    margin: 0;
+}
+
+.linha span {
+    position: absolute;
+    background: #fff;
+    padding: 0 10px;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
