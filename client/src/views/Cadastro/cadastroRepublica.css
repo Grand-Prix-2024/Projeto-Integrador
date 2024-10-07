@@ -1,0 +1,89 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Container dos botões */
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Estilo dos botões (divs) */
+.btn {
+    width: 150px;
+    height: 80px;
+    background-color: #FFE34C;
+    /* Amarelo claro */
+    color: black;
+    /* Texto preto */
+    border: 1.5px solid black;
+    /* Borda preta */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btnQtd {
+    background-color: #FFE34C; /* Cor amarela */
+    color: black;
+    border: none;
+    border-radius: 4px; /* Bordas arredondadas */
+    width: 30px; /* Largura fixa */
+    height: 30px; /* Altura fixa */
+    cursor: pointer;
+    font-size: 20px; /* Tamanho da fonte */
+    transition: background-color 0.2s, transform 0.2s; /* Efeito de transição */
+    display: flex; /* Usando flex para centralizar o texto */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+/* Efeito hover */
+.btn:hover {
+    color: black;
+    /* Manter a cor do texto preta */
+    border: 2px solid black;
+    /* Borda preta permanece */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+    /* Sombra maior e mais profunda */
+}
+
+/* Ícones maiores */
+.btn i {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.quantidade {
+    font-size: 20px;
+    /* Tamanho da fonte */
+    font-weight: bold;
+    padding: 0 10px;
+    /* Espaçamento em volta do número */
+    text-align: center;
+    /* Centraliza o texto */
+    min-width: 30px;
+    /* Largura mínima para o número */
+}
+
+/* Estilo para os rótulos */
+.label {
+    font-size: 18px;
+    /* Tamanho da fonte para rótulos */
+}
