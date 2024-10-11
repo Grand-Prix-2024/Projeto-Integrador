@@ -1,0 +1,13 @@
+{
+    "usuarios":[
+        {
+            "email":"",
+            "senha":"",
+            "nome":"",
+            "sobrenome":"",
+            "data_nascimento":"",
+            "cpf":"",
+            "id":""
+        }
+    ]
+}

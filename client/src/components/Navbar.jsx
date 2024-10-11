@@ -1,10 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import styles from './navbar.module.css'
 
 function Navbar() {
     return (
-        <div className='bg-primary'>
-            <nav className='container navbar navbar-expand-lg px-2'>
+    <div className={`bg-primary ${styles.menu_navegacao}`}>
+            <nav className={`container navbar navbar-expand-lg px-2 ${styles.navCor}`} >
                 <div>
                     <span className='navbar-brand'>Hive</span>
                 </div>
@@ -12,11 +13,11 @@ function Navbar() {
                     <span className='navbar-toggler-icon'></span>
                 </button>
                 <div id='menu' className='collapse navbar-collapse text-center'>
-                    <ul className='navbar-nav mx-auto'>
+                 <ul className='navbar-nav mx-auto'>
                     <li className='navbar-item'><NavLink className='nav-link' to="">Login</NavLink></li>
                     <li className='navbar-item'><NavLink className='nav-link' to="/cadastro">Cadastro</NavLink></li>
                     <li className='navbar-item'><NavLink className='nav-link' to="/perfil">Perfil</NavLink></li>
-                    </ul>
+                 </ul>
                 </div>
             </nav>
         </div>

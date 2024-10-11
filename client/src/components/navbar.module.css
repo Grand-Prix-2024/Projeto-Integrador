@@ -1,0 +1,16 @@
+.navCor{
+    background-color: #FFE34C;
+}
+
+.menu_navegacao a{
+    color: #e1e2e3;
+}
+
+.menu_navegacao a:hover{
+    color: #e1e2e3;
+    transition: 0.5s;
+}
+
+.active{
+    color: #fff;
+}

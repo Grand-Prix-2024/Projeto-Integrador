@@ -14,6 +14,7 @@ import CadastroRepublica from './views/Cadastro/CadastroRepublica';
 function App() {
   return (
     <BrowserRouter>
+      
       <Routes>
         <Route path='/perfil' element={<Perfil/>}/>   
         <Route path='/cadastro' element={<Cadastro/>}/>
