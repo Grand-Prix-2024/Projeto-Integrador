@@ -1,14 +1,15 @@
-.navCor{
-    background-color: #FFE34C;
+#navCor{
+    background-color: #FFE34C !important;
 }
 
 .menu_navegacao a{
-    color: #e1e2e3;
+    color: #000000;
 }
 
 .menu_navegacao a:hover{
-    color: #e1e2e3;
-    transition: 0.5s;
+    font-weight: bold ;
+    color: #000000;
+    transition: 0.2s ease-in-out;
 }
 
 .active{

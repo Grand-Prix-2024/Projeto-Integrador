@@ -1,29 +1,31 @@
 import React from 'react'
 import './Cad.css';
 import Navbar from '../../components/Navbar';
+import FormUsuario from './FormUsuarios';
 
 function Cadastro() {
+  async function cadastrarUsuario(infoUser) {
+    try {
+      const resposta = await fetch('http://localhost:5000/usuarios',{
+        method:'POST',
+        headers:{'Content-Type': 'application/json'},
+        body:JSON.stringify(infoUser)
+      });
+      if(!resposta.ok){
+        console.log('Erro ao cadastrar usuário');
+      }else{
+        console.log('Usuário cadastrado')
+      }
+    } catch (error) {
+      console.error('Erro ao cadastrar usuário', error)
+    }
+  }
+  
   return (
-    <>
+    <div>
       <Navbar />
-      <div className="container container col-sm-12 col-md-6 col-lg-3  mt-3">
-        <h1 className="text-center">Cadastre-se no Hive</h1>
-        <form>
-          <label className='form-label' htmlFor=""></label>
-          <input className='form-control mt-1' type="text" name='' id='' placeholder='Número de telefone ou e-mail' />
-          <label className='form-label' htmlFor=""></label>
-          <input className='form-control mt-1' type="password" name='' id='' placeholder='Senha' />
-          <label className='form-label' htmlFor=""></label>
-          <h3 className="fs-5 text-left">Preencha alguns dados:</h3>
-          <input className='form-control mt-3' type="text" name='' id='' placeholder='Nome' />
-          <input className='form-control mt-3' type="text" name='' id='' placeholder='Sobrenome' />
-          <label className='form-label mt-3' htmlFor="">Data de nascimento:</label>
-          <input className='form-control' type="date" name='' id='' placeholder='' />
-          <input className='form-control mt-3' type="text" name='' id='' placeholder='CPF' />
-          <button className='btn btn-warning mt-3 float-end' type='submit'>Continuar</button>
-        </form>
-      </div>
-    </>
+      <FormUsuario titulo='Cadastrar Usuário' textoBotao='Cadastrar' handleSubmit={cadastrarUsuario}/>
+    </div>
   )
 }
 

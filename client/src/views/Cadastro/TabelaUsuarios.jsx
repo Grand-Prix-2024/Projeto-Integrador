@@ -1,9 +1,9 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import styles from '../TabelaUsuarios/TabelaUsuarios.module.css'
+import React from 'react';
+import { useEffect, useState } from 'react';
+import styles from './TabelaUsuarios.module.css';
 import {Link} from 'react-router-dom';
 
-function TabelaUsuarios() {
+function TabelaUsuarios({tipo, onDeleteSuccess}) {
     const [usuarios, setUsuarios] = useState([]);
 
     useEffect(() =>{
@@ -12,7 +12,7 @@ function TabelaUsuarios() {
 
     async function baixarUsuarios() {
         try {
-            const resposta = await fetch('http//localhost:5000/usuarios',{
+            const resposta = await fetch('http://localhost:5000/usuarios',{
                 method:'GET',
                 headers:{
                     'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ function TabelaUsuarios() {
 
     async function deletarUsuario(id) {
         try {
-            const resposta = await fetch(`http:localhost:5000/usuarios/${id}`,{
+            const resposta = await fetch(`http://localhost:5000/usuarios/${id}`,{
                 method:'DELETE',
                 headers:{
                     'Content-Type': 'application/json'
@@ -42,15 +42,15 @@ function TabelaUsuarios() {
                 throw new Error('Erro ao deletar usuário', JSON.stringify(resposta));
             }else{
                 setUsuarios(usuarios.filter(usuario=>usuario.id !== id));
-                //função de deletar
+                onDeleteSuccess();
             }
         } catch (error) {
-            
+            console.debug(error);
         }
     }
   
     return (
-    <div className={`${styles.usuarios}`}>
+    <div className={`${styles.usuarios} ${tipo === 'edit' ? styles.edit:''}`}>
         <table className={`${styles.tabelaUsuarios}`}>
             <thead>
                 <tr>
@@ -59,16 +59,23 @@ function TabelaUsuarios() {
                     <th>Sobrenome</th>
                     <th>Data de Nascimento</th>
                     <th>CPF</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 {usuarios.map((usuario)=>(
                     <tr key={usuario.id}>
-                        <td>email={usuario.email}</td>
-                        <td>nome={usuario.senha}</td>
-                        <td>sobrenome={usuario.sobrenome}</td>
-                        <td>data_nascimento={usuario.data_nascimento}</td>
-                        <td>cpf={usuario.cpf}</td>
+                        <td>{usuario.email}</td>
+                        <td>{usuario.nome}</td>
+                        <td>{usuario.sobrenome}</td>
+                        <td>{usuario.data_nascimento}</td>
+                        <td>{usuario.cpf}</td>
+                        {tipo === 'edit' &&
+                            <td>
+                                <Link to={`/edit_user/${usuario.id}`} className="btn btn-warning ms-2">Editar</Link>
+                                <button className="btn btn-danger ms-2" onClick={()=>deletarUsuario(usuario.id)}>Deletar</button>
+                            </td>
+                        }
                     </tr>
                 ))}
             </tbody>

@@ -4,8 +4,8 @@ import styles from './navbar.module.css'
 
 function Navbar() {
     return (
-    <div className={`bg-primary ${styles.menu_navegacao}`}>
-            <nav className={`container navbar navbar-expand-lg px-2 ${styles.navCor}`} >
+    <div id={styles.navCor} className={`bg-primary ${styles.menu_navegacao} `}>
+            <nav className={`container navbar navbar-expand-lg px-2 `} >
                 <div>
                     <span className='navbar-brand'>Hive</span>
                 </div>
