@@ -6,7 +6,7 @@ import App from "../../App";
 function Perfil() {
   return (
     <div>
-      asas
+      wewesd
     </div>
     
   )
