@@ -1,12 +1,18 @@
-
+import './views/Perfil/'
 import './App.css';
 import {BrowserRouter} from "react-router-dom";
 import {Routes} from "react-router-dom";
 import {Route} from 'react-router-dom';
+<<<<<<< HEAD
 import Cadastro from './views/Cadastro/Cadastro.jsx';
+=======
+
+import Cadastro from './views/Cadastro/Cadastro';
+>>>>>>> 7e37efd1f1d75085043d88a9e97d2a55ea46b560
 import Perfil from './views/Perfil/Perfil.jsx'
 import GestaoUser from './views/Cadastro/GestaoUsuarios.jsx'
 import EditUsuario from './views/Cadastro/EditUsuario.jsx';
+
 
 
 
