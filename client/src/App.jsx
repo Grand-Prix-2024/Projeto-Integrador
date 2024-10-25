@@ -1,4 +1,4 @@
-import './views/Perfil/'
+
 import './App.css';
 import {BrowserRouter} from "react-router-dom";
 import {Routes} from "react-router-dom";
@@ -7,6 +7,7 @@ import Cadastro from './views/Cadastro/Cadastro.jsx';
 import Perfil from './views/Perfil/Perfil.jsx'
 import GestaoUser from './views/Cadastro/GestaoUsuarios.jsx'
 import EditUsuario from './views/Cadastro/EditUsuario.jsx';
+import FormRepublica from './views/CadRepublica/components/FormRepublica.jsx';
 
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/gestao_usuario/' element={<GestaoUser/>}/>
         <Route path='/gestao_usuario/:tipo' element={<GestaoUser/>}/>
         <Route path='/edit_user/:id' element={<EditUsuario/>}/>
+        <Route path='/teste_rep' element={<FormRepublica/>}/>
       </Routes>
     </BrowserRouter>
   );
