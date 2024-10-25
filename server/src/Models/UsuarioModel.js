@@ -65,7 +65,7 @@ export async function updateUsuario(usuario, id) {
     sobrenome = ?,
     data_nasc = ?,
     cpf = ?
-    WHERE id = ?
+    WHERE id_usuario = ?
     `
     const params = [
         usuario.email,
@@ -90,7 +90,7 @@ export async function updateUsuario(usuario, id) {
 export async function deleteUsuario(id) {
     const conexao = mysql.createPool(db);
     console.log('Deletando usuário');
-    const sql = `DELETE FROM usuarios WHERE id = ?`;
+    const sql = `DELETE FROM usuarios WHERE id_usuario = ?`;
 
     const params = [id];
 
