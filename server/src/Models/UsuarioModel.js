@@ -54,3 +54,52 @@ export async function showUsuarios(usuario) {
         return[502, error];
     }
 }
+
+export async function updateUsuario(usuario, id) {
+    const conexao = mysql.createPool(db);
+    console.log('Atualizando usuário');
+
+    const sql = `UPDATE usuarios SET email = ?,
+    senha = ?,
+    nome = ?,
+    sobrenome = ?,
+    data_nasc = ?,
+    cpf = ?
+    WHERE id = ?
+    `
+    const params = [
+        usuario.email,
+        usuario.senha,
+        usuario.nome,
+        usuario.sobrenome,
+        usuario.data_nasc,
+        usuario.cpf,
+        id
+    ];
+
+    try {
+        const [retorno] = await conexao.query(sql, params);
+        console.log('Atualizando usuário');
+        return[200, retorno]
+    } catch (error) {
+        console.log(error);
+        return[500, error];
+    }
+}
+
+export async function deleteUsuario(id) {
+    const conexao = mysql.createPool(db);
+    console.log('Deletando usuário');
+    const sql = `DELETE FROM usuarios WHERE id = ?`;
+
+    const params = [id];
+
+    try {
+        const [retorno] = await conexao.query(sql, params);
+        console.log('Deletando usuário');
+        return[200, retorno];
+    } catch (error) {
+        console.log(error);
+        return[500, error];
+    }
+}
