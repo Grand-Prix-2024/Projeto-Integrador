@@ -1,0 +1,15 @@
+.container {
+  max-width: 900px;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.card-body {
+  background-color: #f9f9f9;
+}
