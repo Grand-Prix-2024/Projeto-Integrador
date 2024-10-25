@@ -36,7 +36,7 @@ function FormUsuario({tipo, handleSubmit, textoBotao, id, titulo}) {
                 setSenha(respostaJSON.senha)
                 setNome(respostaJSON.nome);
                 setSobrenome(respostaJSON.sobrenome);
-                setDataNasc(respostaJSON.data_nascimento)
+                setDataNasc(respostaJSON.data_nascimento);
                 setCpf(respostaJSON.cpf);
             }
         } catch (error) {

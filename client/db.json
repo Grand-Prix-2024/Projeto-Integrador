@@ -1,3 +1,14 @@
 {
-  "usuarios": []
+  "usuarios": [
+    {
+      "id": "4cba",
+      "email": "emanoelvitor020@gmail.com",
+      "senha": "tylerthcreator",
+      "nome": "gabriel",
+      "sobrenome": "de assis sperandio",
+      "data_nascimento": "2005-01-28",
+      "cpf": "07023462503",
+      "chave": null
+    }
+  ]
 }

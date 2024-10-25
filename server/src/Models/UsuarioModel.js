@@ -31,3 +31,26 @@ export async function createUsuario(usuario) {
         return [500, error];
     }
 }
+
+export async function showUsuarios(usuario) {
+    const conexao = mysql.createPool(db);
+    const sql = `SELECT * FROM usuarios`;
+
+    const params = [
+        usuario.email,
+        usuario.senha,
+        usuario.nome,
+        usuario.sobrenome,
+        usuario.data_nasc,
+        usuario.cpf
+    ];
+
+    try {
+        const [retorno] = await conexao.query(sql, params);
+        console.log('Mostrando usuários');
+        return[200, retorno];
+    } catch (error) {
+        console.log(error);
+        return[502, error];
+    }
+}
