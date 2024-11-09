@@ -103,3 +103,41 @@ export async function deleteUsuario(id) {
         return[500, error];
     }
 }
+
+export async function showOneUsuario(id_usuario) {
+    console.log('UsuarioModel :: showOneUsuario');
+    const conexao = mysql.createPool(db);
+    const sql = 'SELECT * FROM usuarios WHERE id_usuario = ?';
+    const params = [id_usuario];
+
+    try {
+        const [retorno] = await conexao.query(sql, params);
+        if(retorno.length < 1){
+            return [404, {message: 'Não foi possivel localizar o usuário'}];
+        }else{
+            return[200, retorno[0]];
+        }
+    } catch (error) {
+        console.log(error);
+        return[500, {message:'Erro ao exibir o usuário'}];
+    }
+}
+
+export async function findUserByLoginPassword(email, senha) {
+    console.log('UsuarioModel :: findUserByLoginPassword');
+    const conexao = mysql.createPool(db);
+    const sql = 'SELECT id_usuario FROM usuarios WHERE email = ? AND senha = ?';
+    const params = [email, senha];
+
+    try {
+        const [retorno] = await conexao.query(sql,params);
+        if(retorno.length < 1){
+            return[404, {message: 'E-mail ou senha inválidos'}];
+        }else{
+            return[200, retorno[0]];
+        }
+    } catch (error) {
+        console.log(error);
+        return[500, {message: 'Erro ao mostrar usuário'}];
+    }
+}
