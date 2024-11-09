@@ -9,7 +9,7 @@ function Login() {
         const dadosLogin = {email, senha};
 
         try {
-            const resposta = await fetch('httpp://localhost:5000/login', {
+            const resposta = await fetch('http://localhost:5000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
