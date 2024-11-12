@@ -18,7 +18,7 @@ export async function createUsuario(usuario) {
         usuario.senha,
         usuario.nome,
         usuario.sobrenome,
-        usuario.data_nasc,
+        usuario.data_nascimento,
         usuario.cpf
     ];
 
@@ -41,7 +41,7 @@ export async function showUsuarios(usuario) {
         usuario.senha,
         usuario.nome,
         usuario.sobrenome,
-        usuario.data_nasc,
+        usuario.data_nascimento,
         usuario.cpf
     ];
 
@@ -72,7 +72,7 @@ export async function updateUsuario(usuario, id) {
         usuario.senha,
         usuario.nome,
         usuario.sobrenome,
-        usuario.data_nasc,
+        usuario.data_nascimento,
         usuario.cpf,
         id
     ];

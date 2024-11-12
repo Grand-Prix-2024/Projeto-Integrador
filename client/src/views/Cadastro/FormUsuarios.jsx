@@ -52,8 +52,7 @@ function FormUsuario({tipo, handleSubmit, textoBotao, id, titulo}) {
             nome:nome,
             sobrenome:sobrenome,
             data_nascimento:dataNasc,
-            cpf:cpf,
-            chave:null
+            cpf:cpf
         }
         handleSubmit(usuario,id);
         navigate(`/gestao_usuario/${tipo}`)

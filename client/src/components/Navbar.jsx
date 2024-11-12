@@ -14,7 +14,7 @@ function Navbar() {
                 </button>
                 <div id='menu' className='collapse navbar-collapse text-center'>
                  <ul className='navbar-nav mx-auto'>
-                    <li className='navbar-item'><NavLink className='nav-link' to="">Login</NavLink></li>
+                    <li className='navbar-item'><NavLink className='nav-link' to="/login">Login</NavLink></li>
                     <li className='navbar-item'><NavLink className='nav-link' to="/cadastro">Cadastro</NavLink></li>
                     <li className='navbar-item'><NavLink className='nav-link' to="/perfil">Perfil</NavLink></li>
                  </ul>

@@ -19,10 +19,11 @@ function Login() {
 
             if(!resposta.ok){
                 alert('E-mail ou senha inválidos!')
+                console.log(resposta);
             }else{
                 const respostaJSON= await resposta.json();
                 localStorage.setItem('id_usuario', respostaJSON.id_usuario);
-                window.location.href='/';
+                window.location.href='/perfil';
             }
         } catch (error) {
             console.log(error);
