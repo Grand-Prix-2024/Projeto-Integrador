@@ -1,0 +1,19 @@
+.perfil-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .perfil-header h1 {
+    font-size: 24px;
+  }
+  
+  .perfil-header button {
+    background-color: #f0ad4e;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
