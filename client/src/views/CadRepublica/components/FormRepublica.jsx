@@ -113,16 +113,17 @@ function FormRepublica({ tipo, handleSubmit, textoBotao, id, titulo }) {
         <h5>Etapa 1</h5> {/* Título principal da etapa */}
         <h1>Informe sobre sua acomodação</h1> {/*Subtítulo para explicar a ação ao usuário */}
 
-        {/* <Botões de seleção: Casa ou Apartamento  */}
-        <div class="d-flex justify-content-around my-4">
-          {/* Div com flexbox para posicionar os botões de maneira uniforme horizontalmente */}
-          <button type="button" class="btn btn-outline-primary">
-            {/* Botão estilizado com `btn-outline-primary` para criar um botão com bordas azuis */}
-            <i class="bi bi-house">Casa</i> {/*Casa Ícone de casa e texto "Casa"*/}
-          </button>
-          <button type="button" class="btn btn-outline-primary">
-            <i class="bi bi-building">Apartamento</i>  {/*Apartamento  Ícone de prédio e texto "Apartamento"  */}
-          </button>
+        <div className="row mt-3 justify-content-center">
+          <div className="col-3 mb-3">
+            <button className="btn btn-warning w-100 py-3">
+              <i className="bi bi-house"></i> Casa
+            </button>
+          </div>
+          <div className="col-3 mb-3">
+            <button className="btn btn-warning w-100 py-3">
+              <i className="bi bi-building"></i> Apartamento
+            </button>
+          </div>
         </div>
 
         <form onSubmit={submit} className="mt-4">
@@ -146,42 +147,52 @@ function FormRepublica({ tipo, handleSubmit, textoBotao, id, titulo }) {
 
           {/* Informações essenciais */}
           <h3 className="fs-5 mt-4">Compartilhe mais informações essenciais:</h3>
-
+          <div>
+            
+          </div>
           {/* Moradores */}
-          <label className="form-label mt-2">Moradores</label>
-          <div className="input-group mb-3">
-            <button className="btn btn-outline-secondary" type="button" id="decreaseMoradores">-</button>
-            <input type="text" className="form-control text-center" value={qtd_moradores} onChange={(e) => setQtd_moradores(e.target.value)} />
-            <button className="btn btn-outline-secondary" type="button" id="increaseMoradores">+</button>
+          <div className="mb-3 d-flex align-items-center">
+            <label htmlFor="moradores" className="me-5">Moradores</label>
+            <div className="input-group" style={{ width: "100px" }}>
+              <button className="btn btn-outline-secondary" type="button" onClick={() => diminuir('moradores')}>-</button>
+              <input type="number" id="moradores" className="form-control text-center" min="0" value="0" />
+              <button className="btn btn-outline-secondary" type="button" onClick={() => aumentar('moradores')}>+</button>
+            </div>
           </div>
 
           {/* Quartos */}
-          <label className="form-label mt-2">Quartos</label>
-          <div className="input-group mb-3">
-            <button className="btn btn-outline-secondary" type="button" id="decreaseQuartos">-</button>
-            <input type="text" className="form-control text-center" value={qtd_quartos} onChange={(e) => setQtd_quartos(e.target.value)} />
-            <button className="btn btn-outline-secondary" type="button" id="increaseQuartos">+</button>
+          <div className="mb-3 d-flex align-items-center">
+            <label htmlFor="moradores" className="me-5">Quartos</label>
+            <div className="input-group" style={{ width: "100px" }}>
+              <button className="btn btn-outline-secondary" type="button" onClick={() => diminuir('quartos')}>-</button>
+              <input type="number" id="moradores" className="form-control text-center" min="0" value="0" />
+              <button className="btn btn-outline-secondary" type="button" onClick={() => aumentar('quartos')}>+</button>
+            </div>
           </div>
 
           {/* Banheiros */}
-          <label className="form-label mt-2">Banheiros</label>
-          <div className="input-group mb-3">
-            <button className="btn btn-outline-secondary" type="button" id="decreaseBanheiros">-</button>
-            <input type="text" className="form-control text-center" value={qtd_banheiros} onChange={(e) => setQtd_banheiros(e.target.value)} />
-            <button className="btn btn-outline-secondary" type="button" id="increaseBanheiros">+</button>
+          <div className="mb-3 d-flex align-items-center">
+            <label htmlFor="moradores" className="me-5">Banheiros</label>
+            <div className="input-group" style={{ width: "100px" }}>
+              <button className="btn btn-outline-secondary" type="button" onClick={() => diminuir('banheiros')}>-</button>
+              <input type="number" id="moradores" className="form-control text-center" min="0" value="0" />
+              <button className="btn btn-outline-secondary" type="button" onClick={() => aumentar('banheiros')}>+</button>
+            </div>
           </div>
 
           {/* Camas */}
-          <label className="form-label mt-2">Camas</label>
-          <div className="input-group mb-3">
-            <button className="btn btn-outline-secondary" type="button" id="decreaseCamas">-</button>
-            <input type="text" className="form-control text-center" value={qtd_camas} onChange={(e) => setQtd_camas(e.target.value)} />
-            <button className="btn btn-outline-secondary" type="button" id="increaseCamas">+</button>
+          <div className="mb-3 d-flex align-items-center">
+            <label htmlFor="moradores" className="me-5">Camas</label>
+            <div className="input-group" style={{ width: "100px" }}>
+              <button className="btn btn-outline-secondary" type="button" onClick={() => diminuir('camas')}>-</button>
+              <input type="number" id="moradores" className="form-control text-center" min="0" value="0" />
+              <button className="btn btn-outline-secondary" type="button" onClick={() => aumentar('camas')}>+</button>
+            </div>
           </div>
 
           {/* Botões de ação 
           <a className="btn btn-danger mt-3 float-start" href="#">Cancelar</a>
-          <button className="btn btn-warning mt-3 float-end" type="submit">Confirmar</button>*/}
+          <button className="btn btn-warning mt-3 float-end" type="submit">Confirmar</button> */}
         </form>
 
         <h5>Etapa 2</h5> {/* Título principal da etapa */}
@@ -192,33 +203,35 @@ function FormRepublica({ tipo, handleSubmit, textoBotao, id, titulo }) {
         </div>
         {/* O que sua moradia oferece a mais */}
         <h3 className="text-center fs-2 mt-4">Informe o que sua moradia tem a mais pra oferecer</h3>
-        <div className="row mt-3">
-          <div className="col-4 mb-3">
+        <div className="row mt-3 justify-content-center">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-wifi"></i> Wi-Fi
             </button>
           </div>
-          <div className="col-4 mb-3">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-tv"></i> Televisão
             </button>
           </div>
-          <div className="col-4 mb-3">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-house-door"></i> Cozinha
             </button>
           </div>
-          <div className="col-4 mb-3">
+        </div>
+        <div className="row mt-3 justify-content-center">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-snow"></i> Ar-condicionado
             </button>
           </div>
-          <div className="col-4 mb-3">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-journal-bookmark"></i> Canto de estudo
             </button>
           </div>
-          <div className="col-4 mb-3">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-shower"></i> Chuveiro quente
             </button>
@@ -227,33 +240,35 @@ function FormRepublica({ tipo, handleSubmit, textoBotao, id, titulo }) {
 
         {/* O que sua moradia oferece a mais */}
         <h3 className="text-center fs-2 mt-4">Informe comodidades da sua moradia</h3>
-        <div className="row mt-3">
-          <div className="col-4 mb-3">
+        <div className="row mt-3 justify-content-center">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-wifi"></i> Piscina
             </button>
           </div>
-          <div className="col-4 mb-3">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-tv"></i> Churrasqueira
             </button>
           </div>
-          <div className="col-4 mb-3">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-house-door"></i> Academia
             </button>
           </div>
-          <div className="col-4 mb-3">
+        </div>
+        <div className="row mt-3 justify-content-center">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-snow"></i> Varanda
             </button>
           </div>
-          <div className="col-4 mb-3">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-journal-bookmark"></i> Jardim
             </button>
           </div>
-          <div className="col-4 mb-3">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-shower"></i> Banheira
             </button>
@@ -262,26 +277,99 @@ function FormRepublica({ tipo, handleSubmit, textoBotao, id, titulo }) {
 
         {/* O que sua moradia oferece a mais */}
         <h3 className="text-center fs-2 mt-4">Itens de segurança</h3>
-        <div className="row mt-3">
-          <div className="col-4 mb-3">
+        <div className="row mt-3  justify-content-center">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-wifi"></i> Extintor
             </button>
           </div>
-          <div className="col-4 mb-3">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-wifi"></i> Câmeras
             </button>
           </div>
-          <div className="col-4 mb-3">
+          <div className="col-2 mb-3">
             <button className="btn btn-warning w-100 py-3">
               <i className="bi bi-wifi"></i> Alarmes
             </button>
           </div>
         </div>
       </div>
+
+      <div className="container mt-5">
+      {/* Cabeçalho da seção */}
+      <div>
+        <h4>Etapa 3</h4>
+        <h2>Vamos preparar seu anuncio</h2>
+        <p>Montar como seu anuncio vai aparecer para os interessados</p>
+      </div>
+      
+      {/* Instruções para adicionar fotos */}
+      <div className="mt-4">
+        <h5>Adicione fotos do seu espaço</h5>
+        <p className="text-muted justify-content-center">imagens da fachada, do interior, quartos etc</p>
+      </div>
+
+      {/* Grid para os boxes de fotos */}
+      <div className="row justify-content-center">
+        <div className="col-md-3">
+          <div className="photo-box">+</div>
+        </div>
+        <div className="col-md-3">
+          <div className="photo-box">+</div>
+        </div>
+      </div>
+      <div className="row justify-content-center">
+        <div className="col-md-2">
+          <div className="photo-box">+</div>
+        </div>
+        <div className="col-md-2">
+          <div className="photo-box">+</div>
+        </div>
+        <div className="col-md-2">
+          <div className="photo-box">+</div>
+        </div>
+      </div>
+
+      {/* Campo para nomear a moradia */}
+      <div className="mt-4">
+        <h5>Nomeie sua moradia para o anuncio</h5>
+        <p className="text-muted">use sua criatividade!</p>
+        <input type="text" className="form-control" placeholder="Ex.: União Twink" />
+      </div>
+
+      <div>
+        <div className="justify-content-center">
+          <h5>Determine seu valor</h5>
+          <p>Você poderá alterar quando quiser</p>
+        </div>
+
+        <div className="input-group" style={{ width: "100px" }}> 
+            <h1>R$</h1>
+            <input type="number" />
+            <button>edit</button>
+        </div>
+      </div>
+
+      {/* Estilo inline para os boxes de foto */}
+      <style jsx>{`
+        .photo-box {
+          width: 100%;
+          height: 150px;
+          background-color: #ffd966;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2em;
+          color: #333;
+          border: 2px dashed #aaa;
+          margin-bottom: 1rem;
+        }
+      `}</style>
+    </div>
     </>
-  )
+  
+)
 }
 
 export default FormRepublica
