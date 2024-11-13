@@ -9,33 +9,32 @@ function Perfil() {
   return (
    <>
     <Navbar/>
-    <Card style={{ width: '700px', height:'600px' ,  padding: '70px', margin:'50px' }}>
+    <Card style={{ width: '500px', height:'300px' ,  padding: '50px', margin:'50px', borderRadius:'20px' }}>
       <Image 
         src="https://via.placeholder.com/100" // Substitua pela URL real da imagem de perfil
         roundedCircle 
-        style={{ width: '200px', height: '200px', margin: 'auto' }} 
+        style={{ width: '150px', height: '150px', marginTop:'-20px'}} 
       />
       <Card.Body>
-        <Card.Title>[object Object] Doe</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">CEO of Apple</Card.Subtitle>
-        <Card.Text>
-          <div className="d-flex justify-content-between">
-            <span>Detail 1</span>
-            <span>32</span>
+        <Card.Title style={{marginLeft:'-7px', marginTop:'20px'}} >[object Object]</Card.Title>
+        <Card.Subtitle style={{marginLeft:'11px'}} className="mb-2 text-muted">CEO of Apple</Card.Subtitle>
+        <Card.Text style={{marginLeft:'280px', marginBlockStart:'-180px'}}>
+          <div style={{marginBottom:'20px', fontSize:'18px'}}  className=" justify-content-between">
+            <span style={{marginLeft:'-30px'}}>1 </span>
+            <span>daniel</span>
           </div>
-          <div className="d-flex justify-content-between">
-            <span>Detail 2</span>
-            <span>40</span>
+          <div style={{marginBottom:'20px', fontSize:'18px'}} className=" justify-content-between">
+            <span style={{marginLeft:'-30px'}}>2 </span>
+            <span>gabriel</span>
           </div>
-          <div className="d-flex justify-content-between">
-            <span>Detail 3</span>
-            <span>50</span>
+          <div style={{marginBottom:'20px', fontSize:'18px'}} className=" justify-content-between">
+            <span style={{marginLeft:'-30px'}}>3 </span>
+            <span>emanoel</span>
           </div>
         </Card.Text>
-        <Button variant="primary">View Public Profile</Button>
       </Card.Body>
     </Card>
-    <Card style={{ width: '700px', height:'600px' ,  padding: '70px', margin:'50px' }}>
+    <Card style={{ width: '500px', height:'400px' ,  padding: '50px', margin:'50px', borderRadius:'20px' }}>
       <Card.Body>
         <Card.Title> </Card.Title>
         <Card.Subtitle className="mb-2 text-muted"></Card.Subtitle>
