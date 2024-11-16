@@ -5,10 +5,12 @@ import App from "../../App";
 
 function Perfil() {
   return (
-    <div>
-      wewesd
-    </div>
-    
+    <>
+      <Navbar />
+      <div>
+        wewesd
+      </div>
+    </>
   )
 }
 

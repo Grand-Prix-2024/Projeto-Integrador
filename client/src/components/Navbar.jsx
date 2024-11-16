@@ -1,8 +1,25 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './navbar.module.css'
 
 function Navbar() {
+    const [idUsuario, setidUsuario] = useState('');
+    const [nome, setNome] = useState('');
+
+    
+    async function getNome(id_usuario) {
+        try {
+            const resposta = await fetch(`http://localhost:5000/usuarios/${id_usuario}`);
+            const dados = await resposta.json();
+            if(dados){
+                console.log(dados);
+                setNome(dados.nome);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
     <div id={styles.navCor} className={`bg-primary ${styles.menu_navegacao} `}>
             <nav className={`container navbar navbar-expand-lg px-2 `} >
@@ -18,6 +35,9 @@ function Navbar() {
                     <li className='navbar-item'><NavLink className='nav-link' to="/cadastro">Cadastro</NavLink></li>
                     <li className='navbar-item'><NavLink className='nav-link' to="/perfil">Perfil</NavLink></li>
                  </ul>
+                 <div className='form-inline my-2 my-lg-0'>
+                    <label htmlFor="" className='mr-3'>{nome}</label>
+                 </div>
                 </div>
             </nav>
         </div>
