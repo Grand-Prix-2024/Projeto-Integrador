@@ -6,6 +6,23 @@ function Navbar() {
     const [idUsuario, setidUsuario] = useState('');
     const [nome, setNome] = useState('');
 
+    useEffect(()=>{
+        getNome();
+        if(idUsuario === ''){
+            try {
+                const id_usuario = localStorage.getItem('id_usuario');
+                if(!id_usuario){
+                    console.log('usuario nao logado')
+                }else{
+                    setidUsuario(id_usuario);
+                    getNome(id_usuario);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }, []);
+
     
     async function getNome(id_usuario) {
         try {
@@ -36,7 +53,7 @@ function Navbar() {
                     <li className='navbar-item'><NavLink className='nav-link' to="/perfil">Perfil</NavLink></li>
                  </ul>
                  <div className='form-inline my-2 my-lg-0'>
-                    <label htmlFor="" className='mr-3'>{nome}</label>
+                    <p htmlFor="" className='mr-3'>{nome}</p>
                  </div>
                 </div>
             </nav>
