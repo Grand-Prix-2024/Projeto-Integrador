@@ -11,7 +11,7 @@ function Perfil() {
     <Navbar/>
     <Card style={{ width: '500px', height:'300px' ,  padding: '50px', margin:'50px', borderRadius:'20px' }}>
       <Image 
-        src="https://via.placeholder.com/100" // Substitua pela URL real da imagem de perfil
+        src="https://cdn.jornaldebrasilia.com.br/wp-content/uploads/2024/09/12114930/rapper-travis-scott-confirmado-atracao-rock-in-rio-scaled-1-620x620.webp" // Substitua pela URL real da imagem de perfil
         roundedCircle 
         style={{ width: '150px', height: '150px', marginTop:'-20px'}} 
       />
@@ -55,29 +55,36 @@ function Perfil() {
       </Card.Body>     
     </Card>
     <Button style={{ margin:'50px', marginTop:'-20px'}} variant="btn btn-danger">Denunciar perfil</Button>
-    <Card className='position-absolute top-50 start-50"' style={{ width: '1200px', height:'600px', marginLeft:'900px', marginBlockStart:'-607px'}}>
+    <Card className='position-absolute top-50 start-50"' style={{ width: '800px', height:'450px', marginLeft:'650px', marginBlockStart:'-370px', border:'none'}}>
       <Card.Text>
         <div>
           <span></span>
         </div>
       </Card.Text>
     </Card>
-    <hr className='position-absolute top-50 start-50"' style={{ width: '1200px', height:'600px', marginLeft:'900px', marginBlockEnd:'-607px'}}/>
-    <Card className='position top-50 start-50"' style={{ width: '300px', height:'300px', marginLeft:'900px', marginBlockStart:'-719px'}}>
+    <hr className='position-absolute top-50 start-50"' style={{ width: '800px', height:'600px', marginLeft:'650px', marginBlockStart:'115px'}}/>
+    <Card className='position top-50 start-50"' style={{ width: '250px', height:'300px', marginLeft:'650px', marginBlockStart:'-350px',borderRadius:'20px'}}>
       <Card.Text>
         <div>
           <span></span>
         </div>
       </Card.Text>
     </Card>
-    <Card className='position top-50 start-50"' style={{ width: '800px', height:'300px', marginLeft:'1300px', marginBlockStart:'-800px', marginTop:'-300px'}}>
+    <Card className='position top-50 start-50"' style={{ width: '500px', height:'300px', marginLeft:'950px', marginBlockStart:'-800px', marginTop:'-300px', border:'none'}}>
       <Card.Text>
         <div>
           <span></span>
         </div>
       </Card.Text>
     </Card>
-    <hr className='position top-50 start-50"' style={{ width: '1200px', height:'300px', marginLeft:'900px', marginBlockEnd:'-715px', marginTop:'23px'}}/>
+    <Card className='position top-50 start-50"' style={{ width: '300px', height:'820px', marginLeft:'1550px', marginBlockStart:'-818px', marginTop:'-300px', borderRadius:'20px'}}>
+      <Card.Text>
+        <div>
+          <span></span>
+        </div>
+      </Card.Text>
+    </Card>
+    {/* <hr className='position top-50 start-50"' style={{ width: '800px', height:'300px', marginLeft:'650px', marginBlockEnd:'-725px', marginTop:'32px'}}/> */}
    </>
    
   )
