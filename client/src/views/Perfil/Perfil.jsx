@@ -3,8 +3,7 @@ import React from 'react'
 
 function Perfil() {
   return (
-    <NavbarPerfil/>
-    
+    <div></div>
   )
 }
 
