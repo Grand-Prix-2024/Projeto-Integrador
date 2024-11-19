@@ -7,6 +7,7 @@ import Perfil from './views/Perfil/Perfil.jsx'
 import GestaoUser from './views/Cadastro/GestaoUsuarios.jsx'
 import EditUsuario from './views/Cadastro/EditUsuario.jsx';
 import Login from './views/Login/Login.jsx';
+import Home from './views/Home/Home.jsx';
 
 
 
@@ -18,6 +19,7 @@ function App() {
      {/* <Global />
      <Home boxData={data} /> */}
       <Routes>
+      <Route path='/' element={<Home/>}/>
         <Route path='/perfil' element={<Perfil/>}/>   
         <Route path='/cadastro' element={<Cadastro/>}/>
         <Route path='/gestao_usuario/' element={<GestaoUser/>}/>
