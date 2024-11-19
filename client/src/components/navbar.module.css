@@ -1,0 +1,17 @@
+#navCor{
+    background-color: #FFE34C !important;
+}
+
+.menu_navegacao a{
+    color: #000000;
+}
+
+.menu_navegacao a:hover{
+    font-weight: bold ;
+    color: #000000;
+    transition: 0.2s ease-in-out;
+}
+
+.active{
+    color: #fff;
+}
