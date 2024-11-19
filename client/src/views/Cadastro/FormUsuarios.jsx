@@ -27,7 +27,6 @@ function FormUsuario({tipo, handleSubmit, textoBotao, id, titulo}) {
                     'Content-Type': 'application/json'
                 }
             });
-
             if(!resposta){
                 throw new Error('Erro ao buscar os usuários');
             }else{

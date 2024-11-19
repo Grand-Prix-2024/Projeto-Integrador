@@ -109,7 +109,6 @@ export async function showOneUsuario(id_usuario) {
     const conexao = mysql.createPool(db);
     const sql = 'SELECT * FROM usuarios WHERE id_usuario = ?';
     const params = [id_usuario];
-
     try {
         const [retorno] = await conexao.query(sql, params);
         if(retorno.length < 1){
@@ -126,7 +125,7 @@ export async function showOneUsuario(id_usuario) {
 export async function findUserByLoginPassword(email, senha) {
     console.log('UsuarioModel :: findUserByLoginPassword');
     const conexao = mysql.createPool(db);
-    const sql = 'SELECT id_usuario FROM usuarios WHERE email = ? AND senha = ?';
+    const sql = 'SELECT id_usuario, nome FROM usuarios WHERE email = ? AND senha = ?';
     const params = [email, senha];
 
     try {
@@ -134,6 +133,7 @@ export async function findUserByLoginPassword(email, senha) {
         if(retorno.length < 1){
             return[404, {message: 'E-mail ou senha inválidos'}];
         }else{
+            console.log(retorno[0])
             return[200, retorno[0]];
         }
     } catch (error) {

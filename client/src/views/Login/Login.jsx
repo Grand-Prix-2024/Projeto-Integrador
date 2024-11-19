@@ -24,13 +24,17 @@ function Login() {
                 console.log(resposta);
             } else {
                 const respostaJSON = await resposta.json();
+                console.log(`resposta aqui ${respostaJSON}`)
                 localStorage.setItem('id_usuario', respostaJSON.id_usuario);
+                localStorage.setItem('nome', respostaJSON.nome);               
                 window.location.href = '/perfil';
             }
         } catch (error) {
             console.log(error);
         }
     }
+
+    
 
     return (
         <>

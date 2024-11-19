@@ -58,13 +58,13 @@ export async function deletarUsuario(req, res) {
 
 export async function mostrarUmUsuario(req, res) {
     console.log('UsuarioController :: mostrarUmUsuario');
-    const {id_usuario} = req.params;
-
-    if(!id_usuario){
+    const {id} = req.params;
+    console.log(`O id está aqui ${id}`)
+    if(!id){
         res.status(400).json({message: 'ID inválido'})
     }else{
         try {
-            const [status, resposta] = await showOneUsuario(id_usuario);
+            const [status, resposta] = await showOneUsuario(id);
             res.status(status).json(resposta);
         } catch (error) {
             res.status(500).json({message: 'Erro ao mostrar usuário'})
