@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from '../../components/Navbar';
 
 function getRepublicas() {
   return [
@@ -17,6 +18,7 @@ function Home() {
 
   return (
     <div className="App">
+      <Navbar/>
       <header className="bg-warning text-white py-3">
         <div className="container d-flex justify-content-between align-items-center">
           <h1 className="h3 m-0">Hive</h1>
