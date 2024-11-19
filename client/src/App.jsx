@@ -13,7 +13,10 @@ import Login from './views/Login/Login.jsx';
 
 function App() {
   return (
+    
     <BrowserRouter>
+     {/* <Global />
+     <Home boxData={data} /> */}
       <Routes>
         <Route path='/perfil' element={<Perfil/>}/>   
         <Route path='/cadastro' element={<Cadastro/>}/>
