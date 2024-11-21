@@ -30,6 +30,7 @@ function Navbar() {
                     <li className='navbar-item'><NavLink className='nav-link' to="/login">Login</NavLink></li>
                     <li className='navbar-item'><NavLink className='nav-link' to="/cadastro">Cadastro</NavLink></li>
                     <li className='navbar-item'><NavLink className='nav-link' to="/perfil">Perfil</NavLink></li>
+                    <li className='navbar-item'><NavLink className='nav-link' to="/cadastrorepublica">Cadastre uma república</NavLink></li>
                  </ul>
                  <div className='form-inline my-2 my-lg-0'>
                     <label className='mr-3'>{nome}</label>
