@@ -65,7 +65,7 @@ function Perfil() {
       <Card.Text>
         <div>
           <h1>JACQUES BERMAN WEBSTER II</h1>
-          <h5 style={{fontStyle:'italic'}}>ELA/DELA</h5>
+          <h5 style={{fontStyle:'italic'}}>ELA/DELA <Button style={{ margin:'0px', marginTop:'-10px', marginLeft:'25px'}} variant="btn btn-warning">Editar</Button></h5>
           <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam repellendus, quos ipsa voluptatum alias tempore. Tenetur reiciendis omnis ipsa autem, 
             ullam expedita mollitia ut dolore sequi commodi vero exercitationem sapiente.
             </span>
