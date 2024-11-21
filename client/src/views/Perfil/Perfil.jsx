@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar';
 import { Card, Button, Image, CardText } from 'react-bootstrap';
 
 
+
 function Perfil() {
   return (
    <>
