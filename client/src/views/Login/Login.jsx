@@ -26,7 +26,8 @@ function Login() {
                 const respostaJSON = await resposta.json();
                 console.log(`resposta aqui ${respostaJSON}`)
                 localStorage.setItem('id_usuario', respostaJSON.id_usuario);
-                localStorage.setItem('nome', respostaJSON.nome);               
+                localStorage.setItem('nome', respostaJSON.nome);
+                localStorage.setItem('sobrenome', respostaJSON.sobrenome);              
                 window.location.href = '/perfil';
             }
         } catch (error) {

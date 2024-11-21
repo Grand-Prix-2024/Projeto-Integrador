@@ -68,7 +68,7 @@ function Perfil() {
     <Card className='position-absolute top-50 start-50"' style={{ width: '800px', height:'450px', marginLeft:'650px', marginBlockStart:'-370px', border:'none'}}>
       <Card.Text>
         <div>
-          <h1>{nome}{sobrenome}</h1>
+          <h1>{nome} {sobrenome}</h1>
           <h5 style={{fontStyle:'italic'}}>ELA/DELA <Button style={{ margin:'0px', marginTop:'-10px', marginLeft:'25px'}} variant="btn btn-warning">Editar</Button></h5>
           <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam repellendus, quos ipsa voluptatum alias tempore. Tenetur reiciendis omnis ipsa autem, 
             ullam expedita mollitia ut dolore sequi commodi vero exercitationem sapiente.
