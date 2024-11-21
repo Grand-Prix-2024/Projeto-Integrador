@@ -1,32 +1,39 @@
 import React from 'react';
 import Navbar from '../../components/Navbar';
 import { Card, Button, Image, CardText } from 'react-bootstrap';
+import locaPin from './img/locaPin.png';
+import chapeuGrad from './img/chapeuGrad.png';
+import escola from './img/escola.png';
+
+
 
 
 function Perfil() {
   return (
     <>
       <Navbar />
-      <Card style={{ width: '500px', height: '400px', padding: '50px', margin: '50px', borderRadius: '20px' }}>
+      <Card style={{ width: '500px', height: '350px', padding: '50px', margin: '50px', borderRadius: '20px' }}>
         <Image
           src="https://cdn.jornaldebrasilia.com.br/wp-content/uploads/2024/09/12114930/rapper-travis-scott-confirmado-atracao-rock-in-rio-scaled-1-620x620.webp" // Substitua pela URL real da imagem de perfil
           roundedCircle
-          style={{ width: '150px', height: '150px', marginTop: '-20px' }}
+          style={{ width: '200px', height: '200px', marginTop: '-20px' }}
         />
         <Card.Body>
-          <Card.Title style={{ marginLeft: '-7px', marginTop: '20px' }} >[object Object]</Card.Title>
-          <Card.Subtitle style={{ marginLeft: '11px' }} className="mb-2 text-muted">CEO of Apple</Card.Subtitle>
-          <Card.Text style={{ marginLeft: '280px', marginBlockStart: '-180px' }}>
+          <Card.Title style={{ marginLeft: '-7px', marginTop: '20px', fontSize:'25px' }} >[object Object]</Card.Title>
+          <Card.Subtitle style={{ marginLeft: '26px', fontSize:'17px' }} className="mb-2 text-muted">CEO of Apple</Card.Subtitle>
+          <Card.Text style={{ marginLeft: '280px', marginBlockStart: '-220px' }}>
             <div style={{ marginBottom: '20px', fontSize: '18px' }} className=" justify-content-between">
-              <span style={{ marginLeft: '-30px' }}>1 </span>
+            <img src={chapeuGrad} style={{width:'25px', height:'25px'}}/>
               <span>ES</span>
             </div>
             <div style={{ marginBottom: '20px', fontSize: '18px' }} className=" justify-content-between">
-              <span style={{ marginLeft: '-30px' }}>2 </span>
+              <img src={locaPin} style={{width:'25px', height:'25px'}}/>
+              {/* <span style={{ marginLeft: '-30px' }}>2 </span> */}
               <span>Direito</span>
             </div>
             <div style={{ marginBottom: '20px', fontSize: '18px' }} className=" justify-content-between">
-              <span style={{ marginLeft: '-30px' }}>3 </span>
+            <img src={escola} style={{width:'25px', height:'25px'}}/>
+              {/* <span style={{ marginLeft: '-30px' }}>3 </span> */}
               <span>UFES</span>
             </div>
           </Card.Text>
@@ -75,7 +82,7 @@ function Perfil() {
           </div>
         </Card.Text>
       </Card>
-      <hr className='position-absolute top-50 start-50"' style={{ width: '800px', height: '600px', marginLeft: '650px', marginBlockStart: '115px' }} />
+      <hr className='position-absolute top-50 start-50"' style={{ width: '800px', height: '600px', marginLeft: '650px', marginBlockStart: '105px' }} />
       <Card className='position top-50 start-50"' style={{ width: '250px', height: '300px', marginLeft: '650px', marginBlockStart: '-350px', borderRadius: '20px', borderStyle:'solid', borderColor:'black' }}>
         <Card className='position top-50 start-50"' style={{ width: '220px', height: '200px', marginLeft: '15px', marginBlockStart: '-135px', borderRadius: '20px',   }}>
         <Image
