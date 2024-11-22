@@ -98,7 +98,7 @@ function FormUsuario({tipo, handleSubmit, textoBotao, id, titulo}) {
             cpf: cpf,
         };
         handleSubmit(usuario, id);
-        navigate(`/gestao_usuario/${tipo}`);
+        navigate(`/login`);
     }
   
     return (
