@@ -1,110 +1,115 @@
-import mysql from 'mysql2/promise'
-import db from '../conexao.js'
+import mysql from 'mysql2/promise';
+import db from '../conexao.js';
 
 export async function createPerfil(perfil) {
     const conexao = mysql.createPool(db);
-    const sql = `INSERT INTO perfil(
-        pronome,
-        descricao,
-        idioma,
-        estado_civil,
-        local_moradia,
-        telefone,
-        redes,
-        bio
-        )
-        VALUES(?,?,?,?,?,?,?,?)`;
-
+    const sql = `
+        INSERT INTO perfil (
+            pronome, descricao, idioma, estado_civil, local_moradia,
+            telefone, redes, bio, id_usuario
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
     const params = [
-        perfil.pronome,
-        perfil.descricao,
-        perfil.estado_civil,
-        perfil.local_moradia,
-        perfil.telefone,
-        perfil.redes,
-        perfil.bio
+        perfil.pronome, perfil.descricao, perfil.idioma,
+        perfil.estado_civil, perfil.local_moradia, perfil.telefone,
+        perfil.redes, perfil.bio, perfil.id_usuario
     ];
 
     try {
         const [retorno] = await conexao.query(sql, params);
+        console.log(retorno);
         console.log('Perfil cadastrado');
-        return [201,'Perfil cadastrado'];
+        return [201, 'Perfil cadastrado'];
     } catch (error) {
         console.log(error);
         return [500, error];
     }
 }
 
-export async function showPerfil(perfil) {
+
+export async function showPerfil() {
     const conexao = mysql.createPool(db);
     const sql = `SELECT * FROM perfil`;
+
+    try {
+        const [retorno] = await conexao.query(sql);
+        console.log('Perfis encontrados');
+        return [200, retorno];
+    } catch (error) {
+        console.error('Erro ao buscar perfis:', error);
+        return [502, error];
+    }
+}
+
+
+export async function updatePerfil(perfil, id) {
+    const conexao = mysql.createPool(db);
+    console.log('Atualizando perfil...');
+
+    const sql = `UPDATE perfil SET 
+        pronome = ?,
+        descricao = ?,
+        idioma = ?,
+        estado_civil = ?,
+        local_moradia = ?,
+        telefone = ?,
+        redes = ?,
+        bio = ?
+    WHERE id_perfil = ?`;
 
     const params = [
         perfil.pronome,
         perfil.descricao,
+        perfil.idioma,
         perfil.estado_civil,
         perfil.local_moradia,
         perfil.telefone,
         perfil.redes,
-        perfil.bio
-    ];
-
-    try {
-        const [retorno] = await conexao.query(sql, params);
-        console.log('Mostrando perfis');
-        return[200, retorno];
-    } catch (error) {
-        console.log(error);
-        return[502, error];
-    }
-}
-
-export async function updatePerfil(perfil, id) {
-    const conexao = mysql.createPool(db);
-    console.log('Atualizando usuário');
-
-    const sql = `UPDATE usuarios SET pronome = ?,
-    descricao = ?,
-    estado_civil = ?,
-    local_moradia = ?,
-    telefone = ?,
-    redes = ?,
-    bio = ?
-    WHERE id_perfil = ?
-    `
-    const params = [
-        perfil.email,
-        perfil.senha,
-        perfil.nome,
-        perfil.sobrenome,
-        perfil.data_nascimento,
-        perfil.cpf,
+        perfil.bio,
         id
     ];
 
     try {
         const [retorno] = await conexao.query(sql, params);
-        console.log('Atualizando perfil');
-        return[200, retorno]
+        console.log('Perfil atualizado com sucesso');
+        return [200, 'Perfil atualizado com sucesso'];
     } catch (error) {
-        console.log(error);
-        return[500, error];
+        console.error('Erro ao atualizar perfil:', error);
+        return [500, error];
     }
 }
 
+
 export async function deletePerfil(id) {
     const conexao = mysql.createPool(db);
-    console.log('Deletando usuário');
-    const sql = `DELETE FROM usuarios WHERE id_perfil = ?`;
+    console.log('Deletando perfil...');
 
-    const params = [id];
+    const sql = `DELETE FROM perfil WHERE id_perfil = ?`;
 
     try {
-        const [retorno] = await conexao.query(sql, params);
-        console.log('Deletando Perfil');
-        return[200, retorno];
+        const [retorno] = await conexao.query(sql, [id]);
+        console.log('Perfil deletado com sucesso');
+        return [200, 'Perfil deletado com sucesso'];
+    } catch (error) {
+        console.error('Erro ao deletar perfil:', error);
+        return [500, error];
+    }
+}
+
+export async function getPerfilByIdUsuario(id_usuario) {
+    const conexao = mysql.createPool(db);
+    const sql = `SELECT * FROM perfil WHERE id_usuario = ?`;
+
+    try {
+        const [retorno] = await conexao.query(sql, [id_usuario]);
+        if (retorno.length === 0) {
+            console.log('Perfil não encontrado');
+            return [404, 'Perfil não encontrado'];
+        }
+        console.log('Perfil encontrado');
+        return [200, retorno[0]];
     } catch (error) {
         console.log(error);
-        return[500, error];
+        return [500, error];
     }
 }

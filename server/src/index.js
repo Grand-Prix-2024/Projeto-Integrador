@@ -5,7 +5,7 @@ import { mostrarUsuario } from './Controllers/UsuarioController.js';
 import { atualizarUsuario } from './Controllers/UsuarioController.js';
 import { deletarUsuario, mostrarUmUsuario } from './Controllers/UsuarioController.js';
 
-import { criarPerfil, mostrarPerfil, atualizarPerfil, deletarPerfil } from './Controllers/PerfilController.js';
+import { criarPerfil, mostrarPerfil, atualizarPerfil, deletarPerfil, buscarPerfilPorUsuario } from './Controllers/PerfilController.js';
 
 const app = express();
 const porta = 5000;
@@ -32,7 +32,9 @@ app.post('/login', logarUsuario);
 app.post('/perfil', criarPerfil);
 app.get('/perfil', mostrarPerfil);
 app.put('/perfil/:id', atualizarPerfil);
+app.get('/perfil/:id_usuario', buscarPerfilPorUsuario);
 app.delete('/perfil/:id', deletarPerfil);
+
 
 // CRUD REPUBLICA
 

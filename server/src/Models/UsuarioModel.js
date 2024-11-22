@@ -1,5 +1,6 @@
 import mysql from 'mysql2/promise'
 import db from '../conexao.js'
+import { createPerfil } from './PerfilModel.js';
 
 export async function createUsuario(usuario) {
     const conexao = mysql.createPool(db);
@@ -24,8 +25,11 @@ export async function createUsuario(usuario) {
 
     try {
         const [retorno] = await conexao.query(sql, params);
+        const [retornoPerfil] = await createPerfil({id_usuario:retorno.insertId});
+        console.log(retorno);
         console.log('Usuário cadastrado');
-        return [201,'Usuário cadastrado']
+
+        return [201,{insertId:retorno.insertId}]
     } catch (error) {
         console.log(error);
         return [500, error];
