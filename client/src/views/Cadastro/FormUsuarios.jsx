@@ -11,6 +11,7 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
     const [sobrenome, setSobrenome] = useState('');
     const [dataNasc, setDataNasc] = useState('');
     const [cpf, setCpf] = useState('');
+    const [cpfError, setCpfError] = useState('');
 
     useEffect(() => {
         if (id) {
@@ -27,8 +28,7 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
                     'Content-Type': 'application/json'
                 }
             });
-
-            if (!resposta) {
+            if(!resposta){
                 throw new Error('Erro ao buscar os usuários');
             } else {
                 const respostaJSON = await resposta.json();
@@ -36,7 +36,7 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
                 setSenha(respostaJSON.senha)
                 setNome(respostaJSON.nome);
                 setSobrenome(respostaJSON.sobrenome);
-                setDataNasc(respostaJSON.data_nascimento)
+                setDataNasc(respostaJSON.data_nascimento);
                 setCpf(respostaJSON.cpf);
             }
         } catch (error) {
@@ -44,8 +44,51 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
         }
     }
 
+    function validarCpf(cpf) {
+        cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
+        if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+            return false;
+        }
+        let soma = 0;
+        let resto;
+
+        for (let i = 1; i <= 9; i++) {
+            soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+        }
+        resto = (soma * 10) % 11;
+        if (resto === 10 || resto === 11) resto = 0;
+        if (resto !== parseInt(cpf.substring(9, 10))) return false;
+
+        soma = 0;
+        for (let i = 1; i <= 10; i++) {
+            soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+        }
+        resto = (soma * 10) % 11;
+        if (resto === 10 || resto === 11) resto = 0;
+        if (resto !== parseInt(cpf.substring(10, 11))) return false;
+
+        return true;
+    }
+
+    function handleCpfChange(e) {
+        const value = e.target.value;
+        setCpf(value);
+        if (!validarCpf(value)) {
+            setCpfError('CPF inválido');
+        } else {
+            setCpfError('');
+        }
+    }
+
+    
+
     function submit(e) {
         e.preventDefault();
+        if (cpfError) {
+            alert('Por favor, corrija os erros antes de enviar.');
+            return;
+        }
+
         const usuario = {
             email: email,
             senha: senha,
@@ -53,10 +96,9 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
             sobrenome: sobrenome,
             data_nascimento: dataNasc,
             cpf: cpf,
-            chave: null
-        }
+        };
         handleSubmit(usuario, id);
-        navigate(`/gestao_usuario/${tipo}`)
+        navigate(`/login`);
     }
 
     return (
@@ -80,7 +122,8 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
                     <label className='form-label mt-3' htmlFor="">Data de nascimento:</label>
                     <input className='form-control' type="date" value={dataNasc} onChange={(e) => (setDataNasc(e.target.value))} name='' id='' placeholder='' />
 
-                    <input className='form-control mt-3' type="text" value={cpf} onChange={(e => (setCpf(e.target.value)))} name='' id='' placeholder='CPF' />
+            <input className='form-control mt-3' type="text" value={cpf} onChange={handleCpfChange} name='' id='' placeholder='CPF' />
+            {cpfError && <small className="text-danger">{cpfError}</small>}
 
                     <a className='btn btn-danger mt-3 float-start' href="">Cancelar</a>
                     <button className='btn btn-warning mt-3 float-end' type='submit'>{textoBotao}</button>

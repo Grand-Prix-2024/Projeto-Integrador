@@ -24,9 +24,9 @@ function Cadastro() {
   return (
     <div>
       <Navbar />
-      <FormUsuario titulo='Cadastrar Usuário' textoBotao='Cadastrar' handleSubmit={cadastrarUsuario}/>
+      <FormUsuario titulo='Cadastre-se no Hive' textoBotao='Cadastrar' handleSubmit={cadastrarUsuario}/>
     </div>
   )
 }
 
-export default Cadastro
+export default Cadastro;

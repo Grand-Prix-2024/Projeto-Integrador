@@ -6,7 +6,6 @@ import FormUsuario from './FormUsuarios';
 
 function EditUsuario() {
   const {id} = useParams();
-  
   async function EditarUsuario(infoUser, id) {
     try {
       const resposta = await fetch(`http://localhost:5000/usuarios/${id}`,{

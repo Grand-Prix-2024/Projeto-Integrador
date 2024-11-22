@@ -64,7 +64,8 @@ function TabelaUsuarios({tipo, onDeleteSuccess}) {
             </thead>
             <tbody>
                 {usuarios.map((usuario)=>(
-                    <tr key={usuario.id}>
+                    <tr key={usuario.id_usuario}>
+                        <td>{usuario.id_usuario}</td>                        
                         <td>{usuario.email}</td>
                         <td>{usuario.nome}</td>
                         <td>{usuario.sobrenome}</td>
@@ -72,8 +73,8 @@ function TabelaUsuarios({tipo, onDeleteSuccess}) {
                         <td>{usuario.cpf}</td>
                         {tipo === 'edit' &&
                             <td>
-                                <Link to={`/edit_user/${usuario.id}`} className="btn btn-warning ms-2">Editar</Link>
-                                <button className="btn btn-danger ms-2" onClick={()=>deletarUsuario(usuario.id)}>Deletar</button>
+                                <Link to={`/edit_user/${usuario.id_usuario}`} className="btn btn-warning ms-2">Editar</Link>
+                                <button className="btn btn-danger ms-2" onClick={()=>deletarUsuario(usuario.id_usuario)}>Deletar</button>
                             </td>
                         }
                     </tr>
