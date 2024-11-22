@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar';
 
 function getRepublicas() {
   return [
-    { id: 1, nome: 'República 1', bairro: 'Jardim da Penha', estado: 'Vitoria - ES', preco: 70.00, imagem: 'https://imgbr.imovelwebcdn.com/avisos/2/29/60/73/76/40/360x266/2460335707.jpg?isFirstImage=true' },
+    { id: 1, nome: 'República 1', bairro: 'Maria Ortiz', estado: 'Vitória - ES', preco: 70.00, imagem: 'https://imgbr.imovelwebcdn.com/avisos/2/29/60/73/76/40/360x266/2460335707.jpg?isFirstImage=true' },
     { id: 2, nome: 'República 2', bairro: 'Campo Grande', estado: 'Cariacica - ES', preco: 70.00, imagem: 'https://imgs.nestimg.com/casa_sobrado_para_loca_o_em_londrinapr_jardim_santo_antonio_5_quartos_4300002720174786401.jpg' },
     { id: 3, nome: 'República 3', bairro: 'Jardim Camburi', estado: 'Vitória - ES', preco: 70.00, imagem: 'https://i.mgfserv.com/300x180/aHR0cHM6Ly9jZG51c28uY29tLzIwMzM2LzIwMjQvMTAvMTI3NTc0YTA4NTFjNWJlMDFiY2Q0MjEzZjAwOTVhNjIuanBn.jpg' },
     { id: 4, nome: 'República 4', bairro: 'Itapuã', estado: 'Vila Velha - ES', preco: 80.00, imagem: 'https://imgbr.imovelwebcdn.com/avisos/2/29/92/05/60/67/720x532/4443546401.jpg?isFirstImage=true' },

@@ -8,7 +8,7 @@ import GestaoUser from './views/Cadastro/GestaoUsuarios.jsx'
 import EditUsuario from './views/Cadastro/EditUsuario.jsx';
 import Login from './views/Login/Login.jsx';
 import Home from './views/Home/Home.jsx';
-
+import HomeCasas from'./views/Home/HomeCasas.jsx';
 
 
 
@@ -26,6 +26,7 @@ function App() {
         <Route path='/gestao_usuario/:tipo' element={<GestaoUser/>}/>
         <Route path='/edit_user/:id' element={<EditUsuario/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/casas' element={<HomeCasas/>}/>
       </Routes>
     </BrowserRouter>
   );
