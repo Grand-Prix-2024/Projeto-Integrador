@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Form } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 
 function EditarPerfil() {
   const [formData, setFormData] = useState({
@@ -13,12 +13,12 @@ function EditarPerfil() {
   
   const navigate = useNavigate();
 
-  const id_usuario = localStorage.getItem('id_usuario');
+  const id_perfil = useParams();
 
   useEffect(() => {
     async function carregarPerfil() {
       try {
-        const resposta = await fetch(`http://localhost:5000/perfil/${id_usuario}`, {
+        const resposta = await fetch(`http://localhost:5000/perfil/${id_perfil}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function EditarPerfil() {
     }
 
     carregarPerfil();
-  }, [id_usuario]);
+  }, [id_perfil]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +47,7 @@ function EditarPerfil() {
   const salvarPerfil = async (e) => {
     e.preventDefault();
     try {
-      const resposta = await fetch(`http://localhost:5000/perfil/${id_usuario}`, {
+      const resposta = await fetch(`http://localhost:5000/perfil/${id_perfil}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ function EditarPerfil() {
 
       const atualizado = await resposta.json();
       alert('Perfil atualizado com sucesso!');
-      window.location.href = navigate(`/perfil/${id_usuario}`);; 
+      window.location.href = navigate(`/perfil/${id_perfil}`);; 
     } catch (error) {
       console.error('Erro ao salvar o perfil:', error.message);
       alert('Erro ao salvar o perfil. Tente novamente.');
@@ -74,7 +74,7 @@ function EditarPerfil() {
       <Navbar />
       <Card style={{ width: '600px', padding: '30px', margin: '50px auto', borderRadius: '20px' }}>
         <Card.Body>
-          <Card.Title>Editar Perfil</Card.Title>
+          <Card.Title>Insira as informações do perfil:</Card.Title>
           <Form onSubmit={salvarPerfil}>
             <Form.Group className="mb-3">
               <Form.Label>Descrição</Form.Label>
