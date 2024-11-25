@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function FormUsuario({tipo, handleSubmit, textoBotao, id, titulo}) {
+function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -13,39 +13,37 @@ function FormUsuario({tipo, handleSubmit, textoBotao, id, titulo}) {
     const [cpf, setCpf] = useState('');
     const [cpfError, setCpfError] = useState('');
 
-    useEffect(()=>{
-        if(id){
+    useEffect(() => {
+        if (id) {
             baixarUsuarios(id);
-            //setTimeout()
-        };
-    }, [])
+        }
+    }, [id]);
 
     async function baixarUsuarios(id) {
         try {
-            const resposta = await fetch(`http://localhost:5000/usuarios/${id}`,{
-                method:'GET',
-                headers:{
-                    'Content-Type': 'application/json'
-                }
+            const resposta = await fetch(`http://localhost:5000/usuarios/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             });
-            if(!resposta){
+            if (!resposta.ok) {
                 throw new Error('Erro ao buscar os usuários');
-            }else{
-                const respostaJSON = await resposta.json();
-                setEmail(respostaJSON.email);
-                setSenha(respostaJSON.senha)
-                setNome(respostaJSON.nome);
-                setSobrenome(respostaJSON.sobrenome);
-                setDataNasc(respostaJSON.data_nascimento);
-                setCpf(respostaJSON.cpf);
             }
+            const respostaJSON = await resposta.json();
+            setEmail(respostaJSON.email);
+            setSenha(respostaJSON.senha);
+            setNome(respostaJSON.nome);
+            setSobrenome(respostaJSON.sobrenome);
+            setDataNasc(respostaJSON.data_nascimento);
+            setCpf(respostaJSON.cpf);
         } catch (error) {
             console.log(error);
         }
     }
 
     function validarCpf(cpf) {
-        cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
+        cpf = cpf.replace(/\D/g, '');
         if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
             return false;
         }
@@ -80,12 +78,26 @@ function FormUsuario({tipo, handleSubmit, textoBotao, id, titulo}) {
         }
     }
 
-    
+    function calcularIdade(dataNasc) {
+        const hoje = new Date();
+        const nascimento = new Date(dataNasc);
+        let idade = hoje.getFullYear() - nascimento.getFullYear();
+        const mes = hoje.getMonth() - nascimento.getMonth();
+        if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+            idade--;
+        }
+        return idade;
+    }
 
     function submit(e) {
         e.preventDefault();
         if (cpfError) {
             alert('Por favor, corrija os erros antes de enviar.');
+            return;
+        }
+
+        if (!dataNasc || calcularIdade(dataNasc) < 18) {
+            alert('Você deve ter pelo menos 18 anos para se cadastrar.');
             return;
         }
 
@@ -100,37 +112,37 @@ function FormUsuario({tipo, handleSubmit, textoBotao, id, titulo}) {
         handleSubmit(usuario, id);
         navigate(`/login`);
     }
-  
+
     return (
         <>
-        <div className="container container col-sm-12 col-md-6 col-lg-3  mt-3">
-          <h1 className="text-center">{titulo}</h1>
-          <form onSubmit={submit}>
-            <label className='form-label' htmlFor=""></label>
-            <input className='form-control mt-1' type="text" value={email} onChange={(e) => (setEmail(e.target.value))} name='' id='' placeholder='Número de telefone ou e-mail' />
+            <div className="container container col-sm-12 col-md-6 col-lg-3 mt-3">
+                <h1 className="text-center">{titulo}</h1>
+                <form onSubmit={submit}>
+                    <label className='form-label' htmlFor=""></label>
+                    <input className='form-control mt-1' type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Número de telefone ou e-mail' />
 
-            <label className='form-label' htmlFor=""></label>
-            <input className='form-control mt-1' type="password" value={senha} onChange={(e) => (setSenha(e.target.value))} name='' id='' placeholder='Senha' />
+                    <label className='form-label' htmlFor=""></label>
+                    <input className='form-control mt-1' type="password" value={senha} onChange={(e) => setSenha(e.target.value)} placeholder='Senha' />
 
-            <label className='form-label' htmlFor=""></label>
+                    <label className='form-label' htmlFor=""></label>
 
-            <h3 className="fs-5 text-left">Preencha alguns dados:</h3>
-            <input className='form-control mt-3' type="text" value={nome} onChange={(e) => (setNome(e.target.value))} name='' id='' placeholder='Nome' />
+                    <h3 className="fs-5 text-left">Preencha alguns dados:</h3>
+                    <input className='form-control mt-3' type="text" value={nome} onChange={(e) => setNome(e.target.value)} placeholder='Nome' />
 
-            <input className='form-control mt-3' type="text" value={sobrenome} onChange={(e) => (setSobrenome(e.target.value))} name='' id='' placeholder='Sobrenome' />
+                    <input className='form-control mt-3' type="text" value={sobrenome} onChange={(e) => setSobrenome(e.target.value)} placeholder='Sobrenome' />
 
-            <label className='form-label mt-3' htmlFor="">Data de nascimento:</label>
-            <input className='form-control' type="date" value={dataNasc} onChange={(e) => (setDataNasc(e.target.value))} name='' id='' placeholder='' />
+                    <label className='form-label mt-3' htmlFor="">Data de nascimento:</label>
+                    <input className='form-control' type="date" value={dataNasc} onChange={(e) => setDataNasc(e.target.value)} />
 
-            <input className='form-control mt-3' type="text" value={cpf} onChange={handleCpfChange} name='' id='' placeholder='CPF' />
-            {cpfError && <small className="text-danger">{cpfError}</small>}
+                    <input className='form-control mt-3' type="text" value={cpf} onChange={handleCpfChange} placeholder='CPF' />
+                    {cpfError && <small className="text-danger">{cpfError}</small>}
 
-            <a className='btn btn-danger mt-3 float-start' href="">Cancelar</a>
-            <button className='btn btn-warning mt-3 float-end' type='submit'>{textoBotao}</button>
-          </form>
-        </div>
-      </>
-  )
+                    <a className='btn btn-danger mt-3 float-start' href="">Cancelar</a>
+                    <button className='btn btn-warning mt-3 float-end' type='submit'>{textoBotao}</button>
+                </form>
+            </div>
+        </>
+    )
 }
 
-export default FormUsuario
+export default FormUsuario;

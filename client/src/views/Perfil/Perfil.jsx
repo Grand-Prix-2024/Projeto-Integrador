@@ -24,10 +24,6 @@ function Perfil() {
   }
 
   useEffect(() => {
-    if(!id_usuario){
-      alert('Efetue login para ter acesso a essa tela!')
-      navigate('/login');
-    }
     baixarPerfil();
   }, []);
 

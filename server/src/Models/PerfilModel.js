@@ -7,7 +7,7 @@ export async function createPerfil(perfil) {
         INSERT INTO perfil (
             pronome, descricao, idioma, estado_civil, local_moradia,
             telefone, redes, bio, curso, faculdade, id_usuario
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
     const params = [
         perfil.pronome, perfil.descricao, perfil.idioma,

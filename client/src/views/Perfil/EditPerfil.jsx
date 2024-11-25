@@ -139,7 +139,7 @@ function EditarPerfil() {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Estado civil</Form.Label>
+              <Form.Label>Estado Civil</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
@@ -151,8 +151,7 @@ function EditarPerfil() {
             <Form.Group className="mb-3">
               <Form.Label>Estado</Form.Label>
               <Form.Control
-                as="textarea"
-                rows={3}
+                type='text'
                 name="estado"
                 value={formData.local_moradia}
                 onChange={handleInputChange}
