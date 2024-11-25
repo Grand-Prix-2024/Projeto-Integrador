@@ -7,7 +7,7 @@ export async function criarUsuario(req, res) {
     console.log('UsuarioController funcionando');
     const usuario = req.body;
     console.log(usuario);
-
+    
     try {
         const [status, resposta] = await createUsuario(usuario);
         res.status(status).json(resposta);

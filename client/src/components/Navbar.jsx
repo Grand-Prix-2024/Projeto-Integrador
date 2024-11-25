@@ -8,8 +8,11 @@ function Navbar() {
     const navigate = useNavigate();
     
     function logout(){
-        localStorage.removeItem('id_usuario', 'nome');
+        localStorage.removeItem('id_usuario');
+        localStorage.removeItem('nome');
+        alert('Você foi deslogado e levado novamente a tela de login!');
         navigate('/login');
+       
     }
 
     return (
@@ -23,12 +26,15 @@ function Navbar() {
                 </button>
                 <div id='menu' className='collapse navbar-collapse text-center'>
                  <ul className='navbar-nav mx-auto'>
+                 <li className='navbar-item'><NavLink className='nav-link' to="/">Home</NavLink></li>
                     <li className='navbar-item'><NavLink className='nav-link' to="/login">Login</NavLink></li>
                     <li className='navbar-item'><NavLink className='nav-link' to="/cadastro">Cadastro</NavLink></li>
                     <li className='navbar-item'><NavLink className='nav-link' to="/perfil">Perfil</NavLink></li>
+                    <li className='navbar-item'><NavLink className='nav-link' to="/cadastrorepublica">Cadastre uma república</NavLink></li>
                  </ul>
                  <div className='form-inline my-2 my-lg-0'>
                     <label className='mr-3'>{nome}</label>
+                    {nome && <small className="text-danger"><button className='btn btn-danger ms-3' onClick={logout}>Sair</button></small>}
                  </div>
                 </div>
             </nav>
