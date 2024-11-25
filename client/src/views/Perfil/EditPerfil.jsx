@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Form } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 function EditarPerfil() {
   const [formData, setFormData] = useState({
     descricao: '',
+    pronome:'',
     telefone: '',
     redes: '',
-    bio: ''
+    bio: '',
+    idioma: '',
+    estado_civil: '',
+    local_moradia: '',
+    curso: '',
+    faculdade: ''
   });
   
   const navigate = useNavigate();
 
-  const id_perfil = useParams();
+  const id_usuario = localStorage.getItem("id_usuario");
 
   useEffect(() => {
     async function carregarPerfil() {
       try {
-        const resposta = await fetch(`http://localhost:5000/perfil/${id_perfil}`, {
+        const resposta = await fetch(`http://localhost:5000/perfil/${id_usuario}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -37,7 +43,7 @@ function EditarPerfil() {
     }
 
     carregarPerfil();
-  }, [id_perfil]);
+  }, [id_usuario]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +53,7 @@ function EditarPerfil() {
   const salvarPerfil = async (e) => {
     e.preventDefault();
     try {
-      const resposta = await fetch(`http://localhost:5000/perfil/${id_perfil}`, {
+      const resposta = await fetch(`http://localhost:5000/perfil/${id_usuario}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +68,7 @@ function EditarPerfil() {
 
       const atualizado = await resposta.json();
       alert('Perfil atualizado com sucesso!');
-      window.location.href = navigate(`/perfil/${id_perfil}`);; 
+      window.location.href = navigate(`/perfil/${id_usuario}`);; 
     } catch (error) {
       console.error('Erro ao salvar o perfil:', error.message);
       alert('Erro ao salvar o perfil. Tente novamente.');
@@ -104,12 +110,71 @@ function EditarPerfil() {
               />
             </Form.Group>
             <Form.Group className="mb-3">
+              <Form.Label>Pronome</Form.Label>
+              <Form.Control
+                type="text"
+                name="pronome"
+                value={formData.pronome}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label>Biografia</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
                 name="bio"
                 value={formData.bio}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Idioma</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="idioma"
+                value={formData.idioma}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Estado civil</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="estado_civil"
+                value={formData.estado_civil}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Estado</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="estado"
+                value={formData.local_moradia}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Curso</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="curso"
+                value={formData.curso}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Faculdade</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="faculdade"
+                value={formData.faculdade}
                 onChange={handleInputChange}
               />
             </Form.Group>
