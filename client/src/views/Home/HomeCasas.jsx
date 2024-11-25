@@ -3,7 +3,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../../components/Navbar';
 
-function RepublicaCard() {
+function Homecasas() {
     const imageStyle = {
         border: '2px solid #ffc107', // Borda amarela fina
         borderRadius: '8px', // Bordas mais arredondadas para um toque mais suave
@@ -173,4 +173,4 @@ function RepublicaCard() {
     );
 }
 
-export default RepublicaCard;
+export default Homecasas;
