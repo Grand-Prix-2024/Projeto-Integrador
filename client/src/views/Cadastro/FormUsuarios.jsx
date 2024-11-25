@@ -107,26 +107,27 @@ function FormUsuario({tipo, handleSubmit, textoBotao, id, titulo}) {
           <h1 className="text-center">{titulo}</h1>
           <form onSubmit={submit}>
             <label className='form-label' htmlFor=""></label>
-            <input className='form-control mt-1' type="text" value={email} onChange={(e) => (setEmail(e.target.value))} name='' id='' placeholder='Número de telefone ou e-mail' />
+            <input style={{marginBottom:'-29px', borderRadius:'10px 10px 0px 0px', width:'460px', height:'50px', borderColor:'black'}} className='form-control mt-1' type="text" value={email} onChange={(e) => (setEmail(e.target.value))} name='' id='' placeholder='Número de telefone ou e-mail' />
 
             <label className='form-label' htmlFor=""></label>
-            <input className='form-control mt-1' type="password" value={senha} onChange={(e) => (setSenha(e.target.value))} name='' id='' placeholder='Senha' />
+            <input style={{marginBottom:'5px',borderRadius:'0px 0px 10px 10px', width:'460px', height:'50px', borderColor:'black'}} className='form-control mt-1' type="password" value={senha} onChange={(e) => (setSenha(e.target.value))} name='' id='' placeholder='Senha' />
 
             <label className='form-label' htmlFor=""></label>
 
             <h3 className="fs-5 text-left">Preencha alguns dados:</h3>
-            <input className='form-control mt-3' type="text" value={nome} onChange={(e) => (setNome(e.target.value))} name='' id='' placeholder='Nome' />
+            <input style={{marginBottom:'-17px',borderRadius:'10px 10px 0px 0px', width:'460px', height:'50px', borderColor:'black'}} className='form-control mt-3' type="text" value={nome} onChange={(e) => (setNome(e.target.value))} name='' id='' placeholder='Nome' />
 
-            <input className='form-control mt-3' type="text" value={sobrenome} onChange={(e) => (setSobrenome(e.target.value))} name='' id='' placeholder='Sobrenome' />
+            <input style={{marginBottom:'7px',borderRadius:'0px 0px 10px 10px',width:'460px', height:'50px', borderColor:'black' }} className='form-control mt-3' type="text" value={sobrenome} onChange={(e) => (setSobrenome(e.target.value))} name='' id='' placeholder='Sobrenome' />
 
-            <label className='form-label mt-3' htmlFor="">Data de nascimento:</label>
-            <input className='form-control' type="date" value={dataNasc} onChange={(e) => (setDataNasc(e.target.value))} name='' id='' placeholder='' />
+            <label style={{marginBottom:'15px',}} className='form-label mt-3' htmlFor="">Data de nascimento:</label>
+            <input style={{width:'460px', height:'50px', borderRadius:'10px', borderColor:'black'}} className='form-control' type="date" value={dataNasc} onChange={(e) => (setDataNasc(e.target.value))} name='' id='' placeholder='' />
 
-            <input className='form-control mt-3' type="text" value={cpf} onChange={handleCpfChange} name='' id='' placeholder='CPF' />
+            <label style={{marginBottom:'-5px'}} className='form-label mt-3' htmlFor="">CPF:</label>
+            <input style={{width:'460px', height:'50px', borderRadius:'10px', marginBottom:'13px', borderColor:'black'}}  className='form-control mt-3' type="text" value={cpf} onChange={handleCpfChange} name='' id='' placeholder='___.___.___-__' />
             {cpfError && <small className="text-danger">{cpfError}</small>}
 
-            <a className='btn btn-danger mt-3 float-start' href="">Cancelar</a>
-            <button className='btn btn-warning mt-3 float-end' type='submit'>{textoBotao}</button>
+            {/* <a style={{}}  className='btn btn-danger mt-3 float-start' href="">Cancelar</a> */}
+            <button style={{backgroundColor:'#FFE34C', borderColor:'white',}} className='btn btn-warning mt-3 float-end' type='submit'>{textoBotao}</button>
           </form>
         </div>
       </>

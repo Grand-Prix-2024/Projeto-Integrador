@@ -24,7 +24,9 @@ function Cadastro() {
   return (
     <div>
       <Navbar />
+      <div style={{marginTop:'100px'}}>
       <FormUsuario titulo='Cadastre-se no Hive' textoBotao='Cadastrar' handleSubmit={cadastrarUsuario}/>
+      </div>
     </div>
   )
 }
