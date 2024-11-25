@@ -23,8 +23,8 @@ function Perfil() {
           style={{ width: '200px', height: '200px', marginTop: '-20px' }}
         />
         <Card.Body>
-          <Card.Title style={{ marginLeft: '-7px', marginTop: '20px', fontSize: '25px' }} >[object Object]</Card.Title>
-          <Card.Subtitle style={{ marginLeft: '26px', fontSize: '17px' }} className="mb-2 text-muted">CEO of Apple</Card.Subtitle>
+          <Card.Title style={{ marginLeft: '36px', marginTop: '20px', fontSize: '25px' }} >[object Object]</Card.Title>
+          <Card.Subtitle style={{ marginLeft: '66px', fontSize: '17px' }} className="mb-2 text-muted">CEO of Apple</Card.Subtitle>
           <Card.Text style={{ marginLeft: '260px', marginBlockStart: '-230px' }}>
             <div style={{ marginBottom: '35px', fontSize: '18px' }} className=" justify-content-between">
               <img src={locaPin} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4px' }} />
@@ -74,7 +74,7 @@ function Perfil() {
         <Card.Text>
           <div>
             <h1>JACQUES BERMAN WEBSTER II</h1>
-            <h5 style={{ fontStyle: 'italic' }}>ELE/DELE <Button style={{ margin: '0px', marginTop: '-2px', marginLeft: '25px' }} variant="btn btn-warning">Editar</Button>
+            <h5 style={{ fontStyle: 'italic' }}>ELE/DELE <Button style={{ margin: '0px', marginTop: '-2px', marginLeft: '25px', backgroundColor:'#FFE34C', borderColor:'white' }} variant="btn btn-warning">Editar</Button>
             </h5>
             <br />
             <br />
@@ -122,14 +122,6 @@ function Perfil() {
           </div>
         </Card.Text>
       </Card>
-      {/* <Card className='position top-50 start-50"' style={{ width: '300px', height: '700px', marginLeft: '1550px', marginBlockStart: '-700px', borderColor:'black' }}>
-        <Card.Text>
-          <div>
-            <span></span>
-          </div>
-        </Card.Text>
-      </Card> */}
-      {/* <hr className='position top-50 start-50"' style={{ width: '800px', height: '300px', marginLeft: '750px', marginBlockEnd: '-735px', marginTop: '10px' }} /> */}
     </>
 
   )
