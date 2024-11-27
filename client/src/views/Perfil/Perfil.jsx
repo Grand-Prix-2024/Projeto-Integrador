@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import { Card, Button, Image, CardText } from 'react-bootstrap';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import locaPin from './img/locaPin.png';
 import chapeuGrad from './img/chapeuGrad.png';
 import escola from './img/escola.png';
@@ -19,7 +19,7 @@ function Perfil() {
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
 
-  function trocarTela(){
+  function trocarTela() {
     navigate('/editar-perfil');
   }
 
@@ -51,7 +51,6 @@ function Perfil() {
     }
   }
 
-
   return (
     <>
       <Navbar />
@@ -66,16 +65,16 @@ function Perfil() {
           <Card.Subtitle style={{ marginLeft: '26px', fontSize: '17px' }} className="mb-2 text-muted">{perfil?.descricao || 'Descrição não disponível'}</Card.Subtitle>
           <Card.Text style={{ marginLeft: '260px', marginBlockStart: '-230px' }}>
             <div style={{ marginBottom: '35px', fontSize: '18px' }} className=" justify-content-between">
-              <img src={locaPin} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }}/>
-              <span style={{fontSize: '17px'}}>{perfil?.local_moradia || 'N/A'}</span>
+              <img src={locaPin} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }} />
+              <span style={{ fontSize: '17px' }}>{perfil?.local_moradia || 'N/A'}</span>
             </div>
             <div style={{ marginBottom: '35px', fontSize: '18px' }} className=" justify-content-between">
-            <img src={chapeuGrad} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }}/>
-              <span style={{fontSize: '17px'}}>{perfil?.curso || 'N/A'}</span>
+              <img src={chapeuGrad} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }} />
+              <span style={{ fontSize: '17px' }}>{perfil?.curso || 'N/A'}</span>
             </div>
             <div style={{ marginBottom: '35px', fontSize: '18px' }} className=" justify-content-between">
-            <img src={escola} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }}/>
-              <span style={{fontSize: '17px'}}>{perfil?.faculdade || 'N/A'}</span>
+              <img src={escola} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }} />
+              <span style={{ fontSize: '17px' }}>{perfil?.faculdade || 'N/A'}</span>
             </div>
           </Card.Text>
         </Card.Body>
@@ -154,7 +153,6 @@ function Perfil() {
       </Card>
       {/* <hr className='position top-50 start-50"' style={{ width: '800px', height:'300px', marginLeft:'650px', marginBlockEnd:'-725px', marginTop:'32px'}}/> */}
     </>
-
   )
 };
 
