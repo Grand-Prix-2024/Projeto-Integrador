@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 function FormUsuario({tipo, handleSubmit, textoBotao, id, titulo}) {
     const navigate = useNavigate();
@@ -100,6 +101,11 @@ function FormUsuario({tipo, handleSubmit, textoBotao, id, titulo}) {
         handleSubmit(usuario, id);
         navigate(`/login`);
     }
+
+    function cadastro(){
+        swal("Cadastrado com sucesso!");
+      }
+    
   
     return (
         <>
@@ -127,7 +133,7 @@ function FormUsuario({tipo, handleSubmit, textoBotao, id, titulo}) {
             {cpfError && <small className="text-danger">{cpfError}</small>}
 
             {/* <a style={{}}  className='btn btn-danger mt-3 float-start' href="">Cancelar</a> */}
-            <button style={{backgroundColor:'#FFE34C', borderColor:'white',}} className='btn btn-warning mt-3 float-end' type='submit'>{textoBotao}</button>
+            <button  style={{backgroundColor:'#FFE34C', borderColor:'white',}} className='btn btn-warning mt-3 float-end' type='submit' onClick={cadastro} >{textoBotao}</button>
           </form>
         </div>
       </>
