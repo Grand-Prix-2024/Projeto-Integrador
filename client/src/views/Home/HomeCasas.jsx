@@ -1,14 +1,20 @@
-
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../../components/Navbar';
 
 function Homecasas() {
     const imageStyle = {
-        border: '2px solid #ffc107', // Borda amarela fina
+        border: '2px solid #FFE34C', // Nova cor amarela
         borderRadius: '8px', // Bordas mais arredondadas para um toque mais suave
+        transition: 'transform 0.3s ease', // Transição suave para o efeito
     };
-
+    
+    const buttonStyle = {
+        backgroundColor: '#FFE34C', // Nova cor amarela
+        borderColor: '#FFE34C', // Para borda consistente
+        color: 'black', // Texto em preto para contraste
+    };
+   
     return (
         <div className="container-fluid">
             <Navbar />
@@ -35,8 +41,8 @@ function Homecasas() {
                     </div>
 
                     {/* Quatro imagens menores à direita */}
-                    <div className="col-lg-5">
-                        <div className="row g-3">
+                    <div style = {{marginTop:'40px'}}className="col-lg-5">
+                        <div className="row g-4">
                             <div className="col-6">
                                 <img
                                     src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6OTA0MjE5MTUzMDk3Mzc0OTQy/original/abde2381-e8e8-4432-84e5-359d5b8ae865.jpeg?im_w=1440&im_format=avif"
@@ -76,7 +82,7 @@ function Homecasas() {
                 {/* Detalhes da república */}
                 <div className="d-flex align-items-center text-muted mb-4 pt-4">
                     <i className="bi bi-people-fill me-3"></i>
-                    <span className="me-3">3 Vagas</span>
+                    <span className="me-3"> 👥3 Vagas</span>
                     <span className="me-3">1 Quarto</span>
                     <span className="me-3">2 Camas</span>
                     <span>1 Banheiro compartilhado</span>
@@ -85,8 +91,10 @@ function Homecasas() {
                 {/* Descrição e informações */}
                 <div className="row mt-5">
                     <div className="col-lg-8">
-                        <div className="bg-light p-4 rounded shadow-sm">
-                            <p className="mb-0 text-dark">
+                        <div className="p-3 rounded shadow-sm"
+                         style={{ backgroundColor: '#f7f5f5', color: '#1a1717', maxWidth: '580px' }}>
+                            <p className="mb-0">
+                                <p>Descrição:</p>
                             Nossa república é um espaço acolhedor e dinâmico, onde a convivência harmoniosa é a base para o nosso dia a dia. Somos majoritariamente homens, mas temos um ambiente aberto e inclusivo, onde aceitamos também mulheres e pessoas não-binárias. 
                 Buscamos pessoas responsáveis e respeitosas, com o intuito de criar um lar compartilhado, em que todos se sintam à vontade para viver, estudar e crescer juntos. 
                 Se você procura um lugar tranquilo, com boa convivência e respeito mútuo, nossa república é a escolha certa!
@@ -101,7 +109,7 @@ function Homecasas() {
                             <div className="text-center mb-4">
                                 <h3 className="mb-1">R$ 70,00/mês</h3>
                                 <p className="text-muted">a negociar</p>
-                                <button className="btn btn-warning w-100 py-2 text-white">Negociar</button>
+                                <button className="btn w-100 py-2" style={buttonStyle}>Negociar</button>
                             </div>
 
                             <hr />
@@ -143,7 +151,7 @@ function Homecasas() {
                             <hr />
 
                             {/* Botão contactar */}
-                            <button className="btn btn-warning w-100 py-2 text-white">Contactar</button>
+                            <button className="btn w-100 py-2" style={buttonStyle}>Contactar</button>
                         </div>
                     </div>
                 </div>
@@ -153,6 +161,7 @@ function Homecasas() {
                     <h4 className="mb-4">Comentários:</h4>
                     <div className="col-lg-12">
                         <div className="card p-4 shadow-sm">
+                        <div className="d-flex align-items-center mb-4">
                         <img
                                         src="https://ds-images.bolavip.com/news/image?src=https%3A%2F%2Fimages.somosfanaticos.fans%2Fjpg%2Fbr%2Ffull%2FSFBR_20230703_SFBR_17195_Mercado-da-bola-Gabigol-recusa-proposta-da-Arabia-Saudita-e-prioriza-acerto-com-outro-grande-clube-Flamengo-topa-vender-scaled-e1687952940315.jpg&width=1200&height=740"
                                         className="rounded-circle me-3"
@@ -162,9 +171,16 @@ function Homecasas() {
                                             objectFit: 'cover',
                                         }}
                                     />
-                            <p className="mb-1"><strong>Abel</strong></p>
-                            <p>Morou há 1 ano</p>
-                            <p className="text-muted">Fui muito bem recebido e não me serviu apenas como uma casa, foi como um lar para mim. Ótimos anfitriões!</p>
+                                    <div>
+                            <p className="mb-0"><strong>Abel</strong></p>
+                            <p className="text-muted small mb-0">Morou há 1 ano</p>
+                            </div>
+                            </div>
+                            <p className="text-muted">
+                            Fui acolhido com muito carinho, e a república se tornou um ambiente de acolhimento e conforto. Os anfitriões são excepcionais!
+
+
+                       </p>
                         </div>
                     </div>
                 </div>

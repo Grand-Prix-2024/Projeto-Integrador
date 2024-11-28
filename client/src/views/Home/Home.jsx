@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../../components/Navbar';
+import {useNavigate} from 'react-router-dom';
 
 function getRepublicas() {
   return [
@@ -15,6 +16,7 @@ function getRepublicas() {
 
 function Home() {
   const republicas = getRepublicas();
+  const navigate = useNavigate();
 
   return (
     <div className="App">
@@ -57,7 +59,7 @@ function Home() {
                   />
                 </div>
                 <div className="card-body text-center">
-                  <h5 className="card-title">{rep.nome}</h5>
+                  <h5 className="card-title"><a href="/casas">{rep.nome}</a></h5>
                   <p className="card-text">{rep.bairro}</p>
                   <p className="card-text">{rep.estado}</p>
                   <p className="fw-bold" style={{ color: 'black' }}>R$ {rep.preco.toFixed(2)}</p>
