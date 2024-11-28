@@ -12,6 +12,7 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
     const [dataNasc, setDataNasc] = useState('');
     const [cpf, setCpf] = useState('');
     const [cpfError, setCpfError] = useState('');
+    const [senhaError, setSenhaError] = useState('');
 
     useEffect(() => {
         if (id) {
@@ -68,6 +69,11 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
         return true;
     }
 
+    function validarSenha(senha) {
+        const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+        return regex.test(senha);
+    }
+
     function handleCpfChange(e) {
         const value = e.target.value;
         setCpf(value);
@@ -75,6 +81,16 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
             setCpfError('CPF inválido');
         } else {
             setCpfError('');
+        }
+    }
+
+    function handleSenhaChange(e) {
+        const value = e.target.value;
+        setSenha(value);
+        if (!validarSenha(value)) {
+            setSenhaError('A senha deve conter pelo menos uma letra maiúscula, um número e no mínimo 6 caracteres.');
+        } else {
+            setSenhaError('');
         }
     }
 
@@ -91,13 +107,18 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
 
     function submit(e) {
         e.preventDefault();
-        if (cpfError) {
+        if (cpfError || senhaError) {
             alert('Por favor, corrija os erros antes de enviar.');
             return;
         }
 
         if (!dataNasc || calcularIdade(dataNasc) < 18) {
             alert('Você deve ter pelo menos 18 anos para se cadastrar.');
+            return;
+        }
+
+        if (!validarSenha(senha)) {
+            alert('Senha inválida. Por favor, corrija e tente novamente.');
             return;
         }
 
@@ -122,7 +143,8 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
                     <input className='form-control mt-1' type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Número de telefone ou e-mail' />
 
                     <label className='form-label' htmlFor=""></label>
-                    <input className='form-control mt-1' type="password" value={senha} onChange={(e) => setSenha(e.target.value)} placeholder='Senha' />
+                    <input className='form-control mt-1' type="password" value={senha} onChange={handleSenhaChange} placeholder='Senha' />
+                    {senhaError && <small className="text-danger">{senhaError}</small>}
 
                     <label className='form-label' htmlFor=""></label>
 

@@ -122,7 +122,7 @@ function EditarPerfil() {
               <Form.Label>Biografia</Form.Label>
               <Form.Control
                 as="textarea"
-                rows={3}
+                rows={5}
                 name="bio"
                 value={formData.bio}
                 onChange={handleInputChange}

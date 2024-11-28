@@ -9,6 +9,7 @@ import lingua from './img/lingua.png';
 import coracao from './img/coracao.png';
 import casa from './img/casa.png';
 import balao from './img/balao.png';
+import rebecca from './img/rebecca.png';
 
 
 function Perfil() {
@@ -56,7 +57,7 @@ function Perfil() {
       <Navbar />
       <Card style={{ width: '500px', height: '350px', padding: '50px', margin: '50px', borderRadius: '20px', borderColor: 'black' }}>
         <Image
-          src="https://cdn.jornaldebrasilia.com.br/wp-content/uploads/2024/09/12114930/rapper-travis-scott-confirmado-atracao-rock-in-rio-scaled-1-620x620.webp" // Substitua pela URL real da imagem de perfil
+          src="https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg" 
           roundedCircle
           style={{ width: '200px', height: '200px', marginTop: '-20px' }}
         />
@@ -124,7 +125,7 @@ function Perfil() {
         <Card className='position top-50 start-50"' style={{ width: '132px', height: '130px', marginLeft: '8px', marginTop: '-90px', }}>
           <Image
             src="https://www.laut.de/Travis-Scott/Alben/Utopia-121583/travis-scott-utopia-228909.jpg?e1bef5"
-            style={{ width: '132px', height: '130px', marginLeft: '-1px', }}// Substitua pela URL real da imagem de perfil      
+            style={{ width: '132px', height: '130px', marginLeft: '-1px', }}      
           />
           <Card.Text>
             <div style={{ marginBlockStart: '14px', marginLeft: '40px', fontWeight: 'bold', fontSize: '14px' }}>
@@ -137,13 +138,13 @@ function Perfil() {
         <Card.Text>
           <div style={{ marginTop: '65px' }}>
             <span>
-              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={balao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />IDADE: 33 ANOS</h5>
+              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={balao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />IDADE:</h5>
             </span>
             <span>
               <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={lingua} style={{ width: '25px', height: '25px', marginRight: '5px' }} />IDIOMAS:{perfil?.idioma || 'N/A'}</h5>
             </span>
             <span>
-              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={casa} style={{ width: '25px', height: '25px', marginRight: '5px' }} />MORA EM: HOUSTON, TEXAS, EUA</h5>
+              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={casa} style={{ width: '25px', height: '25px', marginRight: '5px' }} />MORA EM: Vitória - ES</h5>
             </span>
             <span>
               <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={coracao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />SOLTEIRO: {perfil?.estado_civil || 'N/A'}</h5>

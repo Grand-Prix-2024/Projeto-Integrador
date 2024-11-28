@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './navbar.module.css';
 import { useNavigate } from 'react-router-dom';
+import hivelogo from './img/hivelogo.png';
 
 function Navbar() {
     const nome = localStorage.getItem("nome");
@@ -18,8 +19,8 @@ function Navbar() {
     return (
         <div id={styles.navCor} className={`bg-primary ${styles.menu_navegacao} `}>
             <nav className={`container navbar navbar-expand-lg px-2 `}>
-                <div>
-                    <span className='navbar-brand'>Hive</span>
+                <div className='logo-image'>
+                    <img src={hivelogo} alt="" width="100px"/>
                 </div>
                 <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#menu'>
                     <span className='navbar-toggler-icon'></span>
