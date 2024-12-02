@@ -4,6 +4,7 @@ import RoomDistribution from "../components/Etapa1/RoomDistribution";
 import EssentialInfo from "../components/Etapa1/EssentialInfo";
 import HighlightFeatures from "../components/Etapa2/HighlightFeatures";
 import PropertyAd from "../components/Etapa3/PropertyAd";
+import DefinirEndereco from "../components/Etapa4/DefinirEndereco";
 
 const FormRepublica = () => {
   const [accommodation, setAccommodation] = useState("Casa");
@@ -24,36 +25,46 @@ const FormRepublica = () => {
 
   return (
     <div className="container">
-      <h5>Etapa 1</h5>
-      <h2>Informe sobre a sua acomodação</h2>
-      <p>Selecione qual melhor descreve seu espaço</p>
-      <AccommodationSelector selected={accommodation} onSelect={setAccommodation} />
+      <div className="container mt-5">
+        <h5>Etapa 1</h5>
+        <h2>Informe sobre a sua acomodação</h2>
+        <p>Selecione qual melhor descreve seu espaço</p>
+        <AccommodationSelector selected={accommodation} onSelect={setAccommodation} />
+      </div>
 
-      <h2>Escolha o tipo de quarto</h2>
-      <p>Selecione a opção que melhor descreve o quarto disponível</p>
-      <RoomDistribution rooms={rooms} onChange={(type, value) => setRooms({ ...rooms, [type]: value })} />
+      <div className="container mt-5">
+        <h2>Escolha o tipo de quarto</h2>
+        <p>Selecione a opção que melhor descreve o quarto disponível</p>
+        <RoomDistribution rooms={rooms} onChange={(type, value) => setRooms({ ...rooms, [type]: value })} />
+      </div>
 
-      <h3>Adcione informções essenciais</h3>
-      <EssentialInfo
-        values={essentialInfo}
-        onUpdate={(key, value) => setEssentialInfo({ ...essentialInfo, [key]: value })}
-      />
+      <div className="container mt-5">
+        <h3>Adcione informações essenciais</h3>
+        <EssentialInfo
+          values={essentialInfo}
+          onUpdate={(key, value) => setEssentialInfo({ ...essentialInfo, [key]: value })}
+        />
+      </div>
 
-      <h5>Etapa 2</h5>
-      <h3>Faca sua republica se destacar</h3>
-      <p>Adicione elementos pra tornar sua acomodacao mais interessante</p>
+      <div className="container mt-5">
+        <h5>Etapa 2</h5>
+        <h3>Faça sua república se destacar</h3>
+        <p>Adicione elementos pra tornar sua acomodação mais interessante</p>
+      </div>
       <HighlightFeatures features={features} onToggle={toggleFeature} />
 
-      <h5>Etapa 3</h5>
-      <h3>Vamos preparar seu anuncio</h3>
-      <p>Montar como seu anuncio vai aparecer para os interessados</p>
 
-      <h5>Etapa 4</h5>
-      <div className="container mt-5">
-        <h2 className="mb-4">Vamos preparar seu anúncio</h2>
-        <p>Monte como seu anúncio vai aparecer para os interessados</p>
-      </div>
+      <h5>Etapa 3</h5>
+      <h2 className="mb-4">Vamos preparar seu anúncio</h2>
+      <p>Monte como seu anúncio vai aparecer para os interessados</p>
       <PropertyAd />
+
+      <div className="container mt-5">
+        <h5>Etapa 5</h5>
+        <h2>Defina seu endereço</h2>
+        <p>Configure a localização da acomodação para ser encontrada</p>
+      </div>
+      <DefinirEndereco />
     </div>
   );
 };
