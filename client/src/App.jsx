@@ -10,7 +10,8 @@ import Login from './views/Login/Login.jsx';
 import Home from './views/Home/Home.jsx';
 import EditarPerfil from './views/Perfil/EditPerfil.jsx';
 import Homecasas from './views/Home/HomeCasas.jsx';
-import Tocar from './views/Musica/Tocar.jsx';
+
+
 
 
 
@@ -31,7 +32,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path="/editar-perfil" element={<EditarPerfil />} />
         <Route path='/casas' element={<Homecasas/>} />
-        <Route path='/tocar' element={<Tocar/>} />
+
 
       </Routes>
     </BrowserRouter>

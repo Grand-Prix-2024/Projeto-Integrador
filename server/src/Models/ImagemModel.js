@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 export async function createImagem(descricao, nomeImg, imagem) {
     const conexao = mysql.createPool(db);
     console.log('ImagemModel :: createImagem');
-    const sql = 'INSERT INTO imagens (descricao,caminho) VALUES (?,?);';
+    const sql = 'INSERT INTO foto_republica (camiho_foto, id_republica) VALUES (?,?);';
     const params = [descricao, nomeImg];
 
     try {
@@ -25,7 +25,7 @@ export async function createImagem(descricao, nomeImg, imagem) {
 export async function readImagem() {
     const conexao = mysql.createPool(db);
     console.log('ImagemModel :: readImagem');
-    const sql = 'SELECT * FROM imagens';
+    const sql = 'SELECT * FROM foto_republica';
 
     try {
         const [retorno] = await conexao.query(sql);
@@ -36,11 +36,11 @@ export async function readImagem() {
     }
 }
 
-export async function readOneImage(id_imagem) {
+export async function readOneImage(id_foto) {
     const conexao = mysql.createPool(db);
     console.log('ImagemModel :: readOneImagem');
-    const sql = 'SELECT * FROM imagens WHERE id_imagens = ?';
-    const params = [id_imagem];
+    const sql = 'SELECT * FROM foto_republica WHERE id_foto = ?';
+    const params = [id_foto];
 
     try {
         const [retorno] = await conexao.query(sql, params);
@@ -55,11 +55,11 @@ export async function readOneImage(id_imagem) {
     }
 }
 
-export async function updateImagem(descricao, id_imagem) {
+export async function updateImagem(descricao, id_foto) {
     const conexao = mysql.createPool(db);
     console.log('ImagemModel :: updateImagem');
-    const sql = 'UPDATE imagens SET descricao=? WHERE id_imagem =?';
-    const params = [descricao, id_imagem];
+    const sql = 'UPDATE imagens SET descricao=? WHERE id_foto =?';
+    const params = [descricao, id_foto];
 
     try {
         const [retorno] = await conexao.query(sql, params);
@@ -73,12 +73,12 @@ export async function updateImagem(descricao, id_imagem) {
         return [500, error];
     }
 }
-export async function deleteImagem(id_imagem) {
+export async function deleteImagem(id_foto) {
     console.log('ImagemModel :: deleteImagem');
     const conexao = mysql.createPool(db);
-    const sqlImagem = 'SELECT * FROM imagens WHERE id_imagem=?'
-    const sql = 'DELETE FROM imagens WHERE id_imagem =?';
-    const params = [id_imagem];
+    const sqlImagem = 'SELECT * FROM foto_republica WHERE id_foto=?'
+    const sql = 'DELETE FROM foto_republica WHERE id_foto =?';
+    const params = [id_foto];
 
     try {
         const [imagem] = await conexao.query(sqlImagem,params);

@@ -6,13 +6,13 @@ export async function createPerfil(perfil) {
     const sql = `
         INSERT INTO perfil (
             pronome, descricao, idioma, estado_civil, local_moradia,
-            telefone, redes, bio, curso, faculdade, id_usuario
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            telefone, redes, bio, curso, faculdade, musicaFavorita, id_usuario
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
     const params = [
         perfil.pronome, perfil.descricao, perfil.idioma,
         perfil.estado_civil, perfil.local_moradia, perfil.telefone,
-        perfil.redes, perfil.bio, perfil.curso, perfil.faculdade, perfil.id_usuario
+        perfil.redes, perfil.bio, perfil.curso, perfil.faculdade, perfil.musicaFavorita, perfil.id_usuario
     ];
 
     try {
@@ -56,7 +56,8 @@ export async function updatePerfil(perfil, id) {
         redes = ?,
         bio = ?,
         curso = ?,
-        faculdade = ?
+        faculdade = ?,
+        musicaFavorita = ?
     WHERE id_usuario = ?`;
 
     const params = [
@@ -70,6 +71,7 @@ export async function updatePerfil(perfil, id) {
         perfil.bio,
         perfil.curso,
         perfil.faculdade,
+        perfil.musicaFavorita,
         id
     ];
 

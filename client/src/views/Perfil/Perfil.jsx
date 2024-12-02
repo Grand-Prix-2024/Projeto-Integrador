@@ -9,7 +9,7 @@ import lingua from './img/lingua.png';
 import coracao from './img/coracao.png';
 import casa from './img/casa.png';
 import balao from './img/balao.png';
-import rebecca from './img/rebecca.png';
+
 
 
 function Perfil() {
@@ -34,7 +34,7 @@ function Perfil() {
         throw new Error("ID do usuário não encontrado");
       }
 
-      const resposta = await fetch(`http://localhost:5000/perfil/${id_usuario}`, {
+      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/perfil/${id_usuario}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

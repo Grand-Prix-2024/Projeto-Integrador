@@ -8,7 +8,7 @@ function EditUsuario() {
   const {id} = useParams();
   async function EditarUsuario(infoUser, id) {
     try {
-      const resposta = await fetch(`http://localhost:5000/usuarios/${id}`,{
+      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/usuarios/${id}`,{
         method:'PUT',
         headers:{
           'Content-Type':'application/json'
