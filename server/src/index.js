@@ -5,6 +5,7 @@ import { mostrarUsuario } from './Controllers/UsuarioController.js';
 import { atualizarUsuario } from './Controllers/UsuarioController.js';
 import { deletarUsuario, mostrarUmUsuario } from './Controllers/UsuarioController.js';
 import { criarPerfil, mostrarPerfil, atualizarPerfil, deletarPerfil, buscarPerfilPorUsuario } from './Controllers/PerfilController.js';
+import { criarRepublica, mostrarRepublica, atualizarRepublica, deletarRepublica, mostrarUmaRepublica } from './Controllers/RepublicaController.js';
 
 const app = express();
 const porta = 5000;
@@ -34,10 +35,13 @@ app.put('/perfil/:id', atualizarPerfil);
 app.get('/perfil/:id_usuario', buscarPerfilPorUsuario);
 app.delete('/perfil/:id', deletarPerfil);
 
-
-
-
 // CRUD REPUBLICA
+app.post('/republicas', criarRepublica);
+app.get('/republicas', mostrarRepublica);
+app.put('/republicas/:id', atualizarRepublica);
+app.delete('/republicas/:id', deletarRepublica);
+app.get('/republicas/:id', mostrarUmaRepublica);
+
 
 app.listen(porta, ()=>{
     console.log(`API RODANDO NA PORTA: ${porta}`)
