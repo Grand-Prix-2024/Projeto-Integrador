@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
+
 function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
     const navigate = useNavigate();
 
@@ -15,8 +15,6 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
     const [cpfError, setCpfError] = useState('');
     const [senhaError, setSenhaError] = useState('');
 
-    useEffect(() => {
-        if (id) {
     useEffect(() => {
         if (id) {
             baixarUsuarios(id);
