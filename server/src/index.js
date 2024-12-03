@@ -4,7 +4,6 @@ import { criarUsuario, logarUsuario } from './Controllers/UsuarioController.js';
 import { mostrarUsuario } from './Controllers/UsuarioController.js';
 import { atualizarUsuario } from './Controllers/UsuarioController.js';
 import { deletarUsuario, mostrarUmUsuario } from './Controllers/UsuarioController.js';
-
 import { criarPerfil, mostrarPerfil, atualizarPerfil, deletarPerfil, buscarPerfilPorUsuario } from './Controllers/PerfilController.js';
 
 const app = express();
@@ -34,6 +33,8 @@ app.get('/perfil', mostrarPerfil);
 app.put('/perfil/:id', atualizarPerfil);
 app.get('/perfil/:id_usuario', buscarPerfilPorUsuario);
 app.delete('/perfil/:id', deletarPerfil);
+
+
 
 
 // CRUD REPUBLICA

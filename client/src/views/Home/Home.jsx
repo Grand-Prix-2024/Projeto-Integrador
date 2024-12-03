@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../../components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 function getRepublicas() {
   return [
@@ -15,59 +16,63 @@ function getRepublicas() {
 
 function Home() {
   const republicas = getRepublicas();
+  const navigate = useNavigate();
 
   return (
-    <div className="App">
-      <Navbar/>
-      <div className="container my-4">
-        <h2 className="text-center mb-4">Encontrar pelas redondezas de:</h2>
-        <div className="d-flex justify-content-center mb-4">
-          <input type="text" className="form-control mx-2" placeholder="Buscar local..." />
-          <input type="text" className="form-control mx-2" placeholder="Buscar por universidade" />
-          <button className="btn btn-secondary">Filtrar</button>
-        </div>
-        <div className="row">
-          {republicas.map((rep) => (
-            <div key={rep.id} className="col-md-4 mb-4">
-              <div
-                className="card republica-card"
-                style={{
-                  transition: 'transform 0.3s, box-shadow 0.3s',
-                }}
-              >
+    <>
+      <Navbar />
+      <div className="App">
+
+        <div className="container my-4">
+          <h2 className="text-center mb-4">Encontrar pelas redondezas de:</h2>
+          <div className="d-flex justify-content-center mb-4">
+            <input type="text" className="form-control mx-2" placeholder="Buscar local..." />
+            <input type="text" className="form-control mx-2" placeholder="Buscar por universidade" />
+            <button className="btn btn-secondary">Filtrar</button>
+          </div>
+          <div className="row">
+            {republicas.map((rep) => (
+              <div key={rep.id} className="col-md-4 mb-4">
                 <div
-                  className="card-img-top"
+                  className="card republica-card"
                   style={{
-                    height: '200px',
-                    overflow: 'hidden',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                    transition: 'transform 0.3s, box-shadow 0.3s',
                   }}
                 >
-                  <img
-                    src={rep.imagem}
-                    alt={rep.nome}
+                  <div
+                    className="card-img-top"
                     style={{
-                      width: '100%',
-                      height: 'auto',
-                      objectFit: 'cover',
-                      maxHeight: '200px',
+                      height: '200px',
+                      overflow: 'hidden',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
                     }}
-                  />
-                </div>
-                <div className="card-body text-center">
-                  <h5 className="card-title">{rep.nome}</h5>
-                  <p className="card-text">{rep.bairro}</p>
-                  <p className="card-text">{rep.estado}</p>
-                  <p className="fw-bold" style={{ color: 'black' }}>R$ {rep.preco.toFixed(2)}</p>
+                  >
+                    <img
+                      src={rep.imagem}
+                      alt={rep.nome}
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                        objectFit: 'cover',
+                        maxHeight: '200px',
+                      }}
+                    />
+                  </div>
+                  <div className="card-body text-center">
+                    <h5 className="card-title"><a href="/casas">{rep.nome}</a></h5>
+                    <p className="card-text">{rep.bairro}</p>
+                    <p className="card-text">{rep.estado}</p>
+                    <p className="fw-bold" style={{ color: 'black' }}>R$ {rep.preco.toFixed(2)}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

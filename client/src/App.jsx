@@ -14,6 +14,8 @@ import Homecasas from './views/Home/HomeCasas.jsx';
 
 
 
+
+
 function App() {
   return (
 
@@ -30,6 +32,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path="/editar-perfil" element={<EditarPerfil />} />
         <Route path='/casas' element={<Homecasas/>} />
+
 
       </Routes>
     </BrowserRouter>
