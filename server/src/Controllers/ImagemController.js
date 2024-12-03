@@ -1,97 +1,63 @@
-import path from 'path';
-import url from 'url';
-import { createImagem, updateImagem, readImagem, deleteImagem, readOneImage} from '../models/ImagemModel.js';
+import { createImagens, listRepublicas, detailRepublica, deleteImagem} from "../Models/ImagemModel.js";
 
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+/**
+ * Cadastrar imagens para uma república.
+ * @param {Object} req - Requisição HTTP.
+ * @param {Object} res - Resposta HTTP.
+ */
+export async function cadastrarImagens(req, res) {
+    const { id_republica } = req.params;
+    const imagens = req.files?.imagens; // Supondo que as imagens vêm de um formulário.
 
-export async function criarImagem(req, res) {
-    console.log('ImagemController :: Criando Imagem')
-    const { descricao } = req.body;
-    const { imagem } = req.files;
-
-    if (!descricao || !imagem) {
-        res.status(400).json({ message: 'Imagem e descrição são obrigatórias' });
-    } else {
-        const extensao = path.extname(imagem.name).toLocaleLowerCase();
-        const extensoePermitidas = ['.jpg', '.png', '.jpeg'];
-
-        if (extensoePermitidas.includes(extensao)) {
-            const nomeImg = `${Date.now()}${extensao}`;
-
-            try {
-                const [status, resposta] = await createImagem(descricao, nomeImg, imagem);
-                res.status(status).json(resposta);
-            } catch (error) {
-                console.log(error);
-                res.status(500).json({ message: 'ImagemController :: Erro' });
-            }
-        } else {
-            res.status(415).json({ message: 'Arquivo invalido!' })
-        }
+    if (!id_republica || !imagens) {
+        return res.status(400).json({ message: 'ID da república e imagens são obrigatórios.' });
     }
+
+    // Garante que as imagens sejam tratadas como um array (mesmo que seja uma única imagem).
+    const imagensArray = Array.isArray(imagens) ? imagens : [imagens];
+
+    const [status, resultado] = await createImagens(id_republica, imagensArray);
+    return res.status(status).json({ message: resultado });
 }
 
-export async function mostrarImagens(req, res) {
-    console.log('ImagemController :: Mostrando lista de imagens')
+/**
+ * Listar todas as repúblicas com imagens destacadas.
+ * @param {Object} req - Requisição HTTP.
+ * @param {Object} res - Resposta HTTP.
+ */
+export async function listarRepublicas(req, res) {
+    const [status, republicas] = await listRepublicas();
+    return res.status(status).json(republicas);
+}
 
-    try {
-        const [status, resposta] = await readImagem();
-        res.status(status).json(resposta);
-    } catch (error) {
-        res.status(500).json({ message: 'ImagemController : Erro' });
+/**
+ * Recuperar detalhes de uma república com suas imagens.
+ * @param {Object} req - Requisição HTTP.
+ * @param {Object} res - Resposta HTTP.
+ */
+export async function detalhesRepublica(req, res) {
+    const { id_republica } = req.params;
+
+    if (!id_republica) {
+        return res.status(400).json({ message: 'ID da república é obrigatório.' });
     }
-}
-export async function mostrarUmaImagem(req, res) {
-    console.log('ImagemController :: Mostrando uma imagem');
-    const { id_imagem } = req.params;
 
-    try {
-        const [status, resposta] = await readOneImage(id_imagem);
-        res.status(status).json(resposta);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({message:'ImagemController :: Erro'})
+    const [status, resultado] = await detailRepublica(id_republica);
+    return res.status(status).json(resultado);
+}
+
+/**
+ * Excluir uma imagem específica de uma república.
+ * @param {Object} req - Requisição HTTP.
+ * @param {Object} res - Resposta HTTP.
+ */
+export async function excluirImagem(req, res) {
+    const { id_foto } = req.params;
+
+    if (!id_foto) {
+        return res.status(400).json({ message: 'ID da foto é obrigatório.' });
     }
-}
-export async function editarImagem(req, res) {
-    console.log('ImagemController :: Editando uma imagem');
-    const { id_imagem } = req.params;
-    const { descricao } = req.body;
 
-    try {
-        const [status, resposta] = await updateImagem(descricao, id_imagem);
-        res.status(status).json(resposta);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({message:'ImagemController :: Erro'})
-    }
-}
-
-export async function deletarImagem(req,res) {
-    console.log('ImagemController :: Deletando Imagem');
-    const {id_imagem} = req.params;
-    
-    try {
-        const [status, resposta] = await deleteImagem(id_imagem);
-        res.status(status).json(resposta);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({message:'ImagemController :: Erro'})
-    }
-}
-
-export async function downloadImagem(req, res) {
-    console.log('ImagemController :: Mostrando Imagem')
-    const { nomeImg } = req.params;
-    const caminho = path.join(__dirname, '..', '..', 'public', 'img', nomeImg)
-
-    console.log(caminho);
-
-    res.sendFile(caminho, (erro) => {
-        if (erro) {
-            console.log(erro)
-            res.status(404).json({ message: 'Imagem não encontrada' })
-        }
-    });
+    const [status, resultado] = await deleteImagem(id_foto);
+    return res.status(status).json(resultado);
 }
