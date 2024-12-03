@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
+function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -14,6 +15,8 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
     const [cpfError, setCpfError] = useState('');
     const [senhaError, setSenhaError] = useState('');
 
+    useEffect(() => {
+        if (id) {
     useEffect(() => {
         if (id) {
             baixarUsuarios(id);
@@ -135,6 +138,7 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
         navigate(`/login`);
     }
 
+
     return (
         <>
             <div className="container container col-sm-12 col-md-6 col-lg-3 mt-3">
@@ -147,6 +151,7 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
                     <input style={{marginBottom:'5px',borderRadius:'0px 0px 10px 10px', width:'460px', height:'50px', borderColor:'black'}} className='form-control mt-1' type="password" value={senha} onChange={handleSenhaChange} placeholder='Senha' />
                     {senhaError && <small className="text-danger">{senhaError}</small>}
 
+                    <label className='form-label' htmlFor=""></label>
                     <label className='form-label' htmlFor=""></label>
 
                     <h3 className="fs-5 text-left">Preencha alguns dados:</h3>
