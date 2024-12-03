@@ -39,7 +39,8 @@ const DefinirEndereco = () => {
         </Row>
         <Row>
           <Col md={6}>
-            <Form.Group className="mb-3" controlId="formEstado">
+            <Form.Group className="mb-3" controlId="formEstado">,
+              
               <Form.Label>Estado</Form.Label>
               <Form.Control type="text" placeholder="Estado" />
             </Form.Group>
