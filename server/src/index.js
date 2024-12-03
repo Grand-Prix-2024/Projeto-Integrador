@@ -6,6 +6,7 @@ import { atualizarUsuario } from './Controllers/UsuarioController.js';
 import { deletarUsuario, mostrarUmUsuario } from './Controllers/UsuarioController.js';
 import { criarPerfil, mostrarPerfil, atualizarPerfil, deletarPerfil, buscarPerfilPorUsuario } from './Controllers/PerfilController.js';
 import { criarRepublica, mostrarRepublica, atualizarRepublica, deletarRepublica, mostrarUmaRepublica } from './Controllers/RepublicaController.js';
+import { cadastrarImagens, listarRepublicas, detalhesRepublica, excluirImagem } from './Controllers/ImagemController.js';
 
 const app = express();
 const porta = 5000;
@@ -41,6 +42,11 @@ app.get('/republicas', mostrarRepublica);
 app.put('/republicas/:id', atualizarRepublica);
 app.delete('/republicas/:id', deletarRepublica);
 app.get('/republicas/:id', mostrarUmaRepublica);
+
+app.post('/imagens', cadastrarImagens);
+app.get('/imagens', listarRepublicas);
+app.delete('/imagens/:id', excluirImagem);
+app.get('/imagens/:id', detalhesRepublica);
 
 
 app.listen(porta, ()=>{
