@@ -8,7 +8,7 @@ const PropertyAd = () => {
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
     if (files.length + images.length <= 12) {
-      const newImages = files.map((file) => URL.createObjectURL(file));
+      const newImages = files.map((file) => file);
       setImages((prevImages) => [...prevImages, ...newImages]);
     } else {
       alert('Você pode carregar no máximo 12 imagens.');
@@ -27,13 +27,41 @@ const PropertyAd = () => {
     setPrice(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title || price <= 0 || images.length < 2) {
       alert('Por favor, preencha todos os campos corretamente.');
       return;
     }
-    alert('Anúncio enviado!');
+
+    // Criando o FormData para enviar imagens e dados
+    const formData = new FormData();
+    formData.append('titulo', title);
+    formData.append('preco', price);
+    images.forEach((image, index) => {
+      formData.append('imagens', image);
+    });
+
+    try {
+      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/api/republica`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!resposta.ok) {
+        console.error('Erro ao cadastrar a república');
+        alert('Erro ao cadastrar. Tente novamente.');
+      } else {
+        console.log('República cadastrada com sucesso');
+        alert('República cadastrada com sucesso!');
+        setTitle('');
+        setPrice(70);
+        setImages([]);
+      }
+    } catch (error) {
+      console.error('Erro ao cadastrar a república', error);
+      alert('Erro ao cadastrar. Tente novamente.');
+    }
   };
 
   return (
@@ -53,7 +81,7 @@ const PropertyAd = () => {
             {images.map((image, index) => (
               <div key={index} className="position-relative">
                 <img
-                  src={image}
+                  src={URL.createObjectURL(image)}
                   alt={`Uploaded ${index}`}
                   className="rounded"
                   style={{ width: '120px', height: '120px', objectFit: 'cover' }}
@@ -135,6 +163,13 @@ const PropertyAd = () => {
           <small className="text-muted">
             Para o morador o valor sairá por R$ {(price * 1.10).toFixed(2)}
           </small>
+        </div>
+
+        {/* Botão para enviar o formulário */}
+        <div className="text-center">
+          <button type="submit" className="btn btn-primary">
+            Cadastrar
+          </button>
         </div>
       </form>
     </div>

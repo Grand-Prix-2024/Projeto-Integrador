@@ -13,11 +13,13 @@ function Cadastro() {
       });
       if(!resposta.ok){
         console.log('Erro ao cadastrar usuário');
+        
       }else{
         console.log('Usuário cadastrado')
       }
     } catch (error) {
       console.error('Erro ao cadastrar usuário', error)
+      console.log(error)
     }
   }
   
