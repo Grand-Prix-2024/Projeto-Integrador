@@ -13,11 +13,18 @@ const porta = 5000;
 
 app.use(express.json());
 
-app.get('/', (req,res)=>{
+app.get('/', (req, res) => {
     res.send('API Hive funcionando :)')
 });
 
-app.use(cors());
+var corsOptions = {
+    origin: 'http://localhost',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.use(cors(corsOptions));
+
+
 
 // CRUD USUARIO
 app.post('/usuarios', criarUsuario);
@@ -49,6 +56,6 @@ app.delete('/imagens/:id', excluirImagem);
 app.get('/imagens/:id', detalhesRepublica);
 
 
-app.listen(porta, ()=>{
+app.listen(porta, () => {
     console.log(`API RODANDO NA PORTA: ${porta}`)
 });
