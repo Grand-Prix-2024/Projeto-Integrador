@@ -32,7 +32,7 @@ function App() {
         <Route path='/edit_user/:id' element={<EditUsuario />} />
         <Route path='/login' element={<Login />} />
         <Route path="/editar-perfil" element={<EditarPerfil />} />
-        <Route path='/casas' element={<Homecasas/>} />
+        <Route path='/casas/:id' element={<Homecasas/>} />
         <Route path='/cadastrar_republica' element={<FormRepublica/>} />
 
 
