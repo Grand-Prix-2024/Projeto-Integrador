@@ -1,23 +1,35 @@
 import React, { useState, useMemo } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+// Supondo que 'useObjeto' seja o hook do contexto para acessar o estado global
+import { useObjeto } from "../ObjectContext"; 
 
-const RoomDistribution = ({ rooms, onChange }) => {
+const RoomDistribution = ({ onChange }) => {
+  const { objetoRepublica, setObjetoRepublica } = useObjeto(); // Pegando valores do contexto
+
   const [selected, setSelected] = useState("");
 
   const handleSelect = (type) => {
     setSelected(type);
-    onChange(type); // Atualiza o estado no componente pai
+    onChange(type); // Atualiza o estado no componente pai ou em um contexto
+
+    // Atualiza o objeto global com a seleção do tipo de quarto
+    setObjetoRepublica((prevObjeto) => ({
+      ...prevObjeto,
+      TipoDeQuarto: type,
+    }));
   };
+
+  const rooms = objetoRepublica.Quartos || 1; // Usa o valor de 'Quartos' do objetoRepublica
 
   const roomOptions = [
     {
       id: "private",
-      title: "1 Quarto Individual",
+      title: `${rooms} Quarto(s) Individual(is)`,
       description: "O morador tem um quarto só pra ele.",
     },
     {
       id: "shared",
-      title: "1 Quarto Compartilhado",
+      title: `${rooms} Quarto(s) Compartilhado(s)`,
       description:
         "O morador dorme em um quarto compartilhado com outras pessoas.",
     },
@@ -40,7 +52,7 @@ const RoomDistribution = ({ rooms, onChange }) => {
           </div>
         </button>
       )),
-    [selected]
+    [selected, rooms]
   );
 
   return (

@@ -64,9 +64,6 @@ const DefinirEndereco = () => {
         <div className="map-container mb-3" style={{ height: "300px", backgroundColor: "#f5f5f5", border: "1px solid #ddd" }}>
           <p className="text-center pt-5">Mapa interativo aqui</p>
         </div>
-        <Button variant="warning" className="w-100">
-          Confirmar
-        </Button>
       </Form>
 
       <style>{`

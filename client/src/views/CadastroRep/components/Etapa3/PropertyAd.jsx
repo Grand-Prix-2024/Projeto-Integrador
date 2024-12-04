@@ -1,49 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const PropertyAd = () => {
-  const [images, setImages] = useState([]);
-  const [title, setTitle] = useState('');
-  const [price, setPrice] = useState(70);
+const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
+  // Inicializa os estados com os valores de `objetoRepublica` ou valores padrão
+  const [titulo, setTitulo] = useState(objetoRepublica.titulo || '');
+  const [images, setImages] = useState(objetoRepublica.images || []);
+  const [preco, setPreco] = useState(objetoRepublica.preco || 70);
+
+  useEffect(() => {
+    if (setObjetoRepublica) {
+      setObjetoRepublica((prevObjeto) => ({
+        ...prevObjeto,
+        titulo,
+        images,
+        preco,
+      }));
+    } else {
+      console.error('setObjetoRepublica não está definido');
+    }
+  }, [titulo, images, preco, setObjetoRepublica]);
 
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
     if (files.length + images.length <= 12) {
-      const newImages = files.map((file) => file);
-      setImages((prevImages) => [...prevImages, ...newImages]);
+      setImages((prevImages) => {
+        const newImages = [...prevImages, ...files];
+        return newImages;
+      });
     } else {
       alert('Você pode carregar no máximo 12 imagens.');
     }
   };
 
   const handleRemoveImage = (index) => {
-    setImages((prevImages) => prevImages.filter((_, idx) => idx !== index));
+    setImages((prevImages) => {
+      const updatedImages = prevImages.filter((_, idx) => idx !== index);
+      return updatedImages;
+    });
   };
 
   const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+    setTitulo(e.target.value);
   };
 
   const handlePriceChange = (e) => {
-    setPrice(e.target.value);
+    const newPrice = e.target.value;
+    setPreco(newPrice);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || price <= 0 || images.length < 2) {
+    if (!titulo || preco <= 0 || images.length < 2) {
       alert('Por favor, preencha todos os campos corretamente.');
       return;
     }
 
-    // Criando o FormData para enviar imagens e dados
     const formData = new FormData();
-    formData.append('titulo', title);
-    formData.append('preco', price);
+    formData.append('titulo', titulo);
+    formData.append('preco', preco);
     images.forEach((image, index) => {
       formData.append('imagens', image);
     });
 
     try {
-      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/api/republica`, {
+      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/republicas`, {
         method: 'POST',
         body: formData,
       });
@@ -54,9 +73,15 @@ const PropertyAd = () => {
       } else {
         console.log('República cadastrada com sucesso');
         alert('República cadastrada com sucesso!');
-        setTitle('');
-        setPrice(70);
+        setTitulo('');
+        setPreco(70);
         setImages([]);
+        setObjetoRepublica({
+          ...objetoRepublica,
+          titulo: '',
+          preco: 70,
+          images: [],
+        });
       }
     } catch (error) {
       console.error('Erro ao cadastrar a república', error);
@@ -65,7 +90,7 @@ const PropertyAd = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 ">
+    <div className="d-flex justify-content-center align-items-center vh-100">
       <form
         onSubmit={handleSubmit}
         className="p-4 rounded shadow bg-warning"
@@ -139,8 +164,8 @@ const PropertyAd = () => {
             id="title"
             type="text"
             className="form-control"
-            placeholder="Ex: União Twink"
-            value={title}
+            placeholder="Ex: Casa"
+            value={titulo}
             onChange={handleTitleChange}
           />
         </div>
@@ -156,20 +181,13 @@ const PropertyAd = () => {
               id="price"
               type="number"
               className="form-control"
-              value={price}
+              value={preco}
               onChange={handlePriceChange}
             />
           </div>
           <small className="text-muted">
-            Para o morador o valor sairá por R$ {(price * 1.10).toFixed(2)}
+            Para o morador o valor sairá por R$ {(preco * 1.10).toFixed(2)}
           </small>
-        </div>
-
-        {/* Botão para enviar o formulário */}
-        <div className="text-center">
-          <button type="submit" className="btn btn-primary">
-            Cadastrar
-          </button>
         </div>
       </form>
     </div>

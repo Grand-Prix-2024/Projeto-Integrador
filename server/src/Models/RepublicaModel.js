@@ -5,6 +5,8 @@ import db from '../conexao.js'
 export async function createRepublica(republica) {
     const conexao = mysql.createPool(db);
     const sql = `INSERT INTO republicas(
+        titulo,
+        preco,
         tipo_republica,
         tipo_distribuicao,
         qtd_moradores,
@@ -37,9 +39,11 @@ export async function createRepublica(republica) {
         apto,
         id_usuario
         )
-        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
 
     const params = [
+        republica.titulo,
+        republica.preco,
         republica.tipo_republica,
         republica.tipo_distribuicao,
         republica.qtd_moradores,
@@ -90,6 +94,8 @@ export async function showRepublicas(republica) {
     const sql = `SELECT * FROM republicas`;
 
     const params = [
+        republica.titulo,
+        republica.preco,
         republica.tipo_republica,
         republica.tipo_distribuicao,
         republica.qtd_moradores,
@@ -137,7 +143,10 @@ export async function updateRepublica(republica, id) {
     const conexao = mysql.createPool(db);
     console.log('Atualizando usuário');
 
-    const sql = `UPDATE republicas SET tipo_republica = ?,
+    const sql = `UPDATE republicas SET
+        titulo = ?,
+        preco = ?,
+        tipo_republica = ?,
         tipo_distribuicao = ?,
         qtd_moradores = ?,
         qtd_quartos = ?,
@@ -170,6 +179,8 @@ export async function updateRepublica(republica, id) {
     WHERE id_republica = ?
     `
     const params = [
+        republica.titulo,
+        republica.preco,
         republica.tipo_republica,
         republica.tipo_distribuicao,
         republica.qtd_moradores,

@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
+import { useObjeto } from "../ObjectContext";
 
 const AccommodationSelector = () => {
-  // Estado para rastrear a seleção do usuário
-  const [selectedAccommodation, setSelectedAccommodation] = useState("");
+  const { objetoRepublica, setObjetoRepublica } = useObjeto();
 
-  // Opções de acomodação
   const options = [
     { name: "Casa", icon: "🏠" },
     { name: "Apartamento", icon: "🏢" },
   ];
+
+  const alterarObjeto = (selectedName) => {
+    setObjetoRepublica((prevState) => ({
+      ...prevState,
+      name: selectedName,
+    }));
+  };
 
   return (
     <div>
@@ -67,24 +73,22 @@ const AccommodationSelector = () => {
         `}
       </style>
       <div className="features-container">
-        {/* Botões de seleção */}
         {options.map((option, index) => (
           <button
             key={index}
             className={`feature-btn ${
-              selectedAccommodation === option.name ? "active" : ""
+              objetoRepublica.name === option.name ? "active" : ""
             }`}
-            onClick={() => setSelectedAccommodation(option.name)}
+            onClick={() => alterarObjeto(option.name)}
           >
             <span className="feature-icon">{option.icon}</span>
             <span className="feature-text">{option.name}</span>
           </button>
         ))}
       </div>
-      {/* Mensagem Condicional
-      <div className="message">
-        {selectedAccommodation
-          ? `Você selecionou: ${selectedAccommodation}`
+      {/* <div className="message">
+        {objetoRepublica.name
+          ? `Você selecionou: ${objetoRepublica.name}`
           : "Nenhuma acomodação selecionada."}
       </div> */}
     </div>
