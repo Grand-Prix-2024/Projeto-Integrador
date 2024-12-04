@@ -9,6 +9,7 @@ import lingua from './img/lingua.png';
 import coracao from './img/coracao.png';
 import casa from './img/casa.png';
 import balao from './img/balao.png';
+import ImagemPerfil from './ImagemPerfil';
 
 
 
@@ -57,10 +58,12 @@ function Perfil() {
       <Navbar />
       <Card style={{ width: '500px', height: '350px', padding: '50px', margin: '50px', borderRadius: '20px', borderColor: 'black' }}>
         <Image
+          onClick={ImagemPerfil} 
           src="https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg" 
           roundedCircle
           style={{ width: '200px', height: '200px', marginTop: '-20px' }}
         />
+        
         <Card.Body>
           <Card.Title style={{ marginLeft: '2px', marginTop: '20px', fontSize: '25px' }} >{nome}</Card.Title>
           <Card.Subtitle style={{ marginLeft: '26px', fontSize: '17px' }} className="mb-2 text-muted">{perfil?.descricao || 'Descrição não disponível'}</Card.Subtitle>

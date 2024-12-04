@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 export async function createImagem(descricao, nomeImg, imagem) {
     const conexao = mysql.createPool(db);
     console.log('ImagemModel :: createImagem');
-    const sql = 'INSERT INTO foto_republica (camiho_foto, id_republica) VALUES (?,?);';
+    const sql = 'INSERT INTO foto_republica (caminho_foto, id_republica) VALUES (?,?);';
     const params = [descricao, nomeImg];
 
     try {

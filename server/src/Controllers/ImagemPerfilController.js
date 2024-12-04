@@ -1,11 +1,11 @@
 import path from 'path';
 import url from 'url';
-import { createImagemPerfil, updateImagemPerfil, readImagemPerfil, deleteImagemPerfil, readOneImagePerfil} from '../models/ImagemPerfilModel.js';
+import { createImagemPerfil, updateImagemPerfil, readImagemPerfil, readOneImagePerfil} from '../models/ImagemPerfilModel.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export async function criarImagem(req, res) {
+export async function criarImagemPerfil(req, res) {
     console.log('ImagemPerfilController :: Criando Imagem')
     const { imagemPerfil } = req.files;
 
@@ -18,11 +18,11 @@ export async function criarImagem(req, res) {
             const nomeImg = `${Date.now()}${extensao}`;
 
             try {
-                const [status, resposta] = await createImagemPerfil(descricao, nomeImg, imagem);
+                const [status, resposta] = await createImagemPerfil(nomeImg, imagem);
                 res.status(status).json(resposta);
             } catch (error) {
                 console.log(error);
-                res.status(500).json({ message: 'ImagemController :: Erro' });
+                res.status(500).json({ message: 'ImagemPerfilController :: Erro' });
             }
         } else {
             res.status(415).json({ message: 'Arquivo invalido!' })
@@ -30,39 +30,56 @@ export async function criarImagem(req, res) {
     }
 }
 
-export async function mostrarImagens(req, res) {
-    console.log('ImagemController :: Mostrando lista de imagens')
+export async function downloadImagemPerfil(req, res) {
+    console.log('ImagemPerfilController :: Mostrando imagem');
+
+    const { nomeImg } = req.params;
+    const caminho = path.join(__dirname, '..', '..', 'public', 'img', nomeImg);
+
+    console.log(caminho);
+
+    res.sendFile(caminho, (erro) => {
+        if (erro) {
+            console.log(erro);
+            res.status(404).json({ message: 'Imagem não encontrada' });
+        }
+    });
+    
+
+}
+
+export async function mostrarImagensPerfil(req, res) {
+    console.log('ImagemPerfilController :: Mostrando lista de imagens')
 
     try {
         const [status, resposta] = await readImagemPerfil();
         res.status(status).json(resposta);
     } catch (error) {
-        res.status(500).json({ message: 'ImagemController : Erro' });
+        res.status(500).json({ message: 'ImagemPerfilController : Erro' });
     }
 }
-export async function mostrarUmaImagem(req, res) {
-    console.log('ImagemController :: Mostrando uma imagem');
-    const { id_imagem } = req.params;
+export async function mostrarUmaImagemPerfil(req, res) {
+    console.log('ImagemPerfilController :: Mostrando uma imagem');
+    const { id_perfil } = req.params;
 
     try {
-        const [status, resposta] = await readOneImagePerfil(id_imagem);
+        const [status, resposta] = await readOneImagePerfil(id_perfil);
         res.status(status).json(resposta);
     } catch (error) {
         console.log(error);
-        res.status(500).json({message:'ImagemController :: Erro'})
+        res.status(500).json({message:'ImagemPerfilController :: Erro'})
     }
 }
-export async function editarImagem(req, res) {
-    console.log('ImagemController :: Editando uma imagem');
-    const { id_imagem } = req.params;
-    const { descricao } = req.body;
+export async function editarImagemPerfil(req, res) {
+    console.log('ImagemPerfilController :: Editando uma imagem');
+    const { id_perfil } = req.params;
 
     try {
-        const [status, resposta] = await updateImagemPerfil(descricao, id_imagem);
+        const [status, resposta] = await updateImagemPerfil(id_perfil);
         res.status(status).json(resposta);
     } catch (error) {
         console.log(error);
-        res.status(500).json({message:'ImagemController :: Erro'})
+        res.status(500).json({message:'ImagemPerfilController :: Erro'})
     }
 }
 

@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise';
 import path from 'path';
 import url from 'url';
-import fs from 'fs/promises';
+//import fs from 'fs/promises';
 import db from '../conexao.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
