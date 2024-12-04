@@ -4,8 +4,8 @@ import { criarUsuario, logarUsuario } from './Controllers/UsuarioController.js';
 import { mostrarUsuario } from './Controllers/UsuarioController.js';
 import { atualizarUsuario } from './Controllers/UsuarioController.js';
 import { deletarUsuario, mostrarUmUsuario } from './Controllers/UsuarioController.js';
-
 import { criarPerfil, mostrarPerfil, atualizarPerfil, deletarPerfil, buscarPerfilPorUsuario } from './Controllers/PerfilController.js';
+import { cadastrarImagens, listarRepublicas, detalhesRepublica, excluirImagem } from './Controllers/ImagemController.js';
 
 const app = express();
 const porta = 5000;
@@ -36,7 +36,16 @@ app.get('/perfil/:id_usuario', buscarPerfilPorUsuario);
 app.delete('/perfil/:id', deletarPerfil);
 
 
+
+
 // CRUD REPUBLICA
+
+//CRUD IMAGEM
+app.post('/imagens', cadastrarImagens);
+app.get('/imagens', listarRepublicas);
+// app.put('/imagens/:id', );
+app.get('/imagens/:id', detalhesRepublica);
+app.delete('/imagens/:id', excluirImagem);
 
 app.listen(porta, ()=>{
     console.log(`API RODANDO NA PORTA: ${porta}`)

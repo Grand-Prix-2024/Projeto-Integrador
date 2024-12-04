@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import { Card, Button, Image, CardText } from 'react-bootstrap';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import locaPin from './img/locaPin.png';
 import chapeuGrad from './img/chapeuGrad.png';
 import escola from './img/escola.png';
@@ -9,6 +9,7 @@ import lingua from './img/lingua.png';
 import coracao from './img/coracao.png';
 import casa from './img/casa.png';
 import balao from './img/balao.png';
+
 
 
 function Perfil() {
@@ -19,15 +20,11 @@ function Perfil() {
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
 
-  function trocarTela(){
+  function trocarTela() {
     navigate('/editar-perfil');
   }
 
   useEffect(() => {
-    if(!id_usuario){
-      alert('Efetue login para ter acesso a essa tela!')
-      navigate('/login');
-    }
     baixarPerfil();
   }, []);
 
@@ -37,7 +34,7 @@ function Perfil() {
         throw new Error("ID do usuário não encontrado");
       }
 
-      const resposta = await fetch(`http://localhost:5000/perfil/${id_usuario}`, {
+      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/perfil/${id_usuario}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -55,13 +52,12 @@ function Perfil() {
     }
   }
 
-
   return (
     <>
       <Navbar />
       <Card style={{ width: '500px', height: '350px', padding: '50px', margin: '50px', borderRadius: '20px', borderColor: 'black' }}>
         <Image
-          src="https://cdn.jornaldebrasilia.com.br/wp-content/uploads/2024/09/12114930/rapper-travis-scott-confirmado-atracao-rock-in-rio-scaled-1-620x620.webp" // Substitua pela URL real da imagem de perfil
+          src="https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg" 
           roundedCircle
           style={{ width: '200px', height: '200px', marginTop: '-20px' }}
         />
@@ -70,16 +66,16 @@ function Perfil() {
           <Card.Subtitle style={{ marginLeft: '26px', fontSize: '17px' }} className="mb-2 text-muted">{perfil?.descricao || 'Descrição não disponível'}</Card.Subtitle>
           <Card.Text style={{ marginLeft: '260px', marginBlockStart: '-230px' }}>
             <div style={{ marginBottom: '35px', fontSize: '18px' }} className=" justify-content-between">
-              <img src={locaPin} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }}/>
-              <span style={{fontSize: '17px'}}>{perfil?.local_moradia || 'N/A'}</span>
+              <img src={locaPin} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }} />
+              <span style={{ fontSize: '17px' }}>{perfil?.local_moradia || 'N/A'}</span>
             </div>
             <div style={{ marginBottom: '35px', fontSize: '18px' }} className=" justify-content-between">
-            <img src={chapeuGrad} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }}/>
-              <span style={{fontSize: '17px'}}>{perfil?.curso || 'N/A'}</span>
+              <img src={chapeuGrad} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }} />
+              <span style={{ fontSize: '17px' }}>{perfil?.curso || 'N/A'}</span>
             </div>
             <div style={{ marginBottom: '35px', fontSize: '18px' }} className=" justify-content-between">
-            <img src={escola} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }}/>
-              <span style={{fontSize: '17px'}}>{perfil?.faculdade || 'N/A'}</span>
+              <img src={escola} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }} />
+              <span style={{ fontSize: '17px' }}>{perfil?.faculdade || 'N/A'}</span>
             </div>
           </Card.Text>
         </Card.Body>
@@ -129,7 +125,7 @@ function Perfil() {
         <Card className='position top-50 start-50"' style={{ width: '132px', height: '130px', marginLeft: '8px', marginTop: '-90px', }}>
           <Image
             src="https://www.laut.de/Travis-Scott/Alben/Utopia-121583/travis-scott-utopia-228909.jpg?e1bef5"
-            style={{ width: '132px', height: '130px', marginLeft: '-1px', }}// Substitua pela URL real da imagem de perfil      
+            style={{ width: '132px', height: '130px', marginLeft: '-1px', }}      
           />
           <Card.Text>
             <div style={{ marginBlockStart: '14px', marginLeft: '40px', fontWeight: 'bold', fontSize: '14px' }}>
@@ -142,13 +138,13 @@ function Perfil() {
         <Card.Text>
           <div style={{ marginTop: '65px' }}>
             <span>
-              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={balao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />IDADE: 33 ANOS</h5>
+              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={balao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />IDADE:</h5>
             </span>
             <span>
               <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={lingua} style={{ width: '25px', height: '25px', marginRight: '5px' }} />IDIOMAS:{perfil?.idioma || 'N/A'}</h5>
             </span>
             <span>
-              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={casa} style={{ width: '25px', height: '25px', marginRight: '5px' }} />MORA EM: HOUSTON, TEXAS, EUA</h5>
+              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={casa} style={{ width: '25px', height: '25px', marginRight: '5px' }} />MORA EM: Vitória - ES</h5>
             </span>
             <span>
               <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={coracao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />SOLTEIRO: {perfil?.estado_civil || 'N/A'}</h5>
@@ -158,7 +154,6 @@ function Perfil() {
       </Card>
       {/* <hr className='position top-50 start-50"' style={{ width: '800px', height:'300px', marginLeft:'650px', marginBlockEnd:'-725px', marginTop:'32px'}}/> */}
     </>
-
   )
 };
 
