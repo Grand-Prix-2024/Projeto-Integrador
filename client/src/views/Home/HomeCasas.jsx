@@ -82,7 +82,7 @@ function Homecasas() {
                     {/* Detalhes da república */}
                     <div className="d-flex align-items-center text-muted mb-4 pt-4">
                         <i className="bi bi-people-fill me-3"></i>
-                        <span className="me-3"> 👥3 Vagas</span>
+                        <span className="me-3"> 3 Vagas</span>
                         <span className="me-3">1 Quarto</span>
                         <span className="me-3">2 Camas</span>
                         <span>1 Banheiro compartilhado</span>

@@ -11,6 +11,7 @@ import Home from './views/Home/Home.jsx';
 import EditarPerfil from './views/Perfil/EditPerfil.jsx';
 import Homecasas from './views/Home/HomeCasas.jsx';
 import FormRepublica from './views/CadastroRep/pages/FormRepublica.jsx';
+import PrivacyPolicy from './views/Home/Privacidade.jsx';
 
 
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/editar-perfil" element={<EditarPerfil />} />
         <Route path='/casas' element={<Homecasas/>} />
         <Route path='/cadastrar_republica' element={<FormRepublica/>} />
+        <Route path='/privacidade' element={<PrivacyPolicy/>} />
 
 
       </Routes>
