@@ -21,7 +21,7 @@ function getRepublicas() {
 function Home() {
   const republicas = getRepublicas();
   const [visibleCount, setVisibleCount] = useState(6); // Inicializa com 6 repúblicas visíveis
-
+  const navigate = useNavigate()
   const handleShowMore = () => {
     setVisibleCount(prevCount => prevCount + 3); // Mostra mais 3 repúblicas a cada clique
   };
@@ -133,9 +133,9 @@ function Home() {
       <footer className="text-center py-3 border-top" style={{ backgroundColor: '#FFE34C' }}>
         <div className="container d-flex justify-content-between align-items-center">
           <div className="text-dark">
-            © 2024 HIVE <a href="#" style={{ color: '#000' }}>Privacidade</a> ·
-            <a href="#" style={{ color: '#000' }}>Termos</a> ·
-            <a href="#" style={{ color: '#000' }}>Informações do site</a>
+            © 2024 HIVE <a href="/privacidade" style={{ color: '#000' }}>Privacidade</a> ·
+            <a href="/termos" style={{ color: '#000' }}>Termos</a> ·
+            <a href="/detalhes" style={{ color: '#000' }}>Informações do site</a>
           </div>
           <div className="d-flex align-items-center">
             <i className="bi bi-globe me-2" style={{ color: '#000' }}></i> Português (BR)

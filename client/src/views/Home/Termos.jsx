@@ -98,8 +98,8 @@ const TermosDeServico = () => {
                 <Container className="d-flex justify-content-between align-items-center">
                     <div style={{ color: '#000' }}>
                         © 2024 HIVE{' '}
-                        <a href="#" style={{ color: '#000' }}>Privacidade</a> ·{' '}
-                        <a href="#" style={{ color: '#000' }}>Informações do site</a>
+                        <a href="/privacidade" style={{ color: '#000' }}>Privacidade</a> ·{' '}
+                        <a href="/detalhes" style={{ color: '#000' }}>Informações do site</a>
                     </div>
                     <div className="d-flex align-items-center">
                         <i className="bi bi-globe me-2" style={{ color: '#000' }}></i> Português (BR)
