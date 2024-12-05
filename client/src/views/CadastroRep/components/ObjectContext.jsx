@@ -10,6 +10,8 @@ export const ObjetoProvider = ({ children }) => {
     Banheiros: 1,
     Camas: 1,
     roomType: "",
+    title: "",
+    
   });
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AccommodationSelector from "../components/Etapa1/AccommodationSelector";
 import RoomDistribution from "../components/Etapa1/RoomDistribution";
 import EssentialInfo from "../components/Etapa1/EssentialInfo";
@@ -18,10 +18,26 @@ const FormRepublica = () => {
     camas: 0,
   });
   const [objetoRepublica, setObjetoRepublica] = useState({
-    Features: [] // Inicialize como array vazio ou com valores que você espera
+    Features: [],
+    pais: '',
+    cep: '',
+    endereco: '',
+    bairro: '',
+    cidade: '',
+    estado: '',
+    id_usuario: null,
   });
-
   const [features, setFeatures] = useState([]);
+
+  useEffect(() => {
+    const idUsuario = localStorage.getItem('id_usuario');
+    if (idUsuario) {
+      setObjetoRepublica((prev) => ({
+        ...prev,
+        id_usuario: idUsuario,
+      }));
+    }
+  }, []);
 
   const toggleFeature = (feature) => {
     setFeatures((prev) =>
@@ -29,7 +45,28 @@ const FormRepublica = () => {
     );
   };
 
+  useEffect(() => {
+    setObjetoRepublica((prev) => ({
+      ...prev,
+      Features: features,
+    }));
+  }, [features]);
+
+  const validarDados = (dados) => {
+    const camposObrigatorios = ['pais', 'cep', 'endereco', 'bairro', 'cidade', 'estado'];
+    for (let campo of camposObrigatorios) {
+      if (!dados[campo] || dados[campo].trim() === '') {
+        alert(`O campo ${campo} é obrigatório.`);
+        return false;
+      }
+    }
+    return true;
+  };
+
   const cadastrarRepublica = async (infoRepublica) => {
+    if (!validarDados(infoRepublica)) {
+      return;
+    }
     try {
       const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/republicas`, {
         method: 'POST',
@@ -46,6 +83,13 @@ const FormRepublica = () => {
         // Resetar estado após cadastro bem-sucedido
         setObjetoRepublica({
           Features: [],
+          pais: '',
+          cep: '',
+          endereco: '',
+          bairro: '',
+          cidade: '',
+          estado: '',
+          id_usuario: null,
         });
         setAccommodation("Casa");
         setRooms({ private: 1, shared: 1 });
@@ -66,19 +110,38 @@ const FormRepublica = () => {
     <>
       <Navbar />
       <div className="container">
-        <div className="container mt-5">
+        <style>
+          {`
+              .section {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start; /* Alinha o conteúdo ao topo */
+                align-items: flex-start; /* Garante que os textos comecem à esquerda */
+                margin-bottom: 20px;
+                max-width: 800px; /* Define a largura máxima da div */
+                margin-left: auto; /* Centraliza horizontalmente */
+                margin-right: auto;
+              }
+
+              .section h5, .section h2, .section p {
+                text-align: left; /* Garante que o texto fique alinhado à esquerda */
+                margin: 0 0 10px 0; /* Espaçamento consistente */
+              }
+            `}
+        </style>
+        <div className="section mt-5">
           <h5>Etapa 1</h5>
           <h2>Informe sobre a sua acomodação</h2>
           <p>Selecione qual melhor descreve seu espaço</p>
-          <AccommodationSelector
-            objetoRepublica={objetoRepublica}
-            setObjetoRepublica={setObjetoRepublica}
-            selected={accommodation}
-            onSelect={setAccommodation}
-          />
         </div>
+        <AccommodationSelector
+          objetoRepublica={objetoRepublica}
+          setObjetoRepublica={setObjetoRepublica}
+          selected={accommodation}
+          onSelect={setAccommodation}
+        />
 
-        <div className="container mt-5">
+        <div className="section mt-5">
           <h2>Escolha o tipo de quarto</h2>
           <p>Selecione a opção que melhor descreve o quarto disponível</p>
           <RoomDistribution
@@ -89,7 +152,7 @@ const FormRepublica = () => {
           />
         </div>
 
-        <div className="container mt-5">
+        <div className="section mt-5">
           <h3>Adicione informações essenciais</h3>
           <EssentialInfo
             objetoRepublica={objetoRepublica}
@@ -99,7 +162,7 @@ const FormRepublica = () => {
           />
         </div>
 
-        <div className="container mt-5">
+        <div className="section mt-5">
           <h5>Etapa 2</h5>
           <h3>Faça sua república se destacar</h3>
           <p>Adicione elementos pra tornar sua acomodação mais interessante</p>
@@ -109,16 +172,17 @@ const FormRepublica = () => {
           setObjetoRepublica={setObjetoRepublica}
           onToggle={toggleFeature}
         />
-
-        <h5>Etapa 3</h5>
-        <h2 className="mb-4">Vamos preparar seu anúncio</h2>
-        <p>Monte como seu anúncio vai aparecer para os interessados</p>
+        <div className="section mt-5">
+          <h5>Etapa 3</h5>
+          <h2 className="mb-4">Vamos preparar seu anúncio</h2>
+          <p>Monte como seu anúncio vai aparecer para os interessados</p>
+        </div>
         <PropertyAd
           objetoRepublica={objetoRepublica}
           setObjetoRepublica={setObjetoRepublica}
         />
 
-        <div className="container mt-5">
+        <div className="section mt-5">
           <h5>Etapa 5</h5>
           <h2>Defina seu endereço</h2>
           <p>Configure a localização da acomodação para ser encontrada</p>
@@ -128,10 +192,10 @@ const FormRepublica = () => {
           setObjetoRepublica={setObjetoRepublica}
         />
       </div>
-      <div className="container">
+      <div className="section mt-5">
         <Button
           variant="warning"
-          className="float-center w-50"
+          className="float-center w-100"
           onClick={() => cadastrarRepublica(objetoRepublica)}
         >
           Confirmar
