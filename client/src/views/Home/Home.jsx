@@ -115,17 +115,12 @@ function Home() {
             ))}
           </div>
 
-          {/* Botão Mostrar Mais */}
+          {/* Botão Mostrar Mais com o mesmo estilo de outros botões */}
           {visibleCount < republicas.length && (
             <div className="text-center mt-4">
               <button
-                className="btn"
+                className="btn custom-button"
                 onClick={handleShowMore}
-                style={{
-                  backgroundColor: '#FFE34C',
-                  color: '#000',
-                  border: '1px solid #FFE34C',
-                }}
               >
                 Mostrar Mais
               </button>
@@ -151,6 +146,24 @@ function Home() {
           </div>
         </div>
       </footer>
+
+      <style>
+        {`
+          .custom-button {
+            background-color: #FFE34C;
+            color: #000;
+            border: 1px solid #FFE34C;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+          }
+
+          .custom-button:hover {
+            background-color: #e1c730;
+          }
+        `}
+      </style>
 
     </>
   );

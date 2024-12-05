@@ -6,7 +6,7 @@ const PrivacyPolicy = () => {
     return (
         <>
             <Navbar />
-            <Container className="mt-5">
+            <Container className="mt-5" style={{ paddingBottom: '3rem' }}>
                 <Row className="justify-content-center">
                     <Col xs={12} md={8} lg={6}>
                         <Card>
@@ -20,6 +20,8 @@ const PrivacyPolicy = () => {
                                         <li>Nome completo</li>
                                         <li>E-mail</li>
                                         <li>Número de telefone</li>
+                                        <li>Data de Nascimento</li>
+                                        <li>CPF</li>
                                     </ul>
                                 </p>
 
@@ -27,8 +29,7 @@ const PrivacyPolicy = () => {
                                 <p>
                                     Os dados coletados são utilizados para:
                                     <ul>
-                                        <li>Processar e confirmar reservas ou solicitações</li>
-                                        <li>Enviar informações sobre serviços, novidades e ofertas</li>
+                                        <li>Mostrar informações sobre serviços, novidades e ofertas</li>
                                         <li>Melhorar a experiência de navegação e personalizar o conteúdo do site</li>
                                         <li>Realizar análises para aprimorar nossos serviços</li>
                                         <li>Cumprir com obrigações legais e regulatórias</li>
@@ -37,7 +38,7 @@ const PrivacyPolicy = () => {
 
                                 <h5>3. Compartilhamento de Dados</h5>
                                 <p>
-                                    Não compartilhamos suas informações pessoais com terceiros, exceto quando necessário para cumprir com obrigações legais ou em casos de parcerias específicas para a prestação de serviços (como plataformas de pagamento).
+                                    Não compartilhamos suas informações pessoais com terceiros, exceto quando necessário para cumprir com obrigações legais.
                                 </p>
 
                                 <h5>4. Segurança dos Dados</h5>
@@ -52,7 +53,7 @@ const PrivacyPolicy = () => {
 
                                 <h5>6. Seus Direitos</h5>
                                 <p>
-                                    Você tem o direito de acessar, corrigir, excluir ou bloquear suas informações pessoais a qualquer momento. Se desejar exercer esses direitos, entre em contato conosco através dos canais disponíveis no site.
+                                    Você tem o direito de acessar, corrigir ou excluir suas informações pessoais a qualquer momento. Se desejar exercer esses direitos, entre em contato conosco através dos canais disponíveis no site.
                                 </p>
 
                                 <h5>7. Alterações no Termo de Privacidade</h5>
@@ -70,31 +71,51 @@ const PrivacyPolicy = () => {
                                 </footer>
 
                                 <div className="text-center mt-4">
-                                    <Button className="custom-button" href="/" size="lg">
-                                        Voltar para o Início
+                                    <Button className="custom-button" href="/" size="sm">
+                                        Voltar para a Página Inicial
                                     </Button>
                                 </div>
                             </Card.Body>
                         </Card>
                     </Col>
                 </Row>
+
                 <style jsx>{`
-        .custom-button {
-          background-color: #FFE34C;
-          border-color: #FFE34C;
-          color: #000; /* Para garantir que o texto seja legível */
-        }
+                    .custom-button {
+                        background-color: #FFE34C;
+                        border-color: #FFE34C;
+                        color: #000;
+                        padding: 0.4rem 0.8rem; /* Reduzindo o tamanho do botão */
+                        font-size: 0.85rem; /* Ajustando o tamanho do texto */
+                    }
 
-        .custom-button:hover {
-          background-color: #d4b200; /* Efeito hover para o botão */
-          border-color: #d4b200;
-        }
+                    .custom-button:hover {
+                        background-color: #d4b200;
+                        border-color: #d4b200;
+                    }
 
-        .custom-button:focus {
-          box-shadow: none; /* Remover o contorno do botão ao focar */
-        }
-      `}</style>
-            </Container >
+                    .custom-button:focus {
+                        box-shadow: none;
+                    }
+                `}</style>
+            </Container>
+
+            <footer className="text-center py-3 border-top" style={{ backgroundColor: '#FFE34C', marginTop: 'auto' }}>
+                <Container className="d-flex justify-content-between align-items-center">
+                    <div style={{ color: '#000' }}>
+                        © 2024 HIVE{' '}
+                        <a href="#" style={{ color: '#000' }}>Termos</a> ·{' '}
+                        <a href="#" style={{ color: '#000' }}>Informações do site</a>
+                    </div>
+                    <div className="d-flex align-items-center">
+                        <i className="bi bi-globe me-2" style={{ color: '#000' }}></i> Português (BR)
+                        <i className="bi bi-currency-dollar mx-2" style={{ color: '#000' }}></i> BRL
+                        <a href="#" className="ms-2" style={{ color: '#000' }}><i className="bi bi-facebook"></i></a>
+                        <a href="#" className="ms-2" style={{ color: '#000' }}><i className="bi bi-twitter"></i></a>
+                        <a href="#" className="ms-2" style={{ color: '#000' }}><i className="bi bi-instagram"></i></a>
+                    </div>
+                </Container>
+            </footer>
         </>
     );
 }
