@@ -6,7 +6,7 @@ import { mostrarUsuario } from './Controllers/UsuarioController.js';
 import { atualizarUsuario } from './Controllers/UsuarioController.js';
 import { deletarUsuario, mostrarUmUsuario } from './Controllers/UsuarioController.js';
 import { criarPerfil, mostrarPerfil, atualizarPerfil, deletarPerfil, buscarPerfilPorUsuario } from './Controllers/PerfilController.js';
-import { criarImagemPerfil, downloadImagemPerfil, editarImagemPerfil, mostrarImagensPerfil, mostrarUmaImagemPerfil } from './Controllers/ImagemPerfilController.js';
+
 
 const app = express();
 const porta = 5000;
@@ -41,20 +41,20 @@ app.get('/perfil', mostrarPerfil);
 app.put('/perfil/:id', atualizarPerfil);
 app.get('/perfil/:id_usuario', buscarPerfilPorUsuario);
 app.delete('/perfil/:id', deletarPerfil);
-app.put('/imagem/:id_imagem', editarImagemPerfil);
+//app.put('/imagem/:id_imagem', editarImagemPerfil);
 
 // CRUD IMAGEM PERFIL
-
-app.get('/public/:nomeImg', downloadImagemPerfil)
-
-app.post('/perfil', criarImagemPerfil);
-app.get('/perfil', mostrarImagensPerfil)
-app.get('/perfil/:id_imagem', mostrarUmaImagemPerfil);
-
 
 
 // CRUD REPUBLICA
 
+
+
+
+
+
 app.listen(porta, ()=>{
     console.log(`API RODANDO NA PORTA: ${porta}`)
 });
+
+
