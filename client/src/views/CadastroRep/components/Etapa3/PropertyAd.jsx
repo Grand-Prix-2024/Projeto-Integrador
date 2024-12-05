@@ -4,6 +4,7 @@ const PropertyAd = () => {
   const [images, setImages] = useState([]);
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState(70);
+  const [description, setDescription] = useState('');
 
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
@@ -27,55 +28,21 @@ const PropertyAd = () => {
     setPrice(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!title || price <= 0 || images.length < 2) {
-      alert('Por favor, preencha todos os campos corretamente.');
-      return;
-    }
-
-    // Criando o FormData para enviar imagens e dados
-    const formData = new FormData();
-    formData.append('titulo', title);
-    formData.append('preco', price);
-    images.forEach((image, index) => {
-      formData.append('imagens', image);
-    });
-
-    try {
-      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/api/republica`, {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!resposta.ok) {
-        console.error('Erro ao cadastrar a república');
-        alert('Erro ao cadastrar. Tente novamente.');
-      } else {
-        console.log('República cadastrada com sucesso');
-        alert('República cadastrada com sucesso!');
-        setTitle('');
-        setPrice(70);
-        setImages([]);
-      }
-    } catch (error) {
-      console.error('Erro ao cadastrar a república', error);
-      alert('Erro ao cadastrar. Tente novamente.');
-    }
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
   };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 ">
       <form
-        onSubmit={handleSubmit}
         className="p-4 rounded shadow bg-warning"
         style={{ width: '100%', maxWidth: '800px' }}
       >
-        <h2 className="text-center mb-4">Cadastro de Propriedade</h2>
+    
 
         {/* Área para adicionar fotos */}
         <div className="mb-4">
-          <h6>Adicione fotos do seu espaço</h6>
+          <h5>Adicione fotos do seu espaço</h5>
           <p>Imagens da fachada, do interior, quartos etc.</p>
           <div className="d-flex gap-2 flex-wrap justify-content-center">
             {images.map((image, index) => (
@@ -133,7 +100,7 @@ const PropertyAd = () => {
         {/* Campo para nomear o anúncio */}
         <div className="mb-4">
           <label htmlFor="title" className="form-label">
-            <h6>Nome do anúncio</h6>
+            <h5>Nome do anúncio</h5>
           </label>
           <input
             id="title"
@@ -148,7 +115,7 @@ const PropertyAd = () => {
         {/* Campo para definir o preço */}
         <div className="mb-4">
           <label htmlFor="price" className="form-label">
-            <h6>Valor</h6>
+            <h5>Valor</h5>
           </label>
           <div className="input-group">
             <span className="input-group-text">R$</span>
@@ -165,11 +132,19 @@ const PropertyAd = () => {
           </small>
         </div>
 
-        {/* Botão para enviar o formulário */}
-        <div className="text-center">
-          <button type="submit" className="btn btn-primary">
-            Cadastrar
-          </button>
+        {/* Campo para descrição */}
+        <div className="mb-4">
+          <label htmlFor="description" className="form-label">
+            <h5>Descrição</h5>
+          </label>
+          <textarea
+            id="description"
+            className="form-control"
+            placeholder="Descreva sua propriedade (detalhes sobre quartos, localização, facilidades, etc.)"
+            value={description}
+            onChange={handleDescriptionChange}
+            rows="4"
+          ></textarea>
         </div>
       </form>
     </div>
