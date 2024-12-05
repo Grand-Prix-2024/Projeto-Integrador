@@ -11,7 +11,7 @@ import Home from './views/Home/Home.jsx';
 import EditarPerfil from './views/Perfil/EditPerfil.jsx';
 import Homecasas from './views/Home/HomeCasas.jsx';
 import FormRepublica from './views/CadastroRep/pages/FormRepublica.jsx';
-
+// import CasaDetalhes from './views/Home/CasaDetalhes.jsx';
 
 
 
@@ -32,8 +32,8 @@ function App() {
         <Route path='/edit_user/:id' element={<EditUsuario />} />
         <Route path='/login' element={<Login />} />
         <Route path="/editar-perfil" element={<EditarPerfil />} />
-        <Route path='/casas' element={<Homecasas/>} />
-        
+        <Route path='/casas/:id' element={<Homecasas/>} />
+        {/* <Route path='/casas/:id' element={<CasaDetalhes />} />  */}
         <Route path='/cadastrar_republica' element={<FormRepublica/>} />
       </Routes>
     </BrowserRouter>

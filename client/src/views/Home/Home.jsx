@@ -7,25 +7,25 @@ import axios from "axios";
 // Função para obter as repúblicas do backend
 async function getRepublicas() {
   try {
-    const response = await axios.get("http://seu-backend-url/republicas"); // Substitua pela URL do seu backend
-    return response.data; // Retorna os dados da API
+    const response = await axios.get(`${process.env.REACT_APP_BACKEND}/republicas`); 
+    return response.data; 
   } catch (error) {
     console.error("Erro ao buscar repúblicas:", error);
-    return []; // Retorna uma lista vazia em caso de erro
+    return []; 
   }
 }
 
 function Home() {
   const [republicas, setRepublicas] = useState([]);
-  const [loading, setLoading] = useState(true); // Estado de carregamento
+  const [loading, setLoading] = useState(true); 
   const navigate = useNavigate();
 
-  // UseEffect para carregar as repúblicas
+  
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getRepublicas(); // Chama a função getRepublicas
+      const data = await getRepublicas(); 
       if (data.length === 0) {
-        // Adiciona república fictícia se a lista estiver vazia
+        
         setRepublicas([
           {
             id: 1,
@@ -86,7 +86,7 @@ function Home() {
                       transition: "transform 0.3s, box-shadow 0.3s",
                       cursor: "pointer",
                     }}
-                    onClick={() => navigate(`/detalhes/${rep.id}`)} // Navegar para a página de detalhes
+                    onClick={() => navigate(`/casas/${rep.id}`)} 
                   >
                     <div
                       className="card-img-top"
@@ -116,7 +116,7 @@ function Home() {
                       <p className="card-text">{rep.bairro}</p>
                       <p className="card-text">{rep.estado}</p>
                       <p className="fw-bold" style={{ color: "black" }}>
-                        R$ {rep.preco.toFixed(2)}
+                        R$ {rep.preco}
                       </p>
                     </div>
                   </div>

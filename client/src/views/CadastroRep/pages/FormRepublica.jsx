@@ -109,7 +109,6 @@ const FormRepublica = () => {
   return (
     <>
       <Navbar />
-      <Navbar />
       <div className="container">
         <style>
           {`
