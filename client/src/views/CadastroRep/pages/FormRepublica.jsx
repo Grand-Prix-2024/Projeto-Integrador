@@ -109,6 +109,7 @@ const FormRepublica = () => {
   return (
     <>
       <Navbar />
+      <Navbar />
       <div className="container">
         <style>
           {`
@@ -206,3 +207,4 @@ const FormRepublica = () => {
 };
 
 export default FormRepublica;
+

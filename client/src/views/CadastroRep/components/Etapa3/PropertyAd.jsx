@@ -105,13 +105,13 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
       <form
-        onSubmit={handleSubmit}
         className="p-4 rounded shadow bg-warning"
         style={{ width: '100%', maxWidth: '800px' }}
       >
 
         {/* Área para adicionar fotos */}
         <div className="mb-4">
+          <h5>Adicione fotos do seu espaço</h5>
           <h5>Adicione fotos do seu espaço</h5>
           <p>Imagens da fachada, do interior, quartos etc.</p>
           <div className="d-flex gap-2 flex-wrap justify-content-center">
@@ -171,6 +171,7 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
         <div className="mb-4">
           <label htmlFor="title" className="form-label">
             <h5>Nome do anúncio</h5>
+            <h5>Nome do anúncio</h5>
           </label>
           <input
             id="title"
@@ -185,6 +186,7 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
         {/* Campo para definir o preço */}
         <div className="mb-4">
           <label htmlFor="price" className="form-label">
+            <h5>Valor</h5>
             <h5>Valor</h5>
           </label>
           <div className="input-group">
