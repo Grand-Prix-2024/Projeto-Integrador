@@ -1,6 +1,6 @@
 import React from "react";
 
-const HighlightFeatures = ({ features, onToggle }) => {
+const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) => {
   // Lista de itens organizados por seções
   const sections = [
     {
@@ -34,6 +34,20 @@ const HighlightFeatures = ({ features, onToggle }) => {
       ],
     },
   ];
+
+  const handleToggle = (name) => {
+    // Atualiza o objeto global com a alternância da feature
+    setObjetoRepublica((prevObjeto) => {
+      const updatedFeatures = prevObjeto.Features.includes(name)
+        ? prevObjeto.Features.filter((feature) => feature !== name)
+        : [...prevObjeto.Features, name];
+
+      return {
+        ...prevObjeto,
+        Features: updatedFeatures,
+      };
+    });
+  };
 
   return (
     <div>
@@ -101,33 +115,32 @@ const HighlightFeatures = ({ features, onToggle }) => {
       </style>
 
       <div>
-        
-      </div>
+        {sections.map((section, index) => (
+          <div key={index} className="section-container">
+            {/* Título da seção */}
+            <div className="section-title">{section.title}</div>
 
-      {sections.map((section, index) => (
-        <div key={index} className="section-container">
-          {/* Título da seção */}
-          <div className="section-title">{section.title}</div>
-
-          {/* Botões da seção */}
-          <div className="features-container">
-            {section.items.map((item, idx) => (
-              <button
-                key={idx}
-                className={`feature-btn ${features.includes(item.name) ? "active" : ""
+            {/* Botões da seção */}
+            <div className="features-container">
+              {section.items.map((item, idx) => (
+                <button
+                  key={idx}
+                  className={`feature-btn ${
+                    objetoRepublica.Features && objetoRepublica.Features.includes(item.name) ? "active" : ""
                   }`}
-                onClick={() => onToggle(item.name)}
-              >
-                <span className="feature-icon">{item.icon}</span> {/* Emoji como ícone */}
-                <span className="feature-text">{item.name}</span>
-              </button>
-            ))}
+                  onClick={() => handleToggle(item.name)}
+                >
+                  <span className="feature-icon">{item.icon}</span> {/* Emoji como ícone */}
+                  <span className="feature-text">{item.name}</span>
+                </button>
+              ))}
+            </div>
           </div>
+        ))}
+        <div className="features-container">
+          Câmeras de segurança que monitoram espaços internos não são permitidas, mesmo que estejam desligadas.
+          É obrigatório informar sobre a presença de todas as câmeras de segurança na parte externa.
         </div>
-      ))}
-      <div className="features-container">
-        Câmeras de segurança que monitoram espaços internos não são permitidas, mesmo que estejam desligadas.
-        É obrigatório informar sobre a presença de todas as câmeras de segurança na parte externa.
       </div>
     </div>
   );

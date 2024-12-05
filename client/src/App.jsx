@@ -33,9 +33,8 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path="/editar-perfil" element={<EditarPerfil />} />
         <Route path='/casas' element={<Homecasas/>} />
+        
         <Route path='/cadastrar_republica' element={<FormRepublica/>} />
-
-
       </Routes>
     </BrowserRouter>
   );
