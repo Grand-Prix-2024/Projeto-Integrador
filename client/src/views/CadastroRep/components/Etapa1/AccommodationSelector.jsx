@@ -6,8 +6,9 @@ const AccommodationSelector = () => {
 
   // Opções de acomodação
   const options = [
-    { name: "Casa", icon: "🏠" },
-    { name: "Apartamento", icon: "🏢" },
+    { name: "Casa", icon: <i className="bi bi-house-door feature-icon"></i> },
+    { name: "Apartamento", icon: <i className="bi bi-building feature-icon"></i> }, // Prédio (simbolizando apartamento)
+
   ];
 
   return (
@@ -24,9 +25,9 @@ const AccommodationSelector = () => {
           .feature-btn {
             padding: 20px 40px; /* Tamanho do botão */
             text-align: center;
-            background: #ffc107; /* Amarelo */
+            background: #FFE245; /* Amarelo atualizado */
             color: #fff; /* Texto branco */
-            border: 1px solid #ffc107;
+            border: 1px solid #FFE245;
             border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
@@ -38,19 +39,24 @@ const AccommodationSelector = () => {
             gap: 10px;
           }
 
+          .feature-btn .feature-icon {
+            font-size: 32px; /* Tamanho do ícone */
+            color: #fff; /* Ícone branco */
+          }
+
           .feature-btn.active {
-            background: #ffe082; /* Amarelo mais claro quando ativo */
+            background: #FFEB86; /* Amarelo mais claro quando ativo */
             color: #000; /* Texto preto */
-            border-color: #ffd54f;
+            border-color: #FFEB86;
+          }
+
+          .feature-btn.active .feature-icon {
+            color: #000; /* Ícone preto quando ativo */
           }
 
           .feature-btn:hover {
-            background: #ffd54f; /* Fundo mais claro no hover */
+            background: #FFD834; /* Fundo mais escuro no hover */
             transform: scale(1.05); /* Zoom no hover */
-          }
-
-          .feature-icon {
-            font-size: 32px; /* Tamanho do ícone */
           }
 
           .feature-text {
@@ -76,17 +82,17 @@ const AccommodationSelector = () => {
             }`}
             onClick={() => setSelectedAccommodation(option.name)}
           >
-            <span className="feature-icon">{option.icon}</span>
+            {option.icon}
             <span className="feature-text">{option.name}</span>
           </button>
         ))}
       </div>
-      {/* Mensagem Condicional
+      {/* Mensagem Condicional */}
       <div className="message">
         {selectedAccommodation
           ? `Você selecionou: ${selectedAccommodation}`
           : "Nenhuma acomodação selecionada."}
-      </div> */}
+      </div>
     </div>
   );
 };

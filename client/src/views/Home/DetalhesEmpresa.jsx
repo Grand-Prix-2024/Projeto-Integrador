@@ -59,8 +59,6 @@ const DetalhesDaEmpresa = () => {
                     <div className="d-flex align-items-center">
                         <i className="bi bi-globe me-2" style={{ color: '#000' }}></i> Português (BR)
                         <i className="bi bi-currency-dollar mx-2" style={{ color: '#000' }}></i> BRL
-                        <a href="#" className="ms-2" style={{ color: '#000' }}><i className="bi bi-facebook"></i></a>
-                        <a href="#" className="ms-2" style={{ color: '#000' }}><i className="bi bi-twitter"></i></a>
                         <a href="#" className="ms-2" style={{ color: '#000' }}><i className="bi bi-instagram"></i></a>
                     </div>
                 </Container>
