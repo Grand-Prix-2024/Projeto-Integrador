@@ -1,4 +1,4 @@
-import { createRepublica, showRepublicas, updateRepublica, deleteRepublica, showOneRepublica } from "../Models/RepublicaModel.js";
+import { createRepublica, showRepublicas, updateRepublica, deleteRepublica, showOneRepublica, getRepublicaWithFotos } from "../Models/RepublicaModel.js";
 
 export async function criarRepublica(req, res) {
     console.log('RepublicaController funcionando');
@@ -67,4 +67,35 @@ export async function mostrarUmaRepublica(req, res) {
             res.status(500).json({message: 'Erro ao mostrar usuário'})
         }
     }
+}
+
+export async function fetchRepublica(req, res) {
+    const { id } = req.params; // ID da república passado como parâmetro na URL
+
+    try {
+        // Valida se o ID foi fornecido
+        if (!id) {
+            return res.status(400).json({ message: 'ID da república é obrigatório.' });
+        }
+
+        // Chama a função do model para buscar os dados
+        const republica = await getRepublicaWithFotos(id);
+
+        // Retorna os dados da república e suas fotos
+        return res.status(200).json(republica);
+    } catch (error) {
+        console.error('Erro ao buscar república:', error);
+
+        // Retorna erro para o cliente
+        return res.status(500).json({
+            message: 'Erro ao buscar república.',
+            error: error.message,
+        });
+    }
+}
+
+export async function imagens(req,res) {
+    const arrayImagens = req.files;
+    console.log(arrayImagens);
+    return res.status(200).json(arrayImagens);
 }

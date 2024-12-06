@@ -7,25 +7,24 @@ import axios from "axios";
 // Função para obter as repúblicas do backend
 async function getRepublicas() {
   try {
-    const response = await axios.get(`${process.env.REACT_APP_BACKEND}/republicas`); 
-    return response.data; 
+    const response = await axios.get(`${process.env.REACT_APP_BACKEND}/republicas`);
+    return response.data;
   } catch (error) {
     console.error("Erro ao buscar repúblicas:", error);
-    return []; 
+    return [];
   }
 }
 
 function Home() {
   const [republicas, setRepublicas] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getRepublicas(); 
-      if (data.length === 0) {
-        
+      const data = await getRepublicas();
+      if (!data || data.length === 0) {
+        // Caso não haja dados, cria uma lista de exemplo
         setRepublicas([
           {
             id: 1,
@@ -37,12 +36,20 @@ function Home() {
           },
         ]);
       } else {
-        setRepublicas(data); // Atualiza o estado com os dados
+        setRepublicas(data); // Atualiza o estado com os dados reais
       }
       setLoading(false); // Finaliza o carregamento
     };
     fetchData();
   }, []);
+
+  const handleNavigate = (id) => {
+    if (id) {
+      navigate(`/casas/${id}`); // Garante que o id está sendo passado corretamente
+    } else {
+      console.error("ID da república está indefinido.");
+    }
+  };
 
   return (
     <>
@@ -86,7 +93,7 @@ function Home() {
                       transition: "transform 0.3s, box-shadow 0.3s",
                       cursor: "pointer",
                     }}
-                    onClick={() => navigate(`/casas/${rep.id}`)} 
+                    onClick={() => handleNavigate(rep.id)} // Corrige o problema do ID
                   >
                     <div
                       className="card-img-top"

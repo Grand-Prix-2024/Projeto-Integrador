@@ -7,6 +7,8 @@ import PropertyAd from "../components/Etapa3/PropertyAd";
 import DefinirEndereco from "../components/Etapa4/DefinirEndereco";
 import Navbar from "../../../components/Navbar";
 import { Button } from "react-bootstrap";
+import { useObjeto } from "../components/ObjectContext";
+
 
 const FormRepublica = () => {
   const [accommodation, setAccommodation] = useState("Casa");
@@ -17,17 +19,23 @@ const FormRepublica = () => {
     banheiros: 1,
     camas: 0,
   });
-  const [objetoRepublica, setObjetoRepublica] = useState({
-    Features: [],
-    pais: '',
-    cep: '',
-    endereco: '',
-    bairro: '',
-    cidade: '',
-    estado: '',
-    id_usuario: null,
-  });
+  // const [objetoRepublica, setObjetoRepublica] = useState({
+  //   name: '',
+  //   moradores: '',
+  //   quartos: '',
+  //   banheiros: '',
+  //   camas: '',
+  //   Features: [],
+  //   pais: '',
+  //   cep: '',
+  //   endereco: '',
+  //   bairro: '',
+  //   cidade: '',
+  //   estado: '',
+  //   id_usuario: null,
+  // });
   const [features, setFeatures] = useState([]);
+  const { objetoRepublica, setObjetoRepublica } = useObjeto();
 
   useEffect(() => {
     const idUsuario = localStorage.getItem('id_usuario');
@@ -53,7 +61,7 @@ const FormRepublica = () => {
   }, [features]);
 
   const validarDados = (dados) => {
-    const camposObrigatorios = ['pais', 'cep', 'endereco', 'bairro', 'cidade', 'estado'];
+    const camposObrigatorios = ['name','pais', 'cep', 'endereco', 'bairro', 'cidade', 'estado'];
     for (let campo of camposObrigatorios) {
       if (!dados[campo] || dados[campo].trim() === '') {
         alert(`O campo ${campo} é obrigatório.`);
@@ -64,6 +72,7 @@ const FormRepublica = () => {
   };
 
   const cadastrarRepublica = async (infoRepublica) => {
+    console.log(infoRepublica);
     if (!validarDados(infoRepublica)) {
       return;
     }

@@ -12,7 +12,7 @@ function HomeCasas() {
   useEffect(() => {
     async function fetchAd() {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND}/republicas/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND}/republicas/${id}/fotos`);
         if (response.data) {
           setAdData(response.data);
         } else {
@@ -52,19 +52,17 @@ function HomeCasas() {
     color: "black",
   };
 
-  // Verifica se adData está carregado
   if (!adData) {
     return (
       <div>
         <Navbar />
         <div className="container text-center mt-5">
-          <p>Nenhum anúncio disponível no momento.</p>
+          <p>Carregando informações da república...</p>
         </div>
       </div>
     );
   }
 
-  // Garante que adData e suas propriedades são verificadas
   return (
     <>
       <Navbar />
@@ -72,7 +70,7 @@ function HomeCasas() {
         <div className="container mt-5">
           <div className="row mb-4">
             <div className="col-lg-12">
-              <h1 className="text-start text-dark mb-3">{adData.nome}</h1>
+              <h1 className="text-start text-dark mb-3">{adData.titulo}</h1>
               <p className="text-muted">
                 <i className="bi bi-geo-alt-fill"></i> {adData.bairro}, {adData.estado}
               </p>
@@ -83,24 +81,25 @@ function HomeCasas() {
           <div className="row g-4">
             <div className="col-lg-7">
               <img
-                src={adData.imagem || "https://via.placeholder.com/450"}
-                alt="Foto maior"
+                src={adData.imagens && adData.imagens[0] ? adData.imagens[0].caminho_foto : "https://via.placeholder.com/450"}
+                alt="Foto principal"
                 className="img-fluid rounded shadow-sm"
                 style={{ ...imageStyle, height: "450px", objectFit: "cover" }}
               />
             </div>
             <div style={{ marginTop: "40px" }} className="col-lg-5">
               <div className="row g-4">
-                {Array.isArray(adData.imagensExtras) && adData.imagensExtras.map((photo, index) => (
-                  <div className="col-6" key={index}>
-                    <img
-                      src={photo}
-                      alt={`Foto menor ${index + 1}`}
-                      className="img-fluid rounded shadow-sm"
-                      style={{ ...imageStyle, height: "200px", objectFit: "cover" }}
-                    />
-                  </div>
-                ))}
+                {Array.isArray(adData.imagens) &&
+                  adData.imagens.slice(1).map((image, index) => (
+                    <div className="col-6" key={index}>
+                      <img
+                        src={image.caminho_foto}
+                        alt={`Foto ${index + 2}`}
+                        className="img-fluid rounded shadow-sm"
+                        style={{ ...imageStyle, height: "200px", objectFit: "cover" }}
+                      />
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
@@ -147,31 +146,6 @@ function HomeCasas() {
                     Negociar
                   </button>
                 </div>
-                <hr />
-                {Array.isArray(adData.anfitrioes) && adData.anfitrioes.length > 0 ? (
-                  adData.anfitrioes.map((host, index) => (
-                    <div key={index}>
-                      <p className="text-muted mb-2">
-                        <strong>Anfitrião{host.genero === "feminino" ? "a" : ""}:</strong>
-                      </p>
-                      <div className="d-flex align-items-center mb-3">
-                        <img
-                          src={host.foto}
-                          alt={host.nome}
-                          className="rounded-circle me-3"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            objectFit: "cover",
-                          }}
-                        />
-                        <p className="mb-0">{host.nome}</p>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <p>Nenhum anfitrião disponível.</p>
-                )}
                 <hr />
                 <button className="btn w-100 py-2" style={buttonStyle}>
                   Contactar

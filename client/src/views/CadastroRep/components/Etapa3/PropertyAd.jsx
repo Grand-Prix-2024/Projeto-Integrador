@@ -71,7 +71,8 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
       preco: preco,
       id_usuario: idUsuario,
       Features: Features,
-      images: images, // Certifique-se de que está incluindo as imagens corretamente
+      images: images,
+      descricao: descricao,
     };
 
     try {
@@ -111,7 +112,6 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
 
         {/* Área para adicionar fotos */}
         <div className="mb-4">
-          <h5>Adicione fotos do seu espaço</h5>
           <h5>Adicione fotos do seu espaço</h5>
           <p>Imagens da fachada, do interior, quartos etc.</p>
           <div className="d-flex gap-2 flex-wrap justify-content-center">
@@ -170,7 +170,6 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
         {/* Campo para nomear o anúncio */}
         <div className="mb-4">
           <label htmlFor="title" className="form-label">
-            <h5>Nome do anúncio</h5>
             <h5>Nome do anúncio</h5>
           </label>
           <input

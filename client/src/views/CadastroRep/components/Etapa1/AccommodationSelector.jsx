@@ -9,10 +9,11 @@ const AccommodationSelector = () => {
     { name: "Apartamento", icon: "🏢" },
   ];
 
-  const alterarObjeto = (selectedName) => {
+  const alterarObjeto = (key, value) => {
+    console.log(objetoRepublica);
     setObjetoRepublica((prevState) => ({
       ...prevState,
-      name: selectedName,
+      [key]: value,
     }));
   };
 
@@ -78,16 +79,20 @@ const AccommodationSelector = () => {
         {options.map((option, index) => (
           <button
             key={index}
-            className={`feature-btn ${
-              objetoRepublica.name === option.name ? "active" : ""
-            }`}
-            onClick={() => alterarObjeto(option.name)}
+            className={`feature-btn ${objetoRepublica.name === option.name ? "active" : ""
+              }`}
+            onClick={() => {
+              // Atualiza o objeto de estado para refletir a seleção
+              alterarObjeto("name", option.name);
+            }}
           >
             <span className="feature-icon">{option.icon}</span>
             <span className="feature-text">{option.name}</span>
           </button>
         ))}
       </div>
+
+  
       {/* <div className="message">
         {objetoRepublica.name
           ? `Você selecionou: ${objetoRepublica.name}`
