@@ -10,7 +10,7 @@ import Login from './views/Login/Login.jsx';
 import Home from './views/Home/Home.jsx';
 import EditarPerfil from './views/Perfil/EditPerfil.jsx';
 import Homecasas from './views/Home/HomeCasas.jsx';
-import AtualizarImagemPerfil from './views/Perfil/ImgPerfil.jsx';
+// import AtualizarImagemPerfil from './views/Perfil/ImgPerfil.jsx';
 
 
 
@@ -33,9 +33,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path="/editar-perfil" element={<EditarPerfil />} />
         <Route path='/casas' element={<Homecasas/>} />
-        <Route path='/imagem_perfil' element={<AtualizarImagemPerfil />} />
-
-
+        {/* <Route path='/imagem_perfil' element={<AtualizarImagemPerfil />} /> */}
       </Routes>
     </BrowserRouter>
   );

@@ -6,6 +6,8 @@ import { mostrarUsuario } from './Controllers/UsuarioController.js';
 import { atualizarUsuario } from './Controllers/UsuarioController.js';
 import { deletarUsuario, mostrarUmUsuario } from './Controllers/UsuarioController.js';
 import { criarPerfil, mostrarPerfil, atualizarPerfil, deletarPerfil, buscarPerfilPorUsuario } from './Controllers/PerfilController.js';
+import { editarImagem } from './Controllers/ImagemPerfilController.js';
+
 
 
 const app = express();
@@ -44,7 +46,7 @@ app.delete('/perfil/:id', deletarPerfil);
 //app.put('/imagem/:id_imagem', editarImagemPerfil);
 
 // CRUD IMAGEM PERFIL
-
+app.put('/img_perfil/:id_perfil', editarImagem)
 
 // CRUD REPUBLICA
 

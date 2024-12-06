@@ -3,6 +3,7 @@ import { Card, Button, Form, Image } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import PerfilImagem from './ImgPerfil';
+import AtualizarImagemPerfil from './ImgPerfil';
 
 const idPerfil = 0;
 
@@ -85,12 +86,12 @@ function EditarPerfil() {
     <>
       <Navbar />
       <Card style={{ width: '400px', padding: '30px', margin: '50px auto', borderRadius: '20px' }}>
-      {/* <PerfilImagem idPerfil={idPerfil} /> */}
-      {/* <Image 
+      <Image 
           src="https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg" 
           roundedCircle
           style={{ width: '200px', height: '200px', marginTop: '-20px', marginLeft:'65px' }}
-        /> */}
+        />
+        <AtualizarImagemPerfil/>
       </Card>
       <Card style={{ width: '600px', padding: '30px', margin: '50px auto', borderRadius: '20px' }}>
         <Card.Body>
