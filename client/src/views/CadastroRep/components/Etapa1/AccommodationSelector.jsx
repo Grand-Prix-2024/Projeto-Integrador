@@ -5,8 +5,8 @@ const AccommodationSelector = () => {
   const { objetoRepublica, setObjetoRepublica } = useObjeto();
 
   const options = [
-    { name: "Casa", icon: "🏠" },
-    { name: "Apartamento", icon: "🏢" },
+    { name: "Casa", icon: <i className="bi bi-house-door feature-icon"></i> },
+    { name: "Apartamento", icon: <i className="bi bi-building feature-icon"></i> },
   ];
 
   const alterarObjeto = (key, value) => {
