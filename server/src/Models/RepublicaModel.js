@@ -2,12 +2,13 @@ import mysql from 'mysql2/promise'
 import db from '../conexao.js'
 
 
-export async function createRepublica(republica) {
+export async function createRepublica(republica, images) {
     if (!republica.id_usuario) {
         throw new Error("ID do usuário é obrigatório.");
     }
 
     const conexao = mysql.createPool(db);
+
     const featureMapping = {
         wifi: "Wi-fi",
         televisao: "Televisão",
@@ -21,41 +22,29 @@ export async function createRepublica(republica) {
         extintor: "Extintor",
     };
 
-    
     const features = Object.fromEntries(
         Object.keys(featureMapping).map((key) => [
             key,
-            republica.Features.includes(featureMapping[key]) ? true : false,
+            republica.Features?.includes(featureMapping[key]) ? true : false,
         ])
     );
 
-    
-    if (!republica.images || !republica.images.length) {
+    if (!images || !images.length) {
         throw new Error("É necessário fornecer pelo menos uma imagem.");
     }
 
-    const images = republica.images.map((image) => image.path);
+    const imagePaths = images.map((image) => `/img/${image.filename}`);
 
-    
     const acomodacaoMapping = {
         Casa: "Casa",
         Apartamento: "Apartamento",
     };
 
-    const tipoAcomodacao = acomodacaoMapping[republica.name]; 
+    const tipoAcomodacao = acomodacaoMapping[republica.name];
     if (!tipoAcomodacao) {
         throw new Error("O campo 'name' deve ser 'Casa' ou 'Apartamento'.");
     }
 
-   
-    const moradores = republica.qtd_moradores || 0;
-    const quartos = republica.qtd_quartos || 0;
-    const banheiros = republica.qtd_banheiros || 0;
-    const camas = republica.qtd_camas || 0;
-    const descricao = republica.descricao || "";
-
-
-    
     const campos = {
         titulo: republica.titulo,
         preco: republica.preco,
@@ -68,11 +57,12 @@ export async function createRepublica(republica) {
         estado: republica.estado,
         apto: republica.apto,
         tipo_republica: tipoAcomodacao,
-        qtd_moradores: moradores,
-        qtd_quartos: quartos,
-        qtd_banheiros: banheiros,
-        qtd_camas: camas,
-        descricao: descricao,
+        qtd_moradores: republica.qtd_moradores || 0,
+        qtd_quartos: republica.qtd_quartos || 0,
+        qtd_banheiros: republica.qtd_banheiros || 0,
+        qtd_camas: republica.qtd_camas || 0,
+        descricao: republica.descricao || "",
+        tipo_distribuicao: republica.TipoDeQuarto || null,
         ...features,
     };
 
@@ -80,11 +70,9 @@ export async function createRepublica(republica) {
     const valores = Object.values(campos);
     const placeholders = valores.map(() => "?").join(", ");
 
-    // SQL para inserção na tabela `republicas`
     const sql = `INSERT INTO republicas (${colunas}) VALUES (${placeholders})`;
 
     try {
-        // Inserindo na tabela `republicas`
         const [resultado] = await conexao.query(sql, valores);
         const idRepublica = resultado.insertId;
 
@@ -92,9 +80,8 @@ export async function createRepublica(republica) {
             throw new Error("Falha ao gerar o ID da república.");
         }
 
-        // Inserindo as imagens na tabela `foto_republica`
         const imageSql = `INSERT INTO foto_republica (caminho_foto, id_republica) VALUES ?`;
-        const imageValues = images.map((path) => [path, idRepublica]);
+        const imageValues = imagePaths.map((path) => [path, idRepublica]);
 
         const [resultadoImagens] = await conexao.query(imageSql, [imageValues]);
 
@@ -102,13 +89,12 @@ export async function createRepublica(republica) {
             throw new Error("Nenhuma imagem foi inserida na tabela foto_republica.");
         }
 
-        console.log("República e imagens cadastradas com sucesso.");
         return [201, "República cadastrada com sucesso!"];
     } catch (error) {
-        console.error("Erro ao cadastrar república e imagens:", error);
         return [500, error.message];
     }
 }
+
 
 
 

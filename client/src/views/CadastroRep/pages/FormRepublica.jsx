@@ -19,21 +19,7 @@ const FormRepublica = () => {
     banheiros: 1,
     camas: 0,
   });
-  // const [objetoRepublica, setObjetoRepublica] = useState({
-  //   name: '',
-  //   moradores: '',
-  //   quartos: '',
-  //   banheiros: '',
-  //   camas: '',
-  //   Features: [],
-  //   pais: '',
-  //   cep: '',
-  //   endereco: '',
-  //   bairro: '',
-  //   cidade: '',
-  //   estado: '',
-  //   id_usuario: null,
-  // });
+
   const [features, setFeatures] = useState([]);
   const { objetoRepublica, setObjetoRepublica } = useObjeto();
 
@@ -61,7 +47,7 @@ const FormRepublica = () => {
   }, [features]);
 
   const validarDados = (dados) => {
-    const camposObrigatorios = ['name','pais', 'cep', 'endereco', 'bairro', 'cidade', 'estado'];
+    const camposObrigatorios = ['name', 'pais', 'cep', 'endereco', 'bairro', 'cidade', 'estado'];
     for (let campo of camposObrigatorios) {
       if (!dados[campo] || dados[campo].trim() === '') {
         alert(`O campo ${campo} é obrigatório.`);
@@ -73,14 +59,27 @@ const FormRepublica = () => {
 
   const cadastrarRepublica = async (infoRepublica) => {
     console.log(infoRepublica);
+
+    const formData = new FormData();
+    formData.append('infoRepublica', JSON.stringify(infoRepublica)); // Certifique-se de serializar `infoRepublica`.
+
+    // Verificar se imagens existe e é um array antes de usar forEach
+    if (objetoRepublica?.imagens?.length > 0) {
+      objetoRepublica.imagens.forEach((imagem) => formData.append('imagens', imagem));
+    } else {
+      console.warn('Nenhuma imagem foi fornecida.');
+    }
+
+    // Validar os dados antes de enviar
     if (!validarDados(infoRepublica)) {
+      alert('Dados inválidos. Verifique as informações fornecidas.');
       return;
     }
+
     try {
-      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/republicas`, {
+      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/republicas`, { // Crase adicionada para interpolação
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(infoRepublica),
+        body: formData,
       });
 
       if (!resposta.ok) {
@@ -89,6 +88,7 @@ const FormRepublica = () => {
       } else {
         console.log('República cadastrada com sucesso');
         alert('República cadastrada com sucesso!');
+
         // Resetar estado após cadastro bem-sucedido
         setObjetoRepublica({
           Features: [],

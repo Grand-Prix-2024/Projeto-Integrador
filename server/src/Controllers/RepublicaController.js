@@ -1,18 +1,32 @@
 import { createRepublica, showRepublicas, updateRepublica, deleteRepublica, showOneRepublica, getRepublicaWithFotos } from "../Models/RepublicaModel.js";
 
 export async function criarRepublica(req, res) {
-    console.log('RepublicaController funcionando');
-    const republica = req.body;
-    console.log(republica);
-    
     try {
-        const [status, resposta] = await createRepublica(republica);
-        res.status(status).json(resposta);
+      const republica = req.body;
+  
+      // Desserializar as features, se necessário
+      if (republica.features) {
+        republica.features = JSON.parse(republica.features);
+      }
+  
+      console.log('Dados da república:', republica);
+      console.log('Imagens:', req.files);
+  
+      // Valide as imagens
+      const images = req.files || [];
+      if (!images.length) {
+        throw new Error('Nenhuma imagem foi enviada.');
+      }
+  
+      // Enviar para a função de criação (ajuste conforme necessário)
+      const [status, resposta] = await createRepublica(republica, images);
+      res.status(status).json(resposta);
     } catch (error) {
-        console.log(error);
-        res.status(500).json(error);
+      console.error('Erro no controlador:', error);
+      res.status(500).json({ error: error.message });
     }
-}
+  }
+  
 
 export async function mostrarRepublica(req, res) {
     const republica = req.body;
@@ -29,7 +43,7 @@ export async function mostrarRepublica(req, res) {
 export async function atualizarRepublica(req, res) {
     console.log('Controller Atualizar usuário');
     const republica = req.body;
-    const {id} = req.params;
+    const { id } = req.params;
 
     try {
         const [status, resposta] = await updateRepublica(republica, id);
@@ -42,7 +56,7 @@ export async function atualizarRepublica(req, res) {
 
 export async function deletarRepublica(req, res) {
     console.log('Controller deletar republica');
-    const {id} = req.params;
+    const { id } = req.params;
 
     try {
         const [status, resposta] = await deleteRepublica(id);
@@ -55,16 +69,16 @@ export async function deletarRepublica(req, res) {
 
 export async function mostrarUmaRepublica(req, res) {
     console.log('RepublicaContoller :: mostrarUmaRepublica');
-    const {id} = req.params;
+    const { id } = req.params;
     console.log(`O id está aqui ${id}`)
-    if(!id){
-        res.status(400).json({message: 'ID inválido'})
-    }else{
+    if (!id) {
+        res.status(400).json({ message: 'ID inválido' })
+    } else {
         try {
             const [status, resposta] = await showOneRepublica(id);
             res.status(status).json(resposta);
         } catch (error) {
-            res.status(500).json({message: 'Erro ao mostrar usuário'})
+            res.status(500).json({ message: 'Erro ao mostrar usuário' })
         }
     }
 }
@@ -94,7 +108,7 @@ export async function fetchRepublica(req, res) {
     }
 }
 
-export async function imagens(req,res) {
+export async function imagens(req, res) {
     const arrayImagens = req.files;
     console.log(arrayImagens);
     return res.status(200).json(arrayImagens);

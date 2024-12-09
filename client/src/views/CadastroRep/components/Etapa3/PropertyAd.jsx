@@ -54,55 +54,6 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
     setDescricao(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const idUsuario = localStorage.getItem('id_usuario');
-    console.log('ID do usuário:', idUsuario); // Verifique se está correto
-
-    if (!idUsuario) {
-      alert('ID do usuário não encontrado. Faça login novamente.');
-      return;
-    }
-
-    // Envie o ID do usuário junto com os outros dados
-    const formData = {
-      titulo: titulo,
-      preco: preco,
-      id_usuario: idUsuario,
-      Features: Features,
-      images: images,
-      descricao: descricao,
-    };
-
-    try {
-      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/republicas`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!resposta.ok) {
-        console.error('Erro ao cadastrar a república');
-        alert('Erro ao cadastrar. Tente novamente.');
-      } else {
-        alert('República cadastrada com sucesso!');
-        // Limpe os campos após a submissão bem-sucedida
-        setTitulo('');
-        setPreco(70);
-        setImages([]);
-        setFeatures([]);
-        setObjetoRepublica({ titulo: '', preco: 70, images: [], Features: [] });
-      }
-    } catch (error) {
-      console.error('Erro ao cadastrar a república', error);
-      alert('Erro ao cadastrar. Tente novamente.');
-    }
-  };
-
-
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
       <form

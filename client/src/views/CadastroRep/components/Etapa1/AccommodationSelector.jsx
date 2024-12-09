@@ -50,12 +50,16 @@ const AccommodationSelector = () => {
           .feature-btn.active {
             background: #ffe082; /* Amarelo mais claro quando ativo */
             color: #000; /* Texto preto */
-            border-color: #ffd54f;
+            border-color: #FFEB86;
           }
 
           .feature-btn:hover {
             background: #ffd54f; /* Fundo mais claro no hover */
             transform: scale(1.05); /* Zoom no hover */
+          }
+
+          .feature-btn.active .feature-icon{
+            color: #000
           }
 
           .feature-icon {
@@ -82,7 +86,6 @@ const AccommodationSelector = () => {
             className={`feature-btn ${objetoRepublica.name === option.name ? "active" : ""
               }`}
             onClick={() => {
-              // Atualiza o objeto de estado para refletir a seleção
               alterarObjeto("name", option.name);
             }}
           >
