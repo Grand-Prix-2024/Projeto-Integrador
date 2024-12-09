@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, Form, Image } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
 import { useNavigate } from 'react-router-dom';
-import PerfilImagem from './ImgPerfil';
-import AtualizarImagemPerfil from './ImgPerfil';
+//import AtualizarImagemPerfil from './ImgPerfil';
+import ImgPerfil from './ImgPerfil.jsx';
+
 
 const idPerfil = 0;
 
@@ -91,7 +92,7 @@ function EditarPerfil() {
           roundedCircle
           style={{ width: '200px', height: '200px', marginTop: '-20px', marginLeft:'65px' }}
         />
-        <AtualizarImagemPerfil/>
+        <ImgPerfil/>
       </Card>
       <Card style={{ width: '600px', padding: '30px', margin: '50px auto', borderRadius: '20px' }}>
         <Card.Body>

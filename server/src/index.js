@@ -48,6 +48,7 @@ app.delete('/perfil/:id', deletarPerfil);
 // CRUD IMAGEM PERFIL
 app.put('/img_perfil/:id_perfil', editarImagem)
 
+
 // CRUD REPUBLICA
 
 
