@@ -68,7 +68,7 @@ function Home() {
             </div>
           </div>
 
-          <div className="row">
+          <div className="row text-center" >
             {republicas.slice(0, visibleCount).map((rep) => (
               <div key={rep.id} className="col-md-4 col-sm-6 mb-4">
                 <div
@@ -82,6 +82,7 @@ function Home() {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
+                    margin: "auto"
                   }}
                 >
                   <img
@@ -95,7 +96,7 @@ function Home() {
                   />
                 </div>
 
-                <div className="text-center mt-3">
+                <div className="mt-3">
                   <h6>
                     <a href="/casas" style={{ fontSize: '1rem', textDecoration: 'none', color: '#000' }}>
                       {rep.nome}
