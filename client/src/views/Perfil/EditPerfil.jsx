@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, Form, Image } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
 import { useNavigate } from 'react-router-dom';
-//import AtualizarImagemPerfil from './ImgPerfil';
 import ImgPerfil from './ImgPerfil.jsx';
-
 
 const idPerfil = 0;
 
@@ -20,11 +18,11 @@ function EditarPerfil() {
     local_moradia: '',
     curso: '',
     faculdade: '',
-    musicaFavorita: ''
+    musicaFavorita: '',
+    caminho_foto_perfil: null // Inicialmente null
   });
 
   const navigate = useNavigate();
-
   const id_usuario = localStorage.getItem("id_usuario");
 
   useEffect(() => {
@@ -74,25 +72,28 @@ function EditarPerfil() {
 
       const atualizado = await resposta.json();
       alert('Perfil atualizado com sucesso!');
-      window.location.href = navigate(`/perfil/${id_usuario}`);;
+      window.location.href = navigate(`/perfil/${id_usuario}`);
     } catch (error) {
       console.error('Erro ao salvar o perfil:', error.message);
       alert('Erro ao salvar o perfil. Tente novamente.');
     }
   };
 
-  
+  // Verifica se caminho_foto_perfil é um arquivo e gera o URL, caso contrário usa uma imagem padrão
+  const imagemPerfil = formData.caminho_foto_perfil && formData.caminho_foto_perfil instanceof File
+    ? URL.createObjectURL(formData.caminho_foto_perfil)
+    : "https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg"; // Imagem padrão
 
   return (
     <>
       <Navbar />
       <Card style={{ width: '400px', padding: '30px', margin: '50px auto', borderRadius: '20px' }}>
-      <Image 
-          src="https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg" 
+        <Image
+          src={imagemPerfil}
           roundedCircle
-          style={{ width: '200px', height: '200px', marginTop: '-20px', marginLeft:'65px' }}
+          style={{ width: '200px', height: '200px', marginTop: '-20px', marginLeft: '65px' }}
         />
-        <ImgPerfil/>
+        <ImgPerfil formData={formData} setFormData={setFormData} />
       </Card>
       <Card style={{ width: '600px', padding: '30px', margin: '50px auto', borderRadius: '20px' }}>
         <Card.Body>
@@ -108,24 +109,6 @@ function EditarPerfil() {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Telefone</Form.Label>
-              <Form.Control
-                type="text"
-                name="telefone"
-                value={formData.telefone}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Instagram</Form.Label>
-              <Form.Control
-                type="text"
-                name="redes"
-                value={formData.redes}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
               <Form.Label>Pronome</Form.Label>
               <Form.Control
                 type="text"
@@ -135,10 +118,27 @@ function EditarPerfil() {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Biografia</Form.Label>
+              <Form.Label>Telefone</Form.Label>
               <Form.Control
-                as="textarea"
-                rows={5}
+                type="text"
+                name="telefone"
+                value={formData.telefone}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Redes Sociais</Form.Label>
+              <Form.Control
+                type="text"
+                name="redes"
+                value={formData.redes}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Bio</Form.Label>
+              <Form.Control
+                type="text"
                 name="bio"
                 value={formData.bio}
                 onChange={handleInputChange}
@@ -147,8 +147,7 @@ function EditarPerfil() {
             <Form.Group className="mb-3">
               <Form.Label>Idioma</Form.Label>
               <Form.Control
-                as="textarea"
-                rows={3}
+                type="text"
                 name="idioma"
                 value={formData.idioma}
                 onChange={handleInputChange}
@@ -157,18 +156,17 @@ function EditarPerfil() {
             <Form.Group className="mb-3">
               <Form.Label>Estado Civil</Form.Label>
               <Form.Control
-                as="textarea"
-                rows={3}
+                type="text"
                 name="estado_civil"
                 value={formData.estado_civil}
                 onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Estado</Form.Label>
+              <Form.Label>Local de Moradia</Form.Label>
               <Form.Control
-                type='text'
-                name="estado"
+                type="text"
+                name="local_moradia"
                 value={formData.local_moradia}
                 onChange={handleInputChange}
               />
@@ -176,8 +174,7 @@ function EditarPerfil() {
             <Form.Group className="mb-3">
               <Form.Label>Curso</Form.Label>
               <Form.Control
-                as="textarea"
-                rows={3}
+                type="text"
                 name="curso"
                 value={formData.curso}
                 onChange={handleInputChange}
@@ -186,10 +183,18 @@ function EditarPerfil() {
             <Form.Group className="mb-3">
               <Form.Label>Faculdade</Form.Label>
               <Form.Control
-                as="textarea"
-                rows={3}
+                type="text"
                 name="faculdade"
                 value={formData.faculdade}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Música Favorita</Form.Label>
+              <Form.Control
+                type="text"
+                name="musicaFavorita"
+                value={formData.musicaFavorita}
                 onChange={handleInputChange}
               />
             </Form.Group>

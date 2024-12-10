@@ -10,9 +10,6 @@ import coracao from './img/coracao.png';
 import casa from './img/casa.png';
 import balao from './img/balao.png';
 
-
-
-
 function Perfil() {
   const [perfil, setPerfil] = useState([]);
   const id_usuario = localStorage.getItem("id_usuario");
@@ -57,8 +54,9 @@ function Perfil() {
     <>
       <Navbar />
       <Card style={{ width: '500px', height: '350px', padding: '50px', margin: '50px', borderRadius: '20px', borderColor: 'black' }}>
+        {/* Substituindo a imagem estática pela imagem dinâmica do perfil */}
         <Image 
-          src="https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg" 
+          src={perfil?.caminho_foto_perfil || "https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg"} 
           roundedCircle
           style={{ width: '200px', height: '200px', marginTop: '-20px' }}
         />
@@ -85,7 +83,6 @@ function Perfil() {
       <Card style={{ width: '500px', height: '300px', padding: '20px', margin: '50px', borderRadius: '20px', borderColor: 'black' }}>
         <Card.Body>
           <Card.Title> </Card.Title>
-          {/* <Card.Subtitle className="mb-2 text-muted"></Card.Subtitle> */}
           <Card.Text>
             <div style={{ marginBottom: '-30px' }} className="d-flex ">
               <span style={{ marginBottom: '50px' }}>
@@ -104,7 +101,6 @@ function Perfil() {
                 <h5>INSTAGRAM</h5>
                 <h6>{perfil?.redes || 'Redes sociais não disponíveis'}</h6>
               </span>
-
             </div>
           </Card.Text>
         </Card.Body>
@@ -117,8 +113,7 @@ function Perfil() {
             <h5 style={{ fontStyle: 'italic' }}>{perfil?.pronome || 'Pronome não informado'} <Button style={{ margin: '0px', marginTop: '-2px', marginLeft: '25px' }} variant="btn btn-warning" onClick={trocarTela}>Editar</Button></h5>
             <br />
             <br />
-            <span>{perfil?.bio || 'Biografia não informada'}
-            </span>
+            <span>{perfil?.bio || 'Biografia não informada'}</span>
           </div>
         </Card.Text>
       </Card>
@@ -154,9 +149,8 @@ function Perfil() {
           </div>
         </Card.Text>
       </Card>
-      {/* <hr className='position top-50 start-50"' style={{ width: '800px', height:'300px', marginLeft:'650px', marginBlockEnd:'-725px', marginTop:'32px'}}/> */}
     </>
-  )
+  );
 };
 
 export default Perfil;
