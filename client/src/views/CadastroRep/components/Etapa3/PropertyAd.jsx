@@ -3,9 +3,8 @@ import React, { useState, useEffect } from 'react';
 const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
   // Inicializa os estados com os valores de `objetoRepublica` ou valores padrão
   const [titulo, setTitulo] = useState(objetoRepublica.titulo || '');
-  const [images, setImages] = useState(objetoRepublica.images || []);
+  const [image, setImage] = useState(objetoRepublica.image || null);
   const [preco, setPreco] = useState(objetoRepublica.preco || 70);
-  const [Features, setFeatures] = useState(objetoRepublica.Features || []);
   const [descricao, setDescricao] = useState(objetoRepublica.descricao || '');
 
   useEffect(() => {
@@ -13,32 +12,32 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
       setObjetoRepublica((prevObjeto) => ({
         ...prevObjeto,
         titulo,
-        images,
+        image,
         preco,
         descricao,
       }));
     } else {
       console.error('setObjetoRepublica não está definido');
     }
-  }, [titulo, images, preco, setObjetoRepublica]);
+  }, [titulo, image, preco, descricao, setObjetoRepublica]);
 
   const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
-    if (files.length + images.length <= 12) {
-      setImages((prevImages) => {
-        const newImages = [...prevImages, ...files];
-        return newImages;
-      });
-    } else {
-      alert('Você pode carregar no máximo 12 imagens.');
+    const file = e.target.files[0]; // Obtém apenas o primeiro arquivo selecionado
+    if (file) {
+      setImage(file);
+      setObjetoRepublica((prev) => ({
+        ...prev,
+        image: file,
+      }));
     }
   };
 
-  const handleRemoveImage = (index) => {
-    setImages((prevImages) => {
-      const updatedImages = prevImages.filter((_, idx) => idx !== index);
-      return updatedImages;
-    });
+  const handleRemoveImage = () => {
+    setImage(null);
+    setObjetoRepublica((prev) => ({
+      ...prev,
+      image: null,
+    }));
   };
 
   const handleTitleChange = (e) => {
@@ -60,28 +59,27 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
         className="p-4 rounded shadow bg-warning"
         style={{ width: '100%', maxWidth: '800px' }}
       >
-
-        {/* Área para adicionar fotos */}
+        {/* Área para adicionar uma foto */}
         <div className="mb-4">
-          <h5>Adicione fotos do seu espaço</h5>
-          <p>Imagens da fachada, do interior, quartos etc.</p>
-          <div className="d-flex gap-2 flex-wrap justify-content-center">
-            {images.map((image, index) => (
-              <div key={index} className="position-relative">
+          <h5>Adicione uma foto do seu espaço</h5>
+          <p>Imagem da fachada, do interior, ou de um quarto.</p>
+          <div className="d-flex flex-column align-items-center">
+            {image && (
+              <div className="position-relative mb-3">
                 <img
                   src={URL.createObjectURL(image)}
-                  alt={`Uploaded ${index}`}
+                  alt="Uploaded"
                   className="rounded"
-                  style={{ width: '120px', height: '120px', objectFit: 'cover' }}
+                  style={{ width: '200px', height: '200px', objectFit: 'cover' }}
                 />
                 <button
                   type="button"
-                  onClick={() => handleRemoveImage(index)}
+                  onClick={handleRemoveImage}
                   className="position-absolute top-0 end-0 bg-danger text-white rounded-circle border-0"
                   style={{
-                    width: '25px',
-                    height: '25px',
-                    fontSize: '16px',
+                    width: '30px',
+                    height: '30px',
+                    fontSize: '18px',
                     padding: '0',
                     cursor: 'pointer',
                   }}
@@ -89,14 +87,14 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
                   x
                 </button>
               </div>
-            ))}
-            {images.length < 12 && (
+            )}
+            {!image && (
               <label
                 htmlFor="imageUpload"
                 className="d-flex justify-content-center align-items-center bg-light border rounded"
                 style={{
-                  width: '120px',
-                  height: '120px',
+                  width: '200px',
+                  height: '200px',
                   cursor: 'pointer',
                   border: '2px dashed #6c757d',
                 }}
@@ -105,7 +103,6 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
                 <input
                   id="imageUpload"
                   type="file"
-                  multiple
                   accept="image/*"
                   style={{ display: 'none' }}
                   onChange={handleImageUpload}
@@ -113,9 +110,6 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
               </label>
             )}
           </div>
-          <p className="text-center mt-2">
-            {images.length} de 12 imagens carregadas
-          </p>
         </div>
 
         {/* Campo para nomear o anúncio */}
@@ -136,7 +130,6 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
         {/* Campo para definir o preço */}
         <div className="mb-4">
           <label htmlFor="price" className="form-label">
-            <h5>Valor</h5>
             <h5>Valor</h5>
           </label>
           <div className="input-group">

@@ -1,8 +1,11 @@
 import mysql from 'mysql2/promise'
 import db from '../conexao.js'
+import path from 'path';
+import fs from 'fs';
 
 
-export async function createRepublica(republica, images) {
+export async function createRepublica(republica, imageFile) {
+    console.log(imageFile);
     if (!republica.id_usuario) {
         throw new Error("ID do usuário é obrigatório.");
     }
@@ -29,11 +32,27 @@ export async function createRepublica(republica, images) {
         ])
     );
 
-    if (!images || !images.length) {
-        throw new Error("É necessário fornecer pelo menos uma imagem.");
+    if (!imageFile) {
+        throw new Error("É necessário fornecer uma imagem.");
     }
 
-    const imagePaths = images.map((image) => `/img/${image.filename}`);
+    // Salvando a imagem no servidor
+    const publicFolder = path.join(process.cwd(), "public", "img");
+    if (!fs.existsSync(publicFolder)) {
+        fs.mkdirSync(publicFolder, { recursive: true });
+    }
+
+    const imagePath = `/img/${Date.now()}_${imageFile}`;
+    const fullPath = path.join(publicFolder, imagePath);
+    console.log(imagePath);
+    console.log(fullPath);
+
+    // try {
+    //     // Salva o arquivo no caminho definido
+    //     await imageFile.mv(fullPath);
+    // } catch (error) {
+    //     throw new Error(`Erro ao salvar a imagem: ${error.message}`);
+    // }
 
     const acomodacaoMapping = {
         Casa: "Casa",
@@ -63,6 +82,7 @@ export async function createRepublica(republica, images) {
         qtd_camas: republica.qtd_camas || 0,
         descricao: republica.descricao || "",
         tipo_distribuicao: republica.TipoDeQuarto || null,
+        caminhofoto: imageFile,
         ...features,
     };
 
@@ -80,13 +100,13 @@ export async function createRepublica(republica, images) {
             throw new Error("Falha ao gerar o ID da república.");
         }
 
-        const imageSql = `INSERT INTO foto_republica (caminho_foto, id_republica) VALUES ?`;
-        const imageValues = imagePaths.map((path) => [path, idRepublica]);
+        const imageSql = `INSERT INTO foto_republica (caminho_foto, id_republica) VALUES (?, ?)`;
+        const imageValues = [imagePath, idRepublica];
 
-        const [resultadoImagens] = await conexao.query(imageSql, [imageValues]);
+        const [resultadoImagem] = await conexao.query(imageSql, imageValues);
 
-        if (!resultadoImagens.affectedRows) {
-            throw new Error("Nenhuma imagem foi inserida na tabela foto_republica.");
+        if (!resultadoImagem.affectedRows) {
+            throw new Error("A imagem não foi inserida na tabela foto_republica.");
         }
 
         return [201, "República cadastrada com sucesso!"];
@@ -94,8 +114,6 @@ export async function createRepublica(republica, images) {
         return [500, error.message];
     }
 }
-
-
 
 
 

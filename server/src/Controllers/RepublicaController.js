@@ -2,30 +2,41 @@ import { createRepublica, showRepublicas, updateRepublica, deleteRepublica, show
 
 export async function criarRepublica(req, res) {
     try {
-      const republica = req.body;
-  
-      // Desserializar as features, se necessário
-      if (republica.features) {
-        republica.features = JSON.parse(republica.features);
-      }
-  
-      console.log('Dados da república:', republica);
-      console.log('Imagens:', req.files);
-  
-      // Valide as imagens
-      const images = req.files || [];
-      if (!images.length) {
-        throw new Error('Nenhuma imagem foi enviada.');
-      }
-  
-      // Enviar para a função de criação (ajuste conforme necessário)
-      const [status, resposta] = await createRepublica(republica, images);
-      res.status(status).json(resposta);
+        const republica = JSON.parse(req.body.infoRepublica);
+        console.log(republica);
+
+        const file = req.files?.image; // Alterado para receber apenas um arquivo com chave 'image'
+
+        console.log(req.files?.image.mv);
+        
+        if (!file) {
+            return res.status(400).json({ error: 'Nenhuma imagem foi enviada.' });
+        }
+
+        // Validação de imagem (opcional)
+        if (!['image/jpeg', 'image/png', 'image/jpg'].includes(file.mimetype)) {
+            return res.status(400).json({ error: 'Apenas arquivos JPEG ou PNG são permitidos.' });
+        }
+
+        // Salve o arquivo no servidor (ou use um serviço externo como S3)
+        const savePath = `./public/img/${file.name}`;
+        console.log(savePath);
+       file.mv(`${savePath}`, (err) => {
+            if (err) {
+                console.error('Erro ao salvar a imagem:', err);
+                return res.status(500).json({ error: 'Erro ao salvar a imagem.' });
+            }
+        });
+
+        // Passar informações para o modelo
+        const [status, resposta] = await createRepublica(republica, savePath);
+        res.status(status).json(resposta);
     } catch (error) {
-      console.error('Erro no controlador:', error);
-      res.status(500).json({ error: error.message });
+        console.error('Erro no controlador:', error);
+        res.status(500).json({ error: error.message });
     }
-  }
+}
+
   
 
 export async function mostrarRepublica(req, res) {

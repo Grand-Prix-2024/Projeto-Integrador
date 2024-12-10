@@ -9,7 +9,6 @@ import Navbar from "../../../components/Navbar";
 import { Button } from "react-bootstrap";
 import { useObjeto } from "../components/ObjectContext";
 
-
 const FormRepublica = () => {
   const [accommodation, setAccommodation] = useState("Casa");
   const [rooms, setRooms] = useState({ private: 1, shared: 1 });
@@ -59,25 +58,26 @@ const FormRepublica = () => {
 
   const cadastrarRepublica = async (infoRepublica) => {
     console.log(infoRepublica);
-
+    console.log(objetoRepublica.image);
     const formData = new FormData();
-    formData.append('infoRepublica', JSON.stringify(infoRepublica)); // Certifique-se de serializar `infoRepublica`.
-
-    // Verificar se imagens existe e é um array antes de usar forEach
-    if (objetoRepublica?.imagens?.length > 0) {
-      objetoRepublica.imagens.forEach((imagem) => formData.append('imagens', imagem));
+    formData.append('infoRepublica', JSON.stringify(infoRepublica));
+    
+    
+    if (objetoRepublica?.image) {
+      formData.append('image', objetoRepublica.image);
     } else {
-      console.warn('Nenhuma imagem foi fornecida.');
+      console.warn('Nenhuma imagem foi fornecida.');  
     }
 
-    // Validar os dados antes de enviar
+    console.log(Array.from(formData));
+
     if (!validarDados(infoRepublica)) {
       alert('Dados inválidos. Verifique as informações fornecidas.');
       return;
     }
 
     try {
-      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/republicas`, { // Crase adicionada para interpolação
+      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/republicas`, {
         method: 'POST',
         body: formData,
       });
@@ -88,8 +88,6 @@ const FormRepublica = () => {
       } else {
         console.log('República cadastrada com sucesso');
         alert('República cadastrada com sucesso!');
-
-        // Resetar estado após cadastro bem-sucedido
         setObjetoRepublica({
           Features: [],
           pais: '',
@@ -99,6 +97,7 @@ const FormRepublica = () => {
           cidade: '',
           estado: '',
           id_usuario: null,
+          imagem: null,
         });
         setAccommodation("Casa");
         setRooms({ private: 1, shared: 1 });
@@ -215,4 +214,3 @@ const FormRepublica = () => {
 };
 
 export default FormRepublica;
-
