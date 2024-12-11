@@ -15,10 +15,11 @@ import balao from './img/balao.png';
 function Perfil() {
   const [perfil, setPerfil] = useState([]);
   const id_usuario = localStorage.getItem("id_usuario");
-  const [idade, setIdade] = useState(null); 
+  const [idade, setIdade] = useState(''); 
   const nome = localStorage.getItem("nome");
   const sobrenome = localStorage.getItem("sobrenome");
   const email = localStorage.getItem("email");
+  const [user, setUser] = ([]);
   const navigate = useNavigate();
 
   function trocarTela() {
@@ -31,24 +32,55 @@ function Perfil() {
       alert('Efetue Login');
       navigate('/login');
     } else {
+      baixarUsuario();
       baixarPerfil();
     }
   }, []);
 
   function calcularIdade(dataNasc) {
-    // Ajusta para o formato ISO caso seja necessário
+    // Verificar se dataNasc é uma string e se está no formato correto 'DD/MM/YYYY'
     const partes = dataNasc.split('/');
     const nascimento = partes.length === 3
       ? new Date(`${partes[2]}-${partes[1]}-${partes[0]}`)
-      : new Date(dataNasc);
-  
+      : new Date(dataNasc);  // Usar o formato padrão caso a data seja inválida
+    
     const hoje = new Date();
     let idade = hoje.getFullYear() - nascimento.getFullYear();
     const mes = hoje.getMonth() - nascimento.getMonth();
+    
+    // Ajustar idade caso o aniversário ainda não tenha ocorrido este ano
     if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
       idade--;
     }
+    
     return idade;
+  }
+  
+  // Função para baixar os dados do usuário
+  async function baixarUsuario() {
+    try {
+      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/usuarios/${id_usuario}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!resposta.ok) {
+        throw new Error('Erro ao buscar os dados do perfil');
+      }
+  
+      const consulta = await resposta.json();
+      setUser(consulta);
+  
+      // Calcular a idade assim que os dados do usuário forem baixados
+      if (consulta.data_nasc) {
+        const idadeCalculada = calcularIdade(consulta.data_nasc);
+        setIdade(idadeCalculada);  // Atualize o estado da idade corretamente
+      }
+    } catch (error) {
+      console.error('Erro ao consultar o perfil:', error.message);
+    }
   }
 
   // Função para baixar os dados do perfil
@@ -71,12 +103,6 @@ function Perfil() {
 
       const consulta = await resposta.json();
       setPerfil(consulta);
-
-      // Calcula a idade com base na data de nascimento
-      if (consulta.data_nasc) {
-        const idadeCalculada = calcularIdade(consulta.data_nasc);
-        setIdade(idadeCalculada);
-      }
     } catch (error) {
       console.error('Erro ao consultar o perfil:', error.message);
     }
