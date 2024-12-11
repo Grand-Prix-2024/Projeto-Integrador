@@ -6,9 +6,10 @@ import db from '../conexao.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const conexao = mysql.createPool(db);
 
 export async function updateImagemPerfil(id_perfil, nomeImg, imagem) {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     console.log('ImagemPerfilModel :: updateImagemPerfil');
     const sql = 'UPDATE perfil SET caminho_foto_perfil=? WHERE id_perfil =?';
     const params = [nomeImg, id_perfil];
@@ -23,3 +24,4 @@ export async function updateImagemPerfil(id_perfil, nomeImg, imagem) {
         
     }
 }
+

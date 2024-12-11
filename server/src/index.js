@@ -6,7 +6,7 @@ import { mostrarUsuario } from './Controllers/UsuarioController.js';
 import { atualizarUsuario } from './Controllers/UsuarioController.js';
 import { deletarUsuario, mostrarUmUsuario } from './Controllers/UsuarioController.js';
 import { criarPerfil, mostrarPerfil, atualizarPerfil, deletarPerfil, buscarPerfilPorUsuario } from './Controllers/PerfilController.js';
-import { editarImagem } from './Controllers/ImagemPerfilController.js';
+import {  editarImagem } from './Controllers/ImagemPerfilController.js';
 
 
 
@@ -47,6 +47,22 @@ app.delete('/perfil/:id', deletarPerfil);
 
 // CRUD IMAGEM PERFIL
 app.put('/img_perfil/:id_perfil', editarImagem)
+app.get('/img_perfil/:id_perfil', )
+
+app.get('/perfil/:id_usuario', (req, res) => {
+    const { id_usuario } = req.params;
+    const query = 'SELECT caminho_perfil_foto FROM perfil WHERE id_usuario = ?';
+  
+    db.query(query, [id_usuario], (err, results) => {
+      if (err) return res.status(500).json({ error: 'Erro no servidor' });
+  
+      if (results.length > 0) {
+        res.json({ caminho_perfil_foto: results[0].caminho_perfil_foto });
+      } else {
+        res.status(404).json({ error: 'Usuário não encontrado' });
+      }
+    });
+  });
 
 
 // CRUD REPUBLICA

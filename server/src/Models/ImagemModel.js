@@ -6,9 +6,10 @@ import db from '../conexao.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const conexao = mysql.createPool(db);
 
 export async function createImagem(descricao, nomeImg, imagem) {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     console.log('ImagemModel :: createImagem');
     const sql = 'INSERT INTO foto_republica (caminho_foto, id_republica) VALUES (?,?);';
     const params = [descricao, nomeImg];
@@ -23,7 +24,7 @@ export async function createImagem(descricao, nomeImg, imagem) {
     }
 }
 export async function readImagem() {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     console.log('ImagemModel :: readImagem');
     const sql = 'SELECT * FROM foto_republica';
 
@@ -37,7 +38,7 @@ export async function readImagem() {
 }
 
 export async function readOneImage(id_foto) {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     console.log('ImagemModel :: readOneImagem');
     const sql = 'SELECT * FROM foto_republica WHERE id_foto = ?';
     const params = [id_foto];
@@ -56,7 +57,7 @@ export async function readOneImage(id_foto) {
 }
 
 export async function updateImagem(descricao, id_foto) {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     console.log('ImagemModel :: updateImagem');
     const sql = 'UPDATE imagens SET descricao=? WHERE id_foto =?';
     const params = [descricao, id_foto];
@@ -75,7 +76,7 @@ export async function updateImagem(descricao, id_foto) {
 }
 export async function deleteImagem(id_foto) {
     console.log('ImagemModel :: deleteImagem');
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     const sqlImagem = 'SELECT * FROM foto_republica WHERE id_foto=?'
     const sql = 'DELETE FROM foto_republica WHERE id_foto =?';
     const params = [id_foto];

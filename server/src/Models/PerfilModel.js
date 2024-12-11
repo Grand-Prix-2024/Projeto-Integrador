@@ -1,8 +1,10 @@
 import mysql from 'mysql2/promise';
 import db from '../conexao.js';
 
+const conexao = mysql.createPool(db);
+
 export async function createPerfil(perfil) {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     const sql = `
         INSERT INTO perfil (
             pronome, descricao, idioma, estado_civil, local_moradia,
@@ -28,7 +30,7 @@ export async function createPerfil(perfil) {
 
 
 export async function showPerfil() {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     const sql = `SELECT * FROM perfil`;
 
     try {
@@ -43,7 +45,7 @@ export async function showPerfil() {
 
 
 export async function updatePerfil(perfil, id) {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     console.log('Atualizando perfil...');
 
     const sql = `UPDATE perfil SET 
@@ -59,7 +61,7 @@ export async function updatePerfil(perfil, id) {
         faculdade = ?,
         musicaFavorita = ?,
         caminho_foto_perfil = ?
-    WHERE id_usuario = ?`;
+        WHERE id_usuario = ?`;
 
     const params = [
         perfil.pronome,
@@ -89,7 +91,7 @@ export async function updatePerfil(perfil, id) {
 
 
 export async function deletePerfil(id) {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     console.log('Deletando perfil...');
 
     const sql = `DELETE FROM perfil WHERE id_perfil = ?`;
@@ -105,7 +107,7 @@ export async function deletePerfil(id) {
 }
 
 export async function getPerfilByIdUsuario(id_usuario) {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     const sql = `SELECT * FROM perfil WHERE id_usuario = ?`;
 
     try {

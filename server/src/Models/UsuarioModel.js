@@ -1,9 +1,10 @@
 import mysql from 'mysql2/promise'
 import db from '../conexao.js'
 import { createPerfil } from './PerfilModel.js';
+const conexao = mysql.createPool(db);
 
 export async function createUsuario(usuario) {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     const sql = `INSERT INTO usuarios(
         email,
         senha,
@@ -37,7 +38,7 @@ export async function createUsuario(usuario) {
 }
 
 export async function showUsuarios(usuario) {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     const sql = `SELECT * FROM usuarios`;
 
     const params = [
@@ -60,7 +61,7 @@ export async function showUsuarios(usuario) {
 }
 
 export async function updateUsuario(usuario, id) {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     console.log('Atualizando usuário');
 
     const sql = `UPDATE usuarios SET email = ?,
@@ -92,7 +93,7 @@ export async function updateUsuario(usuario, id) {
 }
 
 export async function deleteUsuario(id) {
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     console.log('Deletando usuário');
     const sql = `DELETE FROM usuarios WHERE id_usuario = ?`;
 
@@ -110,7 +111,7 @@ export async function deleteUsuario(id) {
 
 export async function showOneUsuario(id_usuario) {
     console.log('UsuarioModel :: showOneUsuario');
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     const sql = 'SELECT * FROM usuarios WHERE id_usuario = ?';
     const params = [id_usuario];
     try {
@@ -128,7 +129,7 @@ export async function showOneUsuario(id_usuario) {
 
 export async function findUserByLoginPassword(email, senha) {
     console.log('UsuarioModel :: findUserByLoginPassword');
-    const conexao = mysql.createPool(db);
+    // const conexao = mysql.createPool(db);
     const sql = 'SELECT id_usuario, nome, sobrenome, email FROM usuarios WHERE email = ? AND senha = ?';
     const params = [email, senha];
 

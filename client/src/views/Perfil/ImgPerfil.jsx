@@ -4,20 +4,27 @@ import { Navigate, useParams } from 'react-router-dom';
 import axios from "axios";
 
 
- function ImgPerfil() {
+
+ function ImgPerfil( ) {
   const [imagem, setImagem] = useState(null);
+  const [imagens, setImagens] = useState(null);
   const [idPerfil, setIdPerfil] = useState(null);
   const [mensagem, setMensagem] = useState("");
   const [caminhoFotoPerfil, setCaminhoFotoPerfil] = useState("");
+  const [caminhoFoto, setCaminhoFoto] = useState('');
+  const [error, setError] = useState(null);
   const {id} = useParams();
-  useEffect(() => {
+  //const navigate = useNavigate();
 
+
+
+  useEffect(() => {
 
     const fetchIdPerfil = async () => {
       try {
         const resposta = await fetch("http://localhost:5000/perfil");
         const dados = await resposta.json();
-        setIdPerfil(dados.id_perfil); // Supõe que o backend retorna o id_perfil do usuário
+        setIdPerfil(dados.id_usuario); // Supõe que o backend retorna o id_perfil do usuário
       } catch (erro) {
         console.error("Erro ao buscar o ID do perfil:", erro);
       }
@@ -25,6 +32,8 @@ import axios from "axios";
 
     fetchIdPerfil();
   }, []);
+
+  
 
   const adicionarImagem = async () => {
     if (!imagem) {
@@ -74,12 +83,14 @@ import axios from "axios";
 
     return (
         <div>
-            
+          <div>   
              <input className='form-control' type="file" accept='image/*' onChange={e => (setImagem(e.target.files[0]))} />
              <button style={{marginLeft:'125px', marginTop:'25px'}} className='btn btn-success' onClick={adicionarImagem}>Atualizar</button>
+          </div>  
         </div>
     )
 
 }
 
 export default ImgPerfil;
+
