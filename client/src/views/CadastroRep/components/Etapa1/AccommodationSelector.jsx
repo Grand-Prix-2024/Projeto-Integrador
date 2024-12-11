@@ -32,7 +32,9 @@ const AccommodationSelector = () => {
             padding: 20px 40px; /* Tamanho do botão */
             text-align: center;
             background: #FFE245; /* Amarelo atualizado */
+            background: #FFE245; /* Amarelo atualizado */
             color: #fff; /* Texto branco */
+            border: 1px solid #FFE245;
             border: 1px solid #FFE245;
             border-radius: 8px;
             cursor: pointer;
@@ -50,9 +52,20 @@ const AccommodationSelector = () => {
             color: #fff; /* Ícone branco */
           }
 
+          .feature-btn .feature-icon {
+            font-size: 32px; /* Tamanho do ícone */
+            color: #fff; /* Ícone branco */
+          }
+
           .feature-btn.active {
             background: #FFEB86; /* Amarelo mais claro quando ativo */
+            background: #FFEB86; /* Amarelo mais claro quando ativo */
             color: #000; /* Texto preto */
+            border-color: #FFEB86;
+          }
+
+          .feature-btn.active .feature-icon {
+            color: #000; /* Ícone preto quando ativo */
             border-color: #FFEB86;
           }
 
@@ -61,6 +74,7 @@ const AccommodationSelector = () => {
           }
 
           .feature-btn:hover {
+            background: #FFD834; /* Fundo mais escuro no hover */
             background: #FFD834; /* Fundo mais escuro no hover */
             transform: scale(1.05); /* Zoom no hover */
           }
@@ -88,7 +102,7 @@ const AccommodationSelector = () => {
               alterarObjeto("name", option.name);
             }}
           >
-            <span className="feature-icon">{option.icon}</span>
+            {option.icon}
             <span className="feature-text">{option.name}</span>
           </button>
         ))}
@@ -97,6 +111,7 @@ const AccommodationSelector = () => {
         {objetoRepublica.name
           ? `Você selecionou: ${objetoRepublica.name}`
           : "Nenhuma acomodação selecionada."}
+      </div>
       </div>
     </div>
   );

@@ -1,138 +1,169 @@
-import React, { useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "../../components/Navbar";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css'; // Importando os ícones do Bootstrap
+import Navbar from '../../components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
-// Função para obter as repúblicas do backend
-async function getRepublicas() {
-  try {
-    const response = await axios.get(`${process.env.REACT_APP_BACKEND}/republicas`);
-    return response.data;
-  } catch (error) {
-    console.error("Erro ao buscar repúblicas:", error);
-    return [];
-  }
+function getRepublicas() {
+  return [
+    { id: 1, nome: 'República 1', bairro: 'Maria Ortiz', estado: 'Vitória - ES', preco: 70.00, imagem: 'https://imgbr.imovelwebcdn.com/avisos/2/29/60/73/76/40/360x266/2460335707.jpg?isFirstImage=true' },
+    { id: 2, nome: 'República 2', bairro: 'Campo Grande', estado: 'Cariacica - ES', preco: 70.00, imagem: 'https://imgs.nestimg.com/casa_sobrado_para_loca_o_em_londrinapr_jardim_santo_antonio_5_quartos_4300002720174786401.jpg' },
+    { id: 3, nome: 'República 3', bairro: 'Jardim Camburi', estado: 'Vitória - ES', preco: 70.00, imagem: 'https://i.mgfserv.com/300x180/aHR0cHM6Ly9jZG51c28uY29tLzIwMzM2LzIwMjQvMTAvMTI3NTc0YTA4NTFjNWJlMDFiY2Q0MjEzZjAwOTVhNjIuanBn.jpg' },
+    { id: 4, nome: 'República 4', bairro: 'Itapuã', estado: 'Vila Velha - ES', preco: 80.00, imagem: 'https://imgbr.imovelwebcdn.com/avisos/2/29/92/05/60/67/720x532/4443546401.jpg?isFirstImage=true' },
+    { id: 5, nome: 'República 5', bairro: 'Barra da Tijuca', estado: 'Rio de Janeiro - RJ', preco: 75.00, imagem: 'https://cdnuso.com/13937/2024/07/893481598f430d88104cd6c32e53eb93.jpg' },
+    { id: 6, nome: 'República 6', bairro: 'São Miguel', estado: 'São Paulo - SP', preco: 85.00, imagem: 'https://imovelguide.com.br/images/condominio-do-edificio-giovanni-giacomin-TTDpUS.jpg' },
+    { id: 7, nome: 'República 7', bairro: 'Jardim da Penha', estado: 'Vitória - ES', preco: 90.00, imagem: 'https://resizedimgs.vivareal.com/crop/614x297/named.images.sp/dfcc0f2396ae8572d728f177b11bfca4/casa-com-4-quartos-para-alugar-180m-no-nazareth-vit-ria.webp' },
+    { id: 8, nome: 'República 8', bairro: 'Praia do Canto', estado: 'Vitória - ES', preco: 100.00, imagem: 'https://fotos.procureimovel.com.br/img_imovel/1348/488773/thumb/66f721bd8cce0.jpg' },
+    { id: 9, nome: 'República 9', bairro: 'Centro', estado: 'Vila Velha - ES', preco: 60.00, imagem: 'https://imgbr.imovelwebcdn.com/avisos/2/30/02/24/46/93/360x266/4618570485.jpg?isFirstImage=true' },
+  ];
 }
 
 function Home() {
-  const [republicas, setRepublicas] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getRepublicas();
-      if (!data || data.length === 0) {
-        // Caso não haja dados, cria uma lista de exemplo
-        setRepublicas([
-          {
-            id: 1,
-            nome: "República Universitária Alpha",
-            bairro: "Centro",
-            estado: "SP",
-            preco: 750.0,
-            imagem: "https://via.placeholder.com/300",
-          },
-        ]);
-      } else {
-        setRepublicas(data); // Atualiza o estado com os dados reais
-      }
-      setLoading(false); // Finaliza o carregamento
-    };
-    fetchData();
-  }, []);
-
-  const handleNavigate = (id) => {
-    if (id) {
-      navigate(`/casas/${id}`); // Garante que o id está sendo passado corretamente
-    } else {
-      console.error("ID da república está indefinido.");
-    }
+  const republicas = getRepublicas();
+  const [visibleCount, setVisibleCount] = useState(6); // Inicializa com 6 repúblicas visíveis
+  const navigate = useNavigate()
+  const handleShowMore = () => {
+    setVisibleCount(prevCount => prevCount + 3); // Mostra mais 3 repúblicas a cada clique
   };
 
   return (
     <>
       <Navbar />
+      
+      <h2 className="text-center mb-4 mt-4">Encontrar pelas redondezas de:</h2>
+      
       <div className="App">
-        {/* Barra de busca */}
         <div className="container my-4">
-          <h2 className="text-center mb-4">Encontrar pelas redondezas de:</h2>
           <div className="d-flex justify-content-center mb-4">
-            <input
-              type="text"
-              className="form-control mx-2"
-              placeholder="Buscar local..."
-            />
-            <input
-              type="text"
-              className="form-control mx-2"
-              placeholder="Buscar por universidade"
-            />
-            <button className="btn btn-secondary">Filtrar</button>
+            <div className="input-group" style={{ maxWidth: '1000px' }}>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Buscar local..."
+                style={{ borderRadius: '25px 0 0 25px' }} // Extremidades arredondadas à esquerda
+              />
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Buscar por universidade"
+                style={{ borderRadius: '0', width: '150px' }} // Sem bordas arredondadas no meio
+              />
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Pessoas"
+                style={{ borderRadius: '0', width: '120px' }} // Sem bordas arredondadas no meio
+              />
+              <button
+                className="btn"
+                style={{
+                  backgroundColor: '#FFE34C',
+                  color: '#000',
+                  border: '1px solid #FFE34C',
+                  borderRadius: '0 25px 25px 0', // Extremidades arredondadas à direita
+                }}
+              >
+                <i className="bi bi-search"></i>
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* Conteúdo principal */}
-        <div className="container">
-          {loading ? (
-            <div className="text-center mt-5">
-              <h4>Carregando...</h4>
-            </div>
-          ) : republicas.length === 0 ? (
-            <div className="text-center mt-5">
-              <h4>Nenhuma república encontrada.</h4>
-            </div>
-          ) : (
-            <div className="row">
-              {republicas.map((rep) => (
-                <div key={rep.id} className="col-md-4 mb-4">
-                  <div
-                    className="card republica-card"
+          <div className="row text-center" >
+            {republicas.slice(0, visibleCount).map((rep) => (
+              <div key={rep.id} className="col-md-4 col-sm-6 mb-4">
+                <div
+                  className="republica-card"
+                  style={{
+                    borderRadius: '8px',
+                    overflow: 'hidden',
+                    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                    width: '80%',
+                    height: '240px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    margin: "auto"
+                  }}
+                >
+                  <img
+                    src={rep.imagem}
+                    alt={rep.nome}
                     style={{
-                      transition: "transform 0.3s, box-shadow 0.3s",
-                      cursor: "pointer",
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
                     }}
-                    onClick={() => handleNavigate(rep.id)} // Corrige o problema do ID
-                  >
-                    <div
-                      className="card-img-top"
-                      style={{
-                        height: "200px",
-                        overflow: "hidden",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <img
-                        src={rep.imagem || "https://via.placeholder.com/150"} // Imagem padrão
-                        alt={rep.nome}
-                        style={{
-                          width: "100%",
-                          height: "auto",
-                          objectFit: "cover",
-                          maxHeight: "200px",
-                        }}
-                      />
-                    </div>
-                    <div className="card-body text-center">
-                      <h5 className="card-title text-decoration-none text-dark">
-                        {rep.nome}
-                      </h5>
-                      <p className="card-text">{rep.bairro}</p>
-                      <p className="card-text">{rep.estado}</p>
-                      <p className="fw-bold" style={{ color: "black" }}>
-                        R$ {rep.preco}
-                      </p>
-                    </div>
-                  </div>
+                  />
                 </div>
-              ))}
+
+                <div className="mt-3">
+                  <h6>
+                    <a href="/casas" style={{ fontSize: '1rem', textDecoration: 'none', color: '#000' }}>
+                      {rep.nome}
+                    </a>
+                  </h6>
+                  <p className="mb-0" style={{ fontSize: '0.9rem', color: '#555' }}>
+                    {rep.bairro}
+                  </p>
+                  <p className="mb-0" style={{ fontSize: '0.9rem', color: '#777' }}>
+                    {rep.estado}
+                  </p>
+                  <p className="fw-bold mt-1" style={{ color: '#000', fontSize: '1rem' }}>
+                    R$ {rep.preco.toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Botão Mostrar Mais com o mesmo estilo de outros botões */}
+          {visibleCount < republicas.length && (
+            <div className="text-center mt-4">
+              <button
+                className="btn custom-button"
+                onClick={handleShowMore}
+              >
+                Mostrar Mais
+              </button>
             </div>
           )}
         </div>
       </div>
+
+      {/* Rodapé */}
+      <footer className="text-center py-3 border-top" style={{ backgroundColor: '#FFE34C' }}>
+        <div className="container d-flex justify-content-between align-items-center">
+          <div className="text-dark">
+            © 2024 HIVE <a href="/privacidade" style={{ color: '#000' }}>Privacidade</a> ·
+            <a href="/termos" style={{ color: '#000' }}>Termos</a> ·
+            <a href="/detalhes" style={{ color: '#000' }}>Informações do site</a>
+          </div>
+          <div className="d-flex align-items-center">
+            <i className="bi bi-globe me-2" style={{ color: '#000' }}></i> Português (BR)
+            <i className="bi bi-currency-dollar mx-2" style={{ color: '#000' }}></i> BRL
+            <a href="#" className="ms-2" style={{ color: '#000' }}><i className="bi bi-instagram"></i></a>
+          </div>
+        </div>
+      </footer>
+
+      <style>
+        {`
+          .custom-button {
+            background-color: #FFE34C;
+            color: #000;
+            border: 1px solid #FFE34C;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+          }
+
+          .custom-button:hover {
+            background-color: #e1c730;
+          }
+        `}
+      </style>
+
     </>
   );
 }

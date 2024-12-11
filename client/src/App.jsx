@@ -11,8 +11,9 @@ import Home from './views/Home/Home.jsx';
 import EditarPerfil from './views/Perfil/EditPerfil.jsx';
 import Homecasas from './views/Home/HomeCasas.jsx';
 import FormRepublica from './views/CadastroRep/pages/FormRepublica.jsx';
-// import CasaDetalhes from './views/Home/CasaDetalhes.jsx';
-
+import PrivacyPolicy from './views/Home/Privacidade.jsx';
+import TermosDeServico from './views/Home/Termos.jsx';
+import DetalhesDaEmpresa from './views/Home/DetalhesEmpresa.jsx';
 
 
 
@@ -35,6 +36,12 @@ function App() {
         <Route path='/casas/:id' element={<Homecasas/>} />
         {/* <Route path='/casas/:id' element={<CasaDetalhes />} />  */}
         <Route path='/cadastrar_republica' element={<FormRepublica/>} />
+        <Route path='/privacidade' element={<PrivacyPolicy/>} />
+        <Route path='/termos' element={<TermosDeServico/>} />
+        <Route path='/detalhes' element={<DetalhesDaEmpresa/>} />
+
+
+
       </Routes>
     </BrowserRouter>
   );

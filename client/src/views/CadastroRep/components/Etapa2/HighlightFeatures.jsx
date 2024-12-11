@@ -31,6 +31,9 @@ const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) =>
         { name: "Extintor", icon: <i className="fas fa-fire-extinguisher feature-icon"></i> },
         { name: "Câmeras", icon: <i className="bi bi-camera feature-icon"></i> },
         { name: "Alarmes", icon: <i className="bi bi-bell feature-icon"></i> },
+        { name: "Extintor", icon: <i className="fas fa-fire-extinguisher feature-icon"></i> },
+        { name: "Câmeras", icon: <i className="bi bi-camera feature-icon"></i> },
+        { name: "Alarmes", icon: <i className="bi bi-bell feature-icon"></i> },
       ],
     },
   ];
@@ -72,13 +75,21 @@ const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) =>
             gap: 16px;
             max-width: 800px;
             margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            max-width: 800px;
+            margin: 0 auto;
           }
 
           .feature-btn {
             flex: 0 1 calc(33.333% - 16px);
+            flex: 0 1 calc(33.333% - 16px);
             max-width: calc(33.333% - 16px);
             padding: 20px;
             text-align: center;
+            background: #ffc107;
+            color: #fff;
             background: #ffc107;
             color: #fff;
             border: 1px solid #ffc107;
@@ -95,9 +106,15 @@ const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) =>
             background: #ffe082;
             color: #000;
             border-color: #ffd54f;
+            background: #ffe082;
+            color: #000;
+            border-color: #ffd54f;
           }
 
           .feature-btn:hover {
+            background: #ffecb3;
+            color: #000;
+            transform: scale(1.05);
             background: #ffecb3;
             color: #000;
             transform: scale(1.05);
@@ -105,9 +122,11 @@ const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) =>
 
           .feature-icon {
             font-size: 32px;
+            font-size: 32px;
           }
 
           .feature-text {
+            font-size: 16px;
             font-size: 16px;
             font-weight: bold;
           }
