@@ -78,14 +78,58 @@ function Perfil() {
     } catch (error) {
       console.error('Erro ao consultar o perfil:', error.message);
     }
-  }
+  };
+
+    const [formData, setFormData] = useState({
+      descricao: '',
+      pronome: '',
+      telefone: '',
+      redes: '',
+      bio: '',
+      idioma: '',
+      estado_civil: '',
+      local_moradia: '',
+      curso: '',
+      faculdade: ''
+    });
+  
+    
+  
+    useEffect(() => {
+      async function carregarPerfil() {
+        try {
+          const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/perfil/${id_usuario}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+  
+          if (!resposta.ok) {
+            throw new Error('Erro ao buscar os dados do perfil');
+          }
+  
+          const perfil = await resposta.json();
+          setFormData(perfil);
+        } catch (error) {
+          console.error('Erro ao consultar o perfil:', error.message);
+        }
+      }
+  
+      carregarPerfil();
+    }, [id_usuario]);
+  
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+    };
   
   return (
     <>
       <Navbar />
       <Card style={{ width: '500px', height: '350px', padding: '50px', margin: '50px', borderRadius: '20px', borderColor: 'black' }}>
         <Image
-          src="https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg"
+          src={`http://localhost:5000/public/${formData.caminho_foto_perfil}`}
           roundedCircle
           style={{ width: '200px', height: '200px', marginTop: '-20px' }}
         />
@@ -147,7 +191,7 @@ function Perfil() {
         </Card.Text>
       </Card>
       <hr className='position-absolute top-50 start-50"' style={{ width: '800px', height: '600px', marginLeft: '750px', marginBlockStart: '35px' }} />
-      <Card className='position top-50 start-50"' style={{ width: '150px', height: '200px', marginLeft: '750px', marginBlockStart: '-382px', borderColor: 'black' }}>
+      {/* <Card className='position top-50 start-50"' style={{ width: '150px', height: '200px', marginLeft: '750px', marginBlockStart: '-382px', borderColor: 'black' }}>
         <Card className='position top-50 start-50"' style={{ width: '132px', height: '130px', marginLeft: '8px', marginTop: '-90px', }}>
           <Image
             src="https://www.laut.de/Travis-Scott/Alben/Utopia-121583/travis-scott-utopia-228909.jpg?e1bef5"
@@ -159,8 +203,8 @@ function Perfil() {
             </div>
           </Card.Text>
         </Card>
-      </Card>
-      <Card className='position top-50 start-50"' style={{ width: '500px', height: '300px', marginLeft: '980px', marginBlockStart: '-780px', marginTop: '-250px', border: 'none' }}>
+      </Card> */}
+      <Card className='position top-50 start-50"' style={{ width: '500px', height: '300px', marginLeft: '760px', marginBlockStart: '-430px', marginTop: '-250px', border: 'none' }}>
         <Card.Text>
           <div style={{ marginTop: '65px' }}>
             <span>

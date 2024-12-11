@@ -31,6 +31,7 @@ import {
     detalhesRepublica,
     excluirImagem
 } from './Controllers/ImagemController.js';
+import { editarImagem } from './Controllers/ImagemPerfilController.js';
 
 const app = express();
 const porta = 5000;
@@ -86,6 +87,8 @@ app.post('/imagens', cadastrarImagens);
 app.get('/imagens', listarRepublicas);
 app.delete('/imagens/:id', excluirImagem);
 app.get('/imagens/:id', detalhesRepublica);
+
+app.put('/img_perfil/:id_perfil', editarImagem)
 
 // Fetch para fotos relacionadas a uma república
 // app.get('/republicas/:id/fotos', fetchRepublica);

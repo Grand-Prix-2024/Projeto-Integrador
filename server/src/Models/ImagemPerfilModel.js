@@ -11,7 +11,7 @@ const conexao = mysql.createPool(db);
 export async function updateImagemPerfil(id_perfil, nomeImg, imagem) {
     // const conexao = mysql.createPool(db);
     console.log('ImagemPerfilModel :: updateImagemPerfil');
-    const sql = 'UPDATE perfil SET caminho_foto_perfil=? WHERE id_perfil =?';
+    const sql = 'UPDATE perfil SET caminho_foto_perfil= ? WHERE id_usuario =?';
     const params = [nomeImg, id_perfil];
 
     try {

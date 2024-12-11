@@ -88,7 +88,7 @@ function EditarPerfil() {
       <Navbar />
       <Card style={{ width: '400px', padding: '30px', margin: '50px auto', borderRadius: '20px' }}>
         <Image
-          src={`http://localhost:5000/public/img/${formData.caminho_foto_perfil}`}
+          src={`http://localhost:5000/public/${formData.caminho_foto_perfil}`}
           roundedCircle
           style={{ width: '200px', height: '200px', marginTop: '-20px', marginLeft: '65px' }}
         />

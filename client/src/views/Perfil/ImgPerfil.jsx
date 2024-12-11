@@ -24,7 +24,7 @@ import axios from "axios";
       try {
         const resposta = await fetch("http://localhost:5000/perfil");
         const dados = await resposta.json();
-        setIdPerfil(dados.id_usuario); // Supõe que o backend retorna o id_perfil do usuário
+        setIdPerfil(dados.id_perfil); // Supõe que o backend retorna o id_perfil do usuário
       } catch (erro) {
         console.error("Erro ao buscar o ID do perfil:", erro);
       }
