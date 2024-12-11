@@ -15,18 +15,17 @@ const EssentialInfo = () => {
   });
 
   const onUpdate = (key, value) => {
-    // Atualiza os valores locais
+    const numericValue = Math.max(MIN_VALUE, Math.min(MAX_VALUE, parseInt(value, 10) || 0));
     setValues((prevValues) => ({
       ...prevValues,
-      [key]: value,
+      [key]: numericValue,
     }));
-
-    // Atualiza o objeto global com as novas informações
     setObjetoRepublica((prevObjeto) => ({
       ...prevObjeto,
-      [key]: value,
+      [key]: numericValue,
     }));
   };
+
 
   return (
     <div>

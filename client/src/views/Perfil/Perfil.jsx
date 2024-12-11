@@ -15,7 +15,7 @@ import balao from './img/balao.png';
 function Perfil() {
   const [perfil, setPerfil] = useState([]);
   const id_usuario = localStorage.getItem("id_usuario");
-  const [idade, setIdade] = useState(null); // Adicionado estado para idade
+  const [idade, setIdade] = useState(null); 
   const nome = localStorage.getItem("nome");
   const sobrenome = localStorage.getItem("sobrenome");
   const email = localStorage.getItem("email");
@@ -36,8 +36,13 @@ function Perfil() {
   }, []);
 
   function calcularIdade(dataNasc) {
+    // Ajusta para o formato ISO caso seja necessário
+    const partes = dataNasc.split('/');
+    const nascimento = partes.length === 3
+      ? new Date(`${partes[2]}-${partes[1]}-${partes[0]}`)
+      : new Date(dataNasc);
+  
     const hoje = new Date();
-    const nascimento = new Date(dataNasc);
     let idade = hoje.getFullYear() - nascimento.getFullYear();
     const mes = hoje.getMonth() - nascimento.getMonth();
     if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
@@ -68,16 +73,15 @@ function Perfil() {
       setPerfil(consulta);
 
       // Calcula a idade com base na data de nascimento
-      if (consulta.data_nascimento) {
-        const idadeCalculada = calcularIdade(consulta.data_nascimento);
+      if (consulta.data_nasc) {
+        const idadeCalculada = calcularIdade(consulta.data_nasc);
         setIdade(idadeCalculada);
       }
     } catch (error) {
       console.error('Erro ao consultar o perfil:', error.message);
     }
   }
-
-
+  
   return (
     <>
       <Navbar />
@@ -170,7 +174,7 @@ function Perfil() {
               <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={lingua} style={{ width: '25px', height: '25px', marginRight: '5px' }} />IDIOMAS:{perfil?.idioma || 'N/A'}</h5>
             </span>
             <span>
-              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={casa} style={{ width: '25px', height: '25px', marginRight: '5px' }} />MORA EM: Vitória - ES</h5>
+              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={casa} style={{ width: '25px', height: '25px', marginRight: '5px' }} />MORA EM: {perfil?.local_moradia || 'N/A'}</h5>
             </span>
             <span>
               <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={coracao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />SOLTEIRO: {perfil?.estado_civil || 'N/A'}</h5>

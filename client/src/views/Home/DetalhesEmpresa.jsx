@@ -1,8 +1,10 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 const DetalhesDaEmpresa = () => {
+    const navigate = useNavigate();
     return (
         <>
             <div className="content-wrapper d-flex flex-column min-vh-100">
@@ -59,10 +61,13 @@ const DetalhesDaEmpresa = () => {
                     <div className="d-flex align-items-center">
                         <i className="bi bi-globe me-2" style={{ color: '#000' }}></i> Português (BR)
                         <i className="bi bi-currency-dollar mx-2" style={{ color: '#000' }}></i> BRL
-                        <a href="#" className="ms-2" style={{ color: '#000' }}><i className="bi bi-instagram"></i></a>
+                        <a href="https://www.instagram.com/hive_republicas" className="ms-2" style={{ color: '#000' }} target="_blank" rel="noopener noreferrer">
+                            <i className="bi bi-instagram"></i>
+                        </a>
                     </div>
                 </Container>
             </footer>
+
 
             {/* Estilos do botão */}
             <style jsx>{`

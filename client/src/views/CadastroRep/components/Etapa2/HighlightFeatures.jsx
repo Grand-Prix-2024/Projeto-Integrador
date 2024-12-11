@@ -31,9 +31,6 @@ const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) =>
         { name: "Extintor", icon: <i className="fas fa-fire-extinguisher feature-icon"></i> },
         { name: "Câmeras", icon: <i className="bi bi-camera feature-icon"></i> },
         { name: "Alarmes", icon: <i className="bi bi-bell feature-icon"></i> },
-        { name: "Extintor", icon: <i className="fas fa-fire-extinguisher feature-icon"></i> },
-        { name: "Câmeras", icon: <i className="bi bi-camera feature-icon"></i> },
-        { name: "Alarmes", icon: <i className="bi bi-bell feature-icon"></i> },
       ],
     },
   ];

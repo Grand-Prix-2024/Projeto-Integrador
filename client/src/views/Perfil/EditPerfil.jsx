@@ -14,8 +14,7 @@ function EditarPerfil() {
     estado_civil: '',
     local_moradia: '',
     curso: '',
-    faculdade: '',
-    musicaFavorita: ''
+    faculdade: ''
   });
 
   const navigate = useNavigate();
@@ -155,7 +154,7 @@ function EditarPerfil() {
               <Form.Label>Estado</Form.Label>
               <Form.Control
                 type='text'
-                name="estado"
+                name="local_moradia"
                 value={formData.local_moradia}
                 onChange={handleInputChange}
               />

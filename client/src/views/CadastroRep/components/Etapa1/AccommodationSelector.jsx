@@ -18,23 +18,21 @@ const AccommodationSelector = () => {
   };
 
   return (
-    <div>
+    <>
       <style>
         {`
-         .features-container {
+          .features-container {
             display: flex;
-            justify-content: center; /* Centraliza os itens */
-            gap: 16px; /* Espaçamento entre os botões */
-            margin: 20px auto; /* Margem para centralizar */
+            justify-content: center;
+            gap: 16px;
+            margin: 20px auto;
           }
 
           .feature-btn {
-            padding: 20px 40px; /* Tamanho do botão */
+            padding: 20px 40px;
             text-align: center;
-            background: #FFE245; /* Amarelo atualizado */
-            background: #FFE245; /* Amarelo atualizado */
-            color: #fff; /* Texto branco */
-            border: 1px solid #FFE245;
+            background: #FFE245;
+            color: #fff;
             border: 1px solid #FFE245;
             border-radius: 8px;
             cursor: pointer;
@@ -48,39 +46,27 @@ const AccommodationSelector = () => {
           }
 
           .feature-btn .feature-icon {
-            font-size: 32px; /* Tamanho do ícone */
-            color: #fff; /* Ícone branco */
-          }
-
-          .feature-btn .feature-icon {
-            font-size: 32px; /* Tamanho do ícone */
-            color: #fff; /* Ícone branco */
+            font-size: 32px;
+            color: #fff;
           }
 
           .feature-btn.active {
-            background: #FFEB86; /* Amarelo mais claro quando ativo */
-            background: #FFEB86; /* Amarelo mais claro quando ativo */
-            color: #000; /* Texto preto */
+            background: #FFEB86;
+            color: #000;
             border-color: #FFEB86;
           }
 
           .feature-btn.active .feature-icon {
-            color: #000; /* Ícone preto quando ativo */
-            border-color: #FFEB86;
-          }
-
-          .feature-btn.active .feature-icon {
-            color: #000; /* Ícone preto quando ativo */
+            color: #000;
           }
 
           .feature-btn:hover {
-            background: #FFD834; /* Fundo mais escuro no hover */
-            background: #FFD834; /* Fundo mais escuro no hover */
-            transform: scale(1.05); /* Zoom no hover */
+            background: #FFD834;
+            transform: scale(1.05);
           }
 
           .feature-text {
-            font-size: 16px; /* Tamanho do texto */
+            font-size: 16px;
             font-weight: bold;
           }
 
@@ -92,28 +78,30 @@ const AccommodationSelector = () => {
           }
         `}
       </style>
-      <div className="features-container">
-        {options.map((option, index) => (
-          <button
-            key={index}
-            className={`feature-btn ${objetoRepublica.name === option.name ? "active" : ""
+      <div>
+        <div className="features-container">
+          {options.map((option, index) => (
+            <button
+              key={index}
+              className={`feature-btn ${
+                objetoRepublica.name === option.name ? "active" : ""
               }`}
-            onClick={() => {
-              alterarObjeto("name", option.name);
-            }}
-          >
-            {option.icon}
-            <span className="feature-text">{option.name}</span>
-          </button>
-        ))}
+              onClick={() => {
+                alterarObjeto("name", option.name);
+              }}
+            >
+              {option.icon}
+              <span className="feature-text">{option.name}</span>
+            </button>
+          ))}
+        </div>
+        <div className="message">
+          {objetoRepublica.name
+            ? `Você selecionou: ${objetoRepublica.name}`
+            : "Nenhuma acomodação selecionada."}
+        </div>
       </div>
-      <div className="message">
-        {objetoRepublica.name
-          ? `Você selecionou: ${objetoRepublica.name}`
-          : "Nenhuma acomodação selecionada."}
-      </div>
-      </div>
-    </div>
+    </>
   );
 };
 

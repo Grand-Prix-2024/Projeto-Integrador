@@ -14,25 +14,22 @@ const FormRepublica = () => {
   const [accommodation, setAccommodation] = useState("Casa");
   const [rooms, setRooms] = useState({ private: 1, shared: 1 });
   const [essentialInfo, setEssentialInfo] = useState({
-    moradores: 0,
-    quartos: 0,
-    banheiros: 1,
-    camas: 0,
+    Moradores: 0,
+    Quartos: 0,
+    Banheiros: 1,
+    Camas: 0,
   });
 
   const [features, setFeatures] = useState([]);
   const { objetoRepublica, setObjetoRepublica } = useObjeto();
   const navigate = useNavigate();
 
-
-  // TESTAR
   useEffect(() => {
-    const idUsuario = localStorage.getItem('id_usuario');
+    const idUsuario = localStorage.getItem("id_usuario");
     if (!idUsuario) {
-      alert('Efetue Login');
-      navigate('/login');
-    }
-    if (idUsuario) {
+      alert("Efetue Login");
+      navigate("/login");
+    } else {
       setObjetoRepublica((prev) => ({
         ...prev,
         id_usuario: idUsuario,
@@ -54,9 +51,9 @@ const FormRepublica = () => {
   }, [features]);
 
   const validarDados = (dados) => {
-    const camposObrigatorios = ['name', 'pais', 'cep', 'endereco', 'bairro', 'cidade', 'estado'];
+    const camposObrigatorios = ["name", "pais", "cep", "endereco", "bairro", "cidade", "estado"];
     for (let campo of camposObrigatorios) {
-      if (!dados[campo] || dados[campo].trim() === '') {
+      if (!dados[campo] || dados[campo].trim() === "") {
         alert(`O campo ${campo} é obrigatório.`);
         return false;
       }
@@ -65,60 +62,66 @@ const FormRepublica = () => {
   };
 
   const cadastrarRepublica = async (infoRepublica) => {
-    console.log(infoRepublica);
-    console.log(objetoRepublica.image);
+    const essentialInfoFormatted = {
+      ...essentialInfo,
+      Moradores: parseInt(essentialInfo.Moradores, 10) || 0,
+      Quartos: parseInt(essentialInfo.Quartos, 10) || 0,
+      Banheiros: parseInt(essentialInfo.Banheiros, 10) || 0,
+      Camas: parseInt(essentialInfo.Camas, 10) || 0,
+    };
+
+    const objetoRepublicaFinal = {
+      ...objetoRepublica,
+      EssentialInfo: essentialInfoFormatted,
+    };
+
     const formData = new FormData();
-    formData.append('infoRepublica', JSON.stringify(infoRepublica));
-    
-    
+    formData.append("infoRepublica", JSON.stringify(objetoRepublicaFinal));
+
     if (objetoRepublica?.image) {
-      formData.append('image', objetoRepublica.image);
-    } else {
-      console.warn('Nenhuma imagem foi fornecida.');  
+      formData.append("image", objetoRepublica.image);
     }
 
-    console.log(Array.from(formData));
-
-    if (!validarDados(infoRepublica)) {
-      alert('Dados inválidos. Verifique as informações fornecidas.');
+    if (!validarDados(objetoRepublicaFinal)) {
+      alert("Dados inválidos. Verifique as informações fornecidas.");
       return;
     }
 
     try {
       const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/republicas`, {
-        method: 'POST',
+        method: "POST",
         body: formData,
       });
 
       if (!resposta.ok) {
-        console.log('Erro ao cadastrar a república');
-        alert('Erro ao cadastrar. Tente novamente.');
+        console.log("Erro ao cadastrar a república");
+        alert("Erro ao cadastrar. Tente novamente.");
       } else {
-        console.log('República cadastrada com sucesso');
-        alert('República cadastrada com sucesso!');
+        console.log("República cadastrada com sucesso");
+        alert("República cadastrada com sucesso!");
         setObjetoRepublica({
           Features: [],
-          pais: '',
-          cep: '',
-          endereco: '',
-          bairro: '',
-          cidade: '',
-          estado: '',
+          pais: "",
+          cep: "",
+          endereco: "",
+          bairro: "",
+          cidade: "",
+          estado: "",
           id_usuario: null,
           imagem: null,
         });
         setAccommodation("Casa");
         setRooms({ private: 1, shared: 1 });
         setEssentialInfo({
-          moradores: 0,
-          quartos: 0,
-          banheiros: 1,
-          camas: 0,
+          Moradores: 0,
+          Quartos: 0,
+          Banheiros: 1,
+          Camas: 0,
         });
       }
     } catch (error) {
-      console.error('Erro ao cadastrar a república', error);
-      alert('Erro ao cadastrar. Tente novamente.');
+      console.error("Erro ao cadastrar a república", error);
+      alert("Erro ao cadastrar. Tente novamente.");
     }
   };
 
@@ -131,17 +134,17 @@ const FormRepublica = () => {
               .section {
                 display: flex;
                 flex-direction: column;
-                justify-content: flex-start; /* Alinha o conteúdo ao topo */
-                align-items: flex-start; /* Garante que os textos comecem à esquerda */
+                justify-content: flex-start;
+                align-items: flex-start;
                 margin-bottom: 20px;
-                max-width: 800px; /* Define a largura máxima da div */
-                margin-left: auto; /* Centraliza horizontalmente */
+                max-width: 800px;
+                margin-left: auto;
                 margin-right: auto;
               }
 
               .section h5, .section h2, .section p {
-                text-align: left; /* Garante que o texto fique alinhado à esquerda */
-                margin: 0 0 10px 0; /* Espaçamento consistente */
+                text-align: left;
+                margin: 0 0 10px 0;
               }
             `}
         </style>

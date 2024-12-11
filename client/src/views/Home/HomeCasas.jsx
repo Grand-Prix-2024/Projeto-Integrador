@@ -16,7 +16,7 @@ function HomeCasas() {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND}/republicas/${id}`);
         if (response.data) {
           setAdData(response.data);
-          fetchUser(response.data.id_usuario); // Buscar informações do usuário
+          fetchUser(response.data.id_usuario); 
         } else {
           console.error("República não encontrada.");
         }
