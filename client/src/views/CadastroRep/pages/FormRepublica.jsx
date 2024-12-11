@@ -8,6 +8,7 @@ import DefinirEndereco from "../components/Etapa4/DefinirEndereco";
 import Navbar from "../../../components/Navbar";
 import { Button } from "react-bootstrap";
 import { useObjeto } from "../components/ObjectContext";
+import { useNavigate } from "react-router-dom";
 
 const FormRepublica = () => {
   const [accommodation, setAccommodation] = useState("Casa");
@@ -21,6 +22,7 @@ const FormRepublica = () => {
 
   const [features, setFeatures] = useState([]);
   const { objetoRepublica, setObjetoRepublica } = useObjeto();
+  const navigate = useNavigate();
 
 
   // TESTAR

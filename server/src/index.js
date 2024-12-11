@@ -22,7 +22,8 @@ import {
     atualizarRepublica,
     deletarRepublica,
     mostrarUmaRepublica,
-    fetchRepublica
+    // fetchRepublica,
+    downloadImagem
 } from './Controllers/RepublicaController.js';
 import {
     cadastrarImagens,
@@ -61,6 +62,8 @@ app.put('/usuarios/:id', atualizarUsuario);
 app.delete('/usuarios/:id', deletarUsuario);
 app.get('/usuarios/:id', mostrarUmUsuario);
 
+app.get('/public/:nomeImg',downloadImagem);
+
 // Rota de login
 app.post('/login', logarUsuario);
 
@@ -85,7 +88,7 @@ app.delete('/imagens/:id', excluirImagem);
 app.get('/imagens/:id', detalhesRepublica);
 
 // Fetch para fotos relacionadas a uma república
-app.get('/republicas/:id/fotos', fetchRepublica);
+// app.get('/republicas/:id/fotos', fetchRepublica);
 
 // Inicialização do servidor
 app.listen(porta, () => {

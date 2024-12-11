@@ -6,6 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 function HomeCasas() {
   const [adData, setAdData] = useState(null);
+  const [userData, setUserData] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -15,11 +16,25 @@ function HomeCasas() {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND}/republicas/${id}`);
         if (response.data) {
           setAdData(response.data);
+          fetchUser(response.data.id_usuario); // Buscar informações do usuário
         } else {
           console.error("República não encontrada.");
         }
       } catch (error) {
         console.error("Erro ao buscar os dados do anúncio:", error);
+      }
+    }
+
+    async function fetchUser(userId) {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND}/usuarios/${userId}`);
+        if (response.data) {
+          setUserData(response.data);
+        } else {
+          console.error("Usuário não encontrado.");
+        }
+      } catch (error) {
+        console.error("Erro ao buscar os dados do usuário:", error);
       }
     }
 
@@ -75,7 +90,7 @@ function HomeCasas() {
           <div className="row g-4">
             <div className="col-lg-12 text-center">
               <img
-                src={`/img/${adData.CaminhoFoto}`}
+                src={`${process.env.REACT_APP_BACKEND}/public/${adData.caminhoFoto}`}
                 alt="Foto principal da república"
                 className="img-fluid rounded shadow-sm"
                 style={{ ...imageStyle, height: "450px", objectFit: "cover" }}
@@ -118,11 +133,28 @@ function HomeCasas() {
 
             <div className="col-lg-4">
               <div className="card shadow border-0 p-4">
+                {/* Preço */}
                 <div className="text-center mb-4">
                   <h3 className="mb-1">R$ {adData.preco || 0}/mês</h3>
                   <p className="text-muted">a negociar</p>
                 </div>
+
+                {/* Informações do usuário */}
+                {userData && (
+                  <div className="text-center mb-4">
+                    <img
+                      src={`${process.env.REACT_APP_BACKEND}/public/${userData.fotoPerfil}`}
+                      alt="Foto de perfil do usuário"
+                      className="rounded-circle shadow-sm"
+                      style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                    />
+                    <h5 className="mt-2">{userData.nome}</h5>
+                  </div>
+                )}
+
                 <hr />
+
+                {/* Botão contactar */}
                 <button
                   className="btn w-100 py-2"
                   style={buttonStyle}
