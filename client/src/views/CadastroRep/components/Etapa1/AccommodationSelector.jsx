@@ -1,32 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
+import { useObjeto } from "../ObjectContext";
 
 const AccommodationSelector = () => {
-  // Estado para rastrear a seleção do usuário
-  const [selectedAccommodation, setSelectedAccommodation] = useState("");
+  const { objetoRepublica, setObjetoRepublica } = useObjeto();
 
-  // Opções de acomodação
   const options = [
-    { name: "Casa", icon: "🏠" },
-    { name: "Apartamento", icon: "🏢" },
+    { name: "Casa", icon: <i className="bi bi-house-door feature-icon"></i> },
+    { name: "Apartamento", icon: <i className="bi bi-building feature-icon"></i> },
   ];
 
+  const alterarObjeto = (key, value) => {
+    console.log(objetoRepublica);
+    setObjetoRepublica((prevState) => ({
+      ...prevState,
+      [key]: value,
+    }));
+  };
+
   return (
-    <div>
+    <>
       <style>
         {`
           .features-container {
             display: flex;
-            justify-content: center; /* Centraliza os itens */
-            gap: 16px; /* Espaçamento entre os botões */
-            margin: 20px auto; /* Margem para centralizar */
+            justify-content: center;
+            gap: 16px;
+            margin: 20px auto;
           }
 
           .feature-btn {
-            padding: 20px 40px; /* Tamanho do botão */
+            padding: 20px 40px;
             text-align: center;
-            background: #ffc107; /* Amarelo */
-            color: #fff; /* Texto branco */
-            border: 1px solid #ffc107;
+            background: #FFE245;
+            color: #fff;
+            border: 1px solid #FFE245;
             border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
@@ -38,23 +45,28 @@ const AccommodationSelector = () => {
             gap: 10px;
           }
 
+          .feature-btn .feature-icon {
+            font-size: 32px;
+            color: #fff;
+          }
+
           .feature-btn.active {
-            background: #ffe082; /* Amarelo mais claro quando ativo */
-            color: #000; /* Texto preto */
-            border-color: #ffd54f;
+            background: #FFEB86;
+            color: #000;
+            border-color: #FFEB86;
+          }
+
+          .feature-btn.active .feature-icon {
+            color: #000;
           }
 
           .feature-btn:hover {
-            background: #ffd54f; /* Fundo mais claro no hover */
-            transform: scale(1.05); /* Zoom no hover */
-          }
-
-          .feature-icon {
-            font-size: 32px; /* Tamanho do ícone */
+            background: #FFD834;
+            transform: scale(1.05);
           }
 
           .feature-text {
-            font-size: 16px; /* Tamanho do texto */
+            font-size: 16px;
             font-weight: bold;
           }
 
@@ -66,28 +78,30 @@ const AccommodationSelector = () => {
           }
         `}
       </style>
-      <div className="features-container">
-        {/* Botões de seleção */}
-        {options.map((option, index) => (
-          <button
-            key={index}
-            className={`feature-btn ${
-              selectedAccommodation === option.name ? "active" : ""
-            }`}
-            onClick={() => setSelectedAccommodation(option.name)}
-          >
-            <span className="feature-icon">{option.icon}</span>
-            <span className="feature-text">{option.name}</span>
-          </button>
-        ))}
+      <div>
+        <div className="features-container">
+          {options.map((option, index) => (
+            <button
+              key={index}
+              className={`feature-btn ${
+                objetoRepublica.name === option.name ? "active" : ""
+              }`}
+              onClick={() => {
+                alterarObjeto("name", option.name);
+              }}
+            >
+              {option.icon}
+              <span className="feature-text">{option.name}</span>
+            </button>
+          ))}
+        </div>
+        <div className="message">
+          {objetoRepublica.name
+            ? `Você selecionou: ${objetoRepublica.name}`
+            : "Nenhuma acomodação selecionada."}
+        </div>
       </div>
-      {/* Mensagem Condicional
-      <div className="message">
-        {selectedAccommodation
-          ? `Você selecionou: ${selectedAccommodation}`
-          : "Nenhuma acomodação selecionada."}
-      </div> */}
-    </div>
+    </>
   );
 };
 

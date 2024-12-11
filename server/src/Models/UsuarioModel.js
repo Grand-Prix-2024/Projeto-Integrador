@@ -11,9 +11,10 @@ export async function createUsuario(usuario) {
         nome,
         sobrenome,
         data_nasc,
-        cpf
+        cpf,
+        status
         )
-        VALUES(?,?,?,?,?,?)`;
+        VALUES(?,?,?,?,?,?,?)`;
 
     const params = [
         usuario.email,
@@ -21,7 +22,8 @@ export async function createUsuario(usuario) {
         usuario.nome,
         usuario.sobrenome,
         usuario.data_nascimento,
-        usuario.cpf
+        usuario.cpf,
+        usuario.status
     ];
 
     try {
@@ -47,7 +49,8 @@ export async function showUsuarios(usuario) {
         usuario.nome,
         usuario.sobrenome,
         usuario.data_nascimento,
-        usuario.cpf
+        usuario.cpf,
+        usuario.status
     ];
 
     try {
@@ -69,7 +72,8 @@ export async function updateUsuario(usuario, id) {
     nome = ?,
     sobrenome = ?,
     data_nasc = ?,
-    cpf = ?
+    cpf = ?,
+    status = ?
     WHERE id_usuario = ?
     `
     const params = [
@@ -79,6 +83,7 @@ export async function updateUsuario(usuario, id) {
         usuario.sobrenome,
         usuario.data_nascimento,
         usuario.cpf,
+        usuario.status,
         id
     ];
 
@@ -93,19 +98,20 @@ export async function updateUsuario(usuario, id) {
 }
 
 export async function deleteUsuario(id) {
-    // const conexao = mysql.createPool(db);
-    console.log('Deletando usuário');
-    const sql = `DELETE FROM usuarios WHERE id_usuario = ?`;
+    const conexao = mysql.createPool(db);
+    console.log('Atualizando status do usuário para inativo');
+
+    const sql = `UPDATE usuarios SET status = 'inativo' WHERE id_usuario = ?`;
 
     const params = [id];
 
     try {
         const [retorno] = await conexao.query(sql, params);
-        console.log('Deletando usuário');
-        return[200, retorno];
+        console.log('Usuário marcado como inativo');
+        return [200, retorno];
     } catch (error) {
         console.log(error);
-        return[500, error];
+        return [500, error];
     }
 }
 

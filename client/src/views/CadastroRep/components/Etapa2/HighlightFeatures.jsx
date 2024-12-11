@@ -1,45 +1,59 @@
 import React from "react";
 
-const HighlightFeatures = ({ features, onToggle }) => {
+const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) => {
   // Lista de itens organizados por seções
   const sections = [
     {
       title: "Tecnologia e Comodidade",
       items: [
-        { name: "Wi-fi", icon: "🌐" },
-        { name: "Televisão", icon: "📺" },
-        { name: "Cozinha", icon: "🍳" },
-        { name: "Ar-condicionado", icon: "❄️" },
-        { name: "Canto de estudo", icon: "🖋️" },
-        { name: "Chuveiro quente", icon: "🚿" },
+        { name: "Wi-fi", icon: <i className="bi bi-wifi feature-icon"></i> },
+        { name: "Televisão", icon: <i className="fas fa-tv feature-icon"></i> },
+        { name: "Cozinha", icon: <i className="bi bi-cup feature-icon"></i> },
+        { name: "Ar-condicionado", icon: <i className="bi bi-snow feature-icon"></i> },
+        { name: "Canto de estudo", icon: <i className="bi bi-pencil feature-icon"></i> },
+        { name: "Chuveiro quente", icon: <i className="bi bi-droplet feature-icon"></i> },
       ],
     },
     {
       title: "Conforto e Lazer",
       items: [
-        { name: "Piscina", icon: "🏊‍♂️" },
-        { name: "Churrasqueira", icon: "🍖" },
-        { name: "Academia", icon: "🏋️‍♂️" },
-        { name: "Varanda", icon: "🏠" },
-        { name: "Jardim", icon: "🌳" },
-        { name: "Banheira", icon: "🛁" },
+        { name: "Piscina", icon: <i className="bi bi-water feature-icon"></i> },
+        { name: "Churrasqueira", icon: <i className="fas fa-fire feature-icon"></i> },
+        { name: "Academia", icon: <i className="fas fa-dumbbell feature-icon"></i> },
+        { name: "Varanda", icon: <i className="fas fa-chair feature-icon"></i> },
+        { name: "Jardim", icon: <i className="bi bi-tree feature-icon"></i> },
+        { name: "Banheira", icon: <i className="bi bi-droplet-half feature-icon"></i> },
       ],
     },
     {
       title: "Segurança",
       items: [
-        { name: "Extintor", icon: "🧯" },
-        { name: "Câmeras", icon: "📷" },
-        { name: "Alarmes", icon: "🚨" },
+        { name: "Extintor", icon: <i className="fas fa-fire-extinguisher feature-icon"></i> },
+        { name: "Câmeras", icon: <i className="bi bi-camera feature-icon"></i> },
+        { name: "Alarmes", icon: <i className="bi bi-bell feature-icon"></i> },
       ],
     },
   ];
+
+  const handleToggle = (name) => {
+    // Atualiza o objeto global com a alternância da feature
+    setObjetoRepublica((prevObjeto) => {
+      const updatedFeatures = prevObjeto.Features.includes(name)
+        ? prevObjeto.Features.filter((feature) => feature !== name)
+        : [...prevObjeto.Features, name];
+
+      return {
+        ...prevObjeto,
+        Features: updatedFeatures,
+      };
+    });
+  };
 
   return (
     <div>
       <style>
         {`
-          .section-container {
+.section-container {
             margin-bottom: 40px;
           }
 
@@ -53,20 +67,28 @@ const HighlightFeatures = ({ features, onToggle }) => {
 
           .features-container {
             display: flex;
-            flex-wrap: wrap; /* Permite quebra de linha */
-            justify-content: center; /* Centraliza os itens */
-            gap: 16px; /* Espaçamento entre os itens */
-            max-width: 800px; /* Limite de largura */
-            margin: 0 auto; /* Centraliza o container na tela */
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            max-width: 800px;
+            margin: 0 auto;
           }
 
           .feature-btn {
-            flex: 0 1 calc(33.333% - 16px); /* Mantém 3 itens por linha */
+            flex: 0 1 calc(33.333% - 16px);
+            flex: 0 1 calc(33.333% - 16px);
             max-width: calc(33.333% - 16px);
             padding: 20px;
             text-align: center;
-            background: #ffc107; /* Amarelo inicial */
-            color: #fff; /* Texto branco */
+            background: #ffc107;
+            color: #fff;
+            background: #ffc107;
+            color: #fff;
             border: 1px solid #ffc107;
             border-radius: 8px;
             cursor: pointer;
@@ -78,56 +100,62 @@ const HighlightFeatures = ({ features, onToggle }) => {
           }
 
           .feature-btn.active {
-            background: #ffe082; /* Fundo mais claro quando ativo */
-            color: #000; /* Texto preto para contraste */
-            border-color: #ffd54f; /* Borda levemente mais clara */
+            background: #ffe082;
+            color: #000;
+            border-color: #ffd54f;
+            background: #ffe082;
+            color: #000;
+            border-color: #ffd54f;
           }
 
           .feature-btn:hover {
-            background: #ffecb3; /* Fundo mais claro no hover */
-            color: #000; /* Texto preto */
-            transform: scale(1.05); /* Leve efeito de zoom */
+            background: #ffecb3;
+            color: #000;
+            transform: scale(1.05);
+            background: #ffecb3;
+            color: #000;
+            transform: scale(1.05);
           }
 
           .feature-icon {
-            font-size: 32px; /* Aumentado para destacar os emojis */
+            font-size: 32px;
+            font-size: 32px;
           }
 
           .feature-text {
-            font-size: 16px; /* Tamanho do texto */
+            font-size: 16px;
+            font-size: 16px;
             font-weight: bold;
           }
         `}
       </style>
 
       <div>
-        
-      </div>
+        {sections.map((section, index) => (
+          <div key={index} className="section-container">
+            {/* Título da seção */}
+            <div className="section-title">{section.title}</div>
 
-      {sections.map((section, index) => (
-        <div key={index} className="section-container">
-          {/* Título da seção */}
-          <div className="section-title">{section.title}</div>
-
-          {/* Botões da seção */}
-          <div className="features-container">
-            {section.items.map((item, idx) => (
-              <button
-                key={idx}
-                className={`feature-btn ${features.includes(item.name) ? "active" : ""
-                  }`}
-                onClick={() => onToggle(item.name)}
-              >
-                <span className="feature-icon">{item.icon}</span> {/* Emoji como ícone */}
-                <span className="feature-text">{item.name}</span>
-              </button>
-            ))}
+            {/* Botões da seção */}
+            <div className="features-container">
+              {section.items.map((item, idx) => (
+                <button
+                  key={idx}
+                  className={`feature-btn ${objetoRepublica.Features && objetoRepublica.Features.includes(item.name) ? "active" : ""
+                    }`}
+                  onClick={() => handleToggle(item.name)}
+                >
+                  <span className="feature-icon">{item.icon}</span> {/* Emoji como ícone */}
+                  <span className="feature-text">{item.name}</span>
+                </button>
+              ))}
+            </div>
           </div>
+        ))}
+        <div className="features-container">
+          Câmeras de segurança que monitoram espaços internos não são permitidas, mesmo que estejam desligadas.
+          É obrigatório informar sobre a presença de todas as câmeras de segurança na parte externa.
         </div>
-      ))}
-      <div className="features-container">
-        Câmeras de segurança que monitoram espaços internos não são permitidas, mesmo que estejam desligadas.
-        É obrigatório informar sobre a presença de todas as câmeras de segurança na parte externa.
       </div>
     </div>
   );

@@ -1,79 +1,96 @@
 import express from 'express';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
-import { criarUsuario, logarUsuario } from './Controllers/UsuarioController.js';
-import { mostrarUsuario } from './Controllers/UsuarioController.js';
-import { atualizarUsuario } from './Controllers/UsuarioController.js';
-import { deletarUsuario, mostrarUmUsuario } from './Controllers/UsuarioController.js';
-import { criarPerfil, mostrarPerfil, atualizarPerfil, deletarPerfil, buscarPerfilPorUsuario } from './Controllers/PerfilController.js';
-import {  editarImagem } from './Controllers/ImagemPerfilController.js';
-
-
+import {
+    criarUsuario,
+    logarUsuario,
+    mostrarUsuario,
+    atualizarUsuario,
+    deletarUsuario,
+    mostrarUmUsuario
+} from './Controllers/UsuarioController.js';
+import {
+    criarPerfil,
+    mostrarPerfil,
+    atualizarPerfil,
+    deletarPerfil,
+    buscarPerfilPorUsuario
+} from './Controllers/PerfilController.js';
+import {
+    criarRepublica,
+    mostrarRepublica,
+    atualizarRepublica,
+    deletarRepublica,
+    mostrarUmaRepublica,
+    // fetchRepublica,
+    downloadImagem
+} from './Controllers/RepublicaController.js';
+import {
+    cadastrarImagens,
+    listarRepublicas,
+    detalhesRepublica,
+    excluirImagem
+} from './Controllers/ImagemController.js';
 
 const app = express();
 const porta = 5000;
 
-app.use(fileUpload());
+// Middleware
 app.use(express.json());
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/',
+    limits: { fileSize: 10 * 1024 * 1024 }, // Limite de 10 MB
+}));
 
-app.get('/', (req,res)=>{
-    res.send('API Hive funcionando :)')
+// Rota inicial
+app.get('/', (req, res) => {
+    res.send('API Hive funcionando :)');
 });
 
+// Configuração de CORS
 var corsOptions = {
     origin: 'http://localhost',
-    optionSuccessStatus: 200
-}
-
+    optionsSuccessStatus: 200 // Para navegadores mais antigos
+};
 app.use(cors(corsOptions));
 
-// CRUD USUARIO
+// Rotas para CRUD de usuários
 app.post('/usuarios', criarUsuario);
 app.get('/usuarios', mostrarUsuario);
 app.put('/usuarios/:id', atualizarUsuario);
 app.delete('/usuarios/:id', deletarUsuario);
 app.get('/usuarios/:id', mostrarUmUsuario);
 
-// CRUD LOGIN
+app.get('/public/:nomeImg',downloadImagem);
+
+// Rota de login
 app.post('/login', logarUsuario);
 
-// CRUD PERFIL
+// Rotas para CRUD de perfis
 app.post('/perfil', criarPerfil);
 app.get('/perfil', mostrarPerfil);
 app.put('/perfil/:id', atualizarPerfil);
 app.get('/perfil/:id_usuario', buscarPerfilPorUsuario);
 app.delete('/perfil/:id', deletarPerfil);
-//app.put('/imagem/:id_imagem', editarImagemPerfil);
 
-// CRUD IMAGEM PERFIL
-app.put('/img_perfil/:id_perfil', editarImagem)
-app.get('/img_perfil/:id_perfil', )
+// Rotas para CRUD de repúblicas
+app.post('/republicas', criarRepublica); // Cadastro de república com imagens
+app.get('/republicas', mostrarRepublica);
+app.put('/republicas/:id', atualizarRepublica);
+app.delete('/republicas/:id', deletarRepublica);
+app.get('/republicas/:id', mostrarUmaRepublica);
 
-app.get('/perfil/:id_usuario', (req, res) => {
-    const { id_usuario } = req.params;
-    const query = 'SELECT caminho_perfil_foto FROM perfil WHERE id_usuario = ?';
-  
-    db.query(query, [id_usuario], (err, results) => {
-      if (err) return res.status(500).json({ error: 'Erro no servidor' });
-  
-      if (results.length > 0) {
-        res.json({ caminho_perfil_foto: results[0].caminho_perfil_foto });
-      } else {
-        res.status(404).json({ error: 'Usuário não encontrado' });
-      }
-    });
-  });
+// Rotas para manipulação de imagens
+app.post('/imagens', cadastrarImagens);
+app.get('/imagens', listarRepublicas);
+app.delete('/imagens/:id', excluirImagem);
+app.get('/imagens/:id', detalhesRepublica);
 
+// Fetch para fotos relacionadas a uma república
+// app.get('/republicas/:id/fotos', fetchRepublica);
 
-// CRUD REPUBLICA
-
-
-
-
-
-
-app.listen(porta, ()=>{
-    console.log(`API RODANDO NA PORTA: ${porta}`)
+// Inicialização do servidor
+app.listen(porta, () => {
+    console.log(`API rodando na porta: ${porta}`);
 });
-
-

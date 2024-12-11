@@ -34,7 +34,7 @@ function Navbar() {
                                 <li className='navbar-item'><NavLink className='nav-link' to="/cadastro">Cadastro</NavLink></li>
                             </>
                         )}
-                        <li className='navbar-item'><NavLink className='nav-link' to="/cadastrorepublica">Cadastre uma república</NavLink></li>
+                        <li className='navbar-item'><NavLink className='nav-link' to="/cadastrar_republica">Cadastre uma república</NavLink></li>
                     </ul>
                     {idUsuario && (
                         <div className="dropdown">

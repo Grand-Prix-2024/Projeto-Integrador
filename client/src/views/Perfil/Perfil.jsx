@@ -13,6 +13,7 @@ import balao from './img/balao.png';
 function Perfil() {
   const [perfil, setPerfil] = useState([]);
   const id_usuario = localStorage.getItem("id_usuario");
+  const [idade, setIdade] = useState(null); 
   const nome = localStorage.getItem("nome");
   const sobrenome = localStorage.getItem("sobrenome");
   const email = localStorage.getItem("email");
@@ -22,10 +23,33 @@ function Perfil() {
     navigate('/editar-perfil');
   }
 
+  // TESTAR ESSA FUNÇÃO AMANHA
   useEffect(() => {
-    baixarPerfil();
+    if (!id_usuario) {
+      alert('Efetue Login');
+      navigate('/login');
+    } else {
+      baixarPerfil();
+    }
   }, []);
 
+  function calcularIdade(dataNasc) {
+    // Ajusta para o formato ISO caso seja necessário
+    const partes = dataNasc.split('/');
+    const nascimento = partes.length === 3
+      ? new Date(`${partes[2]}-${partes[1]}-${partes[0]}`)
+      : new Date(dataNasc);
+  
+    const hoje = new Date();
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const mes = hoje.getMonth() - nascimento.getMonth();
+    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+      idade--;
+    }
+    return idade;
+  }
+
+  // Função para baixar os dados do perfil
   async function baixarPerfil() {
     try {
       if (!id_usuario) {
@@ -45,18 +69,23 @@ function Perfil() {
 
       const consulta = await resposta.json();
       setPerfil(consulta);
+
+      // Calcula a idade com base na data de nascimento
+      if (consulta.data_nasc) {
+        const idadeCalculada = calcularIdade(consulta.data_nasc);
+        setIdade(idadeCalculada);
+      }
     } catch (error) {
       console.error('Erro ao consultar o perfil:', error.message);
     }
   }
-
+  
   return (
     <>
       <Navbar />
       <Card style={{ width: '500px', height: '350px', padding: '50px', margin: '50px', borderRadius: '20px', borderColor: 'black' }}>
-        {/* Substituindo a imagem estática pela imagem dinâmica do perfil */}
-        <Image 
-          src={perfil?.caminho_foto_perfil || "https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg"} 
+        <Image
+          src="https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg"
           roundedCircle
           style={{ width: '200px', height: '200px', marginTop: '-20px' }}
         />
@@ -122,7 +151,7 @@ function Perfil() {
         <Card className='position top-50 start-50"' style={{ width: '132px', height: '130px', marginLeft: '8px', marginTop: '-90px', }}>
           <Image
             src="https://www.laut.de/Travis-Scott/Alben/Utopia-121583/travis-scott-utopia-228909.jpg?e1bef5"
-            style={{ width: '132px', height: '130px', marginLeft: '-1px', }}      
+            style={{ width: '132px', height: '130px', marginLeft: '-1px', }}
           />
           <Card.Text>
             <div style={{ marginBlockStart: '14px', marginLeft: '40px', fontWeight: 'bold', fontSize: '14px' }}>
@@ -135,13 +164,13 @@ function Perfil() {
         <Card.Text>
           <div style={{ marginTop: '65px' }}>
             <span>
-              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={balao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />IDADE:</h5>
+              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={balao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />IDADE: {idade || 'N/A'}</h5>
             </span>
             <span>
               <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={lingua} style={{ width: '25px', height: '25px', marginRight: '5px' }} />IDIOMAS:{perfil?.idioma || 'N/A'}</h5>
             </span>
             <span>
-              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={casa} style={{ width: '25px', height: '25px', marginRight: '5px' }} />MORA EM: Vitória - ES</h5>
+              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={casa} style={{ width: '25px', height: '25px', marginRight: '5px' }} />MORA EM: {perfil?.local_moradia || 'N/A'}</h5>
             </span>
             <span>
               <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={coracao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />SOLTEIRO: {perfil?.estado_civil || 'N/A'}</h5>

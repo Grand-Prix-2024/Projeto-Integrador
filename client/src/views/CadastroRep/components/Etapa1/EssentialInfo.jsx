@@ -1,22 +1,31 @@
 import React, { useState } from "react";
+import { useObjeto } from "../ObjectContext"; // Supondo que este seja o caminho correto
 
-const EssentialInfo = ({ initialValues = {} }) => {
-  const MIN_VALUE = 0;  // Limite inferior
+const EssentialInfo = () => {
+  const { objetoRepublica, setObjetoRepublica } = useObjeto(); // Pegando valores do contexto
+
+  const MIN_VALUE = 0; // Limite inferior
   const MAX_VALUE = 10; // Limite superior
 
   const [values, setValues] = useState({
-    Moradores: initialValues.Moradores || 1,
-    Quartos: initialValues.Quartos || 1,
-    Banheiros: initialValues.Banheiros || 1,
-    Camas: initialValues.Camas || 1,
+    Moradores: objetoRepublica.Moradores || 1,
+    Quartos: objetoRepublica.Quartos || 1,
+    Banheiros: objetoRepublica.Banheiros || 1,
+    Camas: objetoRepublica.Camas || 1,
   });
 
   const onUpdate = (key, value) => {
+    const numericValue = Math.max(MIN_VALUE, Math.min(MAX_VALUE, parseInt(value, 10) || 0));
     setValues((prevValues) => ({
       ...prevValues,
-      [key]: value,
+      [key]: numericValue,
+    }));
+    setObjetoRepublica((prevObjeto) => ({
+      ...prevObjeto,
+      [key]: numericValue,
     }));
   };
+
 
   return (
     <div>
@@ -47,21 +56,20 @@ const EssentialInfo = ({ initialValues = {} }) => {
 
           /* Estilo para as divisões */
           .item-container {
-          border: 1px solid #ddd;
-          border-radius: 5px;
-          padding: 10px;
-          margin-bottom: 10px;
-          background-color: #f9f9f9; /* Fundo leve */
-          width: 800px; /* Largura fixa */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9; /* Fundo leve */
+            width: 800px; /* Largura fixa */
           }
 
           .componentes {
-          display: flex;
-          flex-direction: column; /* Empilha os itens verticalmente */
-          align-items: center;    /* Centraliza horizontalmente */
-          justify-content: center; /* Centraliza verticalmente */
-          min-height: 30vh;      /* Ocupa toda a altura da tela */
-    
+            display: flex;
+            flex-direction: column; /* Empilha os itens verticalmente */
+            align-items: center;    /* Centraliza horizontalmente */
+            justify-content: center; /* Centraliza verticalmente */
+            min-height: 30vh;      /* Ocupa toda a altura da tela */
           }
         `}
       </style>
@@ -104,5 +112,3 @@ const EssentialInfo = ({ initialValues = {} }) => {
 };
 
 export default EssentialInfo;
-
-
