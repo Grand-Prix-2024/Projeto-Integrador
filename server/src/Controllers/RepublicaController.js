@@ -19,7 +19,7 @@ export async function criarRepublica(req, res) {
         }
 
         // Salve o arquivo no servidor (ou use um serviço externo como S3)
-        const savePath = `./public/img/${file.name}`;
+        const savePath = `./public/img/${Date.now()}_${file.name}`;
         console.log(savePath);
        file.mv(`${savePath}`, (err) => {
             if (err) {

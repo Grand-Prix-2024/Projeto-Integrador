@@ -42,7 +42,8 @@ export async function createRepublica(republica, imageFile) {
         fs.mkdirSync(publicFolder, { recursive: true });
     }
 
-    const imagePath = `/img/${Date.now()}_${imageFile}`;
+    const imagePath = `/img/${imageFile}`; 
+    // retirei o date now
     const fullPath = path.join(publicFolder, imagePath);
     console.log(imagePath);
     console.log(fullPath);

@@ -53,7 +53,7 @@ const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) =>
     <div>
       <style>
         {`
-          .section-container {
+.section-container {
             margin-bottom: 40px;
           }
 
@@ -67,20 +67,20 @@ const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) =>
 
           .features-container {
             display: flex;
-            flex-wrap: wrap; /* Permite quebra de linha */
-            justify-content: center; /* Centraliza os itens */
-            gap: 16px; /* Espaçamento entre os itens */
-            max-width: 800px; /* Limite de largura */
-            margin: 0 auto; /* Centraliza o container na tela */
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            max-width: 800px;
+            margin: 0 auto;
           }
 
           .feature-btn {
-            flex: 0 1 calc(33.333% - 16px); /* Mantém 3 itens por linha */
+            flex: 0 1 calc(33.333% - 16px);
             max-width: calc(33.333% - 16px);
             padding: 20px;
             text-align: center;
-            background: #ffc107; /* Amarelo inicial */
-            color: #fff; /* Texto branco */
+            background: #ffc107;
+            color: #fff;
             border: 1px solid #ffc107;
             border-radius: 8px;
             cursor: pointer;
@@ -92,23 +92,23 @@ const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) =>
           }
 
           .feature-btn.active {
-            background: #ffe082; /* Fundo mais claro quando ativo */
-            color: #000; /* Texto preto para contraste */
-            border-color: #ffd54f; /* Borda levemente mais clara */
+            background: #ffe082;
+            color: #000;
+            border-color: #ffd54f;
           }
 
           .feature-btn:hover {
-            background: #ffecb3; /* Fundo mais claro no hover */
-            color: #000; /* Texto preto */
-            transform: scale(1.05); /* Leve efeito de zoom */
+            background: #ffecb3;
+            color: #000;
+            transform: scale(1.05);
           }
 
           .feature-icon {
-            font-size: 32px; /* Aumentado para destacar os emojis */
+            font-size: 32px;
           }
 
           .feature-text {
-            font-size: 16px; /* Tamanho do texto */
+            font-size: 16px;
             font-weight: bold;
           }
         `}
@@ -125,9 +125,8 @@ const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) =>
               {section.items.map((item, idx) => (
                 <button
                   key={idx}
-                  className={`feature-btn ${
-                    objetoRepublica.Features && objetoRepublica.Features.includes(item.name) ? "active" : ""
-                  }`}
+                  className={`feature-btn ${objetoRepublica.Features && objetoRepublica.Features.includes(item.name) ? "active" : ""
+                    }`}
                   onClick={() => handleToggle(item.name)}
                 >
                   <span className="feature-icon">{item.icon}</span> {/* Emoji como ícone */}

@@ -21,49 +21,48 @@ const AccommodationSelector = () => {
     <div>
       <style>
         {`
-          .features-container {
+         .features-container {
             display: flex;
-            justify-content: center; /* Centraliza horizontalmente */
-            align-items: center; /* Centraliza verticalmente */
+            justify-content: center; /* Centraliza os itens */
             gap: 16px; /* Espaçamento entre os botões */
-            margin: 0 auto; /* Centraliza na tela */
-            max-width: 600px; /* Define uma largura máxima para o grupo */
+            margin: 20px auto; /* Margem para centralizar */
           }
 
           .feature-btn {
             padding: 20px 40px; /* Tamanho do botão */
             text-align: center;
-            background: #ffc107; /* Amarelo */
+            background: #FFE245; /* Amarelo atualizado */
             color: #fff; /* Texto branco */
-            border: 1px solid #ffc107;
+            border: 1px solid #FFE245;
             border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
             font-weight: bold;
             transition: background 0.3s, transform 0.2s;
             display: flex;
-            flex-direction: column; /* Ícone acima do texto */
-            align-items: center; /* Centraliza conteúdo do botão */
-            gap: 10px; /* Espaço entre ícone e texto */
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+          }
+
+          .feature-btn .feature-icon {
+            font-size: 32px; /* Tamanho do ícone */
+            color: #fff; /* Ícone branco */
           }
 
           .feature-btn.active {
-            background: #ffe082; /* Amarelo mais claro quando ativo */
+            background: #FFEB86; /* Amarelo mais claro quando ativo */
             color: #000; /* Texto preto */
             border-color: #FFEB86;
           }
 
+          .feature-btn.active .feature-icon {
+            color: #000; /* Ícone preto quando ativo */
+          }
+
           .feature-btn:hover {
-            background: #ffd54f; /* Fundo mais claro no hover */
+            background: #FFD834; /* Fundo mais escuro no hover */
             transform: scale(1.05); /* Zoom no hover */
-          }
-
-          .feature-btn.active .feature-icon{
-            color: #000
-          }
-
-          .feature-icon {
-            font-size: 32px; /* Tamanho do ícone */
           }
 
           .feature-text {
@@ -71,11 +70,11 @@ const AccommodationSelector = () => {
             font-weight: bold;
           }
 
-          .features-container-wrapper {
-            display: flex;
-            justify-content: center; /* Centraliza a wrapper na tela */
-            align-items: center;
-            min-height: 150px; /* Altura mínima para evitar colapsos */
+          .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
           }
         `}
       </style>
@@ -94,13 +93,11 @@ const AccommodationSelector = () => {
           </button>
         ))}
       </div>
-
-  
-      {/* <div className="message">
+      <div className="message">
         {objetoRepublica.name
           ? `Você selecionou: ${objetoRepublica.name}`
           : "Nenhuma acomodação selecionada."}
-      </div> */}
+      </div>
     </div>
   );
 };

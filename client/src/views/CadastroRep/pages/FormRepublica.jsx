@@ -22,8 +22,14 @@ const FormRepublica = () => {
   const [features, setFeatures] = useState([]);
   const { objetoRepublica, setObjetoRepublica } = useObjeto();
 
+
+  // TESTAR
   useEffect(() => {
     const idUsuario = localStorage.getItem('id_usuario');
+    if (!idUsuario) {
+      alert('Efetue Login');
+      navigate('/login');
+    }
     if (idUsuario) {
       setObjetoRepublica((prev) => ({
         ...prev,
