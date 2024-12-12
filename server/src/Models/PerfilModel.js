@@ -59,7 +59,6 @@ export async function updatePerfil(perfil, id) {
         bio = ?,
         curso = ?,
         faculdade = ?,
-        musicaFavorita = ?,
         caminho_foto_perfil = ?
         WHERE id_usuario = ?`;
 
@@ -74,7 +73,6 @@ export async function updatePerfil(perfil, id) {
         perfil.bio,
         perfil.curso,
         perfil.faculdade,
-        perfil.musicaFavorita,
         perfil.caminho_foto_perfil,
         id
     ];

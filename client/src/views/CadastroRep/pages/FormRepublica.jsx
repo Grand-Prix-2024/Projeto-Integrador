@@ -121,7 +121,7 @@ const FormRepublica = () => {
       }
     } catch (error) {
       console.error("Erro ao cadastrar a república", error);
-      alert("Erro ao cadastrar. Tente novamente.");
+      // alert("Erro ao cadastrar. Tente novamente.");
     }
   };
 

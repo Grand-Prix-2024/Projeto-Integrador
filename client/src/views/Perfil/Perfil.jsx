@@ -30,7 +30,6 @@ function Perfil() {
       alert('Efetue Login');
       navigate('/login');
     } else {
-      baixarUsuario();
       baixarPerfil();
     }
   }, []);
