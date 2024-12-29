@@ -36,11 +36,7 @@ CREATE TABLE `foto_republica` (
 -- Dumping data for table `foto_republica`
 --
 
-LOCK TABLES `foto_republica` WRITE;
-/*!40000 ALTER TABLE `foto_republica` DISABLE KEYS */;
-INSERT INTO `foto_republica` VALUES (1,'',3),(2,'',3),(3,'',3),(4,'',4),(5,'',4),(6,'',4),(7,'',4),(8,'',5),(9,'',5),(10,'',5),(11,'',5),(12,'',6),(13,'',6),(14,'',6),(15,'',6),(16,'',7),(17,'',7),(18,'',7),(19,'',7),(20,'',8),(21,'',8),(22,'',8),(23,'',8),(24,'',9),(25,'',9),(26,'',9),(27,'',9),(28,'/img/1733862132096_./public/img/Sacada-gourmet-do-Villa-Celimontana-Residencial-Fontana-Construtora-1170x780.jpg',10),(29,'/img/1733862420822_./public/img/Sacada-gourmet-do-Villa-Celimontana-Residencial-Fontana-Construtora-1170x780.jpg',11),(30,'/img/1733862510454_./public/img/SWELL_SILVA_duplex_v04_01-1.jpg',12),(31,'/img/1733936190500_Sacada-gourmet-do-Villa-Celimontana-Residencial-Fontana-Construtora-1170x780.jpg',13),(32,'/img/./public/img/1733936377056_Sacada-gourmet-do-Villa-Celimontana-Residencial-Fontana-Construtora-1170x780.jpg',14),(33,'/img/1733936471717_maxresdefault.jpg',15),(34,'/img/1733940185309_Sacada-gourmet-do-Villa-Celimontana-Residencial-Fontana-Construtora-1170x780.jpg',16),(35,'/img/1733940306408_maxresdefault.jpg',17),(36,'/img/1733940566823_asas.jpg',18),(37,'/img/1733943451103_asas.jpg',19),(38,'/img/1733943639873_maxresdefault.jpg',20);
-/*!40000 ALTER TABLE `foto_republica` ENABLE KEYS */;
-UNLOCK TABLES;
+
 
 --
 -- Table structure for table `musicas`
@@ -104,11 +100,7 @@ CREATE TABLE `perfil` (
 -- Dumping data for table `perfil`
 --
 
-LOCK TABLES `perfil` WRITE;
-/*!40000 ALTER TABLE `perfil` DISABLE KEYS */;
-INSERT INTO `perfil` VALUES (1,'ELE/DELE','Ciências da computação','Russo','Solteiro','ES','27998320610','emanoelvitor_','OPIUM','Ciências da computação','Faesa',NULL,18,NULL),(2,NULL,'Moda',NULL,NULL,NULL,'27998320610','gabesperandio','psv',NULL,NULL,NULL,19,NULL),(3,'ELA/DELA','Educação Física','Inglês','Solteira',NULL,'27998320610','anna.silva','Linda','Educação Física','UFES',NULL,23,NULL),(4,'ELA/DELA','Direito','Italiano','Solteira','ES','27998320610','rebecca_','Da simplicidade do interior para os horizontes ilimitados da capital!\n\nMe chamo Becca e trilho meu caminho na UFES com o objetivo firme de me tornar uma advogada criminalista. ⚖️','Direito','UFES',NULL,24,NULL),(5,'ELA/DELA','Estudante','frances','solteira',NULL,'27998320610','rebecca_','estudante de direito','Direito','UFES',NULL,25,NULL),(6,'ELA/DELA','Capixaba','Inglês','Solteira','ES','27998320610','a.xavier','verdade','DDS','SENAI',NULL,26,NULL);
-/*!40000 ALTER TABLE `perfil` ENABLE KEYS */;
-UNLOCK TABLES;
+
 
 --
 -- Table structure for table `republicas`
@@ -166,11 +158,7 @@ CREATE TABLE `republicas` (
 -- Dumping data for table `republicas`
 --
 
-LOCK TABLES `republicas` WRITE;
-/*!40000 ALTER TABLE `republicas` DISABLE KEYS */;
-INSERT INTO `republicas` VALUES (2,'Casa','497','','',0,0,0,0,'','',1,1,NULL,NULL,NULL,1,NULL,1,1,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','awewew','ewewe','wewew','ewewe',NULL,NULL,18,NULL),(3,'Casa','500','','',0,0,0,0,'','',1,1,NULL,NULL,NULL,1,NULL,1,1,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','awewew','ewewe','wewew','ewewe',NULL,NULL,18,NULL),(4,'República teste','500','','',0,0,0,0,'','',1,1,NULL,NULL,NULL,1,NULL,1,1,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','awewew','ewewe','wewew','ewewe','701',NULL,18,NULL),(5,'teste','70','Casa','',0,0,0,0,'','',1,1,0,0,1,0,0,1,1,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','awewew','ewewe','wewew','ewewe','701',NULL,18,NULL),(6,'casasa','67','Casa','',0,0,0,0,'','',1,1,0,1,0,0,0,1,0,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','awewew','ewewe','wewew','ewewe','701',NULL,18,NULL),(7,'casa','70','Apartamento','',0,0,0,0,'','',1,1,0,1,0,0,0,1,0,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','awewew','ewewe','wewew','ewewe','701',NULL,18,NULL),(8,'República dos manos','70','Apartamento','',0,0,0,0,'','',1,1,0,1,0,0,0,1,1,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','awewew','ewewe','wewew','ewewe','701',NULL,18,NULL),(9,'Rep dos manos','70','Apartamento','',0,0,0,0,'','',1,1,0,1,0,0,0,1,0,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','awewew','ewewe','wewew','ewewe','701',NULL,18,NULL),(10,'cscscscs','703','Casa','private',0,0,0,0,'cxcsc','',1,1,0,0,0,0,0,1,0,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','Rua Desembargador Eurípdes Queiroz do Valle','Jardim Camburi','Vitória','ES','701',NULL,18,NULL),(11,'Sim','70239','Casa','private',0,0,0,0,'Sim','',1,1,0,1,0,0,0,1,0,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','Rua Desembargador Eurípdes Queiroz do Valle','Jardim Camburi','Vitória','ES','701',NULL,18,NULL),(12,'dsdsd','704','Casa','private',0,0,0,0,'wewewe','',1,1,0,1,0,0,0,1,0,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','Rua Desembargador Eurípdes Queiroz do Valle','Jardim Camburi','Vitória','ES','701','SWELL_SILVA_duplex_v04_01-1.jpg',18,NULL),(13,'teste mais uma vez','498','Apartamento','private',0,0,0,0,'testando','',1,1,0,0,0,0,0,1,0,NULL,NULL,1,NULL,NULL,NULL,'Brasil','29090090','Rua Desembargador Eurípdes Queiroz do Valle','Jardim Camburi','Vitória','ES','701','1733936190500_Sacada-gourmet-do-Villa-Celimontana-Residencial-Fontana-Construtora-1170x780.jpg',18,NULL),(14,'wdwewewew','705','Casa','private',0,0,0,0,'simsim','',1,1,0,0,0,0,0,1,0,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','Rua Desembargador Eurípdes Queiroz do Valle','Jardim Camburi','Vitória','ES','701','./public/img/1733936377056_Sacada-gourmet-do-Villa-Celimontana-Residencial-Fontana-Construtora-1170x780.jpg',18,NULL),(15,'testando dnv','705','Casa','private',0,0,0,0,'3434343','',1,1,0,0,0,0,0,1,0,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','Rua Desembargador Eurípdes Queiroz do Valle','Jardim Camburi','Vitória','ES','701','1733936471717_maxresdefault.jpg',18,NULL),(16,'sdsds','7055','Apartamento','private',0,0,0,0,'wewew','',1,1,0,1,0,0,0,1,0,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','Rua Desembargador Eurípdes Queiroz do Valle','Jardim Camburi','Vitória','ES','701','1733940185309_Sacada-gourmet-do-Villa-Celimontana-Residencial-Fontana-Construtora-1170x780.jpg',18,NULL),(17,'testando','7055','Apartamento','private',0,0,0,0,'teste','',1,1,0,1,0,0,0,1,0,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','Rua Desembargador Eurípdes Queiroz do Valle','Jardim Camburi','Vitória','ES','701','1733940306408_maxresdefault.jpg',18,NULL),(18,'simsimsim','703434','Casa','private',0,0,0,0,'343434','',1,1,0,1,0,0,0,1,0,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','Rua Desembargador Eurípdes Queiroz do Valle','Jardim Camburi','Vitória','ES','701','1733940566823_asas.jpg',18,NULL),(19,'teste quartos','70','Apartamento','private',0,0,0,0,'quartos','',1,1,0,1,0,0,0,1,0,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','Rua Desembargador Eurípdes Queiroz do Valle','Jardim Camburi','Vitória','ES','701','1733943451103_asas.jpg',26,NULL),(20,'sdsd','7034','Apartamento','private',0,0,0,0,'so,','',1,0,0,0,0,0,0,1,1,NULL,NULL,0,NULL,NULL,NULL,'Brasil','29090090','Rua Desembargador Eurípdes Queiroz do Valle','Jardim Camburi','Vitória','ES','701','1733943639873_maxresdefault.jpg',26,NULL);
-/*!40000 ALTER TABLE `republicas` ENABLE KEYS */;
-UNLOCK TABLES;
+
 
 --
 -- Table structure for table `usuarios`
@@ -196,11 +184,7 @@ CREATE TABLE `usuarios` (
 -- Dumping data for table `usuarios`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (18,'emanoelvitor020@gmail.com','tylerthecreator','Emanoel Vitor','Ventura Atanazio','2005-01-28','07023462503','ativo'),(19,'gabriel@gmail.com','123*abc','Gabriel','de Assis Sperandio','2004-09-13','07023462503','ativo'),(23,'anna@gmail.com','123*abc','Anna Julya','Silva','2005-01-28','07023462503','ativo'),(24,'rebecca@gmail.com','Rebecca123','Rebecca','Amorim Mendes','2005-01-28','07023462503','ativo'),(25,'rebeca@gmail.com','Hojeemdia19','Rebeca','Amorin','2003-06-23','07023462503','ativo'),(26,'amandaxavier@gmail.com','Nineiota2801','Amanda','Xavier','2003-03-30','07023462503',NULL);
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
