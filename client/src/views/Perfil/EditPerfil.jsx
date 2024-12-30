@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, Form, Image } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
 import { useNavigate } from 'react-router-dom';
-import ImgPerfil from './ImgPerfil.jsx';
-
-
-const idPerfil = 0;
 
 function EditarPerfil() {
   const [formData, setFormData] = useState({
@@ -18,9 +14,12 @@ function EditarPerfil() {
     estado_civil: '',
     local_moradia: '',
     curso: '',
-    faculdade: ''
+    faculdade: '',
+    musicaFavorita: '',
+    caminho_foto_perfil: '', // Caminho da foto de perfil
   });
 
+  const [selectedFile, setSelectedFile] = useState(null); // Estado para armazenar o arquivo selecionado
   const navigate = useNavigate();
   const id_usuario = localStorage.getItem("id_usuario");
 
@@ -53,15 +52,24 @@ function EditarPerfil() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file); // Atualiza o estado do arquivo
+  };
+
   const salvarPerfil = async (e) => {
     e.preventDefault();
+    const formDataToSend = new FormData();
+
+    formDataToSend.append('infoPerfil', JSON.stringify(formData)); // Adiciona os dados do perfil como JSON
+    if (selectedFile) {
+      formDataToSend.append('image', selectedFile); // Adiciona o arquivo da imagem, se existir
+    }
+
     try {
       const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/perfil/${id_usuario}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: formDataToSend, // Envia o FormData com os dados e a imagem
       });
 
       if (!resposta.ok) {
@@ -69,30 +77,31 @@ function EditarPerfil() {
         throw new Error(`Erro ao salvar: ${erro}`);
       }
 
-      const atualizado = await resposta.json();
       alert('Perfil atualizado com sucesso!');
-      window.location.href = navigate(`/perfil/${id_usuario}`);
+      navigate(`/perfil/${id_usuario}`);
     } catch (error) {
       console.error('Erro ao salvar o perfil:', error.message);
       alert('Erro ao salvar o perfil. Tente novamente.');
     }
   };
 
-  // Verifica se caminho_foto_perfil é um arquivo e gera o URL, caso contrário usa uma imagem padrão
-  const imagemPerfil = formData.caminho_foto_perfil && formData.caminho_foto_perfil instanceof File
-    ? URL.createObjectURL(formData.caminho_foto_perfil)
-    : "https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg"; // Imagem padrão
+  const imagemPerfil = formData.caminho_foto_perfil
+    ? `http://localhost:5000/public/${formData.caminho_foto_perfil}`
+    : "https://img.freepik.com/vetores-premium/icone-de-perfil-de-usuario-em-estilo-plano-ilustracao-em-vetor-avatar-membro-em-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana_157943-15752.jpg";
 
   return (
     <>
       <Navbar />
       <Card style={{ width: '400px', padding: '30px', margin: '50px auto', borderRadius: '20px' }}>
         <Image
-          src={`http://localhost:5000/public/${formData.caminho_foto_perfil}`}
+          src={imagemPerfil}
           roundedCircle
           style={{ width: '200px', height: '200px', marginTop: '-20px', marginLeft: '65px' }}
         />
-        <ImgPerfil formData={formData} setFormData={setFormData} />
+        <Form.Group controlId="formFile" className="mt-3">
+          <Form.Label>Alterar foto de perfil</Form.Label>
+          <Form.Control type="file" onChange={handleFileChange} />
+        </Form.Group>
       </Card>
       <Card style={{ width: '600px', padding: '30px', margin: '50px auto', borderRadius: '20px' }}>
         <Card.Body>
@@ -164,7 +173,7 @@ function EditarPerfil() {
             <Form.Group className="mb-3">
               <Form.Label>Local de Moradia</Form.Label>
               <Form.Control
-                type='text'
+                type="text"
                 name="local_moradia"
                 value={formData.local_moradia}
                 onChange={handleInputChange}

@@ -1,5 +1,7 @@
 import mysql from 'mysql2/promise';
 import db from '../conexao.js';
+import path from 'path';
+import fs from 'fs';
 
 const conexao = mysql.createPool(db);
 
@@ -44,9 +46,34 @@ export async function showPerfil() {
 }
 
 
-export async function updatePerfil(perfil, id) {
-    // const conexao = mysql.createPool(db);
+export async function updatePerfil(perfil, imageFile, id) {
     console.log('Atualizando perfil...');
+
+    if (!id) {
+        throw new Error("ID do usuário é obrigatório.");
+    }
+
+    let imagePath = perfil.caminho_foto_perfil; // Caminho existente da imagem, se fornecido.
+
+    if (imageFile) {
+        // Salvando a nova imagem no servidor
+        const publicFolder = path.join(process.cwd(), "public", "img");
+        if (!fs.existsSync(publicFolder)) {
+            fs.mkdirSync(publicFolder, { recursive: true });
+        }
+
+        // Define o caminho completo para salvar a imagem
+        const newImagePath = `/img/${imageFile}`;
+        const fullPath = path.join(publicFolder, newImagePath);
+
+        try {
+            // Salva a imagem no diretório definido
+            // await imageFile.mv(fullPath);
+            imagePath = newImagePath; // Atualiza o caminho para o novo arquivo
+        } catch (error) {
+            throw new Error(`Erro ao salvar a imagem: ${error.message}`);
+        }
+    }
 
     const sql = `UPDATE perfil SET 
         pronome = ?,
@@ -73,7 +100,7 @@ export async function updatePerfil(perfil, id) {
         perfil.bio,
         perfil.curso,
         perfil.faculdade,
-        perfil.caminho_foto_perfil,
+        imagePath, 
         id
     ];
 

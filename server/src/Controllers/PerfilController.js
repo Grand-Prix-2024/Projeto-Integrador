@@ -5,6 +5,11 @@ import {
     deletePerfil, 
     getPerfilByIdUsuario 
 } from "../Models/PerfilModel.js";
+import path from 'path';
+import url from 'url';
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 export async function criarPerfil(req, res) {
     console.log('Chamando criarPerfil');
@@ -33,7 +38,7 @@ export async function mostrarPerfil(req, res) {
 
 export async function atualizarPerfil(req, res) {
     console.log('Chamando atualizarPerfil');
-    const perfil = req.body;
+    const perfil = JSON.parse(req.body.infoPerfil); // Parse do corpo da requisição para obter os dados do perfil
     const { id } = req.params;
 
     if (!id) {
@@ -41,6 +46,29 @@ export async function atualizarPerfil(req, res) {
     }
 
     try {
+        const file = req.files?.image; // Verifica se uma imagem foi enviada
+
+        if (file) {
+            // Validação de formato de imagem
+            if (!['image/jpeg', 'image/png', 'image/jpg'].includes(file.mimetype)) {
+                return res.status(400).json({ mensagem: 'Apenas arquivos JPEG ou PNG são permitidos.' });
+            }
+
+            // Salva o arquivo no servidor
+            const savePath = `./public/img/${Date.now()}_${file.name}`;
+            const nomeImg = `${Date.now()}_${file.name}`;
+            console.log('Caminho da imagem:', savePath);
+
+            try {
+                await file.mv(savePath); // Salva a imagem no diretório
+                perfil.caminho_foto_perfil = nomeImg; // Atualiza o caminho da imagem no objeto perfil
+            } catch (err) {
+                console.error('Erro ao salvar a imagem:', err);
+                return res.status(500).json({ mensagem: 'Erro ao salvar a imagem.' });
+            }
+        }
+
+        // Chama a função do model para atualizar o perfil no banco de dados
         const [status, resposta] = await updatePerfil(perfil, id);
         res.status(status).json({ mensagem: resposta });
     } catch (error) {
@@ -48,6 +76,7 @@ export async function atualizarPerfil(req, res) {
         res.status(500).json({ mensagem: "Erro interno ao atualizar perfil", detalhes: error.message });
     }
 }
+
 
 export async function deletarPerfil(req, res) {
     console.log('Chamando deletarPerfil');

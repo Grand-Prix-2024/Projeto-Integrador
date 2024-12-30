@@ -120,7 +120,9 @@ export async function createRepublica(republica, imageFile) {
 
 export async function showRepublicas(republica) {
     const conexao = mysql.createPool(db);
-    const sql = `SELECT * FROM republicas`;
+
+    // Ajustar o SQL para ordenar os resultados em ordem decrescente
+    const sql = `SELECT * FROM republicas ORDER BY id DESC`;
 
     const params = [
         republica.titulo,
@@ -160,13 +162,14 @@ export async function showRepublicas(republica) {
 
     try {
         const [retorno] = await conexao.query(sql, params);
-        console.log('Mostrando republicas');
+        console.log('Mostrando republicas em ordem decrescente');
         return [200, retorno];
     } catch (error) {
         console.log(error);
         return [502, error];
     }
 }
+
 
 export async function updateRepublica(republica, id) {
     const conexao = mysql.createPool(db);
