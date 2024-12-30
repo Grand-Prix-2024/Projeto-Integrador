@@ -13,7 +13,7 @@ function HomeCasas() {
   useEffect(() => {
     async function fetchAd() {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND}/republicas/${id}`);
+        const response = await axios.get(`http://localhost:5000/republicas/${id}`);
         if (response.data) {
           setAdData(response.data);
           fetchUser(response.data.id_usuario); 
@@ -27,7 +27,7 @@ function HomeCasas() {
 
     async function fetchUser(userId) {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND}/usuarios/${userId}`);
+        const response = await axios.get(`http://localhost:5000/usuarios/${userId}`);
         if (response.data) {
           setUserData(response.data);
         } else {
@@ -90,7 +90,7 @@ function HomeCasas() {
           <div className="row g-4">
             <div className="col-lg-12 text-center">
               <img
-                src={`${process.env.REACT_APP_BACKEND}/public/${adData.caminhoFoto}`}
+                src={`http://localhost:5000/public/${adData.caminhoFoto}`}
                 alt="Foto principal da república"
                 className="img-fluid rounded shadow-sm"
                 style={{ ...imageStyle, height: "450px", objectFit: "cover" }}

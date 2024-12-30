@@ -30,7 +30,7 @@ function Perfil() {
 
   const carregarPerfil = async () => {
     try {
-      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/perfil/${id_usuario}`, {
+      const resposta = await fetch(`http://localhost:5000/perfil/${id_usuario}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });

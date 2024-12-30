@@ -23,7 +23,7 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
 
     async function baixarUsuarios(id) {
         try {
-            const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/usuarios/${id}`, {
+            const resposta = await fetch(`http://localhost:5000/usuarios/${id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

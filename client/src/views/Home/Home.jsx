@@ -8,7 +8,7 @@ import axios from 'axios';
 // Função para obter as repúblicas do backend
 async function getRepublicas() {
   try {
-    const response = await axios.get(`${process.env.REACT_APP_BACKEND}/republicas`);
+    const response = await axios.get(`http://localhost:5000/republicas`);
     return response.data;
   } catch (error) {
     console.error("Erro ao buscar repúblicas:", error);
@@ -105,7 +105,7 @@ function Home() {
                       onClick={() => handleNavigate(`${rep.id_republica}`)}
                     >
                       <img
-                        src={`${process.env.REACT_APP_BACKEND}/public/${rep.caminhoFoto}`}
+                        src={`http://localhost:5000/public/${rep.caminhoFoto}`}
                         alt={rep.nome}
                         style={{
                           width: '100%',

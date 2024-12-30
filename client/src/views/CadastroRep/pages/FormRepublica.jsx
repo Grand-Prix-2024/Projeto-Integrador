@@ -88,7 +88,7 @@ const FormRepublica = () => {
     }
 
     try {
-      const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/republicas`, {
+      const resposta = await fetch(`http://localhost:5000/republicas`, {
         method: "POST",
         body: formData,
       });

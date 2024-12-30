@@ -12,7 +12,7 @@ function TabelaUsuarios({tipo, onDeleteSuccess}) {
 
     async function baixarUsuarios() {
         try {
-            const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/usuarios`,{
+            const resposta = await fetch(`http://localhost:5000/usuarios`,{
                 method:'GET',
                 headers:{
                     'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ function TabelaUsuarios({tipo, onDeleteSuccess}) {
 
     async function deletarUsuario(id) {
         try {
-            const resposta = await fetch(`${process.env.REACT_APP_BACKEND}/usuarios/${id}`,{
+            const resposta = await fetch(`http://localhost:5000/usuarios/${id}`,{
                 method:'DELETE',
                 headers:{
                     'Content-Type': 'application/json'
