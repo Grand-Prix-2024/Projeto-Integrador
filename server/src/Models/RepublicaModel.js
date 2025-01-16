@@ -122,7 +122,7 @@ export async function showRepublicas(republica) {
     const conexao = mysql.createPool(db);
 
     // Ajustar o SQL para ordenar os resultados em ordem decrescente
-    const sql = `SELECT * FROM republicas ORDER BY id DESC`;
+    const sql = `SELECT * FROM republicas ORDER BY id_republica DESC`;
 
     const params = [
         republica.titulo,

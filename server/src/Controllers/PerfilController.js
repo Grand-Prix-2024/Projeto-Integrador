@@ -1,12 +1,13 @@
-import { 
-    createPerfil, 
-    showPerfil, 
-    updatePerfil, 
-    deletePerfil, 
-    getPerfilByIdUsuario 
+import {
+    createPerfil,
+    showPerfil,
+    updatePerfil,
+    deletePerfil,
+    getPerfilByIdUsuario
 } from "../Models/PerfilModel.js";
 import path from 'path';
 import url from 'url';
+import fs from 'fs';
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -38,15 +39,17 @@ export async function mostrarPerfil(req, res) {
 
 export async function atualizarPerfil(req, res) {
     console.log('Chamando atualizarPerfil');
-    const perfil = JSON.parse(req.body.infoPerfil); // Parse do corpo da requisição para obter os dados do perfil
-    const { id } = req.params;
-
-    if (!id) {
-        return res.status(400).json({ mensagem: "ID do perfil não fornecido" });
-    }
-
     try {
-        const file = req.files?.image; // Verifica se uma imagem foi enviada
+        const perfil = JSON.parse(req.body.infoPerfil);
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({ mensagem: "ID do perfil não fornecido" });
+        }
+
+        // Verifica se uma imagem foi enviada
+        const file = req.files?.image;
+        let nomeImg = null;
 
         if (file) {
             // Validação de formato de imagem
@@ -54,28 +57,39 @@ export async function atualizarPerfil(req, res) {
                 return res.status(400).json({ mensagem: 'Apenas arquivos JPEG ou PNG são permitidos.' });
             }
 
-            // Salva o arquivo no servidor
-            const savePath = `./public/img/${Date.now()}_${file.name}`;
-            const nomeImg = `${Date.now()}_${file.name}`;
-            console.log('Caminho da imagem:', savePath);
+            // Garante que o diretório público existe
+            const publicDir = './public/img';
+            if (!fs.existsSync(publicDir)) {
+                fs.mkdirSync(publicDir, { recursive: true });
+            }
+
+            // Cria um nome único para a imagem
+            nomeImg = `${Date.now()}_${file.name}`;
+            const savePath = `${publicDir}/${nomeImg}`;
 
             try {
-                await file.mv(savePath); // Salva a imagem no diretório
-                perfil.caminho_foto_perfil = nomeImg; // Atualiza o caminho da imagem no objeto perfil
+                await file.mv(savePath);
+                perfil.caminho_foto_perfil = nomeImg;
             } catch (err) {
                 console.error('Erro ao salvar a imagem:', err);
-                return res.status(500).json({ mensagem: 'Erro ao salvar a imagem.' });
+                return res.status(500).json({
+                    mensagem: 'Erro ao salvar a imagem.',
+                    detalhes: err.message
+                });
             }
         }
 
-        // Chama a função do model para atualizar o perfil no banco de dados
-        const [status, resposta] = await updatePerfil(perfil, id);
+        const [status, resposta] = await updatePerfil(perfil, file, id);
         res.status(status).json({ mensagem: resposta });
     } catch (error) {
         console.error('Erro ao atualizar perfil:', error);
-        res.status(500).json({ mensagem: "Erro interno ao atualizar perfil", detalhes: error.message });
+        res.status(500).json({
+            mensagem: "Erro interno ao atualizar perfil",
+            detalhes: error.message
+        });
     }
 }
+
 
 
 export async function deletarPerfil(req, res) {
@@ -96,18 +110,18 @@ export async function deletarPerfil(req, res) {
 }
 
 export const buscarPerfilPorUsuario = async (req, res) => {
-    const { id_usuario } = req.params; 
-    
+    const { id_usuario } = req.params;
+
     try {
-      const [status, perfil] = await getPerfilByIdUsuario(id_usuario);
-      
-      if (!perfil) {
-        return res.status(404).json({ message: "Perfil não encontrado" });
-      }
-  
-      return res.status(status).json(perfil);
+        const [status, perfil] = await getPerfilByIdUsuario(id_usuario);
+
+        if (!perfil) {
+            return res.status(404).json({ message: "Perfil não encontrado" });
+        }
+
+        return res.status(status).json(perfil);
     } catch (error) {
-      console.error("Erro ao buscar perfil:", error);
-      return res.status(500).json({ message: "Erro ao buscar perfil" });
+        console.error("Erro ao buscar perfil:", error);
+        return res.status(500).json({ message: "Erro ao buscar perfil" });
     }
-  };
+};

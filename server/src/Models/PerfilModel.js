@@ -6,17 +6,18 @@ import fs from 'fs';
 const conexao = mysql.createPool(db);
 
 export async function createPerfil(perfil) {
-    // const conexao = mysql.createPool(db);
     const sql = `
         INSERT INTO perfil (
             pronome, descricao, idioma, estado_civil, local_moradia,
             telefone, redes, bio, curso, faculdade, musicaFavorita, caminho_foto_perfil, id_usuario
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
+
     const params = [
         perfil.pronome, perfil.descricao, perfil.idioma,
         perfil.estado_civil, perfil.local_moradia, perfil.telefone,
-        perfil.redes, perfil.bio, perfil.curso, perfil.faculdade, perfil.musicaFavorita, perfil.caminho_foto_perfil, perfil.id_usuario
+        perfil.redes, perfil.bio, perfil.curso, perfil.faculdade,
+        perfil.musicaFavorita, perfil.caminho_foto_perfil, perfil.id_usuario // Incluído corretamente
     ];
 
     try {
@@ -25,10 +26,11 @@ export async function createPerfil(perfil) {
         console.log('Perfil cadastrado');
         return [201, 'Perfil cadastrado'];
     } catch (error) {
-        console.log(error);
-        return [500, error];
+        console.error('Erro ao criar o perfil:', error.message);
+        return [500, error.message];
     }
 }
+
 
 
 export async function showPerfil() {
@@ -53,41 +55,35 @@ export async function updatePerfil(perfil, imageFile, id) {
         throw new Error("ID do usuário é obrigatório.");
     }
 
-    let imagePath = perfil.caminho_foto_perfil; // Caminho existente da imagem, se fornecido.
+    let imagePath = perfil.caminho_foto_perfil || null;
 
     if (imageFile) {
-        // Salvando a nova imagem no servidor
-        const publicFolder = path.join(process.cwd(), "public", "img");
+        const publicFolder = path.resolve('./public/img');
+
+        // Garante que o diretório existe
         if (!fs.existsSync(publicFolder)) {
             fs.mkdirSync(publicFolder, { recursive: true });
         }
 
-        // Define o caminho completo para salvar a imagem
-        const newImagePath = `/img/${imageFile}`;
-        const fullPath = path.join(publicFolder, newImagePath);
-
-        try {
-            // Salva a imagem no diretório definido
-            // await imageFile.mv(fullPath);
-            imagePath = newImagePath; // Atualiza o caminho para o novo arquivo
-        } catch (error) {
-            throw new Error(`Erro ao salvar a imagem: ${error.message}`);
-        }
+        // Usar o nome da imagem que já foi salvo no controller
+        imagePath = perfil.caminho_foto_perfil;
     }
 
-    const sql = `UPDATE perfil SET 
-        pronome = ?,
-        descricao = ?,
-        idioma = ?,
-        estado_civil = ?,
-        local_moradia = ?,
-        telefone = ?,
-        redes = ?,
-        bio = ?,
-        curso = ?,
-        faculdade = ?,
-        caminho_foto_perfil = ?
-        WHERE id_usuario = ?`;
+    const sql = `
+        UPDATE perfil SET 
+            pronome = ?,
+            descricao = ?,
+            idioma = ?,
+            estado_civil = ?,
+            local_moradia = ?,
+            telefone = ?,
+            redes = ?,
+            bio = ?,
+            curso = ?,
+            faculdade = ?,
+            caminho_foto_perfil = ?
+        WHERE id_usuario = ?
+    `;
 
     const params = [
         perfil.pronome,
@@ -100,17 +96,17 @@ export async function updatePerfil(perfil, imageFile, id) {
         perfil.bio,
         perfil.curso,
         perfil.faculdade,
-        imagePath, 
+        imagePath,
         id
     ];
 
     try {
         const [retorno] = await conexao.query(sql, params);
-        console.log('Perfil atualizado com sucesso');
+        console.log('Perfil atualizado com sucesso:', retorno);
         return [200, 'Perfil atualizado com sucesso'];
     } catch (error) {
         console.error('Erro ao atualizar perfil:', error);
-        return [500, error];
+        return [500, `Erro ao atualizar perfil: ${error.message}`];
     }
 }
 
