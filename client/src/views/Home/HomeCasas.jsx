@@ -16,7 +16,7 @@ function HomeCasas() {
         const response = await axios.get(`http://localhost:5000/republicas/${id}`);
         if (response.data) {
           setAdData(response.data);
-          fetchUser(response.data.id_usuario); 
+          fetchUser(response.data.id_usuario);
         } else {
           console.error("República não encontrada.");
         }
@@ -104,6 +104,19 @@ function HomeCasas() {
             <span className="me-3">👥 {adData.qtd_moradores || 0} Vagas</span>
             <span className="me-3">{adData.qtd_quartos || 0} Quarto(s)</span>
             <span className="me-3">{adData.qtd_camas || 0} Cama(s)</span>
+            <span className="me-3"> Piscina: {(adData.wifi || 0) > 0 ? "Sim" : "Não"}</span>
+            <span className="me-3"> {(adData.televisao || 0) > 0 && (
+              <div>Televisao: Sim</div>
+            )}</span>
+            <span className="me-3"> {(adData.cozinha || 0) > 0 && (
+              <div>Cozinha: Sim</div>
+            )}</span>
+            <span className="me-3"> {(adData.ar_condicionado || 0) > 0 && (
+              <div>Ar-Condicionado: Sim</div>
+            )}</span>
+            <span className="me-3"> {(adData.canto_de_estudo || 0) > 0 && (
+              <div>Canto de Estudo: Sim</div>
+            )}</span>
             <span>{adData.banheiroCompartilhado ? "Banheiro compartilhado" : "Banheiro privado"}</span>
           </div>
 
@@ -143,7 +156,7 @@ function HomeCasas() {
                 {userData && (
                   <div className="text-center mb-4">
                     <img
-                      src={`${process.env.REACT_APP_BACKEND}/public/${userData.fotoPerfil}`}
+                      src={`http://localhost:5000/public/${userData.caminho_foto_perfil}`}
                       alt="Foto de perfil do usuário"
                       className="rounded-circle shadow-sm"
                       style={{ width: "100px", height: "100px", objectFit: "cover" }}
