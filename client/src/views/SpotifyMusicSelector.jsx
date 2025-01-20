@@ -9,7 +9,7 @@ const SpotifyMusicSelector = ({ onMusicSelect, selectedTrack, defaultTrack }) =>
     const id = localStorage.getItem("id_usuario");
   
     const CLIENT_ID = '429cb956ed234417b9a5bc3f34c69aa8'; // Substitua pelo seu Client ID
-    const REDIRECT_URI = `http://localhost/perfil/${id}`;
+    const REDIRECT_URI = `http://localhost/editar-perfil`;
   
     useEffect(() => {
       // Check for token in URL hash after Spotify auth

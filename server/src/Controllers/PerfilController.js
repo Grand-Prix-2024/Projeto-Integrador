@@ -5,6 +5,7 @@ import {
     deletePerfil,
     getPerfilByIdUsuario
 } from "../Models/PerfilModel.js";
+import { updateSpotifyTrack } from "../Models/PerfilModel.js";
 import path from 'path';
 import url from 'url';
 import fs from 'fs';
@@ -125,3 +126,24 @@ export const buscarPerfilPorUsuario = async (req, res) => {
         return res.status(500).json({ message: "Erro ao buscar perfil" });
     }
 };
+
+export async function atualizarMusicaPerfil(req, res) {
+    console.log('Chamando atualizarMusicaPerfil');
+    const { id_usuario } = req.params;
+    const { spotify_track } = req.body;
+
+    if (!spotify_track) {
+        return res.status(400).json({ mensagem: "O campo spotify_track é obrigatório." });
+    }
+
+    try {
+        const [status, mensagem] = await updateSpotifyTrack(id_usuario, spotify_track);
+        res.status(status).json({ mensagem });
+    } catch (error) {
+        console.error('Erro ao atualizar a música do perfil:', error);
+        res.status(500).json({
+            mensagem: "Erro interno ao atualizar música do perfil",
+            detalhes: error.message
+        });
+    }
+}

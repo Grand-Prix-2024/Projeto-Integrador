@@ -9,7 +9,6 @@ import lingua from './img/lingua.png';
 import coracao from './img/coracao.png';
 import casa from './img/casa.png';
 import balao from './img/balao.png';
-import SpotifyMusicSelector from '../SpotifyMusicSelector.jsx';
 
 
 function Perfil() {
@@ -19,7 +18,6 @@ function Perfil() {
   const nome = localStorage.getItem("nome");
   const sobrenome = localStorage.getItem("sobrenome");
   const email = localStorage.getItem("email");
-  const [selectedTrack, setSelectedTrack] = useState(null);
   const [defaultTrack, setDefaultTrack] = useState(null);
   const navigate = useNavigate();
 
@@ -83,40 +81,6 @@ function Perfil() {
       console.error('Erro ao consultar o perfil:', error.message);
     }
   }
-
-  const handleMusicSelect = async (track) => {
-    if (!track || !id_usuario) {
-      console.error('Dados inválidos para atualização da música');
-      return;
-    }
-
-    try {
-      const musicData = {
-        id: track.id,
-        name: track.name,
-        artist: track.artists?.[0]?.name || 'Unknown Artist',
-        album_image: track.album?.images?.[1]?.url || null,
-      };
-
-      const response = await fetch(`http://localhost:5000/perfil/${id_usuario}/music`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(musicData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(`Erro ao salvar música: ${errorData.message || response.statusText}`);
-      }
-
-      setSelectedTrack(track);
-      await baixarPerfil();
-    } catch (error) {
-      console.error('Erro ao atualizar música:', error);
-    }
-  };
 
 
   return (
@@ -192,11 +156,22 @@ function Perfil() {
       <hr className='position-absolute top-50 start-50"' style={{ width: '800px', height: '600px', marginLeft: '750px', marginBlockStart: '35px' }} />
       <Card className='position top-50 start-50"' style={{ width: '150px', height: '200px', marginLeft: '750px', marginBlockStart: '-382px', borderColor: 'black' }}>
         <Card className='position top-50 start-50"' style={{ width: '132px', height: '130px', marginLeft: '8px', marginTop: '-90px', }}>
-          <SpotifyMusicSelector
-            onMusicSelect={handleMusicSelect}
-            selectedTrack={selectedTrack}
-            defaultTrack={defaultTrack}
-          />
+          <h5>Música Favorita:</h5>
+          {defaultTrack ? (
+            <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+              <img
+                src={defaultTrack.album_image || 'https://via.placeholder.com/50'}
+                alt="Capa do álbum"
+                style={{ width: '50px', height: '50px', marginRight: '15px' }}
+              />
+              <div>
+                <h6 style={{ margin: 0 }}>{defaultTrack.name || 'Título não disponível'}</h6>
+                <small style={{ color: 'gray' }}>{defaultTrack.artist || 'Artista não disponível'}</small>
+              </div>
+            </div>
+          ) : (
+            <p style={{ fontStyle: 'italic', color: 'gray' }}>Nenhuma música favorita selecionada</p>
+          )}
         </Card>
       </Card>
       <Card className='position top-50 start-50"' style={{ width: '500px', height: '300px', marginLeft: '980px', marginBlockStart: '-780px', marginTop: '-250px', border: 'none' }}>

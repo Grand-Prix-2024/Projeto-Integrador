@@ -9,15 +9,15 @@ export async function createPerfil(perfil) {
     const sql = `
         INSERT INTO perfil (
             pronome, descricao, idioma, estado_civil, local_moradia,
-            telefone, redes, bio, curso, faculdade, musicaFavorita, caminho_foto_perfil, id_usuario
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            telefone, redes, bio, curso, faculdade, musicaFavorita, caminho_foto_perfil,spotify_track, id_usuario
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
     `;
 
     const params = [
         perfil.pronome, perfil.descricao, perfil.idioma,
         perfil.estado_civil, perfil.local_moradia, perfil.telefone,
         perfil.redes, perfil.bio, perfil.curso, perfil.faculdade,
-        perfil.musicaFavorita, perfil.caminho_foto_perfil, perfil.id_usuario // Incluído corretamente
+        perfil.musicaFavorita, perfil.caminho_foto_perfil, perfil.spotify_track, perfil.id_usuario // Incluído corretamente
     ];
 
     try {
@@ -81,7 +81,8 @@ export async function updatePerfil(perfil, imageFile, id) {
             bio = ?,
             curso = ?,
             faculdade = ?,
-            caminho_foto_perfil = ?
+            caminho_foto_perfil = ?,
+            spotify_track = ?
         WHERE id_usuario = ?
     `;
 
@@ -97,6 +98,7 @@ export async function updatePerfil(perfil, imageFile, id) {
         perfil.curso,
         perfil.faculdade,
         imagePath,
+        perfil.spotify_track,
         id
     ];
 
@@ -142,5 +144,30 @@ export async function getPerfilByIdUsuario(id_usuario) {
     } catch (error) {
         console.log(error);
         return [500, error];
+    }
+}
+
+export async function updateSpotifyTrack(id_usuario, spotify_track) {
+    if (!id_usuario) {
+        throw new Error("O ID do usuário é obrigatório.");
+    }
+
+    if (!spotify_track) {
+        throw new Error("O campo spotify_track é obrigatório.");
+    }
+
+    const sql = `
+        UPDATE perfil 
+        SET spotify_track = ?
+        WHERE id_usuario = ?
+    `;
+
+    try {
+        const [retorno] = await conexao.query(sql, [spotify_track, id_usuario]);
+        console.log('Spotify track atualizada com sucesso:', retorno);
+        return [200, 'Spotify track atualizada com sucesso'];
+    } catch (error) {
+        console.error('Erro ao atualizar spotify_track:', error.message);
+        return [500, `Erro ao atualizar spotify_track: ${error.message}`];
     }
 }

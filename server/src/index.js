@@ -16,6 +16,7 @@ import {
     deletarPerfil,
     buscarPerfilPorUsuario
 } from './Controllers/PerfilController.js';
+import { atualizarMusicaPerfil } from './Controllers/PerfilController.js';
 import {
     criarRepublica,
     mostrarRepublica,
@@ -32,6 +33,8 @@ import {
     excluirImagem
 } from './Controllers/ImagemController.js';
 import { editarImagem } from './Controllers/ImagemPerfilController.js';
+
+
 
 const app = express();
 const porta = 5000;
@@ -89,6 +92,8 @@ app.delete('/imagens/:id', excluirImagem);
 app.get('/imagens/:id', detalhesRepublica);
 
 app.put('/img_perfil/:id_perfil', editarImagem)
+
+app.put('/perfil/:id_usuario/music', atualizarMusicaPerfil);
 
 // Fetch para fotos relacionadas a uma república
 // app.get('/republicas/:id/fotos', fetchRepublica);

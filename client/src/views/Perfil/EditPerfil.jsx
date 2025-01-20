@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Form, Image } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
+import SpotifyMusicSelector from '../SpotifyMusicSelector.jsx'; // Importa o componente de música
 import { useNavigate } from 'react-router-dom';
 
 function EditarPerfil() {
@@ -16,10 +17,12 @@ function EditarPerfil() {
     curso: '',
     faculdade: '',
     musicaFavorita: '',
-    caminho_foto_perfil: '', // Caminho da foto de perfil
+    caminho_foto_perfil: '',
+    spotify_track: '' 
   });
 
   const [selectedFile, setSelectedFile] = useState(null); // Estado para armazenar o arquivo selecionado
+  const [selectedTrack, setSelectedTrack] = useState(null); // Estado para armazenar a música selecionada
   const navigate = useNavigate();
   const id_usuario = localStorage.getItem("id_usuario");
 
@@ -39,6 +42,9 @@ function EditarPerfil() {
 
         const perfil = await resposta.json();
         setFormData(perfil);
+        if (perfil.spotify_track) {
+          setSelectedTrack(perfil.spotify_track); // Define a música favorita carregada
+        }
       } catch (error) {
         console.error('Erro ao consultar o perfil:', error.message);
       }
@@ -57,19 +63,33 @@ function EditarPerfil() {
     setSelectedFile(file); // Atualiza o estado do arquivo
   };
 
+  const handleMusicSelect = (track) => {
+    setSelectedTrack(track); // Atualiza o estado da música selecionada
+  };
+
   const salvarPerfil = async (e) => {
     e.preventDefault();
     const formDataToSend = new FormData();
 
-    formDataToSend.append('infoPerfil', JSON.stringify(formData)); // Adiciona os dados do perfil como JSON
+    const profileData = { ...formData };
+    if (selectedTrack) {
+      profileData.spotify_track = {
+        id: selectedTrack.id,
+        name: selectedTrack.name,
+        artist: selectedTrack.artists[0].name,
+        album_image: selectedTrack.album.images[0].url,
+      };
+    }
+
+    formDataToSend.append('infoPerfil', JSON.stringify(profileData));
     if (selectedFile) {
-      formDataToSend.append('image', selectedFile); // Adiciona o arquivo da imagem, se existir
+      formDataToSend.append('image', selectedFile); // Adiciona a imagem, se houver
     }
 
     try {
       const resposta = await fetch(`http://localhost:5000/perfil/${id_usuario}`, {
         method: 'PUT',
-        body: formDataToSend, // Envia o FormData com os dados e a imagem
+        body: formDataToSend,
       });
 
       if (!resposta.ok) {
@@ -199,11 +219,10 @@ function EditarPerfil() {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Música Favorita</Form.Label>
-              <Form.Control
-                type="text"
-                name="musicaFavorita"
-                value={formData.musicaFavorita}
-                onChange={handleInputChange}
+              <SpotifyMusicSelector
+                onMusicSelect={handleMusicSelect}
+                selectedTrack={selectedTrack}
+                defaultTrack={formData.spotify_track}
               />
             </Form.Group>
             <Button variant="primary" type="submit">
