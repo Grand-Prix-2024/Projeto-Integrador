@@ -215,7 +215,7 @@ function Perfil() {
               <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={casa} style={{ width: '25px', height: '25px', marginRight: '5px' }} />MORA EM: Vitória - ES</h5>
             </span>
             <span>
-              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={coracao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />SOLTEIRO: {perfil?.estado_civil || 'N/A'}</h5>
+              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={coracao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />Estado Civil: {perfil?.estado_civil || 'N/A'}</h5>
             </span>
           </div>
         </Card.Text>
