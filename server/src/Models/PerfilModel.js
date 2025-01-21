@@ -82,23 +82,35 @@ export async function updatePerfil(perfil, imageFile, id) {
             curso = ?,
             faculdade = ?,
             caminho_foto_perfil = ?,
-            spotify_track = ?
+            spotify_track = CASE 
+                WHEN ? IS NULL THEN NULL
+                ELSE JSON_OBJECT(
+                    'id', ?,
+                    'name', ?,
+                    'artist', ?,
+                    'album_image', ?
+                )
+            END
         WHERE id_usuario = ?
     `;
 
     const params = [
-        perfil.pronome,
-        perfil.descricao,
-        perfil.idioma,
-        perfil.estado_civil,
-        perfil.local_moradia,
-        perfil.telefone,
-        perfil.redes,
-        perfil.bio,
-        perfil.curso,
-        perfil.faculdade,
+        perfil.pronome || '',
+        perfil.descricao || '',
+        perfil.idioma || '',
+        perfil.estado_civil || '',
+        perfil.local_moradia || '',
+        perfil.telefone || '',
+        perfil.redes || '',
+        perfil.bio || '',
+        perfil.curso || '',
+        perfil.faculdade || '',
         imagePath,
-        perfil.spotify_track,
+        perfil.spotify_track?.id || null,  // Para o CASE WHEN
+        perfil.spotify_track?.id || null,
+        perfil.spotify_track?.name || null,
+        perfil.spotify_track?.artist || null,
+        perfil.spotify_track?.album_image || null,
         id
     ];
 

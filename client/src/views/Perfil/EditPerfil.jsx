@@ -18,7 +18,7 @@ function EditarPerfil() {
     faculdade: '',
     musicaFavorita: '',
     caminho_foto_perfil: '',
-    spotify_track: '' 
+    spotify_track: ''
   });
 
   const [selectedFile, setSelectedFile] = useState(null); // Estado para armazenar o arquivo selecionado
@@ -42,8 +42,13 @@ function EditarPerfil() {
 
         const perfil = await resposta.json();
         setFormData(perfil);
+
+        // Se houver uma música salva, converte para objeto se necessário
         if (perfil.spotify_track) {
-          setSelectedTrack(perfil.spotify_track); // Define a música favorita carregada
+          const trackData = typeof perfil.spotify_track === 'string'
+            ? JSON.parse(perfil.spotify_track)
+            : perfil.spotify_track;
+          setSelectedTrack(trackData);
         }
       } catch (error) {
         console.error('Erro ao consultar o perfil:', error.message);
@@ -64,7 +69,17 @@ function EditarPerfil() {
   };
 
   const handleMusicSelect = (track) => {
-    setSelectedTrack(track); // Atualiza o estado da música selecionada
+    if (track) {
+      const formattedTrack = {
+        id: track.id,
+        name: track.name,
+        artist: track.artists[0].name,
+        album_image: track.album.images[0].url
+      };
+      setSelectedTrack(formattedTrack);
+    } else {
+      setSelectedTrack(null);
+    }
   };
 
   const salvarPerfil = async (e) => {
@@ -72,18 +87,11 @@ function EditarPerfil() {
     const formDataToSend = new FormData();
 
     const profileData = { ...formData };
-    if (selectedTrack) {
-      profileData.spotify_track = {
-        id: selectedTrack.id,
-        name: selectedTrack.name,
-        artist: selectedTrack.artists[0].name,
-        album_image: selectedTrack.album.images[0].url,
-      };
-    }
+    profileData.spotify_track = selectedTrack; // Usa diretamente o selectedTrack
 
     formDataToSend.append('infoPerfil', JSON.stringify(profileData));
     if (selectedFile) {
-      formDataToSend.append('image', selectedFile); // Adiciona a imagem, se houver
+      formDataToSend.append('image', selectedFile);
     }
 
     try {
@@ -222,7 +230,7 @@ function EditarPerfil() {
               <SpotifyMusicSelector
                 onMusicSelect={handleMusicSelect}
                 selectedTrack={selectedTrack}
-                defaultTrack={formData.spotify_track}
+                defaultTrack={selectedTrack} // Usa o selectedTrack como defaultTrack
               />
             </Form.Group>
             <Button variant="primary" type="submit">

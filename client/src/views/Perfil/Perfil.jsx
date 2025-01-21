@@ -69,7 +69,12 @@ function Perfil() {
 
       // Se houver uma música salva no perfil, define ela como música padrão
       if (consulta.spotify_track) {
-        setDefaultTrack(consulta.spotify_track);
+        // Garantir que o spotify_track seja um objeto JSON válido
+        const trackData = typeof consulta.spotify_track === 'string'
+          ? JSON.parse(consulta.spotify_track)
+          : consulta.spotify_track;
+
+        setDefaultTrack(trackData);
       }
 
       // Calcula a idade com base na data de nascimento
@@ -154,26 +159,49 @@ function Perfil() {
         </Card.Text>
       </Card>
       <hr className='position-absolute top-50 start-50"' style={{ width: '800px', height: '600px', marginLeft: '750px', marginBlockStart: '35px' }} />
-      <Card className='position top-50 start-50"' style={{ width: '150px', height: '200px', marginLeft: '750px', marginBlockStart: '-382px', borderColor: 'black' }}>
-        <Card className='position top-50 start-50"' style={{ width: '132px', height: '130px', marginLeft: '8px', marginTop: '-90px', }}>
-          <h5>Música Favorita:</h5>
+      {/* <Card className='position top-50 start-50"' style={{ width: '150px', height: '200px', marginLeft: '750px', marginBlockStart: '-382px', borderColor: 'black' }}> */}
+        <Card className='position top-50 start-50"' style={{
+          width: '150px',
+          height: '200px',
+          marginLeft: '750px',
+          marginBlockStart: '-382px',
+          borderColor: 'black',
+          padding: '10px'
+        }}>
+          <h5 style={{
+            fontSize: '16px',
+            marginBottom: '10px',
+            marginTop: '5px'
+          }}>Música Favorita:</h5>
           {defaultTrack ? (
-            <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <img
                 src={defaultTrack.album_image || 'https://via.placeholder.com/50'}
                 alt="Capa do álbum"
-                style={{ width: '50px', height: '50px', marginRight: '15px' }}
+                style={{
+                  width: '100px',
+                  height: '100px',
+                  objectFit: 'cover',
+                  marginBottom: '8px'
+                }}
               />
-              <div>
-                <h6 style={{ margin: 0 }}>{defaultTrack.name || 'Título não disponível'}</h6>
-                <small style={{ color: 'gray' }}>{defaultTrack.artist || 'Artista não disponível'}</small>
+              <div style={{ textAlign: 'center' }}>
+                <h6 style={{
+                  margin: 0,
+                  fontSize: '14px',
+                  fontWeight: 'bold'
+                }}>{defaultTrack.name || 'Título não disponível'}</h6>
+                <small style={{
+                  color: 'gray',
+                  fontSize: '12px'
+                }}>{defaultTrack.artist || 'Artista não disponível'}</small>
               </div>
             </div>
           ) : (
             <p style={{ fontStyle: 'italic', color: 'gray' }}>Nenhuma música favorita selecionada</p>
           )}
         </Card>
-      </Card>
+      {/* </Card> */}
       <Card className='position top-50 start-50"' style={{ width: '500px', height: '300px', marginLeft: '980px', marginBlockStart: '-780px', marginTop: '-250px', border: 'none' }}>
         <Card.Text>
           <div style={{ marginTop: '65px' }}>
