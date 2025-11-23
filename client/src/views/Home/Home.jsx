@@ -63,9 +63,9 @@ function Home() {
               <button
                 className="btn"
                 style={{
-                  backgroundColor: '#FFE34C',
+                  backgroundColor: '#78EB78',
                   color: '#000',
-                  border: '1px solid #FFE34C',
+                  border: '1px solid #78EB78',
                   borderRadius: '0 25px 25px 0',
                 }}
               >
@@ -82,7 +82,7 @@ function Home() {
               </div>
             ) : republicas.length === 0 ? (
               <div className="text-center mt-5">
-                <h4>Nenhuma república encontrada.</h4>
+                <h4>Nenhum projeto encontrado.</h4>
               </div>
             ) : (
               <div className="row text-center">
@@ -151,10 +151,10 @@ function Home() {
         </div>
 
         {/* Rodapé */}
-        <footer className="text-center py-3 border-top" style={{ backgroundColor: '#FFE34C' }}>
+        <footer className="text-center py-3 border-top" style={{ backgroundColor: '#78EB78' }}>
           <div className="container d-flex justify-content-between align-items-center">
             <div className="text-dark">
-              © 2024 HIVE <a href="/privacidade" style={{ color: '#000' }}>Privacidade</a> ·
+              © 2025 Unisport <a href="/privacidade" style={{ color: '#000' }}>Privacidade</a> ·
               <a href="/termos" style={{ color: '#000' }}>Termos</a> ·
               <a href="/detalhes" style={{ color: '#000' }}>Informações do site</a>
             </div>
@@ -169,9 +169,9 @@ function Home() {
         <style>
           {`
             .custom-button {
-              background-color: #FFE34C;
+              background-color: #78EB78;
               color: #000;
-              border: 1px solid #FFE34C;
+              border: 1px solid #78EB78;
               border-radius: 25px;
               padding: 10px 20px;
               font-size: 1rem;
@@ -179,7 +179,7 @@ function Home() {
             }
 
             .custom-button:hover {
-              background-color: #e1c730;
+              background-color: #56de56ff;
             }
           `}
         </style>

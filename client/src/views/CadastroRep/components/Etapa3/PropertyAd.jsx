@@ -4,7 +4,6 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
   // Inicializa os estados com os valores de `objetoRepublica` ou valores padrão
   const [titulo, setTitulo] = useState(objetoRepublica.titulo || '');
   const [image, setImage] = useState(objetoRepublica.image || null);
-  const [preco, setPreco] = useState(objetoRepublica.preco || 70);
   const [descricao, setDescricao] = useState(objetoRepublica.descricao || '');
 
   useEffect(() => {
@@ -13,13 +12,12 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
         ...prevObjeto,
         titulo,
         image,
-        preco,
         descricao,
       }));
     } else {
       console.error('setObjetoRepublica não está definido');
     }
-  }, [titulo, image, preco, descricao, setObjetoRepublica]);
+  }, [titulo, image, descricao, setObjetoRepublica]);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0]; // Obtém apenas o primeiro arquivo selecionado
@@ -44,10 +42,6 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
     setTitulo(e.target.value);
   };
 
-  const handlePriceChange = (e) => {
-    const newPrice = e.target.value;
-    setPreco(newPrice);
-  };
 
   const handleDescriptionChange = (e) => {
     setDescricao(e.target.value);
@@ -62,7 +56,6 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
         {/* Área para adicionar uma foto */}
         <div className="mb-4">
           <h5>Adicione uma foto do seu espaço</h5>
-          <p>Imagem da fachada, do interior, ou de um quarto.</p>
           <div className="d-flex flex-column align-items-center">
             {image && (
               <div className="position-relative mb-3">
@@ -126,27 +119,6 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
             onChange={handleTitleChange}
           />
         </div>
-
-        {/* Campo para definir o preço */}
-        <div className="mb-4">
-          <label htmlFor="price" className="form-label">
-            <h5>Valor</h5>
-          </label>
-          <div className="input-group">
-            <span className="input-group-text">R$</span>
-            <input
-              id="price"
-              type="number"
-              className="form-control"
-              value={preco}
-              onChange={handlePriceChange}
-            />
-          </div>
-          <small className="text-muted">
-            Para o morador o valor sairá por R$ {(preco * 1.10).toFixed(2)}
-          </small>
-        </div>
-
         {/* Campo para descrição */}
         <div className="mb-4">
           <label htmlFor="description" className="form-label">

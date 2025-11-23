@@ -41,7 +41,7 @@ function Login() {
             <Navbar />
             <div style={{marginTop: '80px'}} className="container d-flex justify-content-center">
                 <div className="com-md-3 mt-5">
-                <h1 className="text-center">Bem-vindo ao Hive!</h1>
+                <h1 className="text-center">Bem-vindo ao Unisport!</h1>
                     <h3 className="text-center">Faça Login</h3>
                     <br />                    
                     <input style={{marginBottom:'-5px', borderRadius:'10px 10px 0px 0px',width:'400px', height:'50px', borderColor:'black'}} className="form-control mt-1" type="text" name="" id="" placeholder='E-mail' value={email} onChange={(e) => setEmail(e.target.value)} />           

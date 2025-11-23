@@ -7,18 +7,11 @@ import { useNavigate } from 'react-router-dom';
 function EditarPerfil() {
   const [formData, setFormData] = useState({
     descricao: '',
-    pronome: '',
     telefone: '',
     redes: '',
     bio: '',
-    idioma: '',
-    estado_civil: '',
     local_moradia: '',
-    curso: '',
-    faculdade: '',
-    musicaFavorita: '',
-    caminho_foto_perfil: '',
-    spotify_track: ''
+    caminho_foto_perfil: ''
   });
 
   const [selectedFile, setSelectedFile] = useState(null); // Estado para armazenar o arquivo selecionado
@@ -43,13 +36,6 @@ function EditarPerfil() {
         const perfil = await resposta.json();
         setFormData(perfil);
 
-        // Se houver uma música salva, converte para objeto se necessário
-        if (perfil.spotify_track) {
-          const trackData = typeof perfil.spotify_track === 'string'
-            ? JSON.parse(perfil.spotify_track)
-            : perfil.spotify_track;
-          setSelectedTrack(trackData);
-        }
       } catch (error) {
         console.error('Erro ao consultar o perfil:', error.message);
       }
@@ -68,19 +54,6 @@ function EditarPerfil() {
     setSelectedFile(file); // Atualiza o estado do arquivo
   };
 
-  const handleMusicSelect = (track) => {
-    if (track) {
-      const formattedTrack = {
-        id: track.id,
-        name: track.name,
-        artist: track.artists[0].name,
-        album_image: track.album.images[0].url
-      };
-      setSelectedTrack(formattedTrack);
-    } else {
-      setSelectedTrack(null);
-    }
-  };
 
   const salvarPerfil = async (e) => {
     e.preventDefault();
@@ -145,15 +118,6 @@ function EditarPerfil() {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Pronome</Form.Label>
-              <Form.Control
-                type="text"
-                name="pronome"
-                value={formData.pronome}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
               <Form.Label>Telefone</Form.Label>
               <Form.Control
                 type="text"
@@ -181,56 +145,12 @@ function EditarPerfil() {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Idioma</Form.Label>
-              <Form.Control
-                type="text"
-                name="idioma"
-                value={formData.idioma}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Estado Civil</Form.Label>
-              <Form.Control
-                type="text"
-                name="estado_civil"
-                value={formData.estado_civil}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
               <Form.Label>Local de Moradia</Form.Label>
               <Form.Control
                 type="text"
                 name="local_moradia"
                 value={formData.local_moradia}
                 onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Curso</Form.Label>
-              <Form.Control
-                type="text"
-                name="curso"
-                value={formData.curso}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Faculdade</Form.Label>
-              <Form.Control
-                type="text"
-                name="faculdade"
-                value={formData.faculdade}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Música Favorita</Form.Label>
-              <SpotifyMusicSelector
-                onMusicSelect={handleMusicSelect}
-                selectedTrack={selectedTrack}
-                defaultTrack={selectedTrack} // Usa o selectedTrack como defaultTrack
               />
             </Form.Group>
             <Button variant="primary" type="submit">

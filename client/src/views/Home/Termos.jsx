@@ -11,27 +11,27 @@ const TermosDeServico = () => {
                     <Col md={8} lg={6}>
                         <Card>
                             <Card.Header>
-                                <h2>Termos de Serviço - Hive</h2>
-                                <p>Data de vigência: 12/12/2024</p>
+                                <h2>Termos de Serviço - Unisport</h2>
+                                <p>Data de vigência: 21/11/2025</p>
                             </Card.Header>
                             <Card.Body>
                                 <h5>1. Aceitação dos Termos</h5>
                                 <p>
-                                    Ao acessar ou utilizar o Hive, você concorda em cumprir estes Termos de Serviço e todas as políticas
+                                    Ao acessar ou utilizar o Unisport, você concorda em cumprir estes Termos de Serviço e todas as políticas
                                     relacionadas. Caso não concorde com qualquer um dos termos aqui descritos, por favor, não utilize os nossos
                                     serviços.
                                 </p>
 
                                 <h5>2. Modificações dos Termos</h5>
                                 <p>
-                                    O Hive se reserva o direito de modificar, alterar ou atualizar estes Termos de Serviço a qualquer momento.
+                                    O Unisport se reserva o direito de modificar, alterar ou atualizar estes Termos de Serviço a qualquer momento.
                                     Quaisquer alterações serão publicadas nesta página, e a data de vigência será atualizada. Recomendamos que
                                     você revise periodicamente os Termos de Serviço.
                                 </p>
 
                                 <h5>3. Uso do Site e dos Serviços</h5>
                                 <ul>
-                                    <li>O Hive oferece uma plataforma para facilitar a comunicação entre estudantes e donos de repúblicas universitárias.</li>
+                                    <li>O Unisport oferece uma plataforma para facilitar a comunicação entre estudantes e donos de repúblicas universitárias.</li>
                                     <li>Você deve ser maior de idade ou ter o consentimento de um responsável legal para utilizar nossos serviços.</li>
                                     <li>Você concorda em usar a plataforma de maneira legal e em conformidade com as normas locais.</li>
                                     <li>É proibido compartilhar informações falsas, fraudulentas ou enganosas, assim como comportamentos abusivos ou prejudiciais para outros usuários.</li>
@@ -39,7 +39,7 @@ const TermosDeServico = () => {
 
                                 <h5>4. Registro e Conta de Usuário</h5>
                                 <p>
-                                    Para utilizar determinados serviços do Hive, você pode ser solicitado a criar uma conta. Ao criar uma conta, você deve fornecer informações precisas, completas e atualizadas.
+                                    Para utilizar determinados serviços do Unisport, você pode ser solicitado a criar uma conta. Ao criar uma conta, você deve fornecer informações precisas, completas e atualizadas.
                                 </p>
                                 <p>
                                     Você é responsável por manter a confidencialidade de sua senha e por todas as atividades realizadas com sua conta.
@@ -53,23 +53,23 @@ const TermosDeServico = () => {
                                 <h5>6. Responsabilidade do Usuário</h5>
                                 <ul>
                                     <li>Você é responsável por todas as interações e negociações realizadas com outros usuários através da plataforma.</li>
-                                    <li>O Hive não se responsabiliza por acordos ou disputas entre os usuários, nem pela qualidade ou segurança das repúblicas ou das acomodações oferecidas.</li>
-                                    <li>O Hive não se responsabiliza por danos causados por terceiros.</li>
+                                    <li>O Unisport não se responsabiliza por acordos ou disputas entre os usuários, nem pela qualidade ou segurança das repúblicas ou das acomodações oferecidas.</li>
+                                    <li>O Unisport não se responsabiliza por danos causados por terceiros.</li>
                                 </ul>
 
                                 <h5>7. Propriedade Intelectual</h5>
                                 <p>
-                                    O conteúdo e os materiais disponíveis no Hive, incluindo textos, imagens, logotipos, design e software, são protegidos por direitos autorais e outras leis de propriedade intelectual.
+                                    O conteúdo e os materiais disponíveis no Unisport, incluindo textos, imagens, logotipos, design e software, são protegidos por direitos autorais e outras leis de propriedade intelectual.
                                 </p>
 
                                 <h5>8. Limitação de Responsabilidade</h5>
                                 <p>
-                                    O Hive não se responsabiliza por danos diretos, indiretos, incidentais, especiais ou consequenciais decorrentes do uso ou da incapacidade de usar os serviços.
+                                    O Unisport não se responsabiliza por danos diretos, indiretos, incidentais, especiais ou consequenciais decorrentes do uso ou da incapacidade de usar os serviços.
                                 </p>
 
                                 <h5>9. Rescisão de Conta</h5>
                                 <p>
-                                    O Hive pode suspender ou encerrar sua conta a qualquer momento, sem aviso prévio, caso você viole qualquer um destes Termos de Serviço.
+                                    O Unisport pode suspender ou encerrar sua conta a qualquer momento, sem aviso prévio, caso você viole qualquer um destes Termos de Serviço.
                                 </p>
 
                                 <h5>10. Lei Aplicável</h5>
@@ -79,7 +79,7 @@ const TermosDeServico = () => {
 
                                 <h5>11. Contato</h5>
                                 <p>
-                                    Se você tiver qualquer dúvida ou preocupação sobre estes Termos de Serviço, entre em contato conosco pelo e-mail: <a href="mailto:contato@hive.com">contato@hive.com</a>.
+                                    Se você tiver qualquer dúvida ou preocupação sobre estes Termos de Serviço, entre em contato conosco pelo e-mail: <a href="mailto:contato@unisport.com">contato@unisport.com</a>.
                                 </p>
 
                                 {/* Colocando o botão diretamente abaixo do conteúdo */}
@@ -94,7 +94,7 @@ const TermosDeServico = () => {
                 </Row>
             </Container>
 
-            <footer className="text-center py-3 border-top" style={{ backgroundColor: '#FFE34C', marginTop: 'auto' }}>
+            <footer className="text-center py-3 border-top" style={{ backgroundColor: '#78EB78', marginTop: 'auto' }}>
                 <Container className="d-flex justify-content-between align-items-center">
                     <div style={{ color: '#000' }}>
                         © 2024 HIVE{' '}
@@ -112,16 +112,16 @@ const TermosDeServico = () => {
             {/* Estilos do botão */}
             <style jsx>{`
         .custom-button {
-          background-color: #FFE34C;
-          border-color: #FFE34C;
+          background-color: #78EB78;
+          border-color: #78EB78;
           color: #000;
           padding: 0.4rem 0.8rem; /* Reduzindo o tamanho do botão */
           font-size: 0.85rem; /* Ajustando o tamanho do texto */
         }
 
         .custom-button:hover {
-          background-color: #d4b200;
-          border-color: #d4b200;
+          background-color: #78EB78;
+          border-color: #78EB78;
         }
 
         .custom-button:focus {

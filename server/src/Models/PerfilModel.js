@@ -8,16 +8,14 @@ const conexao = mysql.createPool(db);
 export async function createPerfil(perfil) {
     const sql = `
         INSERT INTO perfil (
-            pronome, descricao, idioma, estado_civil, local_moradia,
-            telefone, redes, bio, curso, faculdade, musicaFavorita, caminho_foto_perfil,spotify_track, id_usuario
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
+            descricao, local_moradia,
+            telefone, redes, bio, caminho_foto_perfil, id_usuario
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
 
     const params = [
-        perfil.pronome, perfil.descricao, perfil.idioma,
-        perfil.estado_civil, perfil.local_moradia, perfil.telefone,
-        perfil.redes, perfil.bio, perfil.curso, perfil.faculdade,
-        perfil.musicaFavorita, perfil.caminho_foto_perfil, perfil.spotify_track, perfil.id_usuario // Incluído corretamente
+        perfil.descricao, perfil.local_moradia, perfil.telefone,
+        perfil.redes, perfil.bio, perfil.caminho_foto_perfil, perfil.id_usuario // Incluído corretamente
     ];
 
     try {
@@ -71,46 +69,23 @@ export async function updatePerfil(perfil, imageFile, id) {
 
     const sql = `
         UPDATE perfil SET 
-            pronome = ?,
             descricao = ?,
-            idioma = ?,
-            estado_civil = ?,
             local_moradia = ?,
             telefone = ?,
             redes = ?,
             bio = ?,
-            curso = ?,
-            faculdade = ?,
             caminho_foto_perfil = ?,
-            spotify_track = CASE 
-                WHEN ? IS NULL THEN NULL
-                ELSE JSON_OBJECT(
-                    'id', ?,
-                    'name', ?,
-                    'artist', ?,
-                    'album_image', ?
-                )
-            END
         WHERE id_usuario = ?
     `;
 
     const params = [
-        perfil.pronome || '',
         perfil.descricao || '',
-        perfil.idioma || '',
         perfil.estado_civil || '',
         perfil.local_moradia || '',
         perfil.telefone || '',
         perfil.redes || '',
         perfil.bio || '',
-        perfil.curso || '',
-        perfil.faculdade || '',
         imagePath,
-        perfil.spotify_track?.id || null,  // Para o CASE WHEN
-        perfil.spotify_track?.id || null,
-        perfil.spotify_track?.name || null,
-        perfil.spotify_track?.artist || null,
-        perfil.spotify_track?.album_image || null,
         id
     ];
 
@@ -159,27 +134,3 @@ export async function getPerfilByIdUsuario(id_usuario) {
     }
 }
 
-export async function updateSpotifyTrack(id_usuario, spotify_track) {
-    if (!id_usuario) {
-        throw new Error("O ID do usuário é obrigatório.");
-    }
-
-    if (!spotify_track) {
-        throw new Error("O campo spotify_track é obrigatório.");
-    }
-
-    const sql = `
-        UPDATE perfil 
-        SET spotify_track = ?
-        WHERE id_usuario = ?
-    `;
-
-    try {
-        const [retorno] = await conexao.query(sql, [spotify_track, id_usuario]);
-        console.log('Spotify track atualizada com sucesso:', retorno);
-        return [200, 'Spotify track atualizada com sucesso'];
-    } catch (error) {
-        console.error('Erro ao atualizar spotify_track:', error.message);
-        return [500, `Erro ao atualizar spotify_track: ${error.message}`];
-    }
-}

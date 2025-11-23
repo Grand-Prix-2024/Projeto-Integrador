@@ -27,7 +27,7 @@ function Cadastro() {
     <div>
       <Navbar />
       <div style={{marginTop:'100px'}}>
-      <FormUsuario titulo='Cadastre-se no Hive' textoBotao='Cadastrar' handleSubmit={cadastrarUsuario}/>
+      <FormUsuario titulo='Cadastre-se no Unisport' textoBotao='Cadastrar' handleSubmit={cadastrarUsuario}/>
       </div>
     </div>
   )

@@ -11,13 +11,8 @@ import { useObjeto } from "../components/ObjectContext";
 import { useNavigate } from "react-router-dom";
 
 const FormRepublica = () => {
-  const [accommodation, setAccommodation] = useState("Casa");
-  const [rooms, setRooms] = useState({ private: 1, shared: 1 });
   const [essentialInfo, setEssentialInfo] = useState({
-    Moradores: 0,
-    Quartos: 0,
-    Banheiros: 1,
-    Camas: 0,
+      Participantes: 0,
   });
 
   const [features, setFeatures] = useState([]);
@@ -64,10 +59,7 @@ const FormRepublica = () => {
   const cadastrarRepublica = async (infoRepublica) => {
     const essentialInfoFormatted = {
       ...essentialInfo,
-      Moradores: parseInt(essentialInfo.Moradores, 10) || 0,
-      Quartos: parseInt(essentialInfo.Quartos, 10) || 0,
-      Banheiros: parseInt(essentialInfo.Banheiros, 10) || 0,
-      Camas: parseInt(essentialInfo.Camas, 10) || 0,
+      Participantes: parseInt(essentialInfo.Participantes, 10) || 0,
     };
 
     const objetoRepublicaFinal = {
@@ -110,13 +102,8 @@ const FormRepublica = () => {
           id_usuario: null,
           imagem: null,
         });
-        setAccommodation("Casa");
-        setRooms({ private: 1, shared: 1 });
         setEssentialInfo({
-          Moradores: 0,
-          Quartos: 0,
-          Banheiros: 1,
-          Camas: 0,
+          Participantes: 0,
         });
       }
     } catch (error) {
@@ -149,29 +136,6 @@ const FormRepublica = () => {
             `}
         </style>
         <div className="section mt-5">
-          <h5>Etapa 1</h5>
-          <h2>Informe sobre a sua acomodação</h2>
-          <p>Selecione qual melhor descreve seu espaço</p>
-        </div>
-        <AccommodationSelector
-          objetoRepublica={objetoRepublica}
-          setObjetoRepublica={setObjetoRepublica}
-          selected={accommodation}
-          onSelect={setAccommodation}
-        />
-
-        <div className="section mt-5">
-          <h2>Escolha o tipo de quarto</h2>
-          <p>Selecione a opção que melhor descreve o quarto disponível</p>
-          <RoomDistribution
-            objetoRepublica={objetoRepublica}
-            setObjetoRepublica={setObjetoRepublica}
-            rooms={rooms}
-            onChange={(type, value) => setRooms({ ...rooms, [type]: value })}
-          />
-        </div>
-
-        <div className="section mt-5">
           <h3>Adicione informações essenciais</h3>
           <EssentialInfo
             objetoRepublica={objetoRepublica}
@@ -183,8 +147,8 @@ const FormRepublica = () => {
 
         <div className="section mt-5">
           <h5>Etapa 2</h5>
-          <h3>Faça sua república se destacar</h3>
-          <p>Adicione elementos pra tornar sua acomodação mais interessante</p>
+          <h3>Faça seu projeto se destacar</h3>
+          <p>Selecione as modalidades do seu projeto:</p>
         </div>
         <HighlightFeatures
           objetoRepublica={objetoRepublica}
@@ -204,7 +168,7 @@ const FormRepublica = () => {
         <div className="section mt-5">
           <h5>Etapa 5</h5>
           <h2>Defina seu endereço</h2>
-          <p>Configure a localização da acomodação para ser encontrada</p>
+          <p>Configure a localização do projeto para ser encontrado</p>
         </div>
         <DefinirEndereco
           objetoRepublica={objetoRepublica}

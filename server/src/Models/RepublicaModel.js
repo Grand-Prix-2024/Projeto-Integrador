@@ -4,31 +4,27 @@ import path from 'path';
 import fs from 'fs';
 
 
-export async function createRepublica(republica, imageFile) {
+export async function createprojeto(projeto, imageFile) {
     console.log(imageFile);
-    if (!republica.id_usuario) {
+    if (!projeto.id_usuario) {
         throw new Error("ID do usuário é obrigatório.");
     }
 
     const conexao = mysql.createPool(db);
 
     const featureMapping = {
-        wifi: "Wi-fi",
-        televisao: "Televisão",
-        cozinha: "Cozinha",
-        ar_condicionado: "Ar-condicionado",
-        canto_de_estudo: "Canto de estudo",
-        banheira: "Banheira",
-        chuveiro_quente: "Chuveiro quente",
-        churrasqueira: "Churrasqueira",
-        camera: "Câmeras",
-        extintor: "Extintor",
+        futebol: "Futebol",
+        tenis: "Tênis",
+        jiujitsu: "Jiu-Jitsu",
+        volei: "Võlei",
+        capoeira: "Capoeira",
+        ciclismo: "Ciclismo",
     };
 
     const features = Object.fromEntries(
         Object.keys(featureMapping).map((key) => [
             key,
-            republica.Features?.includes(featureMapping[key]) ? true : false,
+            projeto.Features?.includes(featureMapping[key]) ? true : false,
         ])
     );
 
@@ -60,29 +56,22 @@ export async function createRepublica(republica, imageFile) {
         Apartamento: "Apartamento",
     };
 
-    const tipoAcomodacao = acomodacaoMapping[republica.name];
+    const tipoAcomodacao = acomodacaoMapping[projeto.name];
     if (!tipoAcomodacao) {
         throw new Error("O campo 'name' deve ser 'Casa' ou 'Apartamento'.");
     }
 
     const campos = {
-        titulo: republica.titulo,
-        preco: republica.preco,
-        id_usuario: republica.id_usuario,
-        pais: republica.pais,
-        cep: republica.cep,
-        endereco: republica.endereco,
-        bairro: republica.bairro,
-        cidade: republica.cidade,
-        estado: republica.estado,
-        apto: republica.apto,
-        tipo_republica: tipoAcomodacao,
-        qtd_moradores: republica.qtd_moradores || 0,
-        qtd_quartos: republica.qtd_quartos || 0,
-        qtd_banheiros: republica.qtd_banheiros || 0,
-        qtd_camas: republica.qtd_camas || 0,
-        descricao: republica.descricao || "",
-        tipo_distribuicao: republica.TipoDeQuarto || null,
+        titulo: projeto.titulo,
+        id_usuario: projeto.id_usuario,
+        pais: projeto.pais,
+        cep: projeto.cep,
+        endereco: projeto.endereco,
+        bairro: projeto.bairro,
+        cidade: projeto.cidade,
+        estado: projeto.estado,
+        qtd_participantes: projeto.qtd_participantes || 0,
+        descricao: projeto.descricao || "",
         caminhofoto: imageFile,
         ...features,
     };
@@ -91,23 +80,23 @@ export async function createRepublica(republica, imageFile) {
     const valores = Object.values(campos);
     const placeholders = valores.map(() => "?").join(", ");
 
-    const sql = `INSERT INTO republicas (${colunas}) VALUES (${placeholders})`;
+    const sql = `INSERT INTO projetos (${colunas}) VALUES (${placeholders})`;
 
     try {
         const [resultado] = await conexao.query(sql, valores);
-        const idRepublica = resultado.insertId;
+        const idprojeto = resultado.insertId;
 
-        if (!idRepublica) {
+        if (!idprojeto) {
             throw new Error("Falha ao gerar o ID da república.");
         }
 
-        const imageSql = `INSERT INTO foto_republica (caminho_foto, id_republica) VALUES (?, ?)`;
-        const imageValues = [imagePath, idRepublica];
+        const imageSql = `INSERT INTO foto_projeto (caminho_foto, id_projeto) VALUES (?, ?)`;
+        const imageValues = [imagePath, idprojeto];
 
         const [resultadoImagem] = await conexao.query(imageSql, imageValues);
 
         if (!resultadoImagem.affectedRows) {
-            throw new Error("A imagem não foi inserida na tabela foto_republica.");
+            throw new Error("A imagem não foi inserida na tabela foto_projeto.");
         }
 
         return [201, "República cadastrada com sucesso!"];
@@ -118,51 +107,28 @@ export async function createRepublica(republica, imageFile) {
 
 
 
-export async function showRepublicas(republica) {
+export async function showprojetos(projeto) {
     const conexao = mysql.createPool(db);
 
     // Ajustar o SQL para ordenar os resultados em ordem decrescente
-    const sql = `SELECT * FROM republicas ORDER BY id_republica DESC`;
+    const sql = `SELECT * FROM projetos ORDER BY id_projeto DESC`;
 
     const params = [
-        republica.titulo,
-        republica.preco,
-        republica.tipo_republica,
-        republica.tipo_distribuicao,
-        republica.qtd_moradores,
-        republica.qtd_quartos,
-        republica.qtd_banheiros,
-        republica.qtd_camas,
-        republica.descricao,
-        republica.valor,
-        republica.wifi,
-        republica.televisao,
-        republica.cozinha,
-        republica.ar_condicionado,
-        republica.canto_de_estudo,
-        republica.chuveiro_quente,
-        republica.banheira,
-        republica.extintor,
-        republica.camera,
-        republica.alarme,
-        republica.piscina,
-        republica.churrasqueira,
-        republica.academia,
-        republica.varanda,
-        republica.jardim,
-        republica.pais,
-        republica.cep,
-        republica.endereco,
-        republica.bairro,
-        republica.cidade,
-        republica.estado,
-        republica.apto,
-        republica.id_usuario
+        projeto.titulo,
+        projeto.qtd_participantes,
+        projeto.descricao,
+        projeto.futebol,
+        projeto.tenis,
+        projeto.jiujitsu,
+        projeto.volei,
+        projeto.capoeira,
+        projeto.ciclismo,
+        projeto.id_usuario
     ];
 
     try {
         const [retorno] = await conexao.query(sql, params);
-        console.log('Mostrando republicas em ordem decrescente');
+        console.log('Mostrando projetos em ordem decrescente');
         return [200, retorno];
     } catch (error) {
         console.log(error);
@@ -171,79 +137,33 @@ export async function showRepublicas(republica) {
 }
 
 
-export async function updateRepublica(republica, id) {
+export async function updateprojeto(projeto, id) {
     const conexao = mysql.createPool(db);
     console.log('Atualizando usuário');
 
-    const sql = `UPDATE republicas SET
+    const sql = `UPDATE projetos SET
         titulo = ?,
-        preco = ?,
-        tipo_republica = ?,
-        tipo_distribuicao = ?,
-        qtd_moradores = ?,
-        qtd_quartos = ?,
-        qtd_banheiros = ?,
-        qtd_camas = ?,
+        qtd_participantes = ?,
         descricao = ?,
-        valor = ?,
-        wifi = ?,
-        televisao = ?,
-        cozinha = ?,
-        ar_condicionado = ?,
-        canto_de_estudo = ?,
-        chuveiro_quente = ?,
-        banheira = ?,
-        extintor = ?,
-        camera = ?,
-        alarme = ?,
-        piscina = ?,
-        churrasqueira = ?,
-        academia = ?,
-        varanda = ?,
-        jardim = ?,
-        pais = ?,
-        cep = ?,
-        endereco = ?,
-        bairro = ?,
-        cidade = ?,
-        estado = ?,
-        apto = ?
-    WHERE id_republica = ?
+        futebol = ?,
+        tenis = ?,
+        jiujitsu = ?,
+        volei = ?,
+        capoeira = ?,
+        ciclismo = ?,
+    WHERE id_projeto = ?
     `
     const params = [
-        republica.titulo,
-        republica.preco,
-        republica.tipo_republica,
-        republica.tipo_distribuicao,
-        republica.qtd_moradores,
-        republica.qtd_quartos,
-        republica.qtd_banheiros,
-        republica.qtd_camas,
-        republica.descricao,
-        republica.valor,
-        republica.wifi,
-        republica.televisao,
-        republica.cozinha,
-        republica.ar_condicionado,
-        republica.canto_de_estudo,
-        republica.chuveiro_quente,
-        republica.banheira,
-        republica.extintor,
-        republica.camera,
-        republica.alarme,
-        republica.piscina,
-        republica.churrasqueira,
-        republica.academia,
-        republica.varanda,
-        republica.jardim,
-        republica.pais,
-        republica.cep,
-        republica.endereco,
-        republica.bairro,
-        republica.cidade,
-        republica.estado,
-        republica.apto,
-        republica.id_usuario,
+        projeto.titulo,
+        projeto.qtd_participantes,
+        projeto.descricao,
+        projeto.futebol,
+        projeto.tenis,
+        projeto.jiujitsu,
+        projeto.volei,
+        projeto.capoeira,
+        projeto.ciclismo,
+        projeto.id_usuario,
         id
     ];
 
@@ -257,10 +177,10 @@ export async function updateRepublica(republica, id) {
     }
 }
 
-export async function deleteRepublica(id) {
+export async function deleteprojeto(id) {
     const conexao = mysql.createPool(db);
     console.log('Deletando usuário');
-    const sql = `DELETE FROM republicas WHERE id_republica = ?`;
+    const sql = `DELETE FROM projetos WHERE id_projeto = ?`;
 
     const params = [id];
 
@@ -274,11 +194,11 @@ export async function deleteRepublica(id) {
     }
 }
 
-export async function showOneRepublica(id_republica) {
+export async function showOneprojeto(id_projeto) {
     console.log('UsuarioModel :: showOneUsuario');
     const conexao = mysql.createPool(db);
-    const sql = 'SELECT * FROM republicas WHERE id_republica = ?';
-    const params = [id_republica];
+    const sql = 'SELECT * FROM projetos WHERE id_projeto = ?';
+    const params = [id_projeto];
     try {
         const [retorno] = await conexao.query(sql, params);
         if (retorno.length < 1) {
@@ -292,31 +212,31 @@ export async function showOneRepublica(id_republica) {
     }
 }
 
-export async function getRepublicaWithFotos(idRepublica) {
+export async function getprojetoWithFotos(idprojeto) {
     const conexao = mysql.createPool(db);
 
     try {
         // Obter informações da república
-        const [republicaRows] = await conexao.query(
-            `SELECT * FROM republicas WHERE id_republica = ?`,
-            [idRepublica]
+        const [projetoRows] = await conexao.query(
+            `SELECT * FROM projetos WHERE id_projeto = ?`,
+            [idprojeto]
         );
 
-        if (republicaRows.length === 0) {
+        if (projetoRows.length === 0) {
             throw new Error('República não encontrada.');
         }
 
-        const republica = republicaRows[0];
+        const projeto = projetoRows[0];
 
         // Obter as fotos relacionadas
         const [fotosRows] = await conexao.query(
-            `SELECT caminho_foto FROM foto_republica WHERE id_republica = ? LIMIT 4`,
-            [idRepublica]
+            `SELECT caminho_foto FROM foto_projeto WHERE id_projeto = ? LIMIT 4`,
+            [idprojeto]
         );
 
-        republica.fotos = fotosRows.map((row) => row.caminho_foto);
+        projeto.fotos = fotosRows.map((row) => row.caminho_foto);
 
-        return republica;
+        return projeto;
     } catch (error) {
         console.error('Erro ao buscar república e fotos:', error);
         throw error;

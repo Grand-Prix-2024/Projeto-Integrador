@@ -18,7 +18,7 @@ function HomeCasas() {
           setAdData(response.data);
           fetchUser(response.data.id_usuario);
         } else {
-          console.error("República não encontrada.");
+          console.error("Projeto não encontrado.");
         }
       } catch (error) {
         console.error("Erro ao buscar os dados do anúncio:", error);
@@ -42,14 +42,14 @@ function HomeCasas() {
   }, [id]);
 
   const imageStyle = {
-    border: "2px solid #FFE34C",
+    border: "2px solid #78EB78",
     borderRadius: "8px",
     transition: "transform 0.3s ease",
   };
 
   const buttonStyle = {
-    backgroundColor: "#FFE34C",
-    borderColor: "#FFE34C",
+    backgroundColor: "#78EB78",
+    borderColor: "#78EB78",
     color: "black",
   };
 

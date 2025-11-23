@@ -18,14 +18,13 @@ function Perfil() {
   const nome = localStorage.getItem("nome");
   const sobrenome = localStorage.getItem("sobrenome");
   const email = localStorage.getItem("email");
-  const [defaultTrack, setDefaultTrack] = useState(null);
   const navigate = useNavigate();
 
   function trocarTela() {
     navigate('/editar-perfil');
   }
 
-  // TESTAR ESSA FUNÇÃO AMANHA
+  
   useEffect(() => {
     if (!id_usuario) {
       alert('Efetue Login');
@@ -67,16 +66,6 @@ function Perfil() {
       const consulta = await resposta.json();
       setPerfil(consulta);
 
-      // Se houver uma música salva no perfil, define ela como música padrão
-      if (consulta.spotify_track) {
-        // Garantir que o spotify_track seja um objeto JSON válido
-        const trackData = typeof consulta.spotify_track === 'string'
-          ? JSON.parse(consulta.spotify_track)
-          : consulta.spotify_track;
-
-        setDefaultTrack(trackData);
-      }
-
       // Calcula a idade com base na data de nascimento
       if (consulta.data_nascimento) {
         const idadeCalculada = calcularIdade(consulta.data_nascimento);
@@ -106,14 +95,6 @@ function Perfil() {
             <div style={{ marginBottom: '35px', fontSize: '18px' }} className=" justify-content-between">
               <img src={locaPin} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }} />
               <span style={{ fontSize: '17px' }}>{perfil?.local_moradia || 'N/A'}</span>
-            </div>
-            <div style={{ marginBottom: '35px', fontSize: '18px' }} className=" justify-content-between">
-              <img src={chapeuGrad} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }} />
-              <span style={{ fontSize: '17px' }}>{perfil?.curso || 'N/A'}</span>
-            </div>
-            <div style={{ marginBottom: '35px', fontSize: '18px' }} className=" justify-content-between">
-              <img src={escola} style={{ width: '25px', height: '25px', marginRight: '15px', marginTop: '-4' }} />
-              <span style={{ fontSize: '17px' }}>{perfil?.faculdade || 'N/A'}</span>
             </div>
           </Card.Text>
         </Card.Body>
@@ -159,49 +140,6 @@ function Perfil() {
         </Card.Text>
       </Card>
       <hr className='position-absolute top-50 start-50"' style={{ width: '800px', height: '600px', marginLeft: '750px', marginBlockStart: '35px' }} />
-      {/* <Card className='position top-50 start-50"' style={{ width: '150px', height: '200px', marginLeft: '750px', marginBlockStart: '-382px', borderColor: 'black' }}> */}
-        <Card className='position top-50 start-50"' style={{
-          width: '150px',
-          height: '200px',
-          marginLeft: '750px',
-          marginBlockStart: '-382px',
-          borderColor: 'black',
-          padding: '10px'
-        }}>
-          <h5 style={{
-            fontSize: '16px',
-            marginBottom: '10px',
-            marginTop: '5px'
-          }}>Música Favorita:</h5>
-          {defaultTrack ? (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <img
-                src={defaultTrack.album_image || 'https://via.placeholder.com/50'}
-                alt="Capa do álbum"
-                style={{
-                  width: '100px',
-                  height: '100px',
-                  objectFit: 'cover',
-                  marginBottom: '8px'
-                }}
-              />
-              <div style={{ textAlign: 'center' }}>
-                <h6 style={{
-                  margin: 0,
-                  fontSize: '14px',
-                  fontWeight: 'bold'
-                }}>{defaultTrack.name || 'Título não disponível'}</h6>
-                <small style={{
-                  color: 'gray',
-                  fontSize: '12px'
-                }}>{defaultTrack.artist || 'Artista não disponível'}</small>
-              </div>
-            </div>
-          ) : (
-            <p style={{ fontStyle: 'italic', color: 'gray' }}>Nenhuma música favorita selecionada</p>
-          )}
-        </Card>
-      {/* </Card> */}
       <Card className='position top-50 start-50"' style={{ width: '500px', height: '300px', marginLeft: '980px', marginBlockStart: '-780px', marginTop: '-250px', border: 'none' }}>
         <Card.Text>
           <div style={{ marginTop: '65px' }}>
@@ -209,13 +147,7 @@ function Perfil() {
               <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={balao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />IDADE: {idade || 'N/A'}</h5>
             </span>
             <span>
-              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={lingua} style={{ width: '25px', height: '25px', marginRight: '5px' }} />IDIOMAS:{perfil?.idioma || 'N/A'}</h5>
-            </span>
-            <span>
               <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={casa} style={{ width: '25px', height: '25px', marginRight: '5px' }} />MORA EM: Vitória - ES</h5>
-            </span>
-            <span>
-              <h5 style={{ marginBottom: '25px', fontSize: '15px' }}><img src={coracao} style={{ width: '25px', height: '25px', marginRight: '5px' }} />Estado Civil: {perfil?.estado_civil || 'N/A'}</h5>
             </span>
           </div>
         </Card.Text>

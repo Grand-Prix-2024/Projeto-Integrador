@@ -31,9 +31,9 @@ const AccommodationSelector = () => {
           .feature-btn {
             padding: 20px 40px;
             text-align: center;
-            background: #FFE245;
+            background: #78EB78;
             color: #fff;
-            border: 1px solid #FFE245;
+            border: 1px solid #78EB78;
             border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
@@ -51,9 +51,9 @@ const AccommodationSelector = () => {
           }
 
           .feature-btn.active {
-            background: #FFEB86;
+            background: #78EB78;
             color: #000;
-            border-color: #FFEB86;
+            border-color: #78EB78;
           }
 
           .feature-btn.active .feature-icon {
@@ -61,7 +61,7 @@ const AccommodationSelector = () => {
           }
 
           .feature-btn:hover {
-            background: #FFD834;
+            background: #78EB78;
             transform: scale(1.05);
           }
 

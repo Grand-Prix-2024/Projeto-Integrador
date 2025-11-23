@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
                     <Col xs={12} md={8} lg={6}>
                         <Card>
                             <Card.Body>
-                                <Card.Title className="text-center mb-4">Termo de Privacidade - HIVE</Card.Title>
+                                <Card.Title className="text-center mb-4">Termo de Privacidade - Unisport</Card.Title>
 
                                 <h5>1. Coleta de Dados Pessoais</h5>
                                 <p>
@@ -82,16 +82,16 @@ const PrivacyPolicy = () => {
 
                 <style jsx>{`
                     .custom-button {
-                        background-color: #FFE34C;
-                        border-color: #FFE34C;
+                        background-color: #78EB78;
+                        border-color: #78EB78;
                         color: #000;
                         padding: 0.4rem 0.8rem; /* Reduzindo o tamanho do botão */
                         font-size: 0.85rem; /* Ajustando o tamanho do texto */
                     }
 
                     .custom-button:hover {
-                        background-color: #d4b200;
-                        border-color: #d4b200;
+                        background-color: #78EB78;
+                        border-color: #78EB78;
                     }
 
                     .custom-button:focus {
@@ -100,7 +100,7 @@ const PrivacyPolicy = () => {
                 `}</style>
             </Container>
 
-            <footer className="text-center py-3 border-top" style={{ backgroundColor: '#FFE34C', marginTop: 'auto' }}>
+            <footer className="text-center py-3 border-top" style={{ backgroundColor: '#78EB78', marginTop: 'auto' }}>
                 <Container className="d-flex justify-content-between align-items-center">
                     <div style={{ color: '#000' }}>
                         © 2024 HIVE{' '}

@@ -3,19 +3,15 @@ import React, { createContext, useContext, useState } from "react";
 const ObjetoContext = createContext();
 
 export const ObjetoProvider = ({ children }) => {
-  const [objetoRepublica, setObjetoRepublica] = useState({
+  const [objetoProjeto, setObjetoProjeto] = useState({
     name: "",
-    Moradores: 1,
-    Quartos: 1,
-    Banheiros: 1,
-    Camas: 1,
-    roomType: "",
+    Participantes: 1,
     title: "",
     
   });
 
   return (
-    <ObjetoContext.Provider value={{ objetoRepublica, setObjetoRepublica }}>
+    <ObjetoContext.Provider value={{ objetoProjeto, setObjetoProjeto }}>
       {children}
     </ObjetoContext.Provider>
   );

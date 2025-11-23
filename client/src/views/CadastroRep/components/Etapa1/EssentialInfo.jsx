@@ -8,17 +8,11 @@ const EssentialInfo = () => {
   const MAX_VALUE = 10;
 
   const [values, setValues] = useState({
-    qtd_moradores: objetoRepublica.qtd_moradores || 1,
-    qtd_quartos: objetoRepublica.qtd_quartos || 1,
-    qtd_banheiros: objetoRepublica.qtd_banheiros || 1,
-    qtd_camas: objetoRepublica.qtd_camas || 1,
+    qtd_participantes: objetoRepublica.qtd_participantes || 1,
   });
 
   const fieldLabels = {
-    qtd_moradores: "Moradores",
-    qtd_quartos: "Quartos",
-    qtd_banheiros: "Banheiros",
-    qtd_camas: "Camas"
+    qtd_participantes: "Participantes"
   };
 
   const onUpdate = (key, value) => {
@@ -38,22 +32,22 @@ const EssentialInfo = () => {
       <style>
         {`
           .btn-yellow {
-            background-color: #ffc107;
+            background-color: #78EB78;
             color: #fff;
-            border: 1px solid #ffc107;
+            border: 1px solid #78EB78;
             transition: background 0.3s, color 0.3s;
           }
 
           .btn-yellow:hover {
-            background-color: #e0a800;
-            border-color: #e0a800;
+            background-color: #78EB78;
+            border-color: #78EB78;
             color: #fff;
           }
 
           .btn-yellow:disabled {
-            background-color: #ffe082;
+            background-color: #78EB78;
             color: #000;
-            border: 1px solid #ffe082;
+            border: 1px solid #78EB78;
           }
 
           .btn-yellow span {
