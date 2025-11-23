@@ -13,18 +13,18 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-const DefinirEndereco = ({ objetoRepublica, setObjetoRepublica }) => {
+const DefinirEndereco = ({ objetoProjeto, setobjetoProjeto }) => {
   // Função para buscar informações do CEP
   useEffect(() => {
     const fetchEndereco = async () => {
-      if (objetoRepublica.cep && objetoRepublica.cep.length === 8) {
+      if (objetoProjeto.cep && objetoProjeto.cep.length === 8) {
         try {
           const response = await axios.get(
-            `https://viacep.com.br/ws/${objetoRepublica.cep}/json/`
+            `https://viacep.com.br/ws/${objetoProjeto.cep}/json/`
           );
           if (!response.data.erro) {
-            setObjetoRepublica({
-              ...objetoRepublica,
+            setobjetoProjeto({
+              ...objetoProjeto,
               endereco: response.data.logradouro,
               bairro: response.data.bairro,
               cidade: response.data.localidade,
@@ -38,7 +38,7 @@ const DefinirEndereco = ({ objetoRepublica, setObjetoRepublica }) => {
     };
 
     fetchEndereco();
-  }, [objetoRepublica.cep, setObjetoRepublica]);
+  }, [objetoProjeto.cep, setobjetoProjeto]);
 
   const [position, setPosition] = useState([0, 0]); // Posição inicial do mapa
 
@@ -56,8 +56,8 @@ const DefinirEndereco = ({ objetoRepublica, setObjetoRepublica }) => {
           )
           .then((response) => {
             const { address } = response.data;
-            setObjetoRepublica({
-              ...objetoRepublica,
+            setobjetoProjeto({
+              ...objetoProjeto,
               endereco: address.road || "",
               bairro: address.suburb || "",
               cidade: address.city || address.town || address.village || "",
@@ -80,9 +80,9 @@ const DefinirEndereco = ({ objetoRepublica, setObjetoRepublica }) => {
           <Form.Control
             type="text"
             placeholder="País"
-            value={objetoRepublica.pais}
+            value={objetoProjeto.pais}
             onChange={(e) =>
-              setObjetoRepublica({ ...objetoRepublica, pais: e.target.value })
+              setobjetoProjeto({ ...objetoProjeto, pais: e.target.value })
             }
             required
           />
@@ -94,9 +94,9 @@ const DefinirEndereco = ({ objetoRepublica, setObjetoRepublica }) => {
               <Form.Control
                 type="text"
                 placeholder="CEP"
-                value={objetoRepublica.cep}
+                value={objetoProjeto.cep}
                 onChange={(e) =>
-                  setObjetoRepublica({ ...objetoRepublica, cep: e.target.value })
+                  setobjetoProjeto({ ...objetoProjeto, cep: e.target.value })
                 }
                 required
               />
@@ -108,10 +108,10 @@ const DefinirEndereco = ({ objetoRepublica, setObjetoRepublica }) => {
               <Form.Control
                 type="text"
                 placeholder="Endereço"
-                value={objetoRepublica.endereco}
+                value={objetoProjeto.endereco}
                 onChange={(e) =>
-                  setObjetoRepublica({
-                    ...objetoRepublica,
+                  setobjetoProjeto({
+                    ...objetoProjeto,
                     endereco: e.target.value,
                   })
                 }
@@ -127,9 +127,9 @@ const DefinirEndereco = ({ objetoRepublica, setObjetoRepublica }) => {
               <Form.Control
                 type="text"
                 placeholder="Bairro"
-                value={objetoRepublica.bairro}
+                value={objetoProjeto.bairro}
                 onChange={(e) =>
-                  setObjetoRepublica({ ...objetoRepublica, bairro: e.target.value })
+                  setobjetoProjeto({ ...objetoProjeto, bairro: e.target.value })
                 }
                 required
               />
@@ -141,9 +141,9 @@ const DefinirEndereco = ({ objetoRepublica, setObjetoRepublica }) => {
               <Form.Control
                 type="text"
                 placeholder="Cidade/Município"
-                value={objetoRepublica.cidade}
+                value={objetoProjeto.cidade}
                 onChange={(e) =>
-                  setObjetoRepublica({ ...objetoRepublica, cidade: e.target.value })
+                  setobjetoProjeto({ ...objetoProjeto, cidade: e.target.value })
                 }
                 required
               />
@@ -157,9 +157,9 @@ const DefinirEndereco = ({ objetoRepublica, setObjetoRepublica }) => {
               <Form.Control
                 type="text"
                 placeholder="Estado"
-                value={objetoRepublica.estado}
+                value={objetoProjeto.estado}
                 onChange={(e) =>
-                  setObjetoRepublica({ ...objetoRepublica, estado: e.target.value })
+                  setobjetoProjeto({ ...objetoProjeto, estado: e.target.value })
                 }
                 required
               />
@@ -171,9 +171,9 @@ const DefinirEndereco = ({ objetoRepublica, setObjetoRepublica }) => {
               <Form.Control
                 type="text"
                 placeholder="Apartamento"
-                value={objetoRepublica.apto}
+                value={objetoProjeto.apto}
                 onChange={(e) =>
-                  setObjetoRepublica({ ...objetoRepublica, apto: e.target.value })
+                  setobjetoProjeto({ ...objetoProjeto, apto: e.target.value })
                 }
                 required
               />

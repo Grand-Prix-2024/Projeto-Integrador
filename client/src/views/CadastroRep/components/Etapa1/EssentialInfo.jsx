@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useObjeto } from "../ObjectContext";
 
 const EssentialInfo = () => {
-  const { objetoRepublica, setObjetoRepublica } = useObjeto();
+  const { objetoProjeto, setobjetoProjeto } = useObjeto();
 
   const MIN_VALUE = 0;
   const MAX_VALUE = 10;
 
   const [values, setValues] = useState({
-    qtd_participantes: objetoRepublica.qtd_participantes || 1,
+    qtd_participantes: objetoProjeto.qtd_participantes || 1,
   });
 
   const fieldLabels = {
@@ -21,7 +21,7 @@ const EssentialInfo = () => {
       ...prevValues,
       [key]: numericValue,
     }));
-    setObjetoRepublica((prevObjeto) => ({
+    setobjetoProjeto((prevObjeto) => ({
       ...prevObjeto,
       [key]: numericValue,
     }));

@@ -165,7 +165,7 @@ function FormUsuario({ tipo, handleSubmit, textoBotao, id, titulo }) {
                     {cpfError && <small className="text-danger">{cpfError}</small>}
 
                     
-                    <button style={{backgroundColor:'#FFE34C', borderColor:'white',}} className='btn btn-warning mt-3 float-end' type='submit'>{textoBotao}</button>
+                    <button style={{backgroundColor:'#78EB78', borderColor:'white',}} className='btn btn-warning mt-3 float-end' type='submit'>{textoBotao}</button>
                 </form>
             </div>
         </>

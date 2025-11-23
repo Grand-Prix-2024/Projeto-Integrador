@@ -18,11 +18,10 @@ const DetalhesDaEmpresa = () => {
                                 </Card.Header>
                                 <Card.Body>
                                     <p>
-                                        O Hive é uma plataforma digital dedicada à divulgação de repúblicas universitárias,
-                                        oferecendo um espaço confiável para conectar estudantes a donos de acomodações. Para
-                                        usuários residentes ou estabelecidos no Brasil.
+                                        O Unisport é uma plataforma digital dedicada à divulgação de projetos sociais. Para
+                                        projetos estabelecidos no Brasil.
                                     </p>
-                                    <h5 className="mb-3">HIVE Plataforma Digital Ltda.</h5>
+                                    <h5 className="mb-3">Unisport Plataforma Digital Ltda.</h5>
                                     <p>Av. Marechal Mascarenhas de Moraes, 2235</p>
                                     <p>CEP: 29052-121 - Bento Ferreira</p>
                                     <p>Vitória - ES - Brasil</p>
@@ -31,7 +30,7 @@ const DetalhesDaEmpresa = () => {
                                     <p>
                                         <strong>E-mail:</strong>{' '}
                                         <a href="mailto:contato@hive.com" className="text-decoration-none">
-                                            contato@hive.com
+                                            contato@unisport.com
                                         </a>
                                     </p>
                                 </Card.Body>
@@ -51,17 +50,17 @@ const DetalhesDaEmpresa = () => {
                 </Container>
             </div>
 
-            <footer className="text-center py-3 border-top" style={{ backgroundColor: '#FFE34C', marginTop: 'auto' }}>
+            <footer className="text-center py-3 border-top" style={{ backgroundColor: '#78EB78', marginTop: 'auto' }}>
                 <Container className="d-flex justify-content-between align-items-center">
                     <div style={{ color: '#000' }}>
-                        © 2024 HIVE{' '}
+                        © 2025 Unisport{' '}
                         <a href="/privacidade" style={{ color: '#000' }}>Privacidade</a> ·{' '}
                         <a href="/termos" style={{ color: '#000' }}>Termos</a> {' '}
                     </div>
                     <div className="d-flex align-items-center">
                         <i className="bi bi-globe me-2" style={{ color: '#000' }}></i> Português (BR)
                         <i className="bi bi-currency-dollar mx-2" style={{ color: '#000' }}></i> BRL
-                        <a href="https://www.instagram.com/hive_republicas" className="ms-2" style={{ color: '#000' }} target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.instagram.com/unisport" className="ms-2" style={{ color: '#000' }} target="_blank" rel="noopener noreferrer">
                             <i className="bi bi-instagram"></i>
                         </a>
                     </div>
@@ -72,16 +71,16 @@ const DetalhesDaEmpresa = () => {
             {/* Estilos do botão */}
             <style jsx>{`
                 .custom-button {
-                    background-color: #FFE34C;
-                    border-color: #FFE34C;
+                    background-color: #78EB78;
+                    border-color: #78EB78;
                     color: #000;
                     padding: 0.4rem 0.8rem; /* Reduzindo o tamanho do botão */
                     font-size: 0.85rem; /* Ajustando o tamanho do texto */
                 }
 
                 .custom-button:hover {
-                    background-color: #d4b200;
-                    border-color: #d4b200;
+                    background-color: #78EB78;
+                    border-color: #78EB78;
                 }
 
                 .custom-button:focus {

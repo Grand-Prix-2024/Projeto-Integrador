@@ -1,6 +1,6 @@
 import React from "react";
 
-const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) => {
+const HighlightFeatures = ({ objetoProjeto, setobjetoProjeto, onToggle }) => {
   // Lista de itens organizados por seções
   const sections = [
     {
@@ -18,7 +18,7 @@ const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) =>
 
   const handleToggle = (name) => {
     // Atualiza o objeto global com a alternância da feature
-    setObjetoRepublica((prevObjeto) => {
+    setobjetoProjeto((prevObjeto) => {
       const updatedFeatures = prevObjeto.Features.includes(name)
         ? prevObjeto.Features.filter((feature) => feature !== name)
         : [...prevObjeto.Features, name];
@@ -122,7 +122,7 @@ const HighlightFeatures = ({ objetoRepublica, setObjetoRepublica, onToggle }) =>
               {section.items.map((item, idx) => (
                 <button
                   key={idx}
-                  className={`feature-btn ${objetoRepublica.Features && objetoRepublica.Features.includes(item.name) ? "active" : ""
+                  className={`feature-btn ${objetoProjeto.Features && objetoProjeto.Features.includes(item.name) ? "active" : ""
                     }`}
                   onClick={() => handleToggle(item.name)}
                 >

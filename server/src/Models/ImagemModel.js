@@ -17,7 +17,7 @@ export async function createImagens(id_republica, imagens) {
     const conexao = mysql.createPool(db);
     console.log('ImagemModel :: createImagens');
 
-    const sql = 'INSERT INTO foto_republica (caminho_foto, id_republica, destaque) VALUES (?, ?, ?)';
+    const sql = 'INSERT INTO foto_projeto (caminho_foto, id_projeto, destaque) VALUES (?, ?, ?)';
     try {
         for (const [index, imagem] of imagens.entries()) {
             const nomeImg = `${id_republica}_${Date.now()}_${index}.jpg`;
@@ -45,12 +45,12 @@ export async function listRepublicas() {
 
     const sql = `
         SELECT 
-            r.id_republica, 
-            r.nome_republica, 
+            r.id_projeto, 
+            r.nome_projeto, 
             r.descricao, 
             f.caminho_foto AS imagem_destaque 
-        FROM republicas r
-        LEFT JOIN foto_republica f ON r.id_republica = f.id_republica AND f.destaque = true
+        FROM projetos r
+        LEFT JOIN foto_projeto f ON r.id_projeto = f.id_projeto AND f.destaque = true
     `;
 
     try {
@@ -70,8 +70,8 @@ export async function detailRepublica(id_republica) {
     const conexao = mysql.createPool(db);
     console.log('ImagemModel :: detalhesRepublica');
 
-    const sqlRepublica = 'SELECT * FROM republicas WHERE id_republica = ?';
-    const sqlImagens = 'SELECT caminho_foto FROM foto_republica WHERE id_republica = ?';
+    const sqlRepublica = 'SELECT * FROM projetos WHERE id_projeto = ?';
+    const sqlImagens = 'SELECT caminho_foto FROM foto_projeto WHERE id_projeto = ?';
 
     try {
         const [republica] = await conexao.query(sqlRepublica, [id_republica]);
@@ -96,8 +96,8 @@ export async function deleteImagem(id_foto) {
     console.log('ImagemModel :: excluirImagem');
     const conexao = mysql.createPool(db);
 
-    const sqlImagem = 'SELECT caminho_foto FROM foto_republica WHERE id_foto = ?';
-    const sqlDeleteImagem = 'DELETE FROM foto_republica WHERE id_foto = ?';
+    const sqlImagem = 'SELECT caminho_foto FROM foto_projeto WHERE id_foto = ?';
+    const sqlDeleteImagem = 'DELETE FROM foto_projeto WHERE id_foto = ?';
 
     try {
         const [imagens] = await conexao.query(sqlImagem, [id_foto]);

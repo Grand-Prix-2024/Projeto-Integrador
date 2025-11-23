@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
 
-const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
-  // Inicializa os estados com os valores de `objetoRepublica` ou valores padrão
-  const [titulo, setTitulo] = useState(objetoRepublica.titulo || '');
-  const [image, setImage] = useState(objetoRepublica.image || null);
-  const [descricao, setDescricao] = useState(objetoRepublica.descricao || '');
+const PropertyAd = ({ objetoProjeto = {}, setobjetoProjeto }) => {
+  // Inicializa os estados com os valores de `objetoProjeto` ou valores padrão
+  const [titulo, setTitulo] = useState(objetoProjeto.titulo || '');
+  const [image, setImage] = useState(objetoProjeto.image || null);
+  const [descricao, setDescricao] = useState(objetoProjeto.descricao || '');
 
   useEffect(() => {
-    if (setObjetoRepublica) {
-      setObjetoRepublica((prevObjeto) => ({
+    if (setobjetoProjeto) {
+      setobjetoProjeto((prevObjeto) => ({
         ...prevObjeto,
         titulo,
         image,
         descricao,
       }));
     } else {
-      console.error('setObjetoRepublica não está definido');
+      console.error('setobjetoProjeto não está definido');
     }
-  }, [titulo, image, descricao, setObjetoRepublica]);
+  }, [titulo, image, descricao, setobjetoProjeto]);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0]; // Obtém apenas o primeiro arquivo selecionado
     if (file) {
       setImage(file);
-      setObjetoRepublica((prev) => ({
+      setobjetoProjeto((prev) => ({
         ...prev,
         image: file,
       }));
@@ -32,7 +32,7 @@ const PropertyAd = ({ objetoRepublica = {}, setObjetoRepublica }) => {
 
   const handleRemoveImage = () => {
     setImage(null);
-    setObjetoRepublica((prev) => ({
+    setobjetoProjeto((prev) => ({
       ...prev,
       image: null,
     }));

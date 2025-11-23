@@ -15,9 +15,9 @@ export async function createprojeto(projeto, imageFile) {
     const featureMapping = {
         futebol: "Futebol",
         tenis: "Tênis",
-        jiujitsu: "Jiu-Jitsu",
+        basquete: "Basquete",
         volei: "Võlei",
-        capoeira: "Capoeira",
+        pingpong: "Ping Pong",
         ciclismo: "Ciclismo",
     };
 
@@ -119,9 +119,9 @@ export async function showprojetos(projeto) {
         projeto.descricao,
         projeto.futebol,
         projeto.tenis,
-        projeto.jiujitsu,
+        projeto.basquete,
         projeto.volei,
-        projeto.capoeira,
+        projeto.pingpong,
         projeto.ciclismo,
         projeto.id_usuario
     ];
@@ -147,9 +147,9 @@ export async function updateprojeto(projeto, id) {
         descricao = ?,
         futebol = ?,
         tenis = ?,
-        jiujitsu = ?,
+        basquete = ?,
         volei = ?,
-        capoeira = ?,
+        pingpong = ?,
         ciclismo = ?,
     WHERE id_projeto = ?
     `
@@ -159,9 +159,9 @@ export async function updateprojeto(projeto, id) {
         projeto.descricao,
         projeto.futebol,
         projeto.tenis,
-        projeto.jiujitsu,
+        projeto.basquete,
         projeto.volei,
-        projeto.capoeira,
+        projeto.pingpong,
         projeto.ciclismo,
         projeto.id_usuario,
         id

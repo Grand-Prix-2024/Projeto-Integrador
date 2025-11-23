@@ -2,7 +2,7 @@ const db = {
     host:'localhost',
     user:'root',
     password:'',
-    database:'hivebanco'
+    database:'labdatabase'
 } 
 
 export default db;

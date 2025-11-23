@@ -2,7 +2,7 @@ import React from "react";
 import { useObjeto } from "../ObjectContext";
 
 const AccommodationSelector = () => {
-  const { objetoRepublica, setObjetoRepublica } = useObjeto();
+  const { objetoProjeto, setobjetoProjeto } = useObjeto();
 
   const options = [
     { name: "Casa", icon: <i className="bi bi-house-door feature-icon"></i> },
@@ -10,8 +10,8 @@ const AccommodationSelector = () => {
   ];
 
   const alterarObjeto = (key, value) => {
-    console.log(objetoRepublica);
-    setObjetoRepublica((prevState) => ({
+    console.log(objetoProjeto);
+    setobjetoProjeto((prevState) => ({
       ...prevState,
       [key]: value,
     }));
@@ -84,7 +84,7 @@ const AccommodationSelector = () => {
             <button
               key={index}
               className={`feature-btn ${
-                objetoRepublica.name === option.name ? "active" : ""
+                objetoProjeto.name === option.name ? "active" : ""
               }`}
               onClick={() => {
                 alterarObjeto("name", option.name);
@@ -96,8 +96,8 @@ const AccommodationSelector = () => {
           ))}
         </div>
         <div className="message">
-          {objetoRepublica.name
-            ? `Você selecionou: ${objetoRepublica.name}`
+          {objetoProjeto.name
+            ? `Você selecionou: ${objetoProjeto.name}`
             : "Nenhuma acomodação selecionada."}
         </div>
       </div>
