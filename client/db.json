@@ -8,7 +8,15 @@
       "sobrenome": "de assis sperandio",
       "data_nascimento": "2005-01-28",
       "cpf": "07023462503"
+    },
+    {
+      "id": "0eeb",
+      "email": "gregory@gmail.com",
+      "senha": "Nineiota2801",
+      "nome": "gregory",
+      "sobrenome": "veloso",
+      "data_nascimento": "1999-01-01",
+      "cpf": "07023462503"
     }
   ]
 }
-

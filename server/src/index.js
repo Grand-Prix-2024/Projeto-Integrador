@@ -16,13 +16,13 @@ import {
     deletarPerfil,
     buscarPerfilPorUsuario
 } from './Controllers/PerfilController.js';
-import { atualizarMusicaPerfil } from './Controllers/PerfilController.js';
+//import { atualizarMusicaPerfil } from './Controllers/PerfilController.js';
 import {
-    criarRepublica,
-    mostrarRepublica,
-    atualizarRepublica,
-    deletarRepublica,
-    mostrarUmaRepublica,
+    criarprojeto,
+    mostrarprojeto,
+    atualizarprojeto,
+    deletarprojeto,
+    mostrarUmaprojeto,
     // fetchRepublica,
     downloadImagem
 } from './Controllers/RepublicaController.js';
@@ -79,11 +79,11 @@ app.get('/perfil/:id_usuario', buscarPerfilPorUsuario);
 app.delete('/perfil/:id', deletarPerfil);
 
 // Rotas para CRUD de repúblicas
-app.post('/republicas', criarRepublica); // Cadastro de república com imagens
-app.get('/republicas', mostrarRepublica);
-app.put('/republicas/:id', atualizarRepublica);
-app.delete('/republicas/:id', deletarRepublica);
-app.get('/republicas/:id', mostrarUmaRepublica);
+app.post('/republicas', criarprojeto); // Cadastro de república com imagens
+app.get('/republicas', mostrarprojeto);
+app.put('/republicas/:id', atualizarprojeto);
+app.delete('/republicas/:id', deletarprojeto);
+app.get('/republicas/:id', mostrarUmaprojeto);
 
 // Rotas para manipulação de imagens
 app.post('/imagens', cadastrarImagens);
@@ -93,7 +93,7 @@ app.get('/imagens/:id', detalhesRepublica);
 
 app.put('/img_perfil/:id_perfil', editarImagem)
 
-app.put('/perfil/:id_usuario/music', atualizarMusicaPerfil);
+//app.put('/perfil/:id_usuario/music', atualizarMusicaPerfil);
 
 // Fetch para fotos relacionadas a uma república
 // app.get('/republicas/:id/fotos', fetchRepublica);
