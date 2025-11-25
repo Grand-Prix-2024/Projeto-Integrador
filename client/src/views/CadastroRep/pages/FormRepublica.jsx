@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import AccommodationSelector from "../components/Etapa1/AccommodationSelector";
-import RoomDistribution from "../components/Etapa1/RoomDistribution";
 import EssentialInfo from "../components/Etapa1/EssentialInfo";
 import HighlightFeatures from "../components/Etapa2/HighlightFeatures";
 import PropertyAd from "../components/Etapa3/PropertyAd";
@@ -16,7 +14,7 @@ const FormRepublica = () => {
   });
 
   const [features, setFeatures] = useState([]);
-  const { objetoProjeto, setobjetoProjeto } = useObjeto();
+  const { objetoProjeto, setObjetoProjeto } = useObjeto();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +23,7 @@ const FormRepublica = () => {
       alert("Efetue Login");
       navigate("/login");
     } else {
-      setobjetoProjeto((prev) => ({
+      setObjetoProjeto((prev) => ({
         ...prev,
         id_usuario: idUsuario,
       }));
@@ -39,14 +37,16 @@ const FormRepublica = () => {
   };
 
   useEffect(() => {
-    setobjetoProjeto((prev) => ({
+    setObjetoProjeto((prev) => ({
       ...prev,
       Features: features,
     }));
   }, [features]);
 
   const validarDados = (dados) => {
-    const camposObrigatorios = ["name", "pais", "cep", "endereco", "bairro", "cidade", "estado"];
+    console.log(objetoProjeto);
+    
+    const camposObrigatorios = ["pais", "cep", "endereco", "bairro", "cidade", "estado"];
     for (let campo of camposObrigatorios) {
       if (!dados[campo] || dados[campo].trim() === "") {
         alert(`O campo ${campo} é obrigatório.`);
@@ -57,6 +57,7 @@ const FormRepublica = () => {
   };
 
   const cadastrarRepublica = async (infoRepublica) => {
+    
     const essentialInfoFormatted = {
       ...essentialInfo,
       Participantes: parseInt(essentialInfo.Participantes, 10) || 0,
@@ -68,7 +69,7 @@ const FormRepublica = () => {
     };
 
     const formData = new FormData();
-    formData.append("infoRepublica", JSON.stringify(objetoProjetoFinal));
+    formData.append("infoprojeto", JSON.stringify(objetoProjetoFinal));
 
     if (objetoProjeto?.image) {
       formData.append("image", objetoProjeto.image);
@@ -78,9 +79,12 @@ const FormRepublica = () => {
       alert("Dados inválidos. Verifique as informações fornecidas.");
       return;
     }
+    console.log("Aqui",objetoProjetoFinal);
+    console.log("Alo",formData);
+
 
     try {
-      const resposta = await fetch(`http://localhost:5000/republicas`, {
+      const resposta = await fetch(`http://localhost:5000/projetos`, {
         method: "POST",
         body: formData,
       });
@@ -89,9 +93,9 @@ const FormRepublica = () => {
         console.log("Erro ao cadastrar a república");
         alert("Erro ao cadastrar. Tente novamente.");
       } else {
-        console.log("República cadastrada com sucesso");
-        alert("República cadastrada com sucesso!");
-        setobjetoProjeto({
+        console.log("Projeto cadastrada com sucesso");
+        alert("Projeto cadastrada com sucesso!");
+        setObjetoProjeto({
           Features: [],
           pais: "",
           cep: "",
@@ -107,7 +111,7 @@ const FormRepublica = () => {
         });
       }
     } catch (error) {
-      console.error("Erro ao cadastrar a república", error);
+      console.error("Erro ao cadastrar a Projeto", error);
       // alert("Erro ao cadastrar. Tente novamente.");
     }
   };
@@ -116,7 +120,7 @@ const FormRepublica = () => {
     <>
       <Navbar />
       <div className="container">
-        <style>
+        {/* <style>
           {`
               .section {
                 display: flex;
@@ -134,12 +138,12 @@ const FormRepublica = () => {
                 margin: 0 0 10px 0;
               }
             `}
-        </style>
+        </style> */}
         <div className="section mt-5">
           <h3>Adicione informações essenciais</h3>
           <EssentialInfo
             objetoProjeto={objetoProjeto}
-            setobjetoProjeto={setobjetoProjeto}
+            setObjetoProjeto={setObjetoProjeto}
             values={essentialInfo}
             onUpdate={(key, value) => setEssentialInfo({ ...essentialInfo, [key]: value })}
           />
@@ -152,7 +156,7 @@ const FormRepublica = () => {
         </div>
         <HighlightFeatures
           objetoProjeto={objetoProjeto}
-          setobjetoProjeto={setobjetoProjeto}
+          setObjetoProjeto={setObjetoProjeto}
           onToggle={toggleFeature}
         />
         <div className="section mt-5">
@@ -162,7 +166,7 @@ const FormRepublica = () => {
         </div>
         <PropertyAd
           objetoProjeto={objetoProjeto}
-          setobjetoProjeto={setobjetoProjeto}
+          setObjetoProjeto={setObjetoProjeto}
         />
 
         <div className="section mt-5">
@@ -172,12 +176,12 @@ const FormRepublica = () => {
         </div>
         <DefinirEndereco
           objetoProjeto={objetoProjeto}
-          setobjetoProjeto={setobjetoProjeto}
+          setObjetoProjeto={setObjetoProjeto}
         />
       </div>
       <div className="section mt-5">
         <Button
-          variant="warning"
+          variant="success"
           className="float-center w-100"
           onClick={() => cadastrarRepublica(objetoProjeto)}
         >

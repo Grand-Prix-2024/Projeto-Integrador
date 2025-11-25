@@ -12,7 +12,7 @@ function CasaDetalhes() {
     useEffect(() => {
         async function fetchRepublica() {
             try {
-                const response = await axios.get(`http://localhost:5000/republicas/${id}`);
+                const response = await axios.get(`http://localhost:5000/projetos/${id}`);
                 setRepublica(response.data);
             } catch (error) {
                 console.error("Erro ao buscar os detalhes da república:", error);

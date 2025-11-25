@@ -3,10 +3,6 @@ import Navbar from '../../components/Navbar';
 import { Card, Button, Image, CardText } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import locaPin from './img/locaPin.png';
-import chapeuGrad from './img/chapeuGrad.png';
-import escola from './img/escola.png';
-import lingua from './img/lingua.png';
-import coracao from './img/coracao.png';
 import casa from './img/casa.png';
 import balao from './img/balao.png';
 
@@ -131,7 +127,6 @@ function Perfil() {
         <Card.Text>
           <div>
             <h1>{nome} {sobrenome}</h1>
-            <h5 style={{ fontStyle: 'italic' }}>{perfil?.pronome || 'Pronome não informado'} <Button style={{ margin: '0px', marginTop: '-2px', marginLeft: '25px' }} variant="btn btn-warning" onClick={trocarTela}>Editar</Button></h5>
             <br />
             <br />
             <span>{perfil?.bio || 'Biografia não informada'}

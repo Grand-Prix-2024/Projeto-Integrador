@@ -34,14 +34,10 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path="/editar-perfil" element={<EditarPerfil />} />
         <Route path='/casas/:id' element={<Homecasas/>} />
-        {/* <Route path='/casas/:id' element={<CasaDetalhes />} />  */}
         <Route path='/cadastrar_republica' element={<FormRepublica/>} />
         <Route path='/privacidade' element={<PrivacyPolicy/>} />
         <Route path='/termos' element={<TermosDeServico/>} />
         <Route path='/detalhes' element={<DetalhesDaEmpresa/>} />
-
-
-
       </Routes>
     </BrowserRouter>
   );

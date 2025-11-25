@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
 
 // Configuração de CORS
 var corsOptions = {
-    origin: 'http://localhost',
+    origin: '*',
     optionsSuccessStatus: 200 // Para navegadores mais antigos
 };
 app.use(cors(corsOptions));
@@ -79,11 +79,11 @@ app.get('/perfil/:id_usuario', buscarPerfilPorUsuario);
 app.delete('/perfil/:id', deletarPerfil);
 
 // Rotas para CRUD de repúblicas
-app.post('/republicas', criarprojeto); // Cadastro de república com imagens
-app.get('/republicas', mostrarprojeto);
-app.put('/republicas/:id', atualizarprojeto);
-app.delete('/republicas/:id', deletarprojeto);
-app.get('/republicas/:id', mostrarUmaprojeto);
+app.post('/projetos', criarprojeto); // Cadastro de república com imagens
+app.get('/projetos', mostrarprojeto);
+app.put('/projetos/:id', atualizarprojeto);
+app.delete('/projetos/:id', deletarprojeto);
+app.get('/projetos/:id', mostrarUmaprojeto);
 
 // Rotas para manipulação de imagens
 app.post('/imagens', cadastrarImagens);
@@ -96,7 +96,7 @@ app.put('/img_perfil/:id_perfil', editarImagem)
 //app.put('/perfil/:id_usuario/music', atualizarMusicaPerfil);
 
 // Fetch para fotos relacionadas a uma república
-// app.get('/republicas/:id/fotos', fetchRepublica);
+// app.get('/projetos/:id/fotos', fetchRepublica);
 
 // Inicialização do servidor
 app.listen(porta, () => {

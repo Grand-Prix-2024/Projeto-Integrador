@@ -8,16 +8,16 @@ import axios from 'axios';
 // Função para obter as repúblicas do backend
 async function getRepublicas() {
   try {
-    const response = await axios.get(`http://localhost:5000/republicas`);
+    const response = await axios.get(`http://localhost:5000/projetos`);
     return response.data;
   } catch (error) {
-    console.error("Erro ao buscar repúblicas:", error);
+    console.error("Erro ao buscar Projetos:", error);
     return [];
   }
 }
 
 function Home() {
-  const [republicas, setRepublicas] = useState([]);
+  const [projetos, setRepublicas] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6); // Inicializa com 6 repúblicas visíveis
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ function Home() {
     if (id) {
       navigate(`/casas/${id}`);
     } else {
-      console.error("ID da república está indefinido.");
+      console.error("ID do Projeto está indefinido.");
       alert("Erro ao redirecionar: ID não encontrado.");
     }
   };
@@ -80,13 +80,13 @@ function Home() {
               <div className="text-center mt-5">
                 <h4>Carregando...</h4>
               </div>
-            ) : republicas.length === 0 ? (
+            ) : projetos.length === 0 ? (
               <div className="text-center mt-5">
                 <h4>Nenhum projeto encontrado.</h4>
               </div>
             ) : (
               <div className="row text-center">
-                {republicas.slice(0, visibleCount).map((rep) => (
+                {projetos.slice(0, visibleCount).map((rep) => (
                   <div key={rep.id} className="col-md-4 col-sm-6 mb-4">
                     <div
                       className="republica-card"
@@ -102,7 +102,7 @@ function Home() {
                         margin: 'auto',
                         cursor: 'pointer',
                       }}
-                      onClick={() => handleNavigate(`${rep.id_republica}`)}
+                      onClick={() => handleNavigate(`${rep.id_projeto}`)}
                     >
                       <img
                         src={`http://localhost:5000/public/${rep.caminhoFoto}`}
@@ -140,7 +140,7 @@ function Home() {
             )}
 
             {/* Botão Mostrar Mais */}
-            {visibleCount < republicas.length && (
+            {visibleCount < projetos.length && (
               <div className="text-center mt-4">
                 <button className="btn custom-button" onClick={handleShowMore}>
                   Mostrar Mais

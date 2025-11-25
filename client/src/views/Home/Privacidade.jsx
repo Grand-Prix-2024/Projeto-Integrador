@@ -67,7 +67,7 @@ const PrivacyPolicy = () => {
                                 </p>
 
                                 <footer className="text-center mt-4">
-                                    <small><strong>Última atualização:</strong> 12/12/2024</small>
+                                    <small><strong>Última atualização:</strong> 25/11/2025</small>
                                 </footer>
 
                                 <div className="text-center mt-4">

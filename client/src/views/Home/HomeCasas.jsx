@@ -13,7 +13,7 @@ function HomeCasas() {
   useEffect(() => {
     async function fetchAd() {
       try {
-        const response = await axios.get(`http://localhost:5000/republicas/${id}`);
+        const response = await axios.get(`http://localhost:5000/projetos/${id}`);
         if (response.data) {
           setAdData(response.data);
           fetchUser(response.data.id_usuario);
@@ -66,7 +66,7 @@ function HomeCasas() {
       <div>
         <Navbar />
         <div className="container text-center mt-5">
-          <p>Carregando informações da república...</p>
+          <p>Carregando informações do projeto...</p>
         </div>
       </div>
     );
@@ -85,13 +85,12 @@ function HomeCasas() {
               </p>
             </div>
           </div>
-
           {/* Exibição da imagem principal */}
           <div className="row g-4">
             <div className="col-lg-12 text-center">
               <img
                 src={`http://localhost:5000/public/${adData.caminhoFoto}`}
-                alt="Foto principal da república"
+                alt="Foto principal do projeto"
                 className="img-fluid rounded shadow-sm"
                 style={{ ...imageStyle, height: "450px", objectFit: "cover" }}
               />
@@ -101,25 +100,23 @@ function HomeCasas() {
           {/* Detalhes da república */}
           <div className="d-flex align-items-center text-muted mb-4 pt-4">
             <i className="bi bi-people-fill me-3"></i>
-            <span className="me-3">👥 {adData.qtd_moradores || 0} Vagas</span>
-            <span className="me-3">{adData.qtd_quartos || 0} Quarto(s)</span>
-            <span className="me-3">{adData.qtd_camas || 0} Cama(s)</span>
-            <span className="me-3"> Piscina: {(adData.wifi || 0) > 0 ? "Sim" : "Não"}</span>
-            <span className="me-3"> {(adData.televisao || 0) > 0 && (
-              <div>Televisao: Sim</div>
+            <span className="me-3">👥 {adData.qtd_participantes || 0} Vagas</span>
+            <span className="me-3"> {(adData.futebol || 0) > 0 && (
+              <div>Futebol: Sim</div>
             )}</span>
-            <span className="me-3"> {(adData.cozinha || 0) > 0 && (
-              <div>Cozinha: Sim</div>
+            <span className="me-3"> {(adData.basquete || 0) > 0 && (
+              <div>Basquete: Sim</div>
             )}</span>
-            <span className="me-3"> {(adData.ar_condicionado || 0) > 0 && (
-              <div>Ar-Condicionado: Sim</div>
+            <span className="me-3"> {(adData.pingpong || 0) > 0 && (
+              <div>Ping-Pong: Sim</div>
             )}</span>
-            <span className="me-3"> {(adData.canto_de_estudo || 0) > 0 && (
-              <div>Canto de Estudo: Sim</div>
+            <span className="me-3"> {(adData.volei || 0) > 0 && (
+              <div>Vôlei: Sim</div>
             )}</span>
-            <span>{adData.banheiroCompartilhado ? "Banheiro compartilhado" : "Banheiro privado"}</span>
+            <span className="me-3"> {(adData.ciclismo || 0) > 0 && (
+              <div>Ciclismo: Sim</div>
+            )}</span>
           </div>
-
           {/* Descrição e mapa */}
           <div className="row mt-5">
             <div className="col-lg-8">
@@ -146,12 +143,6 @@ function HomeCasas() {
 
             <div className="col-lg-4">
               <div className="card shadow border-0 p-4">
-                {/* Preço */}
-                <div className="text-center mb-4">
-                  <h3 className="mb-1">R$ {adData.preco || 0}/mês</h3>
-                  <p className="text-muted">a negociar</p>
-                </div>
-
                 {/* Informações do usuário */}
                 {userData && (
                   <div className="text-center mb-4">
